@@ -1,3 +1,565 @@
+-- MySQL dump 10.13  Distrib 5.6.23, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: ccjj
+-- ------------------------------------------------------
+-- Server version	5.6.17
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Dumping data for table `actividades`
+--
+
+LOCK TABLES `actividades` WRITE;
+/*!40000 ALTER TABLE `actividades` DISABLE KEYS */;
+/*!40000 ALTER TABLE `actividades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `actividades_terminadas`
+--
+
+LOCK TABLES `actividades_terminadas` WRITE;
+/*!40000 ALTER TABLE `actividades_terminadas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `actividades_terminadas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `alerta`
+--
+
+LOCK TABLES `alerta` WRITE;
+/*!40000 ALTER TABLE `alerta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `alerta` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `area`
+--
+
+LOCK TABLES `area` WRITE;
+/*!40000 ALTER TABLE `area` DISABLE KEYS */;
+/*!40000 ALTER TABLE `area` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_acondicionamientos`
+--
+
+LOCK TABLES `ca_acondicionamientos` WRITE;
+/*!40000 ALTER TABLE `ca_acondicionamientos` DISABLE KEYS */;
+INSERT INTO `ca_acondicionamientos` VALUES (3,'Proyector ');
+/*!40000 ALTER TABLE `ca_acondicionamientos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_areas`
+--
+
+LOCK TABLES `ca_areas` WRITE;
+/*!40000 ALTER TABLE `ca_areas` DISABLE KEYS */;
+INSERT INTO `ca_areas` VALUES (2,'Area 1');
+/*!40000 ALTER TABLE `ca_areas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_aulas`
+--
+
+LOCK TABLES `ca_aulas` WRITE;
+/*!40000 ALTER TABLE `ca_aulas` DISABLE KEYS */;
+INSERT INTO `ca_aulas` VALUES (1,18,'209');
+/*!40000 ALTER TABLE `ca_aulas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_aulas_instancias_acondicionamientos`
+--
+
+LOCK TABLES `ca_aulas_instancias_acondicionamientos` WRITE;
+/*!40000 ALTER TABLE `ca_aulas_instancias_acondicionamientos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ca_aulas_instancias_acondicionamientos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_cargas_academicas`
+--
+
+LOCK TABLES `ca_cargas_academicas` WRITE;
+/*!40000 ALTER TABLE `ca_cargas_academicas` DISABLE KEYS */;
+INSERT INTO `ca_cargas_academicas` VALUES (2,1,'85863','0501-1994-05961',1);
+/*!40000 ALTER TABLE `ca_cargas_academicas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_contratos`
+--
+
+LOCK TABLES `ca_contratos` WRITE;
+/*!40000 ALTER TABLE `ca_contratos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ca_contratos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_cursos`
+--
+
+LOCK TABLES `ca_cursos` WRITE;
+/*!40000 ALTER TABLE `ca_cursos` DISABLE KEYS */;
+INSERT INTO `ca_cursos` VALUES (8,33,2,701,2,1,'11456464','0801-9123-12323');
+/*!40000 ALTER TABLE `ca_cursos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_cursos_dias`
+--
+
+LOCK TABLES `ca_cursos_dias` WRITE;
+/*!40000 ALTER TABLE `ca_cursos_dias` DISABLE KEYS */;
+INSERT INTO `ca_cursos_dias` VALUES (8,1),(8,2);
+/*!40000 ALTER TABLE `ca_cursos_dias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_dias`
+--
+
+LOCK TABLES `ca_dias` WRITE;
+/*!40000 ALTER TABLE `ca_dias` DISABLE KEYS */;
+INSERT INTO `ca_dias` VALUES (1,'Lunes'),(2,'Martes'),(3,'Miércoles'),(4,'Jueves'),(5,'Viernes'),(6,'Sábado'),(7,'Domingo');
+/*!40000 ALTER TABLE `ca_dias` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_empleados_contratos`
+--
+
+LOCK TABLES `ca_empleados_contratos` WRITE;
+/*!40000 ALTER TABLE `ca_empleados_contratos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ca_empleados_contratos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_empleados_proyectos`
+--
+
+LOCK TABLES `ca_empleados_proyectos` WRITE;
+/*!40000 ALTER TABLE `ca_empleados_proyectos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ca_empleados_proyectos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_estados_carga`
+--
+
+LOCK TABLES `ca_estados_carga` WRITE;
+/*!40000 ALTER TABLE `ca_estados_carga` DISABLE KEYS */;
+INSERT INTO `ca_estados_carga` VALUES (1,'Aprobada'),(2,'Cancelada');
+/*!40000 ALTER TABLE `ca_estados_carga` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_facultades`
+--
+
+LOCK TABLES `ca_facultades` WRITE;
+/*!40000 ALTER TABLE `ca_facultades` DISABLE KEYS */;
+INSERT INTO `ca_facultades` VALUES (2,'Facultad 1');
+/*!40000 ALTER TABLE `ca_facultades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_instancias_acondicionamientos`
+--
+
+LOCK TABLES `ca_instancias_acondicionamientos` WRITE;
+/*!40000 ALTER TABLE `ca_instancias_acondicionamientos` DISABLE KEYS */;
+INSERT INTO `ca_instancias_acondicionamientos` VALUES (3,3),(4,3),(5,3),(6,3),(7,3),(8,3),(9,3),(10,3),(11,3),(12,3),(13,3),(14,3),(15,3),(16,3),(17,3),(18,3),(19,3),(20,3),(21,3),(22,3),(23,3),(24,3);
+/*!40000 ALTER TABLE `ca_instancias_acondicionamientos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_proyectos`
+--
+
+LOCK TABLES `ca_proyectos` WRITE;
+/*!40000 ALTER TABLE `ca_proyectos` DISABLE KEYS */;
+INSERT INTO `ca_proyectos` VALUES (2,'Proyecto nuevo',1,2);
+/*!40000 ALTER TABLE `ca_proyectos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_roles_proyecto`
+--
+
+LOCK TABLES `ca_roles_proyecto` WRITE;
+/*!40000 ALTER TABLE `ca_roles_proyecto` DISABLE KEYS */;
+INSERT INTO `ca_roles_proyecto` VALUES (1,'Coordinador'),(2,'Participante');
+/*!40000 ALTER TABLE `ca_roles_proyecto` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_secciones`
+--
+
+LOCK TABLES `ca_secciones` WRITE;
+/*!40000 ALTER TABLE `ca_secciones` DISABLE KEYS */;
+INSERT INTO `ca_secciones` VALUES (700,'07:00:00','08:00:00'),(701,'07:00:00','08:00:00'),(800,'08:00:00','09:00:00'),(1300,'13:00:00','17:00:00');
+/*!40000 ALTER TABLE `ca_secciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `ca_vinculaciones`
+--
+
+LOCK TABLES `ca_vinculaciones` WRITE;
+/*!40000 ALTER TABLE `ca_vinculaciones` DISABLE KEYS */;
+INSERT INTO `ca_vinculaciones` VALUES (1,'Area 1',2);
+/*!40000 ALTER TABLE `ca_vinculaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `cargo`
+--
+
+LOCK TABLES `cargo` WRITE;
+/*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
+INSERT INTO `cargo` VALUES (2,'Cargo 1'),(3,'Cargo prueba');
+/*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `categorias_folios`
+--
+
+LOCK TABLES `categorias_folios` WRITE;
+/*!40000 ALTER TABLE `categorias_folios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `categorias_folios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `clases`
+--
+
+LOCK TABLES `clases` WRITE;
+/*!40000 ALTER TABLE `clases` DISABLE KEYS */;
+INSERT INTO `clases` VALUES (2,'Derecho Romano'),(3,'Introduccion a la estadistica social');
+/*!40000 ALTER TABLE `clases` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `clases_has_experiencia_academica`
+--
+
+LOCK TABLES `clases_has_experiencia_academica` WRITE;
+/*!40000 ALTER TABLE `clases_has_experiencia_academica` DISABLE KEYS */;
+INSERT INTO `clases_has_experiencia_academica` VALUES (3,1);
+/*!40000 ALTER TABLE `clases_has_experiencia_academica` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `costo_porcentaje_actividad_por_trimestre`
+--
+
+LOCK TABLES `costo_porcentaje_actividad_por_trimestre` WRITE;
+/*!40000 ALTER TABLE `costo_porcentaje_actividad_por_trimestre` DISABLE KEYS */;
+/*!40000 ALTER TABLE `costo_porcentaje_actividad_por_trimestre` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `departamento_laboral`
+--
+
+LOCK TABLES `departamento_laboral` WRITE;
+/*!40000 ALTER TABLE `departamento_laboral` DISABLE KEYS */;
+INSERT INTO `departamento_laboral` VALUES (1,'Departamento prueba'),(2,'Docencia');
+/*!40000 ALTER TABLE `departamento_laboral` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `edificios`
+--
+
+LOCK TABLES `edificios` WRITE;
+/*!40000 ALTER TABLE `edificios` DISABLE KEYS */;
+INSERT INTO `edificios` VALUES (18,'B3');
+/*!40000 ALTER TABLE `edificios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `empleado`
+--
+
+LOCK TABLES `empleado` WRITE;
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` VALUES ('11456464','0801-9123-12323',2,'2015-06-06',NULL,'OBS',1),('1234','0501-1994-05967',2,'2015-07-09',NULL,'Observacion observacion',1),('12344','1234-0000-00000',2,'2015-07-09',NULL,'ninguna',1),('123444','0000-0000-00000',2,'2015-07-07',NULL,'',1),('85863','0501-1994-05961',1,'2015-07-18',NULL,'Esta es una observacion',1);
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `empleado_has_cargo`
+--
+
+LOCK TABLES `empleado_has_cargo` WRITE;
+/*!40000 ALTER TABLE `empleado_has_cargo` DISABLE KEYS */;
+INSERT INTO `empleado_has_cargo` VALUES ('11456464',3,'2015-07-09',NULL),('85863',2,'2015-07-18',NULL);
+/*!40000 ALTER TABLE `empleado_has_cargo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `estado_seguimiento`
+--
+
+LOCK TABLES `estado_seguimiento` WRITE;
+/*!40000 ALTER TABLE `estado_seguimiento` DISABLE KEYS */;
+/*!40000 ALTER TABLE `estado_seguimiento` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `estudios_academico`
+--
+
+LOCK TABLES `estudios_academico` WRITE;
+/*!40000 ALTER TABLE `estudios_academico` DISABLE KEYS */;
+INSERT INTO `estudios_academico` VALUES (6,'Licenciatura en Ingenieria en Sistemas',1,'0000-0000-00000',3),(7,'Maestria en Derecho Penal',2,'0801-9123-12323',3),(8,'Maestria en Derecho Penal',2,'0000-0000-00000',3);
+/*!40000 ALTER TABLE `estudios_academico` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `experiencia_academica`
+--
+
+LOCK TABLES `experiencia_academica` WRITE;
+/*!40000 ALTER TABLE `experiencia_academica` DISABLE KEYS */;
+INSERT INTO `experiencia_academica` VALUES (1,'UNAH',20,'0000-0000-00000');
+/*!40000 ALTER TABLE `experiencia_academica` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `experiencia_laboral`
+--
+
+LOCK TABLES `experiencia_laboral` WRITE;
+/*!40000 ALTER TABLE `experiencia_laboral` DISABLE KEYS */;
+INSERT INTO `experiencia_laboral` VALUES (1,'UNAH',23,'0000-0000-00000');
+/*!40000 ALTER TABLE `experiencia_laboral` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `experiencia_laboral_has_cargo`
+--
+
+LOCK TABLES `experiencia_laboral_has_cargo` WRITE;
+/*!40000 ALTER TABLE `experiencia_laboral_has_cargo` DISABLE KEYS */;
+INSERT INTO `experiencia_laboral_has_cargo` VALUES (1,3);
+/*!40000 ALTER TABLE `experiencia_laboral_has_cargo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `folios`
+--
+
+LOCK TABLES `folios` WRITE;
+/*!40000 ALTER TABLE `folios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `folios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `grupo_o_comite`
+--
+
+LOCK TABLES `grupo_o_comite` WRITE;
+/*!40000 ALTER TABLE `grupo_o_comite` DISABLE KEYS */;
+INSERT INTO `grupo_o_comite` VALUES (2,'Grupo prueba');
+/*!40000 ALTER TABLE `grupo_o_comite` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `grupo_o_comite_has_empleado`
+--
+
+LOCK TABLES `grupo_o_comite_has_empleado` WRITE;
+/*!40000 ALTER TABLE `grupo_o_comite_has_empleado` DISABLE KEYS */;
+INSERT INTO `grupo_o_comite_has_empleado` VALUES (2,'123444'),(2,'85863');
+/*!40000 ALTER TABLE `grupo_o_comite_has_empleado` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `idioma`
+--
+
+LOCK TABLES `idioma` WRITE;
+/*!40000 ALTER TABLE `idioma` DISABLE KEYS */;
+/*!40000 ALTER TABLE `idioma` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `idioma_has_persona`
+--
+
+LOCK TABLES `idioma_has_persona` WRITE;
+/*!40000 ALTER TABLE `idioma_has_persona` DISABLE KEYS */;
+/*!40000 ALTER TABLE `idioma_has_persona` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `indicadores`
+--
+
+LOCK TABLES `indicadores` WRITE;
+/*!40000 ALTER TABLE `indicadores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `indicadores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `motivos`
+--
+
+LOCK TABLES `motivos` WRITE;
+/*!40000 ALTER TABLE `motivos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `motivos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `notificaciones_folios`
+--
+
+LOCK TABLES `notificaciones_folios` WRITE;
+/*!40000 ALTER TABLE `notificaciones_folios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `notificaciones_folios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `objetivos_institucionales`
+--
+
+LOCK TABLES `objetivos_institucionales` WRITE;
+/*!40000 ALTER TABLE `objetivos_institucionales` DISABLE KEYS */;
+/*!40000 ALTER TABLE `objetivos_institucionales` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `organizacion`
+--
+
+LOCK TABLES `organizacion` WRITE;
+/*!40000 ALTER TABLE `organizacion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `organizacion` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `pais`
+--
+
+LOCK TABLES `pais` WRITE;
+/*!40000 ALTER TABLE `pais` DISABLE KEYS */;
+INSERT INTO `pais` VALUES (2,'Honduras'),(3,'Estados Unidos'),(4,'MÃ©xico');
+/*!40000 ALTER TABLE `pais` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `permisos`
+--
+
+LOCK TABLES `permisos` WRITE;
+/*!40000 ALTER TABLE `permisos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `permisos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `persona`
+--
+
+LOCK TABLES `persona` WRITE;
+/*!40000 ALTER TABLE `persona` DISABLE KEYS */;
+INSERT INTO `persona` VALUES ('0000-0000-00000','Luis','Manuel','Reyes','Deras','2015-07-16','M','','correonuevo@gmail.com','viudo','Nacionalidad',''),('0050-0000-00000','s','p','s','s','2015-06-06','M','D','correo','Casado','Nacionalidad',''),('01','S','P','O','K','2015-06-06','M','',NULL,NULL,'',''),('021','S','P','O','K','2015-06-06','M','',NULL,NULL,'',''),('0301-1993-04250','Carlos','Alberto','Salgado','Montoya','1993-10-22','F','Col. Kennedy 4ta Entrada, frente a Consejo Liberal.','calbertsm@gmail.com','Soltero','Hondurena',''),('0501-1994-05961','L','M','R','d','2015-06-06','M','D','l@gmail.com','soltero','H',''),('0501-1994-05962','M','R','D','R','2015-06-06','M','','l@gmail.com','Soltero','Nacionalidad',''),('0501-1994-05967','S','S','S','S','2015-07-14','M','Dirección','l@gmail.com','Casado','Nacionalidad',''),('0801-9123-12323','Claudio','','Paz','','2015-07-09','M','Nuevo Paraiso, Morocelí','klypaz@gmail.com','Soltero','Hondureña',''),('0808-1232-12312','P','S','N','S','2015-06-06','F','D','m@gmail.com','Divorciado','N',''),('1234-0000-00000','s','p','s','s','2015-06-06','M','D','correo','Casado','Nacionalidad',''),('1234-1978-91011','sdfghjk','DSAD','mdqow','dmi','2015-07-20','F','',NULL,NULL,'','');
+/*!40000 ALTER TABLE `persona` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `poa`
+--
+
+LOCK TABLES `poa` WRITE;
+/*!40000 ALTER TABLE `poa` DISABLE KEYS */;
+/*!40000 ALTER TABLE `poa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `prioridad`
+--
+
+LOCK TABLES `prioridad` WRITE;
+/*!40000 ALTER TABLE `prioridad` DISABLE KEYS */;
+/*!40000 ALTER TABLE `prioridad` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `prioridad_folio`
+--
+
+LOCK TABLES `prioridad_folio` WRITE;
+/*!40000 ALTER TABLE `prioridad_folio` DISABLE KEYS */;
+/*!40000 ALTER TABLE `prioridad_folio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `responsables_por_actividad`
+--
+
+LOCK TABLES `responsables_por_actividad` WRITE;
+/*!40000 ALTER TABLE `responsables_por_actividad` DISABLE KEYS */;
+/*!40000 ALTER TABLE `responsables_por_actividad` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `roles`
+--
+
+LOCK TABLES `roles` WRITE;
+/*!40000 ALTER TABLE `roles` DISABLE KEYS */;
+INSERT INTO `roles` VALUES (10,'Usuario Basico'),(20,'Docente'),(29,'Asistente Jefatura'),(30,'Jefe Departamento'),(40,'Secretaria General'),(45,'Secretaria Decana'),(50,'Decano'),(100,'root');
+/*!40000 ALTER TABLE `roles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `sa_ciudades`
+--
+
+LOCK TABLES `sa_ciudades` WRITE;
+/*!40000 ALTER TABLE `sa_ciudades` DISABLE KEYS */;
+INSERT INTO `sa_ciudades` VALUES (1,'San Pedro Sula'),(2,'Tegucigalpa'),(3,'Comayagua'),(4,'Santa Rosa de Copan'),(5,'Jesus de Otoro'),(6,'La Ceiba'),(7,'Tela'),(8,'El Progreso'),(9,'Choluteca'),(10,'Valle'),(11,'La Paz');
+/*!40000 ALTER TABLE `sa_ciudades` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `sa_estados_solicitud`
+--
+
+LOCK TABLES `sa_estados_solicitud` WRITE;
+/*!40000 ALTER TABLE `sa_estados_solicitud` DISABLE KEYS */;
+INSERT INTO `sa_estados_solicitud` VALUES (1,'Activa'),(2,'Desactiva');
+/*!40000 ALTER TABLE `sa_estados_solicitud` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping data for table `sa_estudiantes`
+--
+
+LOCK TABLES `sa_estudiantes` WRITE;
+/*!40000 ALTER TABLE `sa_estudiantes` DISABLE KEYS */;
+INSERT INTO `sa_estudiantes` VALUES ('0000-0000-00000','0000-0000-0',2,5,'2015-05-05',30,NULL,1,1,1,1);
+/*!40000 ALTER TABLE `sa_estudiantes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Dumping data for table `sa_estudiantes_correos`
