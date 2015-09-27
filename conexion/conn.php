@@ -1,6 +1,8 @@
 
 <?php
 
+error_reporting(E_ALL ^ E_DEPRECATED);
+
  $host = 'localhost';
  $dbname = 'ccjj';
  $username = 'root';
