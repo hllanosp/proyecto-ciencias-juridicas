@@ -1,26 +1,14 @@
 -- phpMyAdmin SQL Dump
-<<<<<<< HEAD
--- version 3.3.8.1
--- http://www.phpmyadmin.net
---
--- Servidor: localhost
--- Tiempo de generación: 27-09-2015 a las 12:49:56
--- Versión del servidor: 5.0.91
--- Versión de PHP: 5.3.6-pl0-gentoo
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-=======
 -- version 4.4.3
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-09-2015 a las 04:01:43
+-- Tiempo de generación: 27-09-2015 a las 19:23:33
 -- Versión del servidor: 5.6.24
--- Versión de PHP: 5.6.8
+-- Versión de PHP: 5.5.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -32,8 +20,6 @@ SET time_zone = "+00:00";
 -- Base de datos: `ccjj`
 --
 
-<<<<<<< HEAD
-=======
 DELIMITER $$
 --
 -- Procedimientos
@@ -176,7 +162,6 @@ SP: begin
         LEAVE SP;
 	END;
 	END IF;
-
     
 	delete from indicadores where indicadores.id_indicadores= id_indicador;
 	
@@ -274,7 +259,6 @@ begin
 
    DECLARE EXIT HANDLER FOR SQLEXCEPTION
    BEGIN
-
      SET mensaje = "No se pudo realizar la operacion, por favor intende de nuevo dentro de un momento";
      SET codMensaje = 0;
      ROLLBACK;
@@ -403,7 +387,6 @@ end$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_modificar_area`(IN id_Area int ,IN nombre VARCHAR(30), IN id_tipo_Area INT, IN observacion TEXT)
 begin
 	update area set nombre=nombre,id_tipo_Area=id_tipo_Area,observaciones=observacion where area.id_Area=id_Area;
-
 end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_modificar_costo_porcentaje_actividad_por_trimestre`(IN id_Costo_Porcentaje_Actividad_Por_Trimesrte INT,IN id_Actividad INT, IN costo INT, IN porcentaje INT, IN observacion TEXT, IN trimestre INT)
@@ -425,7 +408,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_modificar_poa`(in id_Poa int,IN 
 begin
 update poa set nombre=nombre,fecha_de_Inicio=fecha_de_Inicio,fecha_Fin=fecha_Fin,descripcion=descripcion
 where poa.id_Poa=id_Poa;
-
 end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_modificar_responsables_por_actividad`(IN `id_Responsable_por_Act` INT, IN `id_Actividad` INT, IN `id_Responsable` INT, IN `fecha_Asignacion` DATE, IN `observacion` TEXT)
@@ -534,7 +516,6 @@ END;
         SET  DescripcionEstadoSeguimiento=DescripcionEstadoSeguimiento_
         where Id_Estado_Seguimiento = Id_Estado_Seguimiento_;
 		SET mensaje = "el estado se ha actualizado satisfactoriamente."; 
-
 		SET codMensaje = 1;                  
 COMMIT;   
 end$$
@@ -713,7 +694,6 @@ END;
         SET  DescripcionPrioridad=DescripcionPrioridad_
         where Id_Prioridad = Id_Prioridad_;
 		
-
 		SET mensaje = "la prioridad se ha actualizado satisfactoriamente."; 
 		SET codMensaje = 1;               
 COMMIT;   
@@ -884,7 +864,6 @@ BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
     
-
 		ROLLBACK;
     
         SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError, ' Server: ', error4);
@@ -901,7 +880,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -926,7 +905,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -961,7 +940,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -1008,7 +987,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona
 			WHERE
@@ -1037,7 +1016,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -1076,7 +1055,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -1107,7 +1086,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -1310,7 +1289,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ELIMINAR_CIUDADES`(
 )
 SP: begin
 
-
    DECLARE EXIT HANDLER FOR SQLEXCEPTION
    BEGIN
      SET mensaje = "No se pudo realizar la operacion, por favor intende de nuevo dentro de un momento";
@@ -1385,7 +1363,6 @@ IN `Id_Estado_Seguimiento_` tinyint(4),
     OUT codMensaje TINYINT  -- ParamentroId_Prioridad
 )
 BEGIN 
-
    IF NOT EXISTS (SELECT 1 FROM seguimiento_historico WHERE  Id_Estado_Seguimiento = Id_Estado_Seguimiento_) THEN -- Revisa si NO hay un registro en seguimiento historico con este estado
      DELETE FROM estado_seguimiento WHERE Id_Estado_Seguimiento  = Id_Estado_Seguimiento_; -- Borra la ubicacion si no existe el registro 
      SET mensaje = "Exito al eliminar el estado de seguimiento"; -- mensaje de salida
@@ -1735,7 +1712,6 @@ SP: BEGIN
         START TRANSACTION;
         
         -- Registrar el área
-
         SET vcTempMensajeError := 'Error al registrar el Área de Vinculación. ';
         
         INSERT INTO ca_vinculaciones VALUES (pnCodigoArea, pcNombreArea, pnCodigoFacultad);
@@ -1951,7 +1927,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_GESTIONAR_EDIFICIOS`(
     IN pnCodigoEdificio INT, -- Código de edificio (En caso de que acción sea actualizar o eliminar)
     IN pcDescripcion VARCHAR(200), -- Descripción del edificio
     IN pnAccion INT, -- Parámetro para determinar qué acción se realizará
-
     OUT pcMensajeError VARCHAR(1000) -- Parámetro para los mensajes de error
 )
 SP: BEGIN
@@ -2256,7 +2231,6 @@ BEGIN
 	 
      INSERT INTO seguimiento_historico VALUES(NULL,LAST_INSERT_ID(),seguimiento_,notas_,prioridad_,NOW());
 	 
-
      INSERT INTO prioridad_folio VALUES(NULL,numFolio_,prioridad_,fechaEntrada_);
      
      UPDATE folios SET NroFolioRespuesta = numFolio_ WHERE NroFolio = folioRef;
@@ -2391,7 +2365,6 @@ begin
 select id_Actividad,No_Empleado,fecha,
 (select nombre from indicadores where indicadores.id_Indicadores in (select id_indicador from actividades where id_actividad in (SELECT actividades_terminadas.id_Actividad FROM actividades_terminadas) and id_indicador in (select id_indicadores from indicadores where id_ObjetivosInsitucionales in (select id_Objetivo from objetivos_institucionales where id_Poa = ID_POA)))) as id_Indicador,
 (select descripcion from actividades where id_actividad in (SELECT actividades_terminadas.id_Actividad FROM actividades_terminadas) and id_indicador in (select id_indicadores from indicadores where id_ObjetivosInsitucionales in (select id_Objetivo from objetivos_institucionales where objetivos_institucionales.id_Poa in(select id_Poa from poa where objetivos_institucionales.id_Poa =poa.id_Poa)))) as Descripcion,
-
 (select correlativo from actividades where id_actividad in (SELECT actividades_terminadas.id_Actividad FROM actividades_terminadas) and id_indicador in (select id_indicadores from indicadores where id_ObjetivosInsitucionales in (select id_Objetivo from objetivos_institucionales where objetivos_institucionales.id_Poa in(select id_Poa from poa where objetivos_institucionales.id_Poa =poa.id_Poa)))) as Correlativo,
 (select supuesto from actividades where id_actividad in (SELECT actividades_terminadas.id_Actividad FROM actividades_terminadas) and id_indicador in (select id_indicadores from indicadores where id_ObjetivosInsitucionales in (select id_Objetivo from objetivos_institucionales where objetivos_institucionales.id_Poa in(select id_Poa from poa where objetivos_institucionales.id_Poa =poa.id_Poa)))) as Supuesto,
 (select justificacion from actividades where id_actividad in (SELECT actividades_terminadas.id_Actividad FROM actividades_terminadas) and id_indicador in (select id_indicadores from indicadores where id_ObjetivosInsitucionales in (select id_Objetivo from objetivos_institucionales where objetivos_institucionales.id_Poa in(select id_Poa from poa where objetivos_institucionales.id_Poa =poa.id_Poa)))) as Justificacion,
@@ -2425,7 +2398,6 @@ BEGIN
     DECLARE vcMensajeErrorServidor TEXT; -- Variable para almacenar el mensaje de error del servidor
         
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
-
     BEGIN    
 		ROLLBACK;    
 		GET DIAGNOSTICS CONDITION 1 vcMensajeErrorServidor = MESSAGE_TEXT;
@@ -2582,7 +2554,6 @@ BEGIN
     SELECT 
 		codigo, nombre
 	FROM
-
 		ca_areas;
 		
 END$$
@@ -2799,7 +2770,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_ESTUDIANTES`(
 BEGIN
 
 
-
 	DECLARE vcTempMensajeError VARCHAR(1000); -- Variable para anteponer los posibles mensajes de error
 
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3004,7 +2974,6 @@ BEGIN
     
 	SELECT 
 		sa_solicitudes.codigo AS CODIGO,
-		concat(Primer_nombre," ",Primer_apellido) AS NOMBRE,
 		sa_solicitudes.fecha_solicitud AS FECHA_SOLICITUD,
 		IF(sa_solicitudes.observaciones IS NULL, 'Niguna', sa_solicitudes.observaciones) AS OBSERVACIONES,
         sa_estados_solicitud.descripcion AS ESTADO, 
@@ -3015,8 +2984,7 @@ BEGIN
 	FROM sa_solicitudes LEFT JOIN sa_examenes_himno ON(sa_solicitudes.codigo = sa_examenes_himno.cod_solicitud) 
 		 INNER JOIN sa_periodos ON(sa_solicitudes.cod_periodo = sa_periodos.codigo)
 		 INNER JOIN sa_tipos_solicitud ON(sa_tipos_solicitud.codigo = sa_solicitudes.cod_tipo_solicitud)
-         INNER JOIN sa_estados_solicitud ON (sa_estados_solicitud.codigo = sa_solicitudes.cod_estado)
-		inner join persona on (persona.N_identidad = sa_solicitudes.dni_estudiante);
+         INNER JOIN sa_estados_solicitud ON (sa_estados_solicitud.codigo = sa_solicitudes.cod_estado);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_TIPOS_ESTUDIANTES`(
@@ -3060,7 +3028,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_TIPOS_SOLICITUDES_POR_ES
 SP: BEGIN
 
 	DECLARE vcTempMensajeError VARCHAR(1000); -- Variable para anteponer los posibles mensajes de error
-
     DECLARE ERROR2 VARCHAR(500); 
 
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
@@ -3240,7 +3207,6 @@ SP:BEGIN
 		nombre = pcnombre;
         
         
-
 	-- Ya hay una ciudad con ese nombre
 	IF vnContadorSolicitud > 0 then
     
@@ -3518,7 +3484,6 @@ SP:BEGIN
     
 		SET pcMensajeError := 'Esta mencion ya esta registrada, intenta otra';
         LEAVE SP;
-
     
     END IF;
     
@@ -3786,7 +3751,6 @@ SP:BEGIN
         SET pcMensajeError := vcTempMensajeError;
     
     END;    
-
     
      -- Determinar si el nombre del tipo de estudiante ya está siendo usado
     SET vcTempMensajeError := 'Error al seleccionar COUNT de tipo de estudiante';
@@ -3869,57 +3833,6 @@ SP:BEGIN
     VALUES(vnNuevoCodigoSolicitud, pnCodigoTipoEstudiante);
     
     COMMIT;
-
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REPORTE_CARGA_ACADEMICA`(IN anio YEAR, IN periodo INT)
-BEGIN
-
-select ca_cursos.cod_carga, ca_cargas_academicas.cod_periodo,
-persona.Primer_nombre , persona.Primer_apellido, clases.Clase, ca_secciones.codigo, ca_secciones.hora_inicio,
-ca_secciones.hora_fin FROM ca_cargas_academicas inner JOIN ca_cursos on ca_cargas_academicas.codigo=
-ca_cursos.cod_carga inner join clases on ca_cursos.cod_asignatura=clases.ID_Clases inner join ca_secciones on 
-ca_cursos.cod_seccion=ca_secciones.codigo inner join empleado on ca_cursos.no_empleado=
-empleado.No_empleado inner join persona on empleado.N_identidad= persona.N_identidad 
-where ca_cargas_academicas.anio=anio and ca_cargas_academicas.cod_periodo=periodo order by ca_cargas_academicas.codigo;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REPORTE_PROYECTOS`(
-	OUT pcMensajeError VARCHAR(500) -- Para mensajes de error
-)
-BEGIN
-
-    DECLARE vcTempMensajeError VARCHAR(500) DEFAULT ''; -- Variable para posibles errores no con	trolados
-    
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-    
-		ROLLBACK;
-		GET DIAGNOSTICS CONDITION 1   vcTempMensajeError  = MESSAGE_TEXT;
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
-        SET pcMensajeError := vcTempMensajeError;
-    
-    END;  
-
-    
-    
-    SELECT 
-		PROYECTOS.codigo AS CODIGO_PROYECTO,
-		PROYECTOS.nombre AS PROYECTO_NOMBRE,
-        VINCULACIONES.nombre AS VINCULACION_NOMBRE,
-        AREAS.nombre AS NOMBRE_AREA,
-        CONCAT(Primer_nombre, ' ', Primer_apellido) AS NOMBRE_COORDINADOR
-    FROM    
-		ca_proyectos PROYECTOS INNER JOIN ca_vinculaciones VINCULACIONES ON(PROYECTOS.cod_vinculacion =  VINCULACIONES.codigo)
-        INNER JOIN ca_areas AREAS ON(AREAS.codigo = PROYECTOS.cod_area)
-        INNER JOIN ca_empleados_proyectos EMPLEADOS_PROYECTOS ON (EMPLEADOS_PROYECTOS.cod_proyecto = PROYECTOS.codigo)
-
-        INNER JOIN ca_roles_proyecto EMPLEADOS_ROLES_PROYECTO ON (EMPLEADOS_PROYECTOS.cod_rol_proyecto = EMPLEADOS_ROLES_PROYECTO.codigo)
-		INNER JOIN persona PERSONA ON (PERSONA.N_identidad = EMPLEADOS_PROYECTOS.dni_empleado);
-        
-		
-    
-    
 
 END$$
 
@@ -4016,26 +3929,14 @@ END$$
 
 DELIMITER ;
 
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `actividades`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 09-09-2015 a las 10:36:09
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `actividades`;
-CREATE TABLE IF NOT EXISTS `actividades` (
-  `id_actividad` int(11) NOT NULL auto_increment,
-=======
 
 CREATE TABLE IF NOT EXISTS `actividades` (
   `id_actividad` int(11) NOT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `id_indicador` int(11) NOT NULL,
   `descripcion` text NOT NULL,
   `correlativo` varchar(20) NOT NULL,
@@ -4044,120 +3945,59 @@ CREATE TABLE IF NOT EXISTS `actividades` (
   `medio_verificacion` text NOT NULL,
   `poblacion_objetivo` varchar(30) NOT NULL,
   `fecha_inicio` date NOT NULL,
-<<<<<<< HEAD
-  `fecha_fin` date NOT NULL,
-  PRIMARY KEY  (`id_actividad`),
-  KEY `id_indicador` (`id_indicador`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  `fecha_fin` date NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `actividades`
+-- Volcado de datos para la tabla `actividades`
 --
 
 INSERT INTO `actividades` (`id_actividad`, `id_indicador`, `descripcion`, `correlativo`, `supuesto`, `justificacion`, `medio_verificacion`, `poblacion_objetivo`, `fecha_inicio`, `fecha_fin`) VALUES
 (11, 4, 'actividad septiembre', 'correlativ', 'supuesto septiembre', 'justificacion septiembre', 'medio de verificacion septiembre', 'poblacion objetivo\n\n', '2015-09-10', '2015-09-16');
-=======
-  `fecha_fin` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `actividades_terminadas`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 26-07-2015 a las 20:02:42
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `actividades_terminadas`;
-CREATE TABLE IF NOT EXISTS `actividades_terminadas` (
-  `id_Actividades_Terminadas` int(11) NOT NULL auto_increment,
-=======
 
 CREATE TABLE IF NOT EXISTS `actividades_terminadas` (
   `id_Actividades_Terminadas` int(11) NOT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `id_Actividad` int(11) NOT NULL,
   `No_Empleado` varchar(20) NOT NULL,
   `fecha` date NOT NULL,
   `estado` varchar(15) NOT NULL,
-<<<<<<< HEAD
-  `observaciones` text,
-  PRIMARY KEY  (`id_Actividades_Terminadas`),
-  KEY `id_Actividad` (`id_Actividad`),
-  KEY `No_Empleado` (`No_Empleado`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Volcar la base de datos para la tabla `actividades_terminadas`
---
-
-=======
   `observaciones` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `alerta`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 26-07-2015 a las 20:02:42
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `alerta`;
-CREATE TABLE IF NOT EXISTS `alerta` (
-  `Id_Alerta` int(11) NOT NULL auto_increment,
-  `NroFolioGenera` varchar(25) NOT NULL,
-  `FechaCreacion` datetime NOT NULL,
-  `Atendido` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`Id_Alerta`),
-  KEY `fk_alerta_folios_idx` (`NroFolioGenera`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `alerta`
---
-
-=======
 
 CREATE TABLE IF NOT EXISTS `alerta` (
   `Id_Alerta` int(11) NOT NULL,
   `NroFolioGenera` varchar(25) NOT NULL,
   `FechaCreacion` datetime NOT NULL,
   `Atendido` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `area`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 10:23:11
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `area`;
 CREATE TABLE IF NOT EXISTS `area` (
-  `id_Area` int(11) NOT NULL auto_increment,
+  `id_Area` int(11) NOT NULL,
   `nombre` varchar(20) NOT NULL,
   `id_tipo_area` int(11) NOT NULL,
-  `observacion` text NOT NULL,
-  PRIMARY KEY  (`id_Area`),
-  KEY `id_tipo_area` (`id_tipo_area`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `observacion` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `area`
+-- Volcado de datos para la tabla `area`
 --
 
 INSERT INTO `area` (`id_Area`, `nombre`, `id_tipo_area`, `observacion`) VALUES
@@ -4165,35 +4005,20 @@ INSERT INTO `area` (`id_Area`, `nombre`, `id_tipo_area`, `observacion`) VALUES
 (3, 'area septiembre', 0, 'n.a.'),
 (4, 'area septiembre', 2, 'n.a'),
 (5, 'area septiembre', 5, '');
-=======
-
-CREATE TABLE IF NOT EXISTS `area` (
-  `id_Area` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
-  `id_tipo_area` int(11) NOT NULL,
-  `observacion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `cargo`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 03-09-2015 a las 12:54:05
---
 
-DROP TABLE IF EXISTS `cargo`;
 CREATE TABLE IF NOT EXISTS `cargo` (
-  `ID_cargo` int(11) NOT NULL auto_increment,
-  `Cargo` varchar(45) NOT NULL,
-  PRIMARY KEY  (`ID_cargo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+  `ID_cargo` int(11) NOT NULL,
+  `Cargo` varchar(45) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `cargo`
+-- Volcado de datos para la tabla `cargo`
 --
 
 INSERT INTO `cargo` (`ID_cargo`, `Cargo`) VALUES
@@ -4218,42 +4043,21 @@ INSERT INTO `cargo` (`ID_cargo`, `Cargo`) VALUES
 (20, 'JEFE DEPARTAMENTO CURRICULAR'),
 (21, 'JEFE DE DEPARTAMENTO INVESTIGACION'),
 (22, 'ASISTENTE OPERATIVO II');
-=======
-
-CREATE TABLE IF NOT EXISTS `cargo` (
-  `ID_cargo` int(11) NOT NULL,
-  `Cargo` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `cargo`
---
-
-INSERT INTO `cargo` (`ID_cargo`, `Cargo`) VALUES
-(2, 'Cargo 1'),
-(3, 'Cargo prueba');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `categorias_folios`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 25-09-2015 a las 12:45:50
---
 
-DROP TABLE IF EXISTS `categorias_folios`;
 CREATE TABLE IF NOT EXISTS `categorias_folios` (
-  `Id_categoria` int(11) NOT NULL auto_increment,
+  `Id_categoria` int(11) NOT NULL,
   `NombreCategoria` text NOT NULL,
-  `DescripcionCategoria` text,
-  PRIMARY KEY  (`Id_categoria`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `DescripcionCategoria` text
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `categorias_folios`
+-- Volcado de datos para la tabla `categorias_folios`
 --
 
 INSERT INTO `categorias_folios` (`Id_categoria`, `NombreCategoria`, `DescripcionCategoria`) VALUES
@@ -4262,34 +4066,20 @@ INSERT INTO `categorias_folios` (`Id_categoria`, `NombreCategoria`, `Descripcion
 (5, 'EQUIVALENCIAS', 'Solicitud de Dictámenes'),
 (6, 'EXPEDIENTES DE GRADUACIÓN', 'Graduaciones Públicas'),
 (7, 'TÍTULOS POR VENTANILLA', 'Expedientes de Graduación');
-=======
-
-CREATE TABLE IF NOT EXISTS `categorias_folios` (
-  `Id_categoria` int(11) NOT NULL,
-  `NombreCategoria` text NOT NULL,
-  `DescripcionCategoria` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_acondicionamientos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 17-08-2015 a las 15:44:12
---
 
-DROP TABLE IF EXISTS `ca_acondicionamientos`;
 CREATE TABLE IF NOT EXISTS `ca_acondicionamientos` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(50) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `ca_acondicionamientos`
+-- Volcado de datos para la tabla `ca_acondicionamientos`
 --
 
 INSERT INTO `ca_acondicionamientos` (`codigo`, `nombre`) VALUES
@@ -4305,40 +4095,20 @@ INSERT INTO `ca_acondicionamientos` (`codigo`, `nombre`) VALUES
 (19, 'PruebaAllan3'),
 (20, 'PruebaAllan4'),
 (21, 'PruebaAllan5');
-=======
-
-CREATE TABLE IF NOT EXISTS `ca_acondicionamientos` (
-  `codigo` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_acondicionamientos`
---
-
-INSERT INTO `ca_acondicionamientos` (`codigo`, `nombre`) VALUES
-(3, 'Proyector ');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_areas`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 16-09-2015 a las 13:04:21
---
 
-DROP TABLE IF EXISTS `ca_areas`;
 CREATE TABLE IF NOT EXISTS `ca_areas` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(50) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `ca_areas`
+-- Volcado de datos para la tabla `ca_areas`
 --
 
 INSERT INTO `ca_areas` (`codigo`, `nombre`) VALUES
@@ -4348,43 +4118,21 @@ INSERT INTO `ca_areas` (`codigo`, `nombre`) VALUES
 (12, 'nueva area de proyecto'),
 (13, 'soporte'),
 (19, 'eliZ');
-=======
-
-CREATE TABLE IF NOT EXISTS `ca_areas` (
-  `codigo` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_areas`
---
-
-INSERT INTO `ca_areas` (`codigo`, `nombre`) VALUES
-(2, 'Area 1');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_aulas`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 16-09-2015 a las 13:07:29
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `ca_aulas`;
 CREATE TABLE IF NOT EXISTS `ca_aulas` (
-  `codigo` int(11) NOT NULL auto_increment,
+  `codigo` int(11) NOT NULL,
   `cod_edificio` int(11) NOT NULL,
-  `numero_aula` varchar(100) NOT NULL,
-  PRIMARY KEY  (`codigo`),
-  KEY `aulas_edificios_FK_idx` (`cod_edificio`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+  `numero_aula` varchar(100) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `ca_aulas`
+-- Volcado de datos para la tabla `ca_aulas`
 --
 
 INSERT INTO `ca_aulas` (`codigo`, `cod_edificio`, `numero_aula`) VALUES
@@ -4401,82 +4149,23 @@ INSERT INTO `ca_aulas` (`codigo`, `cod_edificio`, `numero_aula`) VALUES
 (11, 35, '99Modificado'),
 (12, 19, '201'),
 (13, 34, '101');
-=======
-
-CREATE TABLE IF NOT EXISTS `ca_aulas` (
-  `codigo` int(11) NOT NULL,
-  `cod_edificio` int(11) NOT NULL,
-  `numero_aula` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_aulas`
---
-
-INSERT INTO `ca_aulas` (`codigo`, `cod_edificio`, `numero_aula`) VALUES
-(1, 18, '209');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_aulas_instancias_acondicionamientos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 26-07-2015 a las 20:02:42
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `ca_aulas_instancias_acondicionamientos`;
-CREATE TABLE IF NOT EXISTS `ca_aulas_instancias_acondicionamientos` (
-  `cod_aula` int(11) NOT NULL,
-  `cod_instancia_acondicionamiento` int(11) NOT NULL,
-  PRIMARY KEY  (`cod_aula`),
-  KEY `a_i_a_instancias_acondicionamientos_FK_idx` (`cod_instancia_acondicionamiento`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `ca_aulas_instancias_acondicionamientos`
---
-
-=======
 
 CREATE TABLE IF NOT EXISTS `ca_aulas_instancias_acondicionamientos` (
   `cod_aula` int(11) NOT NULL,
   `cod_instancia_acondicionamiento` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_cargas_academicas`
 --
-<<<<<<< HEAD
--- Creación: 23-08-2015 a las 15:09:43
--- Última actualización: 02-09-2015 a las 16:52:46
---
-
-DROP TABLE IF EXISTS `ca_cargas_academicas`;
-CREATE TABLE IF NOT EXISTS `ca_cargas_academicas` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `cod_periodo` int(11) default NULL,
-  `no_empleado` varchar(20) default NULL,
-  `dni_empleado` varchar(20) default NULL,
-  `cod_estado` int(11) default NULL,
-  `anio` year(4) NOT NULL,
-  PRIMARY KEY  (`codigo`),
-  KEY `cargas_academicas_periodos_FK_idx` (`cod_periodo`),
-  KEY `cargas_academicas_empleados_FK_idx` (`no_empleado`,`dni_empleado`),
-  KEY `cargas_academicas_estados_FK_idx` (`cod_estado`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
-
---
--- Volcar la base de datos para la tabla `ca_cargas_academicas`
---
-
-=======
 
 CREATE TABLE IF NOT EXISTS `ca_cargas_academicas` (
   `codigo` int(11) NOT NULL,
@@ -4484,80 +4173,25 @@ CREATE TABLE IF NOT EXISTS `ca_cargas_academicas` (
   `no_empleado` varchar(20) DEFAULT NULL,
   `dni_empleado` varchar(20) DEFAULT NULL,
   `cod_estado` int(11) DEFAULT NULL,
-  `anio` year(4) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_cargas_academicas`
---
-
-INSERT INTO `ca_cargas_academicas` (`codigo`, `cod_periodo`, `no_empleado`, `dni_empleado`, `cod_estado`, `anio`) VALUES
-(2, 1, '85863', '0501-1994-05961', 1, 2015);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+  `anio` year(4) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_contratos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 26-07-2015 a las 20:02:42
---
-
-DROP TABLE IF EXISTS `ca_contratos`;
-CREATE TABLE IF NOT EXISTS `ca_contratos` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(50) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Volcar la base de datos para la tabla `ca_contratos`
---
-
-=======
 
 CREATE TABLE IF NOT EXISTS `ca_contratos` (
   `codigo` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_cursos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 16:52:49
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `ca_cursos`;
-CREATE TABLE IF NOT EXISTS `ca_cursos` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `cupos` int(11) default NULL,
-  `cod_carga` int(11) default NULL,
-  `cod_seccion` int(11) default NULL,
-  `cod_asignatura` int(11) default NULL,
-  `cod_aula` int(11) default NULL,
-  `no_empleado` varchar(20) default NULL,
-  `dni_empleado` varchar(20) default NULL,
-  PRIMARY KEY  (`codigo`),
-  KEY `cursos_cargas_FK_idx` (`cod_carga`),
-  KEY `cursos_secciones_FK_idx` (`cod_seccion`),
-  KEY `cursos_asignaturas_FK_idx` (`cod_asignatura`),
-  KEY `cursos_aulas_FK_idx` (`cod_aula`),
-  KEY `cursos_empleados_FK_idx` (`no_empleado`,`dni_empleado`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
-
---
--- Volcar la base de datos para la tabla `ca_cursos`
---
-
-=======
 
 CREATE TABLE IF NOT EXISTS `ca_cursos` (
   `codigo` int(11) NOT NULL,
@@ -4568,37 +4202,21 @@ CREATE TABLE IF NOT EXISTS `ca_cursos` (
   `cod_aula` int(11) DEFAULT NULL,
   `no_empleado` varchar(20) DEFAULT NULL,
   `dni_empleado` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_cursos`
---
-
-INSERT INTO `ca_cursos` (`codigo`, `cupos`, `cod_carga`, `cod_seccion`, `cod_asignatura`, `cod_aula`, `no_empleado`, `dni_empleado`) VALUES
-(8, 33, 2, 701, 2, 1, '11456464', '0801-9123-12323');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_cursos_dias`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 24-08-2015 a las 00:13:41
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `ca_cursos_dias`;
 CREATE TABLE IF NOT EXISTS `ca_cursos_dias` (
   `cod_curso` int(11) NOT NULL,
-  `cod_dia` int(11) NOT NULL,
-  PRIMARY KEY  (`cod_curso`,`cod_dia`),
-  KEY `cursos_dias_dias_FK_idx` (`cod_dia`)
+  `cod_dia` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `ca_cursos_dias`
+-- Volcado de datos para la tabla `ca_cursos_dias`
 --
 
 INSERT INTO `ca_cursos_dias` (`cod_curso`, `cod_dia`) VALUES
@@ -4640,41 +4258,20 @@ INSERT INTO `ca_cursos_dias` (`cod_curso`, `cod_dia`) VALUES
 (11, 5),
 (12, 1),
 (13, 1);
-=======
-
-CREATE TABLE IF NOT EXISTS `ca_cursos_dias` (
-  `cod_curso` int(11) NOT NULL,
-  `cod_dia` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_cursos_dias`
---
-
-INSERT INTO `ca_cursos_dias` (`cod_curso`, `cod_dia`) VALUES
-(8, 1),
-(8, 2);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_dias`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 28-07-2015 a las 11:19:47
---
 
-DROP TABLE IF EXISTS `ca_dias`;
 CREATE TABLE IF NOT EXISTS `ca_dias` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(9) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(9) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `ca_dias`
+-- Volcado de datos para la tabla `ca_dias`
 --
 
 INSERT INTO `ca_dias` (`codigo`, `nombre`) VALUES
@@ -4685,88 +4282,34 @@ INSERT INTO `ca_dias` (`codigo`, `nombre`) VALUES
 (6, 'Viernes'),
 (7, 'Sábado'),
 (8, 'Domingo');
-=======
-
-CREATE TABLE IF NOT EXISTS `ca_dias` (
-  `codigo` int(11) NOT NULL,
-  `nombre` varchar(9) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_dias`
---
-
-INSERT INTO `ca_dias` (`codigo`, `nombre`) VALUES
-(1, 'Lunes'),
-(2, 'Martes'),
-(3, 'Miércoles'),
-(4, 'Jueves'),
-(5, 'Viernes'),
-(6, 'Sábado'),
-(7, 'Domingo');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_empleados_contratos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 26-07-2015 a las 20:02:42
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `ca_empleados_contratos`;
-CREATE TABLE IF NOT EXISTS `ca_empleados_contratos` (
-  `no_empleado` varchar(20) NOT NULL,
-  `dni_empleado` varchar(20) NOT NULL,
-  `cod_contrato` int(11) NOT NULL,
-  PRIMARY KEY  (`no_empleado`,`dni_empleado`),
-  KEY `e_c_contratos_FK_idx` (`cod_contrato`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `ca_empleados_contratos`
---
-
-=======
 
 CREATE TABLE IF NOT EXISTS `ca_empleados_contratos` (
   `no_empleado` varchar(20) NOT NULL,
   `dni_empleado` varchar(20) NOT NULL,
   `cod_contrato` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_empleados_proyectos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 23-08-2015 a las 13:35:13
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `ca_empleados_proyectos`;
-=======
-
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 CREATE TABLE IF NOT EXISTS `ca_empleados_proyectos` (
   `no_empleado` varchar(20) NOT NULL,
   `dni_empleado` varchar(20) NOT NULL,
   `cod_proyecto` int(11) NOT NULL,
-<<<<<<< HEAD
-  `cod_rol_proyecto` int(11) NOT NULL,
-  PRIMARY KEY  (`no_empleado`,`dni_empleado`),
-  KEY `d_e_p_proyectos_FK_idx` (`cod_proyecto`),
-  KEY `d_e_p_roles_proyecto_FK_idx` (`cod_rol_proyecto`)
+  `cod_rol_proyecto` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `ca_empleados_proyectos`
+-- Volcado de datos para la tabla `ca_empleados_proyectos`
 --
 
 INSERT INTO `ca_empleados_proyectos` (`no_empleado`, `dni_empleado`, `cod_proyecto`, `cod_rol_proyecto`) VALUES
@@ -4777,71 +4320,40 @@ INSERT INTO `ca_empleados_proyectos` (`no_empleado`, `dni_empleado`, `cod_proyec
 ('00004', '0004-0004-00004', 9, 2),
 ('00005', '0005-0005-00005', 10, 2),
 ('999989', '9999-9999-99999', 4, 2);
-=======
-  `cod_rol_proyecto` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_estados_carga`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 22:52:12
---
-
-DROP TABLE IF EXISTS `ca_estados_carga`;
-CREATE TABLE IF NOT EXISTS `ca_estados_carga` (
-  `codigo` int(11) NOT NULL,
-  `descripcion` varchar(50) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `ca_estados_carga`
---
-
-INSERT INTO `ca_estados_carga` (`codigo`, `descripcion`) VALUES
-(2, 'En proceso'),
-(4, 'Cancelada'),
-(3, 'Rechazada');
-=======
 
 CREATE TABLE IF NOT EXISTS `ca_estados_carga` (
   `codigo` int(11) NOT NULL,
   `descripcion` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ca_estados_carga`
 --
 
 INSERT INTO `ca_estados_carga` (`codigo`, `descripcion`) VALUES
-(1, 'Aprobada'),
-(2, 'Cancelada');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+(2, 'En proceso'),
+(4, 'Cancelada'),
+(3, 'Rechazada');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_facultades`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 16-09-2015 a las 13:04:06
---
 
-DROP TABLE IF EXISTS `ca_facultades`;
 CREATE TABLE IF NOT EXISTS `ca_facultades` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(50) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `ca_facultades`
+-- Volcado de datos para la tabla `ca_facultades`
 --
 
 INSERT INTO `ca_facultades` (`codigo`, `nombre`) VALUES
@@ -4850,106 +4362,40 @@ INSERT INTO `ca_facultades` (`codigo`, `nombre`) VALUES
 (20, 'PruebaAllanModificado?'),
 (17, 'Informática'),
 (23, 'Ciencias Jurídicas');
-=======
-
-CREATE TABLE IF NOT EXISTS `ca_facultades` (
-  `codigo` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_facultades`
---
-
-INSERT INTO `ca_facultades` (`codigo`, `nombre`) VALUES
-(2, 'Facultad 1');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_instancias_acondicionamientos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 31-07-2015 a las 16:24:57
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `ca_instancias_acondicionamientos`;
-CREATE TABLE IF NOT EXISTS `ca_instancias_acondicionamientos` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `cod_acondicionamiento` int(11) default NULL,
-  PRIMARY KEY  (`codigo`),
-  KEY `instancias_acondicionamientos_acondicionamientos_FK_idx` (`cod_acondicionamiento`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcar la base de datos para la tabla `ca_instancias_acondicionamientos`
---
-
-INSERT INTO `ca_instancias_acondicionamientos` (`codigo`, `cod_acondicionamiento`) VALUES
-(2, 3);
-=======
 
 CREATE TABLE IF NOT EXISTS `ca_instancias_acondicionamientos` (
   `codigo` int(11) NOT NULL,
   `cod_acondicionamiento` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ca_instancias_acondicionamientos`
 --
 
 INSERT INTO `ca_instancias_acondicionamientos` (`codigo`, `cod_acondicionamiento`) VALUES
-(3, 3),
-(4, 3),
-(5, 3),
-(6, 3),
-(7, 3),
-(8, 3),
-(9, 3),
-(10, 3),
-(11, 3),
-(12, 3),
-(13, 3),
-(14, 3),
-(15, 3),
-(16, 3),
-(17, 3),
-(18, 3),
-(19, 3),
-(20, 3),
-(21, 3),
-(22, 3),
-(23, 3),
-(24, 3);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+(2, 3);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_proyectos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 16-09-2015 a las 13:06:17
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `ca_proyectos`;
 CREATE TABLE IF NOT EXISTS `ca_proyectos` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(50) default NULL,
-  `cod_vinculacion` int(11) default NULL,
-  `cod_area` int(11) default NULL,
-  PRIMARY KEY  (`codigo`),
-  KEY `proyectos_vinculaciones_FK_idx` (`cod_vinculacion`),
-  KEY `proyectos_areas_FK_idx` (`cod_area`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `cod_vinculacion` int(11) DEFAULT NULL,
+  `cod_area` int(11) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `ca_proyectos`
+-- Volcado de datos para la tabla `ca_proyectos`
 --
 
 INSERT INTO `ca_proyectos` (`codigo`, `nombre`, `cod_vinculacion`, `cod_area`) VALUES
@@ -4963,52 +4409,20 @@ INSERT INTO `ca_proyectos` (`codigo`, `nombre`, `cod_vinculacion`, `cod_area`) V
 (9, 'PruebaAllan', 111, 5),
 (10, 'elizabeth', 12, 19),
 (11, 'PROYECTO SEPTIEMBRE', 12, 19);
-=======
-
-CREATE TABLE IF NOT EXISTS `ca_proyectos` (
-  `codigo` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL,
-  `cod_vinculacion` int(11) DEFAULT NULL,
-  `cod_area` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_proyectos`
---
-
-INSERT INTO `ca_proyectos` (`codigo`, `nombre`, `cod_vinculacion`, `cod_area`) VALUES
-(2, 'Proyecto nuevo', 1, 2);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_roles_proyecto`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `ca_roles_proyecto`;
-CREATE TABLE IF NOT EXISTS `ca_roles_proyecto` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(50) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcar la base de datos para la tabla `ca_roles_proyecto`
-=======
 
 CREATE TABLE IF NOT EXISTS `ca_roles_proyecto` (
   `codigo` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ca_roles_proyecto`
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 --
 
 INSERT INTO `ca_roles_proyecto` (`codigo`, `nombre`) VALUES
@@ -5020,64 +4434,27 @@ INSERT INTO `ca_roles_proyecto` (`codigo`, `nombre`) VALUES
 --
 -- Estructura de tabla para la tabla `ca_secciones`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 16:52:48
---
-
-DROP TABLE IF EXISTS `ca_secciones`;
-CREATE TABLE IF NOT EXISTS `ca_secciones` (
-  `codigo` int(11) NOT NULL,
-  `hora_inicio` time default NULL,
-  `hora_fin` time default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `ca_secciones`
---
-
-=======
 
 CREATE TABLE IF NOT EXISTS `ca_secciones` (
   `codigo` int(11) NOT NULL,
   `hora_inicio` time DEFAULT NULL,
   `hora_fin` time DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_secciones`
---
-
-INSERT INTO `ca_secciones` (`codigo`, `hora_inicio`, `hora_fin`) VALUES
-(700, '07:00:00', '08:00:00'),
-(701, '07:00:00', '08:00:00'),
-(800, '08:00:00', '09:00:00'),
-(1300, '13:00:00', '17:00:00');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ca_vinculaciones`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 16-09-2015 a las 13:05:28
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `ca_vinculaciones`;
 CREATE TABLE IF NOT EXISTS `ca_vinculaciones` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(50) default NULL,
-  `cod_facultad` int(11) default NULL,
-  PRIMARY KEY  (`codigo`),
-  KEY `vinculaciones_facultades_FK_idx` (`cod_facultad`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12346 ;
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `cod_facultad` int(11) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=12346 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `ca_vinculaciones`
+-- Volcado de datos para la tabla `ca_vinculaciones`
 --
 
 INSERT INTO `ca_vinculaciones` (`codigo`, `nombre`, `cod_facultad`) VALUES
@@ -5086,41 +4463,20 @@ INSERT INTO `ca_vinculaciones` (`codigo`, `nombre`, `cod_facultad`) VALUES
 (34, 'aistente', 7),
 (12345, 'otro', 17),
 (111, 'PruebaAllanModificado', 20);
-=======
-
-CREATE TABLE IF NOT EXISTS `ca_vinculaciones` (
-  `codigo` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL,
-  `cod_facultad` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `ca_vinculaciones`
---
-
-INSERT INTO `ca_vinculaciones` (`codigo`, `nombre`, `cod_facultad`) VALUES
-(1, 'Area 1', 2);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `clases`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 14:24:35
---
 
-DROP TABLE IF EXISTS `clases`;
 CREATE TABLE IF NOT EXISTS `clases` (
-  `ID_Clases` int(11) NOT NULL auto_increment,
-  `Clase` varchar(45) NOT NULL,
-  PRIMARY KEY  (`ID_Clases`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=73 ;
+  `ID_Clases` int(11) NOT NULL,
+  `Clase` varchar(45) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `clases`
+-- Volcado de datos para la tabla `clases`
 --
 
 INSERT INTO `clases` (`ID_Clases`, `Clase`) VALUES
@@ -5188,124 +4544,62 @@ INSERT INTO `clases` (`ID_Clases`, `Clase`) VALUES
 (69, 'Módulo de Práctica Judicial Internacional'),
 (70, 'Módulo de Derecho Notarial y Derecho Registra'),
 (71, 'Módulo de Justicia Constitucional');
-=======
-
-CREATE TABLE IF NOT EXISTS `clases` (
-  `ID_Clases` int(11) NOT NULL,
-  `Clase` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `clases`
---
-
-INSERT INTO `clases` (`ID_Clases`, `Clase`) VALUES
-(2, 'Derecho Romano'),
-(3, 'Introduccion a la estadistica social');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `clases_has_experiencia_academica`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 29-07-2015 a las 17:53:41
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `clases_has_experiencia_academica`;
-CREATE TABLE IF NOT EXISTS `clases_has_experiencia_academica` (
-  `ID_Clases` int(11) NOT NULL,
-  `ID_Experiencia_academica` int(11) NOT NULL,
-  PRIMARY KEY  (`ID_Clases`,`ID_Experiencia_academica`),
-  KEY `fk_Clases_has_Experiencia_academica_Experiencia_academica1_idx` (`ID_Experiencia_academica`),
-  KEY `fk_Clases_has_Experiencia_academica_Clases1_idx` (`ID_Clases`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `clases_has_experiencia_academica`
---
-
-INSERT INTO `clases_has_experiencia_academica` (`ID_Clases`, `ID_Experiencia_academica`) VALUES
-(3, 1),
-(4, 2),
-(4, 3);
-=======
 
 CREATE TABLE IF NOT EXISTS `clases_has_experiencia_academica` (
   `ID_Clases` int(11) NOT NULL,
   `ID_Experiencia_academica` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `clases_has_experiencia_academica`
 --
 
 INSERT INTO `clases_has_experiencia_academica` (`ID_Clases`, `ID_Experiencia_academica`) VALUES
-(3, 1);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+(3, 1),
+(4, 2),
+(4, 3);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `costo_porcentaje_actividad_por_trimestre`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 09-09-2015 a las 11:00:49
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `costo_porcentaje_actividad_por_trimestre`;
-CREATE TABLE IF NOT EXISTS `costo_porcentaje_actividad_por_trimestre` (
-  `id_Costo_Porcentaje_Actividad_Por_Trimesrte` int(11) NOT NULL auto_increment,
-=======
 
 CREATE TABLE IF NOT EXISTS `costo_porcentaje_actividad_por_trimestre` (
   `id_Costo_Porcentaje_Actividad_Por_Trimesrte` int(11) NOT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `id_Actividad` int(11) NOT NULL,
   `costo` int(11) NOT NULL,
   `porcentaje` int(11) NOT NULL,
   `observacion` text,
-<<<<<<< HEAD
-  `trimestre` int(11) NOT NULL,
-  PRIMARY KEY  (`id_Costo_Porcentaje_Actividad_Por_Trimesrte`),
-  KEY `id_Actividad` (`id_Actividad`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `trimestre` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `costo_porcentaje_actividad_por_trimestre`
+-- Volcado de datos para la tabla `costo_porcentaje_actividad_por_trimestre`
 --
 
 INSERT INTO `costo_porcentaje_actividad_por_trimestre` (`id_Costo_Porcentaje_Actividad_Por_Trimesrte`, `id_Actividad`, `costo`, `porcentaje`, `observacion`, `trimestre`) VALUES
 (3, 11, 125000, 25, 'na', 1);
-=======
-  `trimestre` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `departamento_laboral`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 20-09-2015 a las 12:05:07
---
 
-DROP TABLE IF EXISTS `departamento_laboral`;
 CREATE TABLE IF NOT EXISTS `departamento_laboral` (
-  `Id_departamento_laboral` int(11) NOT NULL auto_increment,
-  `nombre_departamento` varchar(30) NOT NULL,
-  PRIMARY KEY  (`Id_departamento_laboral`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+  `Id_departamento_laboral` int(11) NOT NULL,
+  `nombre_departamento` varchar(30) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `departamento_laboral`
+-- Volcado de datos para la tabla `departamento_laboral`
 --
 
 INSERT INTO `departamento_laboral` (`Id_departamento_laboral`, `nombre_departamento`) VALUES
@@ -5323,41 +4617,20 @@ INSERT INTO `departamento_laboral` (`Id_departamento_laboral`, `nombre_departame
 (13, 'LABORATORIO ESTUDIANTES'),
 (14, 'LABORATORIO DOCENTES'),
 (15, 'Docencia');
-=======
-
-CREATE TABLE IF NOT EXISTS `departamento_laboral` (
-  `Id_departamento_laboral` int(11) NOT NULL,
-  `nombre_departamento` varchar(30) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `departamento_laboral`
---
-
-INSERT INTO `departamento_laboral` (`Id_departamento_laboral`, `nombre_departamento`) VALUES
-(1, 'Departamento prueba'),
-(2, 'Docencia');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `edificios`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 16-09-2015 a las 13:07:49
---
 
-DROP TABLE IF EXISTS `edificios`;
 CREATE TABLE IF NOT EXISTS `edificios` (
-  `Edificio_ID` int(11) NOT NULL auto_increment,
-  `descripcion` text,
-  PRIMARY KEY  (`Edificio_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+  `Edificio_ID` int(11) NOT NULL,
+  `descripcion` text
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `edificios`
+-- Volcado de datos para la tabla `edificios`
 --
 
 INSERT INTO `edificios` (`Edificio_ID`, `descripcion`) VALUES
@@ -5369,68 +4642,29 @@ INSERT INTO `edificios` (`Edificio_ID`, `descripcion`) VALUES
 (35, 'C2'),
 (36, 'A2'),
 (40, 'edificio septiembre');
-=======
-
-CREATE TABLE IF NOT EXISTS `edificios` (
-  `Edificio_ID` int(11) NOT NULL,
-  `descripcion` text
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `edificios`
---
-
-INSERT INTO `edificios` (`Edificio_ID`, `descripcion`) VALUES
-(18, 'B3');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `empleado`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 20-09-2015 a las 12:47:40
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `empleado`;
-=======
-
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 CREATE TABLE IF NOT EXISTS `empleado` (
   `No_Empleado` varchar(20) NOT NULL,
   `N_identidad` varchar(20) NOT NULL,
   `Id_departamento` int(11) NOT NULL,
   `Fecha_ingreso` date NOT NULL,
-<<<<<<< HEAD
-  `fecha_salida` date default NULL,
-  `Observacion` text,
-  `estado_empleado` tinyint(1) default NULL,
-  PRIMARY KEY  (`No_Empleado`,`N_identidad`),
-  UNIQUE KEY `No_Empleado_2` (`No_Empleado`),
-  KEY `fk_Empleado_Persona1_idx` (`N_identidad`),
-  KEY `fk_empleado_dep_idx` (`Id_departamento`),
-  KEY `No_Empleado` (`No_Empleado`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `empleado`
-=======
   `fecha_salida` date DEFAULT NULL,
   `Observacion` text,
   `estado_empleado` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `empleado`
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 --
 
 INSERT INTO `empleado` (`No_Empleado`, `N_identidad`, `Id_departamento`, `Fecha_ingreso`, `fecha_salida`, `Observacion`, `estado_empleado`) VALUES
 ('11456464', '0801-9123-12323', 2, '2015-06-06', NULL, 'OBS', 1),
-<<<<<<< HEAD
 ('1234', '0501-1994-05967', 2, '2015-07-09', '2015-07-28', 'Observacion observacion', 0),
 ('12344', '1234-0000-00000', 2, '2015-07-09', NULL, 'ninguna', 1),
 ('123444', '0000-0000-00000', 2, '2015-07-07', NULL, '', 1),
@@ -5460,54 +4694,26 @@ INSERT INTO `empleado` (`No_Empleado`, `N_identidad`, `Id_departamento`, `Fecha_
 ('01', '0801-1978-12387', 12, '0000-00-00', NULL, '', 1),
 ('11910', '0801-1988-16746', 13, '0000-00-00', NULL, '', 1),
 ('1414', '1414-1414-14141', 4, '2015-06-24', NULL, 'asd', 1);
-=======
-('1234', '0501-1994-05967', 2, '2015-07-09', NULL, 'Observacion observacion', 1),
-('12344', '1234-0000-00000', 2, '2015-07-09', NULL, 'ninguna', 1),
-('123444', '0000-0000-00000', 2, '2015-07-07', NULL, '', 1),
-('85863', '0501-1994-05961', 1, '2015-07-18', NULL, 'Esta es una observacion', 1);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `empleado_has_cargo`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 20-09-2015 a las 12:47:17
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `empleado_has_cargo`;
-=======
-
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 CREATE TABLE IF NOT EXISTS `empleado_has_cargo` (
   `No_Empleado` varchar(20) NOT NULL,
   `ID_cargo` int(11) NOT NULL,
   `Fecha_ingreso_cargo` date NOT NULL,
-<<<<<<< HEAD
-  `Fecha_salida_cargo` date default NULL,
-  PRIMARY KEY  (`No_Empleado`,`ID_cargo`),
-  KEY `fk_Empleado_has_Cargo_Cargo1_idx` (`ID_cargo`),
-  KEY `fk_Empleado_has_Cargo_Empleado1_idx` (`No_Empleado`),
-  KEY `No_Empleado` (`No_Empleado`)
+  `Fecha_salida_cargo` date DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `empleado_has_cargo`
-=======
-  `Fecha_salida_cargo` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
 -- Volcado de datos para la tabla `empleado_has_cargo`
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 --
 
 INSERT INTO `empleado_has_cargo` (`No_Empleado`, `ID_cargo`, `Fecha_ingreso_cargo`, `Fecha_salida_cargo`) VALUES
 ('11456464', 3, '2015-07-09', NULL),
-<<<<<<< HEAD
 ('85863', 2, '2015-07-18', NULL),
 ('12968', 4, '2015-07-28', NULL),
 ('11538', 2, '2014-02-10', '2015-07-29'),
@@ -5528,29 +4734,20 @@ INSERT INTO `empleado_has_cargo` (`No_Empleado`, `ID_cargo`, `Fecha_ingreso_carg
 ('01', 22, '0000-00-00', NULL),
 ('11910', 2, '0000-00-00', NULL),
 ('1414', 2, '2015-06-24', NULL);
-=======
-('85863', 2, '2015-07-18', NULL);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `estado_seguimiento`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 12:20:00
---
 
-DROP TABLE IF EXISTS `estado_seguimiento`;
 CREATE TABLE IF NOT EXISTS `estado_seguimiento` (
-  `Id_Estado_Seguimiento` tinyint(4) NOT NULL auto_increment,
-  `DescripcionEstadoSeguimiento` text NOT NULL,
-  PRIMARY KEY  (`Id_Estado_Seguimiento`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  `Id_Estado_Seguimiento` tinyint(4) NOT NULL,
+  `DescripcionEstadoSeguimiento` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `estado_seguimiento`
+-- Volcado de datos para la tabla `estado_seguimiento`
 --
 
 INSERT INTO `estado_seguimiento` (`Id_Estado_Seguimiento`, `DescripcionEstadoSeguimiento`) VALUES
@@ -5558,41 +4755,12 @@ INSERT INTO `estado_seguimiento` (`Id_Estado_Seguimiento`, `DescripcionEstadoSeg
 (9, 'Aprobada'),
 (10, 'Denegada'),
 (11, 'En proceso');
-=======
-
-CREATE TABLE IF NOT EXISTS `estado_seguimiento` (
-  `Id_Estado_Seguimiento` tinyint(4) NOT NULL,
-  `DescripcionEstadoSeguimiento` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `estudios_academico`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 29-07-2015 a las 17:48:01
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `estudios_academico`;
-CREATE TABLE IF NOT EXISTS `estudios_academico` (
-  `ID_Estudios_academico` int(11) NOT NULL auto_increment,
-  `Nombre_titulo` varchar(45) NOT NULL,
-  `ID_Tipo_estudio` int(11) NOT NULL,
-  `N_identidad` varchar(20) NOT NULL,
-  `Id_universidad` int(11) default NULL,
-  PRIMARY KEY  (`ID_Estudios_academico`),
-  KEY `fk_Estudios_academico_Tipo_estudio1_idx` (`ID_Tipo_estudio`),
-  KEY `fk_Estudios_academico_Persona1_idx` (`N_identidad`),
-  KEY `fk_estudio_universidad_idx` (`Id_universidad`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
-
---
--- Volcar la base de datos para la tabla `estudios_academico`
-=======
 
 CREATE TABLE IF NOT EXISTS `estudios_academico` (
   `ID_Estudios_academico` int(11) NOT NULL,
@@ -5600,182 +4768,90 @@ CREATE TABLE IF NOT EXISTS `estudios_academico` (
   `ID_Tipo_estudio` int(11) NOT NULL,
   `N_identidad` varchar(20) NOT NULL,
   `Id_universidad` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `estudios_academico`
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 --
 
 INSERT INTO `estudios_academico` (`ID_Estudios_academico`, `Nombre_titulo`, `ID_Tipo_estudio`, `N_identidad`, `Id_universidad`) VALUES
 (6, 'Licenciatura en Ingenieria en Sistemas', 1, '0000-0000-00000', 3),
 (7, 'Maestria en Derecho Penal', 2, '0801-9123-12323', 3),
-<<<<<<< HEAD
 (8, 'Maestria en Derecho Penal', 2, '0000-0000-00000', 3),
 (10, ' Informática Administrativa', 8, '0801-1991-06974', 5),
 (11, 'Administración Empresarial', 9, '1211-1980-00001', 6),
 (12, 'Administración Empresarial', 8, '0801-1985-18347', 5),
 (13, 'Administración Empresarial', 9, '0000-0000-00178', 5);
-=======
-(8, 'Maestria en Derecho Penal', 2, '0000-0000-00000', 3);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `experiencia_academica`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 29-07-2015 a las 17:53:41
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `experiencia_academica`;
-CREATE TABLE IF NOT EXISTS `experiencia_academica` (
-  `ID_Experiencia_academica` int(11) NOT NULL auto_increment,
-  `Institucion` varchar(45) NOT NULL,
-  `Tiempo` int(3) NOT NULL,
-  `N_identidad` varchar(20) NOT NULL,
-  PRIMARY KEY  (`ID_Experiencia_academica`),
-  KEY `fk_Experiencia_academica_Persona1_idx` (`N_identidad`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcar la base de datos para la tabla `experiencia_academica`
---
-
-INSERT INTO `experiencia_academica` (`ID_Experiencia_academica`, `Institucion`, `Tiempo`, `N_identidad`) VALUES
-(1, 'UNAH', 20, '0000-0000-00000'),
-(2, 'prueba', 2, '0801-1991-06974'),
-(3, 'unah', 19, '0000-0000-00178');
-=======
 
 CREATE TABLE IF NOT EXISTS `experiencia_academica` (
   `ID_Experiencia_academica` int(11) NOT NULL,
   `Institucion` varchar(45) NOT NULL,
   `Tiempo` int(3) NOT NULL,
   `N_identidad` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `experiencia_academica`
 --
 
 INSERT INTO `experiencia_academica` (`ID_Experiencia_academica`, `Institucion`, `Tiempo`, `N_identidad`) VALUES
-(1, 'UNAH', 20, '0000-0000-00000');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+(1, 'UNAH', 20, '0000-0000-00000'),
+(2, 'prueba', 2, '0801-1991-06974'),
+(3, 'unah', 19, '0000-0000-00178');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `experiencia_laboral`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 29-07-2015 a las 17:53:02
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `experiencia_laboral`;
-CREATE TABLE IF NOT EXISTS `experiencia_laboral` (
-  `ID_Experiencia_laboral` int(11) NOT NULL auto_increment,
-  `Nombre_empresa` varchar(45) NOT NULL,
-  `Tiempo` int(3) NOT NULL,
-  `N_identidad` varchar(20) NOT NULL,
-  PRIMARY KEY  (`ID_Experiencia_laboral`),
-  KEY `fk_Experiencia_laboral_Persona1_idx` (`N_identidad`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
-
---
--- Volcar la base de datos para la tabla `experiencia_laboral`
---
-
-INSERT INTO `experiencia_laboral` (`ID_Experiencia_laboral`, `Nombre_empresa`, `Tiempo`, `N_identidad`) VALUES
-(1, 'UNAH', 23, '0000-0000-00000'),
-(2, 'pruebas', 20, '0801-1991-06974'),
-(3, 'Prueba', 36, '0000-0000-00178');
-=======
 
 CREATE TABLE IF NOT EXISTS `experiencia_laboral` (
   `ID_Experiencia_laboral` int(11) NOT NULL,
   `Nombre_empresa` varchar(45) NOT NULL,
   `Tiempo` int(3) NOT NULL,
   `N_identidad` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `experiencia_laboral`
 --
 
 INSERT INTO `experiencia_laboral` (`ID_Experiencia_laboral`, `Nombre_empresa`, `Tiempo`, `N_identidad`) VALUES
-(1, 'UNAH', 23, '0000-0000-00000');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+(1, 'UNAH', 23, '0000-0000-00000'),
+(2, 'pruebas', 20, '0801-1991-06974'),
+(3, 'Prueba', 36, '0000-0000-00178');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `experiencia_laboral_has_cargo`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 29-07-2015 a las 17:53:02
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `experiencia_laboral_has_cargo`;
-CREATE TABLE IF NOT EXISTS `experiencia_laboral_has_cargo` (
-  `ID_Experiencia_laboral` int(11) NOT NULL,
-  `ID_cargo` int(11) NOT NULL,
-  PRIMARY KEY  (`ID_Experiencia_laboral`,`ID_cargo`),
-  KEY `fk_Experiencia_laboral_has_Cargo_Cargo1_idx` (`ID_cargo`),
-  KEY `fk_Experiencia_laboral_has_Cargo_Experiencia_laboral1_idx` (`ID_Experiencia_laboral`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `experiencia_laboral_has_cargo`
---
-
-INSERT INTO `experiencia_laboral_has_cargo` (`ID_Experiencia_laboral`, `ID_cargo`) VALUES
-(1, 3),
-(2, 4),
-(3, 3);
-=======
 
 CREATE TABLE IF NOT EXISTS `experiencia_laboral_has_cargo` (
   `ID_Experiencia_laboral` int(11) NOT NULL,
   `ID_cargo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `experiencia_laboral_has_cargo`
 --
 
 INSERT INTO `experiencia_laboral_has_cargo` (`ID_Experiencia_laboral`, `ID_cargo`) VALUES
-(1, 3);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+(1, 3),
+(2, 4),
+(3, 3);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `folios`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 25-09-2015 a las 13:01:07
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `folios`;
-CREATE TABLE IF NOT EXISTS `folios` (
-  `NroFolio` varchar(25) NOT NULL,
-  `NroFolioRespuesta` varchar(25) default NULL,
-  `FechaCreacion` date NOT NULL,
-  `FechaEntrada` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `PersonaReferente` text NOT NULL,
-  `UnidadAcademica` int(11) default NULL,
-  `Organizacion` int(11) default NULL,
-=======
 
 CREATE TABLE IF NOT EXISTS `folios` (
   `NroFolio` varchar(25) NOT NULL,
@@ -5785,142 +4861,80 @@ CREATE TABLE IF NOT EXISTS `folios` (
   `PersonaReferente` text NOT NULL,
   `UnidadAcademica` int(11) DEFAULT NULL,
   `Organizacion` int(11) DEFAULT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `Categoria` int(11) NOT NULL,
   `DescripcionAsunto` text,
   `TipoFolio` tinyint(1) NOT NULL,
   `UbicacionFisica` int(5) NOT NULL,
-<<<<<<< HEAD
-  `Prioridad` tinyint(4) NOT NULL,
-  PRIMARY KEY  (`NroFolio`),
-  KEY `fk_folios_unidad_academica_unidadAcademica_idx` (`UnidadAcademica`),
-  KEY `fk_folios_organizacion_organizacion_idx` (`Organizacion`),
-  KEY `fk_folios_tblTipoPrioridad_idx` (`Prioridad`),
-  KEY `fk_folios_ubicacion_archivofisico_ubicacionFisica_idx` (`UbicacionFisica`),
-  KEY `fk_folio_folioRespuesta_idx` (`NroFolioRespuesta`),
-  KEY `fk_folios_categoria_idx` (`Categoria`)
+  `Prioridad` tinyint(4) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `folios`
+-- Volcado de datos para la tabla `folios`
 --
 
 INSERT INTO `folios` (`NroFolio`, `NroFolioRespuesta`, `FechaCreacion`, `FechaEntrada`, `PersonaReferente`, `UnidadAcademica`, `Organizacion`, `Categoria`, `DescripcionAsunto`, `TipoFolio`, `UbicacionFisica`, `Prioridad`) VALUES
-('5', NULL, '2015-08-17', '2015-08-17 17:19:01', 'prueba', 3, NULL, 2, 'hola', 0, 5, 5),
-('1', NULL, '2015-08-19', '2015-08-19 10:53:53', 'Rafael', NULL, 3, 2, 'fdsfsdf', 0, 5, 5),
-('123123', NULL, '2015-08-23', '2015-08-23 14:41:40', 'asd', NULL, 3, 2, 'Descripcion', 1, 5, 5),
-('123', NULL, '2015-09-02', '2015-09-02 12:33:03', 'Elizabeth', NULL, 4, 4, 'n', 1, 6, 6),
-('folio de prueba', NULL, '2015-09-10', '2015-09-10 12:54:45', 'junior', NULL, 3, 2, 'prueba', 0, 5, 5),
-('20', NULL, '2015-09-11', '2015-09-11 17:38:35', 'EMMA VIRGINIA ', NULL, 3, 2, 'ASUNTO', 1, 5, 5),
-('Oficio 120', NULL, '2015-09-01', '2015-09-22 17:02:50', 'rutilia calderon', NULL, 5, 2, 'sddddddd', 0, 6, 5),
-('015/2015', NULL, '2015-09-15', '2015-09-25 12:49:59', 'ESTER LÓPEZ', NULL, 4, 5, 'Se devuelve expediente de Carmen Mondragón', 1, 6, 5),
-('002', NULL, '2015-09-10', '2015-09-25 13:01:07', 'Ester Lopez', NULL, 3, 5, 'Se devuelve expediente para recosideración de dictamen', 0, 6, 6);
-=======
-  `Prioridad` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+('5', NULL, '2015-08-17', '2015-08-17 23:19:01', 'prueba', 3, NULL, 2, 'hola', 0, 5, 5),
+('1', NULL, '2015-08-19', '2015-08-19 16:53:53', 'Rafael', NULL, 3, 2, 'fdsfsdf', 0, 5, 5),
+('123123', NULL, '2015-08-23', '2015-08-23 20:41:40', 'asd', NULL, 3, 2, 'Descripcion', 1, 5, 5),
+('123', NULL, '2015-09-02', '2015-09-02 18:33:03', 'Elizabeth', NULL, 4, 4, 'n', 1, 6, 6),
+('folio de prueba', NULL, '2015-09-10', '2015-09-10 18:54:45', 'junior', NULL, 3, 2, 'prueba', 0, 5, 5),
+('20', NULL, '2015-09-11', '2015-09-11 23:38:35', 'EMMA VIRGINIA ', NULL, 3, 2, 'ASUNTO', 1, 5, 5),
+('Oficio 120', NULL, '2015-09-01', '2015-09-22 23:02:50', 'rutilia calderon', NULL, 5, 2, 'sddddddd', 0, 6, 5),
+('015/2015', NULL, '2015-09-15', '2015-09-25 18:49:59', 'ESTER LÓPEZ', NULL, 4, 5, 'Se devuelve expediente de Carmen Mondragón', 1, 6, 5),
+('002', NULL, '2015-09-10', '2015-09-25 19:01:07', 'Ester Lopez', NULL, 3, 5, 'Se devuelve expediente para recosideración de dictamen', 0, 6, 6);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `grupo_o_comite`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 29-07-2015 a las 18:22:30
---
-
-DROP TABLE IF EXISTS `grupo_o_comite`;
-CREATE TABLE IF NOT EXISTS `grupo_o_comite` (
-  `ID_Grupo_o_comite` int(11) NOT NULL auto_increment,
-  `Nombre_Grupo_o_comite` varchar(45) NOT NULL,
-  PRIMARY KEY  (`ID_Grupo_o_comite`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Volcar la base de datos para la tabla `grupo_o_comite`
---
-
-INSERT INTO `grupo_o_comite` (`ID_Grupo_o_comite`, `Nombre_Grupo_o_comite`) VALUES
-(4, 'Pruebas'),
-(3, 'Asistentes Técnicos');
-=======
 
 CREATE TABLE IF NOT EXISTS `grupo_o_comite` (
   `ID_Grupo_o_comite` int(11) NOT NULL,
   `Nombre_Grupo_o_comite` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `grupo_o_comite`
 --
 
 INSERT INTO `grupo_o_comite` (`ID_Grupo_o_comite`, `Nombre_Grupo_o_comite`) VALUES
-(2, 'Grupo prueba');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+(4, 'Pruebas'),
+(3, 'Asistentes Técnicos');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `grupo_o_comite_has_empleado`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 28-07-2015 a las 17:08:13
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `grupo_o_comite_has_empleado`;
-CREATE TABLE IF NOT EXISTS `grupo_o_comite_has_empleado` (
-  `ID_Grupo_o_comite` int(11) NOT NULL,
-  `No_Empleado` varchar(20) NOT NULL,
-  PRIMARY KEY  (`ID_Grupo_o_comite`,`No_Empleado`),
-  KEY `fk_Grupo_o_comite_has_Empleado_Empleado1_idx` (`No_Empleado`),
-  KEY `fk_Grupo_o_comite_has_Empleado_Grupo_o_comite1_idx` (`ID_Grupo_o_comite`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `grupo_o_comite_has_empleado`
-=======
 
 CREATE TABLE IF NOT EXISTS `grupo_o_comite_has_empleado` (
   `ID_Grupo_o_comite` int(11) NOT NULL,
   `No_Empleado` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `grupo_o_comite_has_empleado`
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 --
 
 INSERT INTO `grupo_o_comite_has_empleado` (`ID_Grupo_o_comite`, `No_Empleado`) VALUES
 (2, '123444'),
-<<<<<<< HEAD
 (2, '85863'),
 (3, '12969');
-=======
-(2, '85863');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `idioma`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 01-09-2015 a las 16:27:40
---
 
-DROP TABLE IF EXISTS `idioma`;
 CREATE TABLE IF NOT EXISTS `idioma` (
-  `ID_Idioma` int(11) NOT NULL auto_increment,
-  `Idioma` varchar(45) default NULL,
-  PRIMARY KEY  (`ID_Idioma`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+  `ID_Idioma` int(11) NOT NULL,
+  `Idioma` varchar(45) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `idioma`
+-- Volcado de datos para la tabla `idioma`
 --
 
 INSERT INTO `idioma` (`ID_Idioma`, `Idioma`) VALUES
@@ -5938,38 +4952,22 @@ INSERT INTO `idioma` (`ID_Idioma`, `Idioma`) VALUES
 (13, 'Coreano'),
 (14, 'Turco'),
 (15, 'Vietnamita');
-=======
-
-CREATE TABLE IF NOT EXISTS `idioma` (
-  `ID_Idioma` int(11) NOT NULL,
-  `Idioma` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `idioma_has_persona`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 29-07-2015 a las 17:47:36
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `idioma_has_persona`;
 CREATE TABLE IF NOT EXISTS `idioma_has_persona` (
   `ID_Idioma` int(11) NOT NULL,
   `N_identidad` varchar(20) NOT NULL,
-  `Nivel` varchar(45) default NULL,
-  `Id` int(11) NOT NULL auto_increment,
-  PRIMARY KEY  (`Id`),
-  KEY `fk_Idioma_has_Persona_Persona1_idx` (`N_identidad`),
-  KEY `fk_Idioma_has_Persona_Idioma_idx` (`ID_Idioma`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `Nivel` varchar(45) DEFAULT NULL,
+  `Id` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `idioma_has_persona`
+-- Volcado de datos para la tabla `idioma_has_persona`
 --
 
 INSERT INTO `idioma_has_persona` (`ID_Idioma`, `N_identidad`, `Nivel`, `Id`) VALUES
@@ -5978,72 +4976,40 @@ INSERT INTO `idioma_has_persona` (`ID_Idioma`, `N_identidad`, `Nivel`, `Id`) VAL
 (2, '1211-1980-00001', '90', 3),
 (2, '0801-1985-18347', '70', 4),
 (4, '0000-0000-00178', '80', 5);
-=======
-
-CREATE TABLE IF NOT EXISTS `idioma_has_persona` (
-  `ID_Idioma` int(11) NOT NULL,
-  `N_identidad` varchar(20) NOT NULL,
-  `Nivel` varchar(45) DEFAULT NULL,
-  `Id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `indicadores`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 10:30:43
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `indicadores`;
-CREATE TABLE IF NOT EXISTS `indicadores` (
-  `id_Indicadores` int(11) NOT NULL auto_increment,
-  `id_ObjetivosInsitucionales` int(11) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `descripcion` text,
-  PRIMARY KEY  (`id_Indicadores`),
-  KEY `id_ObjetivosInsitucionales` (`id_ObjetivosInsitucionales`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Volcar la base de datos para la tabla `indicadores`
---
-
-INSERT INTO `indicadores` (`id_Indicadores`, `id_ObjetivosInsitucionales`, `nombre`, `descripcion`) VALUES
-(4, 6, 'Tiempo', 'n.a.');
-=======
 
 CREATE TABLE IF NOT EXISTS `indicadores` (
   `id_Indicadores` int(11) NOT NULL,
   `id_ObjetivosInsitucionales` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `descripcion` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `indicadores`
+--
+
+INSERT INTO `indicadores` (`id_Indicadores`, `id_ObjetivosInsitucionales`, `nombre`, `descripcion`) VALUES
+(4, 6, 'Tiempo', 'n.a.');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `motivos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 10:32:03
---
 
-DROP TABLE IF EXISTS `motivos`;
 CREATE TABLE IF NOT EXISTS `motivos` (
-  `Motivo_ID` int(11) NOT NULL auto_increment,
-  `descripcion` text,
-  PRIMARY KEY  (`Motivo_ID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `Motivo_ID` int(11) NOT NULL,
+  `descripcion` text
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `motivos`
+-- Volcado de datos para la tabla `motivos`
 --
 
 INSERT INTO `motivos` (`Motivo_ID`, `descripcion`) VALUES
@@ -6054,170 +5020,93 @@ INSERT INTO `motivos` (`Motivo_ID`, `descripcion`) VALUES
 (5, 'dsxds'),
 (6, 'fdf'),
 (7, 'motivo septiembre');
-=======
-
-CREATE TABLE IF NOT EXISTS `motivos` (
-  `Motivo_ID` int(11) NOT NULL,
-  `descripcion` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `notificaciones_folios`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 11-09-2015 a las 17:46:12
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `notificaciones_folios`;
-CREATE TABLE IF NOT EXISTS `notificaciones_folios` (
-  `Id_Notificacion` int(11) NOT NULL auto_increment,
-=======
 
 CREATE TABLE IF NOT EXISTS `notificaciones_folios` (
   `Id_Notificacion` int(11) NOT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `NroFolio` varchar(25) NOT NULL,
   `IdEmisor` int(15) NOT NULL,
   `Titulo` text NOT NULL,
   `Cuerpo` text NOT NULL,
   `FechaCreacion` datetime NOT NULL,
   `IdUbicacionNotificacion` int(11) NOT NULL,
-<<<<<<< HEAD
-  `Estado` tinyint(4) NOT NULL,
-  PRIMARY KEY  (`Id_Notificacion`,`IdEmisor`),
-  KEY `fk_notificaciones_folios_folios_idx` (`NroFolio`),
-  KEY `fk_usuario_notificaciones_idx` (`IdEmisor`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `Estado` tinyint(4) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `notificaciones_folios`
+-- Volcado de datos para la tabla `notificaciones_folios`
 --
 
 INSERT INTO `notificaciones_folios` (`Id_Notificacion`, `NroFolio`, `IdEmisor`, `Titulo`, `Cuerpo`, `FechaCreacion`, `IdUbicacionNotificacion`, `Estado`) VALUES
 (1, '1', 1, 'a', 'asd', '2015-08-23 14:40:52', 2, 1),
 (2, '1', 5, 'APURENSE', 'ES PARA AYER', '2015-09-11 17:45:23', 2, 1);
-=======
-  `Estado` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `objetivos_institucionales`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 10:30:22
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `objetivos_institucionales`;
-CREATE TABLE IF NOT EXISTS `objetivos_institucionales` (
-  `id_Objetivo` int(11) NOT NULL auto_increment,
-=======
 
 CREATE TABLE IF NOT EXISTS `objetivos_institucionales` (
   `id_Objetivo` int(11) NOT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `definicion` text NOT NULL,
   `area_Estrategica` text NOT NULL,
   `resultados_Esperados` text NOT NULL,
   `id_Area` int(11) NOT NULL,
-<<<<<<< HEAD
-  `id_Poa` int(11) NOT NULL,
-  PRIMARY KEY  (`id_Objetivo`),
-  KEY `id_Area` (`id_Area`),
-  KEY `id_Poa` (`id_Poa`),
-  KEY `id_Area_2` (`id_Area`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `id_Poa` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `objetivos_institucionales`
+-- Volcado de datos para la tabla `objetivos_institucionales`
 --
 
 INSERT INTO `objetivos_institucionales` (`id_Objetivo`, `definicion`, `area_Estrategica`, `resultados_Esperados`, `id_Area`, `id_Poa`) VALUES
 (6, 'Mejorar el rendimiento de la actividades de septiembre', 'Area Laboral', 'Lograr el cumplimiento de la actividades en menos tiempo', 4, 19);
-=======
-  `id_Poa` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `organizacion`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 03-09-2015 a las 10:17:56
---
 
-DROP TABLE IF EXISTS `organizacion`;
 CREATE TABLE IF NOT EXISTS `organizacion` (
-  `Id_Organizacion` int(11) NOT NULL auto_increment,
+  `Id_Organizacion` int(11) NOT NULL,
   `NombreOrganizacion` text NOT NULL,
-  `Ubicacion` text NOT NULL,
-  PRIMARY KEY  (`Id_Organizacion`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  `Ubicacion` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `organizacion`
+-- Volcado de datos para la tabla `organizacion`
 --
 
 INSERT INTO `organizacion` (`Id_Organizacion`, `NombreOrganizacion`, `Ubicacion`) VALUES
 (4, 'organizacion septiembre', 'A2'),
 (3, 'PRUEBA FCJ', 'A-2'),
 (5, 'CRA', 'ADMINISTRATIVO');
-=======
-
-CREATE TABLE IF NOT EXISTS `organizacion` (
-  `Id_Organizacion` int(11) NOT NULL,
-  `NombreOrganizacion` text NOT NULL,
-  `Ubicacion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `pais`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 13:00:57
---
-
-DROP TABLE IF EXISTS `pais`;
-CREATE TABLE IF NOT EXISTS `pais` (
-  `Id_pais` int(11) NOT NULL auto_increment,
-  `Nombre_pais` varchar(20) NOT NULL,
-  PRIMARY KEY  (`Id_pais`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=23 ;
-
---
--- Volcar la base de datos para la tabla `pais`
-=======
 
 CREATE TABLE IF NOT EXISTS `pais` (
   `Id_pais` int(11) NOT NULL,
   `Nombre_pais` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `pais`
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 --
 
 INSERT INTO `pais` (`Id_pais`, `Nombre_pais`) VALUES
 (2, 'Honduras'),
 (3, 'Estados Unidos'),
-<<<<<<< HEAD
 (4, 'Mexico'),
 (5, 'Guatemala'),
 (6, 'ChinaTaiwan'),
@@ -6237,29 +5126,15 @@ INSERT INTO `pais` (`Id_pais`, `Nombre_pais`) VALUES
 (20, 'Chile'),
 (21, 'Argentina'),
 (22, 'Japon');
-=======
-(4, 'MÃ©xico');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `permisos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 25-09-2015 a las 17:20:09
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `permisos`;
-CREATE TABLE IF NOT EXISTS `permisos` (
-  `id_Permisos` int(11) NOT NULL auto_increment,
-=======
 
 CREATE TABLE IF NOT EXISTS `permisos` (
   `id_Permisos` int(11) NOT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `id_departamento` int(11) NOT NULL,
   `No_Empleado` varchar(20) NOT NULL,
   `id_motivo` int(11) NOT NULL,
@@ -6268,23 +5143,15 @@ CREATE TABLE IF NOT EXISTS `permisos` (
   `hora_finalizacion` time NOT NULL,
   `fecha` datetime NOT NULL,
   `fecha_solicitud` date NOT NULL,
-<<<<<<< HEAD
-  `estado` varchar(15) default NULL,
-  `observacion` varchar(200) default NULL,
-  `revisado_por` varchar(15) default NULL,
+  `estado` varchar(15) DEFAULT NULL,
+  `observacion` varchar(200) DEFAULT NULL,
+  `revisado_por` varchar(15) DEFAULT NULL,
   `id_Edificio_Registro` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  PRIMARY KEY  (`id_Permisos`),
-  KEY `fk_motivo_idx` (`id_motivo`),
-  KEY `fk_empleado_idx` (`No_Empleado`),
-  KEY `fk_edificio_registro_idx` (`id_Edificio_Registro`),
-  KEY `fk_revisado_idx` (`revisado_por`),
-  KEY `fk_departamento_idx` (`id_departamento`),
-  KEY `fk_usuario_idx` (`id_usuario`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+  `id_usuario` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `permisos`
+-- Volcado de datos para la tabla `permisos`
 --
 
 INSERT INTO `permisos` (`id_Permisos`, `id_departamento`, `No_Empleado`, `id_motivo`, `dias_permiso`, `hora_inicio`, `hora_finalizacion`, `fecha`, `fecha_solicitud`, `estado`, `observacion`, `revisado_por`, `id_Edificio_Registro`, `id_usuario`) VALUES
@@ -6308,45 +5175,12 @@ INSERT INTO `permisos` (`id_Permisos`, `id_departamento`, `No_Empleado`, `id_mot
 (18, 11, '7908', 2, 1, '08:00:00', '03:30:00', '0000-00-00 00:00:00', '2015-09-11', 'Espera', NULL, NULL, 36, 16),
 (19, 2, '8708', 2, 1, '01:00:00', '08:00:00', '0009-09-15 00:00:00', '2015-09-11', 'Espera', NULL, NULL, 36, 5),
 (20, 11, '11022', 4, 5, '01:00:00', '02:00:00', '2023-09-15 00:00:00', '2015-09-25', 'Espera', NULL, NULL, 36, 15);
-=======
-  `estado` varchar(15) DEFAULT NULL,
-  `observacion` varchar(200) DEFAULT NULL,
-  `revisado_por` varchar(15) DEFAULT NULL,
-  `id_Edificio_Registro` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `persona`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 20-09-2015 a las 12:46:45
---
-
-DROP TABLE IF EXISTS `persona`;
-CREATE TABLE IF NOT EXISTS `persona` (
-  `N_identidad` varchar(20) NOT NULL,
-  `Primer_nombre` varchar(20) NOT NULL,
-  `Segundo_nombre` varchar(20) default NULL,
-  `Primer_apellido` varchar(45) NOT NULL,
-  `Segundo_apellido` varchar(20) default NULL,
-  `Fecha_nacimiento` date NOT NULL,
-  `Sexo` varchar(1) default NULL,
-  `Direccion` varchar(300) NOT NULL,
-  `Correo_electronico` varchar(40) default NULL,
-  `Estado_Civil` varchar(15) default NULL,
-  `Nacionalidad` varchar(20) NOT NULL,
-  `foto_perfil` varchar(60) NOT NULL,
-  PRIMARY KEY  (`N_identidad`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `persona`
-=======
 
 CREATE TABLE IF NOT EXISTS `persona` (
   `N_identidad` varchar(20) NOT NULL,
@@ -6361,11 +5195,10 @@ CREATE TABLE IF NOT EXISTS `persona` (
   `Estado_Civil` varchar(15) DEFAULT NULL,
   `Nacionalidad` varchar(20) NOT NULL,
   `foto_perfil` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `persona`
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 --
 
 INSERT INTO `persona` (`N_identidad`, `Primer_nombre`, `Segundo_nombre`, `Primer_apellido`, `Segundo_apellido`, `Fecha_nacimiento`, `Sexo`, `Direccion`, `Correo_electronico`, `Estado_Civil`, `Nacionalidad`, `foto_perfil`) VALUES
@@ -6373,18 +5206,13 @@ INSERT INTO `persona` (`N_identidad`, `Primer_nombre`, `Segundo_nombre`, `Primer
 ('0050-0000-00000', 's', 'p', 's', 's', '2015-06-06', 'M', 'D', 'correo', 'Casado', 'Nacionalidad', ''),
 ('01', 'S', 'P', 'O', 'K', '2015-06-06', 'M', '', NULL, NULL, '', ''),
 ('021', 'S', 'P', 'O', 'K', '2015-06-06', 'M', '', NULL, NULL, '', ''),
-<<<<<<< HEAD
 ('0301-1993-04250', 'Carlos', 'Alberto', 'Salgado', 'Montoya', '1993-10-22', 'F', 'Col. Kennedy 4ta Entrada, frente a Consejo Liberal.', 'calbertsm@gmail.com', 'viudo', 'Hondurena', ''),
-=======
-('0301-1993-04250', 'Carlos', 'Alberto', 'Salgado', 'Montoya', '1993-10-22', 'F', 'Col. Kennedy 4ta Entrada, frente a Consejo Liberal.', 'calbertsm@gmail.com', 'Soltero', 'Hondurena', ''),
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 ('0501-1994-05961', 'L', 'M', 'R', 'd', '2015-06-06', 'M', 'D', 'l@gmail.com', 'soltero', 'H', ''),
 ('0501-1994-05962', 'M', 'R', 'D', 'R', '2015-06-06', 'M', '', 'l@gmail.com', 'Soltero', 'Nacionalidad', ''),
 ('0501-1994-05967', 'S', 'S', 'S', 'S', '2015-07-14', 'M', 'Dirección', 'l@gmail.com', 'Casado', 'Nacionalidad', ''),
 ('0801-9123-12323', 'Claudio', '', 'Paz', '', '2015-07-09', 'M', 'Nuevo Paraiso, Morocelí', 'klypaz@gmail.com', 'Soltero', 'Hondureña', ''),
 ('0808-1232-12312', 'P', 'S', 'N', 'S', '2015-06-06', 'F', 'D', 'm@gmail.com', 'Divorciado', 'N', ''),
 ('1234-0000-00000', 's', 'p', 's', 's', '2015-06-06', 'M', 'D', 'correo', 'Casado', 'Nacionalidad', ''),
-<<<<<<< HEAD
 ('1234-1978-91011', 'sdfghjk', 'DSAD', 'mdqow', 'dmi', '2015-07-20', 'F', '', NULL, NULL, '', ''),
 ('0801-1991-06974', 'Elizabeth', '', 'Tercero', 'Calix', '0066-05-26', 'F', 'ni', 'prueba@yahoo.com', 'Soltero', 'Hondureña', ''),
 ('1211-1980-00001', 'Walter', 'levi', 'Meléndez', 'Perdomo', '1980-01-01', 'M', 'Lomas de Miraflores Sur, apartamento Venecia n°12', 'walter.melendez@unah.edu.hn', 'Casado', 'Hondureña', ''),
@@ -6430,37 +5258,12 @@ INSERT INTO `persona` (`N_identidad`, `Primer_nombre`, `Segundo_nombre`, `Primer
 ('0801-1971-10136', 'JUAN', 'JUAN', 'SSS', 'SS', '0000-00-00', 'F', 'SS', 'SDJDJD@GMAIL.COM', 'Soltero', 'SS', ''),
 ('0801-1987-09326', 'IRIS', 'ALEJANDRA', 'CHAVARRÍA', 'LAGOS', '1987-04-24', 'F', '', 'irishawi@hotmail.com', 'Soltero', 'hondureña', ''),
 ('1414-1414-14141', 'Prueba de error', '', 'Prueba de error', 'Prueba de error', '2015-06-24', 'M', 'Direccion', 'q@gmail.com', 'Soltero', 'Hondurena', '');
-=======
-('1234-1978-91011', 'sdfghjk', 'DSAD', 'mdqow', 'dmi', '2015-07-20', 'F', '', NULL, NULL, '', '');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `poa`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 10:27:43
---
-
-DROP TABLE IF EXISTS `poa`;
-CREATE TABLE IF NOT EXISTS `poa` (
-  `id_Poa` int(11) NOT NULL auto_increment,
-  `nombre` varchar(30) NOT NULL,
-  `fecha_de_Inicio` date NOT NULL,
-  `fecha_Fin` date NOT NULL,
-  `descripcion` text NOT NULL,
-  PRIMARY KEY  (`id_Poa`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
-
---
--- Volcar la base de datos para la tabla `poa`
---
-
-INSERT INTO `poa` (`id_Poa`, `nombre`, `fecha_de_Inicio`, `fecha_Fin`, `descripcion`) VALUES
-(19, 'POA SEPTIEMBRE', '2015-09-02', '2016-09-02', 'Eficiencia');
-=======
 
 CREATE TABLE IF NOT EXISTS `poa` (
   `id_Poa` int(11) NOT NULL,
@@ -6468,65 +5271,49 @@ CREATE TABLE IF NOT EXISTS `poa` (
   `fecha_de_Inicio` date NOT NULL,
   `fecha_Fin` date NOT NULL,
   `descripcion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `poa`
+--
+
+INSERT INTO `poa` (`id_Poa`, `nombre`, `fecha_de_Inicio`, `fecha_Fin`, `descripcion`) VALUES
+(19, 'POA SEPTIEMBRE', '2015-09-02', '2016-09-02', 'Eficiencia');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `prioridad`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 12:17:38
---
 
-DROP TABLE IF EXISTS `prioridad`;
 CREATE TABLE IF NOT EXISTS `prioridad` (
   `Id_Prioridad` tinyint(4) NOT NULL,
-  `DescripcionPrioridad` text NOT NULL,
-  PRIMARY KEY  (`Id_Prioridad`)
+  `DescripcionPrioridad` text NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `prioridad`
+-- Volcado de datos para la tabla `prioridad`
 --
 
 INSERT INTO `prioridad` (`Id_Prioridad`, `DescripcionPrioridad`) VALUES
 (5, 'PRUEBA'),
 (6, 'desc prioridad');
-=======
-
-CREATE TABLE IF NOT EXISTS `prioridad` (
-  `Id_Prioridad` tinyint(4) NOT NULL,
-  `DescripcionPrioridad` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `prioridad_folio`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 25-09-2015 a las 13:01:07
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `prioridad_folio`;
 CREATE TABLE IF NOT EXISTS `prioridad_folio` (
-  `Id_PrioridadFolio` int(11) NOT NULL auto_increment,
+  `Id_PrioridadFolio` int(11) NOT NULL,
   `IdFolio` varchar(25) NOT NULL,
   `Id_Prioridad` tinyint(4) NOT NULL,
-  `FechaEstablecida` date NOT NULL,
-  PRIMARY KEY  (`Id_PrioridadFolio`),
-  KEY `fk_prioridad_folio_folios_idx` (`IdFolio`),
-  KEY `fk_prioridad_folio_prioridad_idx` (`Id_Prioridad`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `FechaEstablecida` date NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `prioridad_folio`
+-- Volcado de datos para la tabla `prioridad_folio`
 --
 
 INSERT INTO `prioridad_folio` (`Id_PrioridadFolio`, `IdFolio`, `Id_Prioridad`, `FechaEstablecida`) VALUES
@@ -6536,46 +5323,12 @@ INSERT INTO `prioridad_folio` (`Id_PrioridadFolio`, `IdFolio`, `Id_Prioridad`, `
 (5, '20', 5, '2015-09-11'),
 (6, 'Oficio 120', 5, '2015-09-22'),
 (7, '002', 6, '2015-09-25');
-=======
-
-CREATE TABLE IF NOT EXISTS `prioridad_folio` (
-  `Id_PrioridadFolio` int(11) NOT NULL,
-  `IdFolio` varchar(25) NOT NULL,
-  `Id_Prioridad` tinyint(4) NOT NULL,
-  `FechaEstablecida` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `responsables_por_actividad`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 09-09-2015 a las 11:03:49
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `responsables_por_actividad`;
-CREATE TABLE IF NOT EXISTS `responsables_por_actividad` (
-  `id_Responsable_por_Actividad` int(11) NOT NULL auto_increment,
-  `id_Actividad` int(11) NOT NULL,
-  `id_Responsable` int(11) NOT NULL,
-  `fecha_Asignacion` date NOT NULL,
-  `observacion` text,
-  PRIMARY KEY  (`id_Responsable_por_Actividad`),
-  KEY `id_Actividad` (`id_Actividad`,`id_Responsable`),
-  KEY `id_Responsable` (`id_Responsable`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Volcar la base de datos para la tabla `responsables_por_actividad`
---
-
-INSERT INTO `responsables_por_actividad` (`id_Responsable_por_Actividad`, `id_Actividad`, `id_Responsable`, `fecha_Asignacion`, `observacion`) VALUES
-(4, 11, 3, '2015-09-09', 'na');
-=======
 
 CREATE TABLE IF NOT EXISTS `responsables_por_actividad` (
   `id_Responsable_por_Actividad` int(11) NOT NULL,
@@ -6583,38 +5336,28 @@ CREATE TABLE IF NOT EXISTS `responsables_por_actividad` (
   `id_Responsable` int(11) NOT NULL,
   `fecha_Asignacion` date NOT NULL,
   `observacion` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `responsables_por_actividad`
+--
+
+INSERT INTO `responsables_por_actividad` (`id_Responsable_por_Actividad`, `id_Actividad`, `id_Responsable`, `fecha_Asignacion`, `observacion`) VALUES
+(4, 11, 3, '2015-09-09', 'na');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `roles`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `roles`;
-CREATE TABLE IF NOT EXISTS `roles` (
-  `Id_Rol` tinyint(4) NOT NULL,
-  `Descripcion` text NOT NULL,
-  PRIMARY KEY  (`Id_Rol`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `roles`
-=======
 
 CREATE TABLE IF NOT EXISTS `roles` (
   `Id_Rol` tinyint(4) NOT NULL,
   `Descripcion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `roles`
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 --
 
 INSERT INTO `roles` (`Id_Rol`, `Descripcion`) VALUES
@@ -6632,20 +5375,14 @@ INSERT INTO `roles` (`Id_Rol`, `Descripcion`) VALUES
 --
 -- Estructura de tabla para la tabla `sa_ciudades`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 12-08-2015 a las 02:29:43
---
 
-DROP TABLE IF EXISTS `sa_ciudades`;
 CREATE TABLE IF NOT EXISTS `sa_ciudades` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(50) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_ciudades`
+-- Volcado de datos para la tabla `sa_ciudades`
 --
 
 INSERT INTO `sa_ciudades` (`codigo`, `nombre`) VALUES
@@ -6660,60 +5397,20 @@ INSERT INTO `sa_ciudades` (`codigo`, `nombre`) VALUES
 (10, 'Valle'),
 (11, 'La Paz'),
 (24, 'PruebaAllan');
-=======
-
-CREATE TABLE IF NOT EXISTS `sa_ciudades` (
-  `codigo` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sa_ciudades`
---
-
-INSERT INTO `sa_ciudades` (`codigo`, `nombre`) VALUES
-(1, 'San Pedro Sula'),
-(2, 'Tegucigalpa'),
-(3, 'Comayagua'),
-(4, 'Santa Rosa de Copan'),
-(5, 'Jesus de Otoro'),
-(6, 'La Ceiba'),
-(7, 'Tela'),
-(8, 'El Progreso'),
-(9, 'Choluteca'),
-(10, 'Valle'),
-(11, 'La Paz');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_estados_solicitud`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `sa_estados_solicitud`;
-CREATE TABLE IF NOT EXISTS `sa_estados_solicitud` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `descripcion` varchar(50) NOT NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcar la base de datos para la tabla `sa_estados_solicitud`
-=======
 
 CREATE TABLE IF NOT EXISTS `sa_estados_solicitud` (
   `codigo` int(11) NOT NULL,
   `descripcion` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `sa_estados_solicitud`
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 --
 
 INSERT INTO `sa_estados_solicitud` (`codigo`, `descripcion`) VALUES
@@ -6725,15 +5422,7 @@ INSERT INTO `sa_estados_solicitud` (`codigo`, `descripcion`) VALUES
 --
 -- Estructura de tabla para la tabla `sa_estudiantes`
 --
-<<<<<<< HEAD
--- Creación: 12-08-2015 a las 23:29:42
--- Última actualización: 19-09-2015 a las 13:13:45
---
 
-DROP TABLE IF EXISTS `sa_estudiantes`;
-=======
-
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 CREATE TABLE IF NOT EXISTS `sa_estudiantes` (
   `dni` varchar(20) NOT NULL,
   `no_cuenta` varchar(11) NOT NULL,
@@ -6741,76 +5430,48 @@ CREATE TABLE IF NOT EXISTS `sa_estudiantes` (
   `indice_academico` decimal(10,0) NOT NULL,
   `fecha_registro` date NOT NULL,
   `uv_acumulados` int(11) NOT NULL,
-<<<<<<< HEAD
-  `cantcodad_solicitudes` int(11) default NULL,
-=======
   `cantcodad_solicitudes` int(11) DEFAULT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `cod_plan_estudio` int(11) NOT NULL,
   `cod_ciudad_origen` int(11) NOT NULL,
   `cod_orientacion` int(11) NOT NULL,
   `cod_residencia_actual` int(11) NOT NULL,
-<<<<<<< HEAD
-  `anios_final_estudio` int(11) NOT NULL,
-  PRIMARY KEY  (`dni`),
-  UNIQUE KEY `no_cuenta_estudiantes_UC` (`no_cuenta`),
-  KEY `estudiante_plan_FK_idx` (`cod_plan_estudio`),
-  KEY `estudiante_ciudad_FK_idx` (`cod_ciudad_origen`),
-  KEY `estudiante_orientacion_FK_idx` (`cod_orientacion`),
-  KEY `estudiantes_lugar_origen_FK_idx` (`cod_residencia_actual`)
+  `anios_final_estudio` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `sa_estudiantes`
---
-
-INSERT INTO `sa_estudiantes` (`dni`, `no_cuenta`, `anios_inicio_estudio`, `indice_academico`, `fecha_registro`, `uv_acumulados`, `cantcodad_solicitudes`, `cod_plan_estudio`, `cod_ciudad_origen`, `cod_orientacion`, `cod_residencia_actual`, `anios_final_estudio`) VALUES
-('0801-1987-09326', '20051008272', 2005, 71, '2015-09-19', 265, NULL, 16, 2, 2, 2, 2015),
-('0501-0501-05010', '20112011201', 1, 88, '2015-07-29', 52, NULL, 1, 1, 2, 1, 0),
-('0801-1990-77778', '20091000028', 5, 61, '2015-07-31', 70, NULL, 8, 2, 8, 2, 0),
-('0801-1971-10136', '20120001201', 1990, 98, '2015-09-11', 1, NULL, 1, 2, 2, 2, 2015),
-('0801-1991-21784', '20101003771', 1, 75, '2015-08-01', 56, NULL, 9, 2, 8, 2, 0),
-('0801-1991-21785', '20101003661', 1, 80, '2015-08-04', 1, NULL, 9, 1, 2, 1, 0),
-('0002-0002-00002', '20101002705', 5, 100, '2015-08-04', 52, NULL, 9, 2, 4, 2, 0),
-('8888-8888-88888', '20882008640', 1, 87, '2015-08-04', 1, NULL, 9, 1, 2, 1, 0),
-('0801-1991-21786', '20101003772', 5, 80, '2015-08-05', 56, NULL, 15, 1, 2, 1, 0),
-('0801-1990-12345', '20091000370', 5, 2, '2015-08-05', 20, NULL, 15, 9, 4, 21, 0),
-('0801-1991-77777', '20081000028', 8, 61, '2015-08-12', 6, NULL, 8, 9, 2, 9, 0),
-('0301-1993-04251', '20121001759', 2012, 87, '2015-08-12', 50, NULL, 15, 2, 3, 2, 2015),
-('0301-1990-00604', '20091900402', 2009, 83, '2015-08-12', 67, NULL, 15, 2, 4, 2, 2014),
-('0007-0007-00007', '20101002707', 1990, 98, '2015-08-17', 54, NULL, 1, 4, 8, 4, 2015),
-('0801-1977-13759', '20101003881', 1996, 89, '2015-08-19', 254, NULL, 16, 2, 8, 2, 2003);
-=======
-  `anios_final_estudio` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `sa_estudiantes`
 --
 
 INSERT INTO `sa_estudiantes` (`dni`, `no_cuenta`, `anios_inicio_estudio`, `indice_academico`, `fecha_registro`, `uv_acumulados`, `cantcodad_solicitudes`, `cod_plan_estudio`, `cod_ciudad_origen`, `cod_orientacion`, `cod_residencia_actual`, `anios_final_estudio`) VALUES
-('0000-0000-00000', '0000-0000-0', 2, '5', '2015-05-05', 30, NULL, 1, 1, 1, 1, 2015);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+('0801-1987-09326', '20051008272', 2005, '71', '2015-09-19', 265, NULL, 16, 2, 2, 2, 2015),
+('0501-0501-05010', '20112011201', 1, '88', '2015-07-29', 52, NULL, 1, 1, 2, 1, 0),
+('0801-1990-77778', '20091000028', 5, '61', '2015-07-31', 70, NULL, 8, 2, 8, 2, 0),
+('0801-1971-10136', '20120001201', 1990, '98', '2015-09-11', 1, NULL, 1, 2, 2, 2, 2015),
+('0801-1991-21784', '20101003771', 1, '75', '2015-08-01', 56, NULL, 9, 2, 8, 2, 0),
+('0801-1991-21785', '20101003661', 1, '80', '2015-08-04', 1, NULL, 9, 1, 2, 1, 0),
+('0002-0002-00002', '20101002705', 5, '100', '2015-08-04', 52, NULL, 9, 2, 4, 2, 0),
+('8888-8888-88888', '20882008640', 1, '87', '2015-08-04', 1, NULL, 9, 1, 2, 1, 0),
+('0801-1991-21786', '20101003772', 5, '80', '2015-08-05', 56, NULL, 15, 1, 2, 1, 0),
+('0801-1990-12345', '20091000370', 5, '2', '2015-08-05', 20, NULL, 15, 9, 4, 21, 0),
+('0801-1991-77777', '20081000028', 8, '61', '2015-08-12', 6, NULL, 8, 9, 2, 9, 0),
+('0301-1993-04251', '20121001759', 2012, '87', '2015-08-12', 50, NULL, 15, 2, 3, 2, 2015),
+('0301-1990-00604', '20091900402', 2009, '83', '2015-08-12', 67, NULL, 15, 2, 4, 2, 2014),
+('0007-0007-00007', '20101002707', 1990, '98', '2015-08-17', 54, NULL, 1, 4, 8, 4, 2015),
+('0801-1977-13759', '20101003881', 1996, '89', '2015-08-19', 254, NULL, 16, 2, 8, 2, 2003);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_estudiantes_correos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 19-09-2015 a las 13:13:45
---
 
-DROP TABLE IF EXISTS `sa_estudiantes_correos`;
 CREATE TABLE IF NOT EXISTS `sa_estudiantes_correos` (
   `dni_estudiante` varchar(20) NOT NULL,
-  `correo` varchar(50) NOT NULL,
-  PRIMARY KEY  (`dni_estudiante`,`correo`)
+  `correo` varchar(50) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_estudiantes_correos`
+-- Volcado de datos para la tabla `sa_estudiantes_correos`
 --
 
 INSERT INTO `sa_estudiantes_correos` (`dni_estudiante`, `correo`) VALUES
@@ -6831,35 +5492,20 @@ INSERT INTO `sa_estudiantes_correos` (`dni_estudiante`, `correo`) VALUES
 ('0801-1991-77777', 'analinda@yahoo.com'),
 ('0802-1991-33333', 'anamen@yahoo.com'),
 ('8888-8888-88888', 'correo@gmail.com');
-=======
-
-CREATE TABLE IF NOT EXISTS `sa_estudiantes_correos` (
-  `dni_estudiante` varchar(20) NOT NULL,
-  `correo` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_estudiantes_menciones_honorificas`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 19-09-2015 a las 13:13:45
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `sa_estudiantes_menciones_honorificas`;
 CREATE TABLE IF NOT EXISTS `sa_estudiantes_menciones_honorificas` (
   `dni_estudiante` varchar(20) NOT NULL,
-  `cod_mencion` int(11) NOT NULL,
-  PRIMARY KEY  (`dni_estudiante`,`cod_mencion`),
-  KEY `estudiante_mencion_mencion_FK_idx` (`cod_mencion`)
+  `cod_mencion` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_estudiantes_menciones_honorificas`
+-- Volcado de datos para la tabla `sa_estudiantes_menciones_honorificas`
 --
 
 INSERT INTO `sa_estudiantes_menciones_honorificas` (`dni_estudiante`, `cod_mencion`) VALUES
@@ -6880,36 +5526,21 @@ INSERT INTO `sa_estudiantes_menciones_honorificas` (`dni_estudiante`, `cod_menci
 ('0801-1991-77777', 3),
 ('0802-1991-33333', 1),
 ('8888-8888-88888', 1);
-=======
-
-CREATE TABLE IF NOT EXISTS `sa_estudiantes_menciones_honorificas` (
-  `dni_estudiante` varchar(20) NOT NULL,
-  `cod_mencion` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_estudiantes_tipos_estudiantes`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 19-09-2015 a las 13:13:45
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `sa_estudiantes_tipos_estudiantes`;
 CREATE TABLE IF NOT EXISTS `sa_estudiantes_tipos_estudiantes` (
   `codigo_tipo_estudiante` int(11) NOT NULL,
   `dni_estudiante` varchar(20) NOT NULL,
-  `fecha_registro` datetime NOT NULL,
-  PRIMARY KEY  (`codigo_tipo_estudiante`,`dni_estudiante`),
-  KEY `sa_estudiantes_tipos_estudiantes_estudiantes_idx` (`dni_estudiante`)
+  `fecha_registro` datetime NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_estudiantes_tipos_estudiantes`
+-- Volcado de datos para la tabla `sa_estudiantes_tipos_estudiantes`
 --
 
 INSERT INTO `sa_estudiantes_tipos_estudiantes` (`codigo_tipo_estudiante`, `dni_estudiante`, `fecha_registro`) VALUES
@@ -6939,102 +5570,57 @@ INSERT INTO `sa_estudiantes_tipos_estudiantes` (`codigo_tipo_estudiante`, `dni_e
 (2, '0801-1977-13759', '2015-08-19 09:54:47'),
 (6, '0801-1971-10136', '2015-09-11 18:00:51'),
 (6, '0801-1987-09326', '2015-09-19 13:13:45');
-=======
-
-CREATE TABLE IF NOT EXISTS `sa_estudiantes_tipos_estudiantes` (
-  `codigo_tipo_estudiante` int(11) NOT NULL,
-  `dni_estudiante` varchar(20) NOT NULL,
-  `fecha_registro` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sa_estudiantes_tipos_estudiantes`
---
-
-INSERT INTO `sa_estudiantes_tipos_estudiantes` (`codigo_tipo_estudiante`, `dni_estudiante`, `fecha_registro`) VALUES
-(1, '0000-0000-00000', '2015-05-05 00:00:00');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_examenes_himno`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 16-09-2015 a las 09:52:58
---
-
-DROP TABLE IF EXISTS `sa_examenes_himno`;
-CREATE TABLE IF NOT EXISTS `sa_examenes_himno` (
-  `cod_solicitud` int(11) NOT NULL,
-  `fecha_solicitud` date NOT NULL,
-  `nota_himno` decimal(10,0) default NULL,
-  `fecha_examen_himno` date default NULL,
-  PRIMARY KEY  (`cod_solicitud`,`fecha_solicitud`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Volcar la base de datos para la tabla `sa_examenes_himno`
---
-
-INSERT INTO `sa_examenes_himno` (`cod_solicitud`, `fecha_solicitud`, `nota_himno`, `fecha_examen_himno`) VALUES
-(21, '2015-08-03', 20150803, '0000-00-00'),
-(22, '2015-08-04', 20150804, '0000-00-00'),
-(23, '2015-08-04', 20150804, '2015-08-06'),
-(24, '2015-08-04', 20150804, '0000-00-00'),
-(25, '2015-08-04', 20150804, '0000-00-00'),
-(26, '2015-08-04', 20150804, '0000-00-00'),
-(27, '2015-08-04', 20150804, '0000-00-00'),
-(28, '2015-08-04', 20150804, '0000-00-00'),
-(29, '2015-08-04', 20150804, '0000-00-00'),
-(30, '2015-08-04', 20150804, '2015-08-09'),
-(31, '2015-08-05', 20150805, '0000-00-00'),
-(32, '2015-08-05', 20150805, '2015-08-14'),
-(33, '2015-08-09', NULL, '2015-05-05'),
-(34, '2015-08-12', NULL, '2015-10-10'),
-(35, '2015-08-19', NULL, '0000-00-00'),
-(36, '2015-08-19', NULL, '0000-00-00'),
-(37, '2015-08-19', 20150819, '2015-08-19'),
-(38, '2015-09-16', 20150916, '0000-00-00');
-=======
 
 CREATE TABLE IF NOT EXISTS `sa_examenes_himno` (
   `cod_solicitud` int(11) NOT NULL,
   `fecha_solicitud` date NOT NULL,
   `nota_himno` decimal(10,0) DEFAULT NULL,
   `fecha_examen_himno` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `sa_examenes_himno`
 --
 
 INSERT INTO `sa_examenes_himno` (`cod_solicitud`, `fecha_solicitud`, `nota_himno`, `fecha_examen_himno`) VALUES
-(21, '2015-07-25', '20150725', '0000-00-00'),
-(22, '2015-07-25', '20150725', '2015-05-05'),
-(23, '2015-07-25', '20150725', '0000-00-00');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+(21, '2015-08-03', '20150803', '0000-00-00'),
+(22, '2015-08-04', '20150804', '0000-00-00'),
+(23, '2015-08-04', '20150804', '2015-08-06'),
+(24, '2015-08-04', '20150804', '0000-00-00'),
+(25, '2015-08-04', '20150804', '0000-00-00'),
+(26, '2015-08-04', '20150804', '0000-00-00'),
+(27, '2015-08-04', '20150804', '0000-00-00'),
+(28, '2015-08-04', '20150804', '0000-00-00'),
+(29, '2015-08-04', '20150804', '0000-00-00'),
+(30, '2015-08-04', '20150804', '2015-08-09'),
+(31, '2015-08-05', '20150805', '0000-00-00'),
+(32, '2015-08-05', '20150805', '2015-08-14'),
+(33, '2015-08-09', NULL, '2015-05-05'),
+(34, '2015-08-12', NULL, '2015-10-10'),
+(35, '2015-08-19', NULL, '0000-00-00'),
+(36, '2015-08-19', NULL, '0000-00-00'),
+(37, '2015-08-19', '20150819', '2015-08-19'),
+(38, '2015-09-16', '20150916', '0000-00-00');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_menciones_honorificas`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 19-09-2015 a las 13:18:21
---
 
-DROP TABLE IF EXISTS `sa_menciones_honorificas`;
 CREATE TABLE IF NOT EXISTS `sa_menciones_honorificas` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `descripcion` varchar(50) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+  `codigo` int(11) NOT NULL,
+  `descripcion` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_menciones_honorificas`
+-- Volcado de datos para la tabla `sa_menciones_honorificas`
 --
 
 INSERT INTO `sa_menciones_honorificas` (`codigo`, `descripcion`) VALUES
@@ -7042,88 +5628,45 @@ INSERT INTO `sa_menciones_honorificas` (`codigo`, `descripcion`) VALUES
 (13, 'Magna Cum Laude'),
 (11, 'N/A'),
 (12, 'Summa Cum Laude');
-=======
-
-CREATE TABLE IF NOT EXISTS `sa_menciones_honorificas` (
-  `codigo` int(11) NOT NULL,
-  `descripcion` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sa_menciones_honorificas`
---
-
-INSERT INTO `sa_menciones_honorificas` (`codigo`, `descripcion`) VALUES
-(1, 'Magna Cum Laude'),
-(2, 'Cum Laude'),
-(3, 'Cum'),
-(4, 'Suma Magna Cum Laude');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_orientaciones`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 19-09-2015 a las 13:19:12
---
-
-DROP TABLE IF EXISTS `sa_orientaciones`;
-CREATE TABLE IF NOT EXISTS `sa_orientaciones` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `descripcion` varchar(50) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
-
---
--- Volcar la base de datos para la tabla `sa_orientaciones`
-=======
 
 CREATE TABLE IF NOT EXISTS `sa_orientaciones` (
   `codigo` int(11) NOT NULL,
   `descripcion` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `sa_orientaciones`
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 --
 
 INSERT INTO `sa_orientaciones` (`codigo`, `descripcion`) VALUES
 (2, 'Derecho Mercantil'),
 (3, 'Ciencias Politicas'),
 (4, 'Derechos Humanos'),
-<<<<<<< HEAD
 (5, 'Derecho Maritimo'),
 (8, 'Informática'),
 (16, 'N/A'),
 (11, 'mercantil'),
 (12, 'mercantil2');
-=======
-(5, 'Derecho Maritimo');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_periodos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 16-09-2015 a las 10:46:35
---
 
-DROP TABLE IF EXISTS `sa_periodos`;
 CREATE TABLE IF NOT EXISTS `sa_periodos` (
   `codigo` int(11) NOT NULL,
-  `nombre` varchar(20) default NULL,
-  PRIMARY KEY  (`codigo`)
+  `nombre` varchar(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_periodos`
+-- Volcado de datos para la tabla `sa_periodos`
 --
 
 INSERT INTO `sa_periodos` (`codigo`, `nombre`) VALUES
@@ -7131,43 +5674,21 @@ INSERT INTO `sa_periodos` (`codigo`, `nombre`) VALUES
 (6, 'Segundo Periodo'),
 (3, 'Primer periodo'),
 (4, 'Tercer Periodo');
-=======
-
-CREATE TABLE IF NOT EXISTS `sa_periodos` (
-  `codigo` int(11) NOT NULL,
-  `nombre` varchar(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sa_periodos`
---
-
-INSERT INTO `sa_periodos` (`codigo`, `nombre`) VALUES
-(1, 'Primer periodo'),
-(2, 'Segundo periodo'),
-(3, 'Tercer periodo');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_planes_estudio`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 19-09-2015 a las 13:21:11
---
 
-DROP TABLE IF EXISTS `sa_planes_estudio`;
 CREATE TABLE IF NOT EXISTS `sa_planes_estudio` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(50) default NULL,
-  `uv` int(11) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `uv` int(11) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_planes_estudio`
+-- Volcado de datos para la tabla `sa_planes_estudio`
 --
 
 INSERT INTO `sa_planes_estudio` (`codigo`, `nombre`, `uv`) VALUES
@@ -7178,62 +5699,27 @@ INSERT INTO `sa_planes_estudio` (`codigo`, `nombre`, `uv`) VALUES
 (16, 'Nuevo Plan', 20),
 (22, 'Plan 2003', NULL),
 (23, 'Plan 1978', NULL);
-=======
-
-CREATE TABLE IF NOT EXISTS `sa_planes_estudio` (
-  `codigo` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL,
-  `uv` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sa_planes_estudio`
---
-
-INSERT INTO `sa_planes_estudio` (`codigo`, `nombre`, `uv`) VALUES
-(1, 'Derecho', 120);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_solicitudes`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 16-09-2015 a las 09:52:58
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `sa_solicitudes`;
-CREATE TABLE IF NOT EXISTS `sa_solicitudes` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `fecha_solicitud` date NOT NULL,
-  `observaciones` varchar(50) default NULL,
-=======
 
 CREATE TABLE IF NOT EXISTS `sa_solicitudes` (
   `codigo` int(11) NOT NULL,
   `fecha_solicitud` date NOT NULL,
   `observaciones` varchar(50) DEFAULT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `dni_estudiante` varchar(20) NOT NULL,
   `cod_periodo` int(11) NOT NULL,
   `cod_estado` int(11) NOT NULL,
   `cod_tipo_solicitud` int(11) NOT NULL,
-<<<<<<< HEAD
-  `cod_solicitud_padre` int(11) default NULL,
-  `fecha_solicitud_padre` date default NULL,
-  PRIMARY KEY  (`codigo`,`fecha_solicitud`),
-  KEY `solicitud_estudiante_FK_idx` (`dni_estudiante`),
-  KEY `solicitud_periodo_FK_idx` (`cod_periodo`),
-  KEY `solicitud_estados_solicitud_FK_idx` (`cod_estado`),
-  KEY `solicitud_tipo_solicitud_FK_idx` (`cod_tipo_solicitud`),
-  KEY `solicitud_solicitud_FK_idx` (`cod_solicitud_padre`,`fecha_solicitud_padre`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+  `cod_solicitud_padre` int(11) DEFAULT NULL,
+  `fecha_solicitud_padre` date DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_solicitudes`
+-- Volcado de datos para la tabla `sa_solicitudes`
 --
 
 INSERT INTO `sa_solicitudes` (`codigo`, `fecha_solicitud`, `observaciones`, `dni_estudiante`, `cod_periodo`, `cod_estado`, `cod_tipo_solicitud`, `cod_solicitud_padre`, `fecha_solicitud_padre`) VALUES
@@ -7247,40 +5733,20 @@ INSERT INTO `sa_solicitudes` (`codigo`, `fecha_solicitud`, `observaciones`, `dni
 (36, '2015-08-19', NULL, '0002-0002-00002', 2, 1, 1, 26, NULL),
 (37, '2015-08-19', NULL, '0801-1977-13759', 4, 1, 123482, NULL, NULL),
 (38, '2015-09-16', NULL, '0801-1959-03859', 4, 1, 123481, NULL, NULL);
-=======
-  `cod_solicitud_padre` int(11) DEFAULT NULL,
-  `fecha_solicitud_padre` date DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sa_solicitudes`
---
-
-INSERT INTO `sa_solicitudes` (`codigo`, `fecha_solicitud`, `observaciones`, `dni_estudiante`, `cod_periodo`, `cod_estado`, `cod_tipo_solicitud`, `cod_solicitud_padre`, `fecha_solicitud_padre`) VALUES
-(21, '2015-07-25', NULL, '0000-0000-00000', 1, 1, 1, NULL, NULL),
-(22, '2015-07-25', NULL, '0000-0000-00000', 1, 1, 1, NULL, NULL),
-(23, '2015-07-25', NULL, '0000-0000-00000', 3, 1, 1, NULL, NULL);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_tipos_estudiante`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 19-09-2015 a las 13:27:37
---
 
-DROP TABLE IF EXISTS `sa_tipos_estudiante`;
 CREATE TABLE IF NOT EXISTS `sa_tipos_estudiante` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `descripcion` varchar(50) NOT NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+  `codigo` int(11) NOT NULL,
+  `descripcion` varchar(50) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_tipos_estudiante`
+-- Volcado de datos para la tabla `sa_tipos_estudiante`
 --
 
 INSERT INTO `sa_tipos_estudiante` (`codigo`, `descripcion`) VALUES
@@ -7291,41 +5757,20 @@ INSERT INTO `sa_tipos_estudiante` (`codigo`, `descripcion`) VALUES
 (7, 'PruebaAllan0'),
 (8, 'ghfghfgh'),
 (9, 'Pregrado');
-=======
-
-CREATE TABLE IF NOT EXISTS `sa_tipos_estudiante` (
-  `codigo` int(11) NOT NULL,
-  `descripcion` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sa_tipos_estudiante`
---
-
-INSERT INTO `sa_tipos_estudiante` (`codigo`, `descripcion`) VALUES
-(1, 'Pregrado'),
-(2, 'Postgrado');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_tipos_solicitud`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 19-09-2015 a las 13:22:58
---
 
-DROP TABLE IF EXISTS `sa_tipos_solicitud`;
 CREATE TABLE IF NOT EXISTS `sa_tipos_solicitud` (
-  `codigo` int(11) NOT NULL auto_increment,
-  `nombre` varchar(50) default NULL,
-  PRIMARY KEY  (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=123487 ;
+  `codigo` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=123487 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_tipos_solicitud`
+-- Volcado de datos para la tabla `sa_tipos_solicitud`
 --
 
 INSERT INTO `sa_tipos_solicitud` (`codigo`, `nombre`) VALUES
@@ -7346,49 +5791,20 @@ INSERT INTO `sa_tipos_solicitud` (`codigo`, `nombre`) VALUES
 (123482, 'GRE'),
 (123484, 'EXPEDIENTE DE GRADUACIÓN'),
 (123486, 'Solicitud Constancia de Egresado');
-=======
-
-CREATE TABLE IF NOT EXISTS `sa_tipos_solicitud` (
-  `codigo` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=123477 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sa_tipos_solicitud`
---
-
-INSERT INTO `sa_tipos_solicitud` (`codigo`, `nombre`) VALUES
-(1, 'Tipo solicitud'),
-(123456, 'Hola'),
-(123457, 'esCorrecto'),
-(123458, 'mi solicitud'),
-(123459, 'hola mundo'),
-(123460, 'a'),
-(123461, 'nuevaSolicitud'),
-(123462, NULL);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sa_tipos_solicitud_tipos_alumnos`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 19-09-2015 a las 13:22:58
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `sa_tipos_solicitud_tipos_alumnos`;
 CREATE TABLE IF NOT EXISTS `sa_tipos_solicitud_tipos_alumnos` (
   `cod_tipo_solicitud` int(11) NOT NULL,
-  `cod_tipo_alumno` int(11) NOT NULL,
-  PRIMARY KEY  (`cod_tipo_solicitud`,`cod_tipo_alumno`),
-  KEY `tipo_alumno_tipo_solicitud_t_a_FK_idx` (`cod_tipo_alumno`)
+  `cod_tipo_alumno` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sa_tipos_solicitud_tipos_alumnos`
+-- Volcado de datos para la tabla `sa_tipos_solicitud_tipos_alumnos`
 --
 
 INSERT INTO `sa_tipos_solicitud_tipos_alumnos` (`cod_tipo_solicitud`, `cod_tipo_alumno`) VALUES
@@ -7402,59 +5818,12 @@ INSERT INTO `sa_tipos_solicitud_tipos_alumnos` (`cod_tipo_solicitud`, `cod_tipo_
 (123484, 6),
 (123485, 1),
 (123486, 1);
-=======
-
-CREATE TABLE IF NOT EXISTS `sa_tipos_solicitud_tipos_alumnos` (
-  `cod_tipo_solicitud` int(11) NOT NULL,
-  `cod_tipo_alumno` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `sa_tipos_solicitud_tipos_alumnos`
---
-
-INSERT INTO `sa_tipos_solicitud_tipos_alumnos` (`cod_tipo_solicitud`, `cod_tipo_alumno`) VALUES
-(1, 1);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `seguimiento`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 25-09-2015 a las 13:01:07
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `seguimiento`;
-CREATE TABLE IF NOT EXISTS `seguimiento` (
-  `Id_Seguimiento` int(11) NOT NULL auto_increment,
-  `NroFolio` varchar(25) NOT NULL,
-  `UsuarioAsignado` int(11) default NULL,
-  `Notas` text NOT NULL,
-  `Prioridad` tinyint(4) NOT NULL,
-  `FechaInicio` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `FechaFinal` date default NULL,
-  `EstadoSeguimiento` tinyint(4) NOT NULL,
-  PRIMARY KEY  (`Id_Seguimiento`),
-  KEY `fk_seguimiento_folios_idx` (`NroFolio`),
-  KEY `fk_seguimiento_usuarioAsignado_idx` (`UsuarioAsignado`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
-
---
--- Volcar la base de datos para la tabla `seguimiento`
---
-
-INSERT INTO `seguimiento` (`Id_Seguimiento`, `NroFolio`, `UsuarioAsignado`, `Notas`, `Prioridad`, `FechaInicio`, `FechaFinal`, `EstadoSeguimiento`) VALUES
-(2, '123123', 4, 'd', 5, '2015-08-23 14:41:23', NULL, 8),
-(3, '123', 3, 'ninguna', 6, '2015-09-02 12:33:03', NULL, 11),
-(4, 'folio de prueba', NULL, 'prueba', 5, '2015-09-10 12:54:45', NULL, 9),
-(5, '20', 5, 'PRUEBA', 5, '2015-09-11 17:38:35', NULL, 11),
-(6, 'Oficio 120', 9, 'faltan documentos de soporte', 5, '2015-09-22 17:02:50', NULL, 11),
-(7, '002', 6, 'en proceso de aprobación', 6, '2015-09-25 13:01:07', NULL, 11);
-=======
 
 CREATE TABLE IF NOT EXISTS `seguimiento` (
   `Id_Seguimiento` int(11) NOT NULL,
@@ -7465,41 +5834,37 @@ CREATE TABLE IF NOT EXISTS `seguimiento` (
   `FechaInicio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `FechaFinal` date DEFAULT NULL,
   `EstadoSeguimiento` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `seguimiento`
+--
+
+INSERT INTO `seguimiento` (`Id_Seguimiento`, `NroFolio`, `UsuarioAsignado`, `Notas`, `Prioridad`, `FechaInicio`, `FechaFinal`, `EstadoSeguimiento`) VALUES
+(2, '123123', 4, 'd', 5, '2015-08-23 20:41:23', NULL, 8),
+(3, '123', 3, 'ninguna', 6, '2015-09-02 18:33:03', NULL, 11),
+(4, 'folio de prueba', NULL, 'prueba', 5, '2015-09-10 18:54:45', NULL, 9),
+(5, '20', 5, 'PRUEBA', 5, '2015-09-11 23:38:35', NULL, 11),
+(6, 'Oficio 120', 9, 'faltan documentos de soporte', 5, '2015-09-22 23:02:50', NULL, 11),
+(7, '002', 6, 'en proceso de aprobación', 6, '2015-09-25 19:01:07', NULL, 11);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `seguimiento_historico`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 25-09-2015 a las 13:01:07
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `seguimiento_historico`;
-CREATE TABLE IF NOT EXISTS `seguimiento_historico` (
-  `Id_SeguimientoHistorico` int(11) NOT NULL auto_increment,
-=======
 
 CREATE TABLE IF NOT EXISTS `seguimiento_historico` (
   `Id_SeguimientoHistorico` int(11) NOT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `Id_Seguimiento` int(11) NOT NULL,
   `Id_Estado_Seguimiento` tinyint(4) NOT NULL,
   `Notas` text NOT NULL,
   `Prioridad` tinyint(4) NOT NULL,
-<<<<<<< HEAD
-  `FechaCambio` datetime NOT NULL,
-  PRIMARY KEY  (`Id_SeguimientoHistorico`),
-  KEY `fk_seguimiento_historico_seguimiento` (`Id_Seguimiento`),
-  KEY `fk_seguimiento_historico_tblEstdoSeguimiento_idx` (`Id_Estado_Seguimiento`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+  `FechaCambio` datetime NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `seguimiento_historico`
+-- Volcado de datos para la tabla `seguimiento_historico`
 --
 
 INSERT INTO `seguimiento_historico` (`Id_SeguimientoHistorico`, `Id_Seguimiento`, `Id_Estado_Seguimiento`, `Notas`, `Prioridad`, `FechaCambio`) VALUES
@@ -7510,30 +5875,15 @@ INSERT INTO `seguimiento_historico` (`Id_SeguimientoHistorico`, `Id_Seguimiento`
 (6, 5, 11, 'PRUEBA', 5, '2015-09-11 17:38:35'),
 (7, 6, 11, 'faltan documentos de soporte', 5, '2015-09-22 17:02:50'),
 (8, 7, 11, 'en proceso de aprobación', 6, '2015-09-25 13:01:07');
-=======
-  `FechaCambio` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sub_actividad`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 09-09-2015 a las 11:09:28
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `sub_actividad`;
-CREATE TABLE IF NOT EXISTS `sub_actividad` (
-  `id_sub_Actividad` int(11) NOT NULL auto_increment,
-=======
 
 CREATE TABLE IF NOT EXISTS `sub_actividad` (
   `id_sub_Actividad` int(11) NOT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `idActividad` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `descripcion` text NOT NULL,
@@ -7541,83 +5891,44 @@ CREATE TABLE IF NOT EXISTS `sub_actividad` (
   `id_Encargado` varchar(20) NOT NULL,
   `ponderacion` int(11) NOT NULL,
   `costo` int(11) NOT NULL,
-<<<<<<< HEAD
-  `observacion` text NOT NULL,
-  PRIMARY KEY  (`id_sub_Actividad`),
-  KEY `idActividad` (`idActividad`),
-  KEY `id_Encargado(Usuario)` (`id_Encargado`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `observacion` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `sub_actividad`
+-- Volcado de datos para la tabla `sub_actividad`
 --
 
 INSERT INTO `sub_actividad` (`id_sub_Actividad`, `idActividad`, `nombre`, `descripcion`, `fecha_monitoreo`, `id_Encargado`, `ponderacion`, `costo`, `observacion`) VALUES
 (1, 11, 'subactividad de septiembre', 'desc subactividad de septiembre', '2015-09-10', '12969', 10, 10000, 'observacion septiembre sub');
-=======
-  `observacion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `sub_actividades_realizadas`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 26-07-2015 a las 20:02:42
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `sub_actividades_realizadas`;
-CREATE TABLE IF NOT EXISTS `sub_actividades_realizadas` (
-  `id_subActividadRealizada` int(11) NOT NULL auto_increment,
-  `id_SubActividad` int(11) NOT NULL,
-  `fecha_Realizacion` date NOT NULL,
-  `observacion` text NOT NULL,
-  PRIMARY KEY  (`id_subActividadRealizada`),
-  UNIQUE KEY `id_SubActividad_2` (`id_SubActividad`),
-  KEY `id_SubActividad` (`id_SubActividad`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `sub_actividades_realizadas`
---
-
-=======
 
 CREATE TABLE IF NOT EXISTS `sub_actividades_realizadas` (
   `id_subActividadRealizada` int(11) NOT NULL,
   `id_SubActividad` int(11) NOT NULL,
   `fecha_Realizacion` date NOT NULL,
   `observacion` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `telefono`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 19-09-2015 a las 13:13:45
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `telefono`;
 CREATE TABLE IF NOT EXISTS `telefono` (
-  `ID_Telefono` int(11) NOT NULL auto_increment,
-  `Tipo` varchar(45) default NULL,
+  `ID_Telefono` int(11) NOT NULL,
+  `Tipo` varchar(45) DEFAULT NULL,
   `Numero` varchar(20) NOT NULL,
-  `N_identidad` varchar(20) NOT NULL,
-  PRIMARY KEY  (`ID_Telefono`),
-  KEY `fk_Telefono_Persona1_idx` (`N_identidad`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+  `N_identidad` varchar(20) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `telefono`
+-- Volcado de datos para la tabla `telefono`
 --
 
 INSERT INTO `telefono` (`ID_Telefono`, `Tipo`, `Numero`, `N_identidad`) VALUES
@@ -7643,69 +5954,40 @@ INSERT INTO `telefono` (`ID_Telefono`, `Tipo`, `Numero`, `N_identidad`) VALUES
 (24, NULL, '9710-9201', '0801-1977-13759'),
 (25, NULL, '3280-1140', '0801-1971-10136'),
 (26, NULL, '9916-2002', '0801-1987-09326');
-=======
-
-CREATE TABLE IF NOT EXISTS `telefono` (
-  `ID_Telefono` int(11) NOT NULL,
-  `Tipo` varchar(45) DEFAULT NULL,
-  `Numero` varchar(20) NOT NULL,
-  `N_identidad` varchar(20) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tipo_area`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 10:22:47
---
-
-DROP TABLE IF EXISTS `tipo_area`;
-CREATE TABLE IF NOT EXISTS `tipo_area` (
-  `id_Tipo_Area` int(11) NOT NULL auto_increment,
-  `nombre` varchar(30) NOT NULL,
-  `observaciones` text NOT NULL,
-  PRIMARY KEY  (`id_Tipo_Area`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Volcar la base de datos para la tabla `tipo_area`
---
-
-INSERT INTO `tipo_area` (`id_Tipo_Area`, `nombre`, `observaciones`) VALUES
-(2, 'prueba', 'prueba15'),
-(5, 'tipo de area septiembre', '');
-=======
 
 CREATE TABLE IF NOT EXISTS `tipo_area` (
   `id_Tipo_Area` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `observaciones` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tipo_area`
+--
+
+INSERT INTO `tipo_area` (`id_Tipo_Area`, `nombre`, `observaciones`) VALUES
+(2, 'prueba', 'prueba15'),
+(5, 'tipo de area septiembre', '');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tipo_estudio`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 01-09-2015 a las 16:06:04
---
 
-DROP TABLE IF EXISTS `tipo_estudio`;
 CREATE TABLE IF NOT EXISTS `tipo_estudio` (
-  `ID_Tipo_estudio` int(11) NOT NULL auto_increment,
-  `Tipo_estudio` varchar(45) NOT NULL,
-  PRIMARY KEY  (`ID_Tipo_estudio`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+  `ID_Tipo_estudio` int(11) NOT NULL,
+  `Tipo_estudio` varchar(45) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `tipo_estudio`
+-- Volcado de datos para la tabla `tipo_estudio`
 --
 
 INSERT INTO `tipo_estudio` (`ID_Tipo_estudio`, `Tipo_estudio`) VALUES
@@ -7716,42 +5998,20 @@ INSERT INTO `tipo_estudio` (`ID_Tipo_estudio`, `Tipo_estudio`) VALUES
 (11, 'PERITO'),
 (12, 'BACHILLER'),
 (13, 'TECNICO');
-=======
-
-CREATE TABLE IF NOT EXISTS `tipo_estudio` (
-  `ID_Tipo_estudio` int(11) NOT NULL,
-  `Tipo_estudio` varchar(45) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `tipo_estudio`
---
-
-INSERT INTO `tipo_estudio` (`ID_Tipo_estudio`, `Tipo_estudio`) VALUES
-(1, 'licenciatura'),
-(2, 'Maestria'),
-(3, 'Doctorado');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `titulo`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 12:40:27
---
 
-DROP TABLE IF EXISTS `titulo`;
 CREATE TABLE IF NOT EXISTS `titulo` (
-  `id_titulo` int(11) NOT NULL auto_increment,
-  `titulo` varchar(50) NOT NULL,
-  PRIMARY KEY  (`id_titulo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+  `id_titulo` int(11) NOT NULL,
+  `titulo` varchar(50) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `titulo`
+-- Volcado de datos para la tabla `titulo`
 --
 
 INSERT INTO `titulo` (`id_titulo`, `titulo`) VALUES
@@ -7775,52 +6035,12 @@ INSERT INTO `titulo` (`id_titulo`, `titulo`) VALUES
 (23, 'DERECHO TRIBUTARIO'),
 (24, 'DERECHO PROCESAL PENAL'),
 (25, 'CRIMINOLOGIA');
-=======
-
-CREATE TABLE IF NOT EXISTS `titulo` (
-  `id_titulo` int(11) NOT NULL,
-  `titulo` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `titulo`
---
-
-INSERT INTO `titulo` (`id_titulo`, `titulo`) VALUES
-(1, 'Licenciatura en Ingenieria en Sistemas'),
-(2, 'Licenciatura en Derecho'),
-(3, 'Licenciatura en Matematicas'),
-(4, 'Maestria en Derecho Penal');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ubicacion_archivofisico`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 12:19:22
---
-
-DROP TABLE IF EXISTS `ubicacion_archivofisico`;
-CREATE TABLE IF NOT EXISTS `ubicacion_archivofisico` (
-  `Id_UbicacionArchivoFisico` int(5) NOT NULL auto_increment,
-  `DescripcionUbicacionFisica` text NOT NULL,
-  `Capacidad` int(10) NOT NULL,
-  `TotalIngresados` int(10) NOT NULL default '0',
-  `HabilitadoParaAlmacenar` tinyint(1) NOT NULL,
-  PRIMARY KEY  (`Id_UbicacionArchivoFisico`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
-
---
--- Volcar la base de datos para la tabla `ubicacion_archivofisico`
---
-
-INSERT INTO `ubicacion_archivofisico` (`Id_UbicacionArchivoFisico`, `DescripcionUbicacionFisica`, `Capacidad`, `TotalIngresados`, `HabilitadoParaAlmacenar`) VALUES
-(6, 'documentos', 300, 2000, 1),
-(5, 'EDIFICIO PRUEBA', 20, 30, 1);
-=======
 
 CREATE TABLE IF NOT EXISTS `ubicacion_archivofisico` (
   `Id_UbicacionArchivoFisico` int(5) NOT NULL,
@@ -7828,97 +6048,69 @@ CREATE TABLE IF NOT EXISTS `ubicacion_archivofisico` (
   `Capacidad` int(10) NOT NULL,
   `TotalIngresados` int(10) NOT NULL DEFAULT '0',
   `HabilitadoParaAlmacenar` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ubicacion_archivofisico`
+--
+
+INSERT INTO `ubicacion_archivofisico` (`Id_UbicacionArchivoFisico`, `DescripcionUbicacionFisica`, `Capacidad`, `TotalIngresados`, `HabilitadoParaAlmacenar`) VALUES
+(6, 'documentos', 300, 2000, 1),
+(5, 'EDIFICIO PRUEBA', 20, 30, 1);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `ubicacion_notificaciones`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 12:29:49
---
 
-DROP TABLE IF EXISTS `ubicacion_notificaciones`;
 CREATE TABLE IF NOT EXISTS `ubicacion_notificaciones` (
-  `Id_UbicacionNotificaciones` tinyint(4) NOT NULL auto_increment,
-  `DescripcionUbicacionNotificaciones` text NOT NULL,
-  PRIMARY KEY  (`Id_UbicacionNotificaciones`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+  `Id_UbicacionNotificaciones` tinyint(4) NOT NULL,
+  `DescripcionUbicacionNotificaciones` text NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `ubicacion_notificaciones`
+-- Volcado de datos para la tabla `ubicacion_notificaciones`
 --
 
 INSERT INTO `ubicacion_notificaciones` (`Id_UbicacionNotificaciones`, `DescripcionUbicacionNotificaciones`) VALUES
 (7, 'Espere un momento'),
 (6, 'PRUEBA');
-=======
-
-CREATE TABLE IF NOT EXISTS `ubicacion_notificaciones` (
-  `Id_UbicacionNotificaciones` tinyint(4) NOT NULL,
-  `DescripcionUbicacionNotificaciones` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `unidad_academica`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 02-09-2015 a las 12:15:25
---
-
-DROP TABLE IF EXISTS `unidad_academica`;
-CREATE TABLE IF NOT EXISTS `unidad_academica` (
-  `Id_UnidadAcademica` int(11) NOT NULL auto_increment,
-  `NombreUnidadAcademica` text NOT NULL,
-  `UbicacionUnidadAcademica` text NOT NULL,
-  PRIMARY KEY  (`Id_UnidadAcademica`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
-
---
--- Volcar la base de datos para la tabla `unidad_academica`
---
-
-INSERT INTO `unidad_academica` (`Id_UnidadAcademica`, `NombreUnidadAcademica`, `UbicacionUnidadAcademica`) VALUES
-(4, 'unidad academica septiembre', 'A2'),
-(3, 'FAMILIA', 'A-2');
-=======
 
 CREATE TABLE IF NOT EXISTS `unidad_academica` (
   `Id_UnidadAcademica` int(11) NOT NULL,
   `NombreUnidadAcademica` text NOT NULL,
   `UbicacionUnidadAcademica` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `unidad_academica`
+--
+
+INSERT INTO `unidad_academica` (`Id_UnidadAcademica`, `NombreUnidadAcademica`, `UbicacionUnidadAcademica`) VALUES
+(4, 'unidad academica septiembre', 'A2'),
+(3, 'FAMILIA', 'A-2');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `universidad`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 01-09-2015 a las 16:16:39
--- Última revisión: 26-07-2015 a las 20:03:17
---
 
-DROP TABLE IF EXISTS `universidad`;
 CREATE TABLE IF NOT EXISTS `universidad` (
-  `Id_universidad` int(11) NOT NULL auto_increment,
+  `Id_universidad` int(11) NOT NULL,
   `nombre_universidad` varchar(50) NOT NULL,
-  `Id_pais` int(11) NOT NULL,
-  PRIMARY KEY  (`Id_universidad`),
-  KEY `fk_universidad_pais_idx` (`Id_pais`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+  `Id_pais` int(11) NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `universidad`
+-- Volcado de datos para la tabla `universidad`
 --
 
 INSERT INTO `universidad` (`Id_universidad`, `nombre_universidad`, `Id_pais`) VALUES
@@ -7938,834 +6130,550 @@ INSERT INTO `universidad` (`Id_universidad`, `nombre_universidad`, `Id_pais`) VA
 (19, 'UNIVERSIDAD NACIONAL DE AGRICULTURA', 2),
 (20, 'UNIVERSIDAD CRISTIANA DE HONDURAS', 2),
 (21, 'INCAE BUSINESS SCHOOL', 2);
-=======
-
-CREATE TABLE IF NOT EXISTS `universidad` (
-  `Id_universidad` int(11) NOT NULL,
-  `nombre_universidad` varchar(50) NOT NULL,
-  `Id_pais` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `universidad`
---
-
-INSERT INTO `universidad` (`Id_universidad`, `nombre_universidad`, `Id_pais`) VALUES
-(3, 'UNAH', 2),
-(4, 'Universidad Pedagogica', 2);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuario`
 --
-<<<<<<< HEAD
--- Creación: 20-09-2015 a las 12:44:40
--- Última actualización: 25-09-2015 a las 12:41:33
---
-
-DROP TABLE IF EXISTS `usuario`;
-CREATE TABLE IF NOT EXISTS `usuario` (
-  `id_Usuario` int(11) NOT NULL auto_increment,
-=======
 
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id_Usuario` int(11) NOT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `No_Empleado` varchar(13) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `Password` varbinary(250) NOT NULL,
   `Id_Rol` tinyint(4) NOT NULL,
   `Fecha_Creacion` date NOT NULL,
-<<<<<<< HEAD
-  `Fecha_Alta` date default NULL,
-  `Estado` tinyint(1) NOT NULL,
-  `esta_logueado` tinyint(1) default NULL,
-  PRIMARY KEY  (`id_Usuario`),
-  KEY `fk_usuarios_roles_idx` (`Id_Rol`),
-  KEY `fk_usuario_empleado_` (`No_Empleado`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
-
---
--- Volcar la base de datos para la tabla `usuario`
---
-
-INSERT INTO `usuario` (`id_Usuario`, `No_Empleado`, `nombre`, `Password`, `Id_Rol`, `Fecha_Creacion`, `Fecha_Alta`, `Estado`, `esta_logueado`) VALUES
-(1, '123444', 'prueba', '81DF7D234F3B8F5487AF508C2C79B00A', 100, '2015-07-06', NULL, 1, 0),
-(2, '123444', 'lmrd1', 'C444203AF3C11D2F3BF84417F63CD33B', 100, '2015-07-28', NULL, 1, 0),
-(3, '12968', 'elizabeth', '98CD0F3AC30CC8F533386EF4A5F2DA39', 100, '2015-07-29', NULL, 1, 0),
-(4, '12969', 'jorgeaguilar', 'F7F892A8A4FA63D655C4983176EFE85B', 100, '2015-07-29', NULL, 1, 0),
-(5, '8708', 'anamoncada', '542B38CD94422922C42C6F6C2C274674', 100, '2015-07-30', NULL, 1, 0),
-(6, '00001', 'secretaria', '54F010C7A40C1AA04F9986D21D3415CD', 40, '2015-08-04', NULL, 1, 0),
-(7, '00003', 'secretariadeca', '5128FBDBB918AF60B165576C73590D59', 45, '2015-08-04', NULL, 1, 0),
-(8, '00004', 'asistente', 'B42D008B9DE4F4401E3CD31EC948C5DB', 29, '2015-08-04', NULL, 1, 0),
-(9, '00005', 'decana', 'B9FCF9C1156B1C5D1C10820FCE6D846C', 50, '2015-08-04', NULL, 1, 0),
-(10, '12969', 'Docente', '1672262831B5AEBF4ADC7EAF879CDB47', 20, '2015-08-10', NULL, 1, 0),
-(11, '12344', 'Liduvina', 'BE9D74F1AA6E1E70FF9A0552562B0EE5', 40, '2015-09-02', '2015-09-03', 0, 0),
-(12, '6558', 'bessynazar', '35869D3215BBBBD3608F2184574ECD84', 50, '2015-09-03', NULL, 1, 0),
-(13, '5548', 'gloriaoseguera', 'AA99974CA5672DC282C568F6B463F226', 45, '2015-09-03', NULL, 1, 0),
-(14, '3089', 'mariamaradiaga', 'BFC5B1DB170FB548AF4ECF74A23CB712', 40, '2015-09-03', NULL, 1, 0),
-(15, '11022', 'carlosburgos', '1B4F0A5EC9B4F6A3D9E4AC535712CE20', 10, '2015-09-03', NULL, 1, 0),
-(16, '7908', 'jhonnymembreno', '0B0A86BE3EC479858E7B0895A99E0601', 10, '2015-09-03', NULL, 1, 0),
-(17, '01', 'monicadormes', 'CA9C56E398410A28D03CB9BC83402A29', 40, '2015-09-03', NULL, 1, 0),
-(18, '11910', 'evelincanaca', '31C1519C2C4C8922856C379879A486C6', 10, '2015-09-03', NULL, 1, 0);
-=======
   `Fecha_Alta` date DEFAULT NULL,
   `Estado` tinyint(1) NOT NULL,
   `esta_logueado` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id_Usuario`, `No_Empleado`, `nombre`, `Password`, `Id_Rol`, `Fecha_Creacion`, `Fecha_Alta`, `Estado`, `esta_logueado`) VALUES
-(1, '123444', 'prueba', 0x3831444637443233344633423846353438374146353038433243373942303041, 100, '2015-07-06', NULL, 1, 1);
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+(1, '123444', 'prueba', 0x3831444637443233344633423846353438374146353038433243373942303041, 100, '2015-07-06', NULL, 1, 0),
+(2, '123444', 'lmrd1', 0x4334343432303341463343313144324633424638343431374636334344333342, 100, '2015-07-28', NULL, 1, 0),
+(3, '12968', 'elizabeth', 0x3938434430463341433330434338463533333338364546344135463244413339, 100, '2015-07-29', NULL, 1, 0),
+(4, '12969', 'jorgeaguilar', 0x4637463839324138413446413633443635354334393833313736454645383542, 100, '2015-07-29', NULL, 1, 0),
+(5, '8708', 'anamoncada', 0x3534324233384344393434323239323243343243364636433243323734363734, 100, '2015-07-30', NULL, 1, 0),
+(6, '00001', 'secretaria', 0x3534463031304337413430433141413034463939383644323144333431354344, 40, '2015-08-04', NULL, 1, 0),
+(7, '00003', 'secretariadeca', 0x3531323846424442423931384146363042313635353736433733353930443539, 45, '2015-08-04', NULL, 1, 0),
+(8, '00004', 'asistente', 0x4234324430303842394445344634343031453343443331454339343843354442, 29, '2015-08-04', NULL, 1, 0),
+(9, '00005', 'decana', 0x4239464346394331313536423143354431433130383230464345364438343643, 50, '2015-08-04', NULL, 1, 0),
+(10, '12969', 'Docente', 0x3136373232363238333142354145424634414443374541463837394344423437, 20, '2015-08-10', NULL, 1, 0),
+(11, '12344', 'Liduvina', 0x4245394437344631414136453145373046463941303535323536324230454535, 40, '2015-09-02', '2015-09-03', 0, 0),
+(12, '6558', 'bessynazar', 0x3335383639443332313542424242443336303846323138343537344543443834, 50, '2015-09-03', NULL, 1, 0),
+(13, '5548', 'gloriaoseguera', 0x4141393939373443413536373244433238324335363846364234363346323236, 45, '2015-09-03', NULL, 1, 0),
+(14, '3089', 'mariamaradiaga', 0x4246433542314442313730464235343841463445434637344132334342373132, 40, '2015-09-03', NULL, 1, 0),
+(15, '11022', 'carlosburgos', 0x3142344630413545433942344636413344394534414335333537313243453230, 10, '2015-09-03', NULL, 1, 0),
+(16, '7908', 'jhonnymembreno', 0x3042304138364245334543343739383538453742303839354139394530363031, 10, '2015-09-03', NULL, 1, 0),
+(17, '01', 'monicadormes', 0x4341394335364533393834313041323844303343423942433833343032413239, 40, '2015-09-03', NULL, 1, 0),
+(18, '11910', 'evelincanaca', 0x3331433135313943324334433839323238353643333739383739413438364336, 10, '2015-09-03', NULL, 1, 0);
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuario_alertado`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 26-07-2015 a las 20:02:42
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `usuario_alertado`;
-CREATE TABLE IF NOT EXISTS `usuario_alertado` (
-  `Id_UsuarioAlertado` int(11) NOT NULL auto_increment,
-  `Id_Alerta` int(11) NOT NULL,
-  `Id_Usuario` int(11) NOT NULL,
-  PRIMARY KEY  (`Id_UsuarioAlertado`),
-  KEY `fk_usuario_alertado_usuario_idx` (`Id_Usuario`),
-  KEY `fk_usuario_alertado_alerta_idx` (`Id_Alerta`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Volcar la base de datos para la tabla `usuario_alertado`
---
-
-=======
 
 CREATE TABLE IF NOT EXISTS `usuario_alertado` (
   `Id_UsuarioAlertado` int(11) NOT NULL,
   `Id_Alerta` int(11) NOT NULL,
   `Id_Usuario` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuario_log`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 25-09-2015 a las 17:17:53
---
-
-DROP TABLE IF EXISTS `usuario_log`;
-CREATE TABLE IF NOT EXISTS `usuario_log` (
-  `Id_log` int(11) NOT NULL auto_increment,
-  `usuario` int(11) NOT NULL,
-  `fecha_log` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
-  `ip_conn` varchar(45) default NULL,
-  PRIMARY KEY  (`Id_log`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=614 ;
-
---
--- Volcar la base de datos para la tabla `usuario_log`
---
-
-INSERT INTO `usuario_log` (`Id_log`, `usuario`, `fecha_log`, `ip_conn`) VALUES
-(141, 1, '2015-07-06 20:51:30', '::1'),
-(142, 1, '2015-07-06 21:04:21', '::1'),
-(143, 1, '2015-07-06 22:04:10', '::1'),
-(144, 1, '2015-07-09 00:56:43', '::1'),
-(145, 1, '2015-07-09 00:57:10', '::1'),
-(146, 1, '2015-07-09 01:24:43', '::1'),
-(147, 1, '2015-07-09 01:26:32', '192.168.0.16'),
-(148, 1, '2015-07-09 01:28:15', '192.168.0.22'),
-(149, 1, '2015-07-09 01:28:15', '192.168.0.22'),
-(150, 1, '2015-07-09 01:28:35', '192.168.0.5'),
-(151, 1, '2015-07-09 01:30:48', '::1'),
-(152, 1, '2015-07-09 01:51:35', '::1'),
-(153, 1, '2015-07-09 01:57:15', '192.168.0.5'),
-(154, 1, '2015-07-09 02:21:13', '192.168.0.5'),
-(155, 1, '2015-07-09 02:36:33', '::1'),
-(156, 1, '2015-07-09 02:38:30', '192.168.0.22'),
-(157, 1, '2015-07-09 02:38:30', '192.168.0.22'),
-(158, 1, '2015-07-09 02:51:17', '::1'),
-(159, 1, '2015-07-09 02:52:33', '::1'),
-(160, 1, '2015-07-09 02:56:41', '::1'),
-(161, 1, '2015-07-09 03:03:03', '::1'),
-(162, 1, '2015-07-09 03:12:31', '192.168.0.16'),
-(163, 1, '2015-07-09 03:39:38', '192.168.0.5'),
-(164, 1, '2015-07-09 03:39:43', '::1'),
-(165, 1, '2015-07-09 03:41:58', '::1'),
-(166, 1, '2015-07-09 04:02:15', '::1'),
-(167, 1, '2015-07-09 04:04:13', '::1'),
-(168, 1, '2015-07-09 04:12:55', '192.168.0.16'),
-(169, 1, '2015-07-09 04:16:36', '::1'),
-(170, 1, '2015-07-09 04:56:39', '::1'),
-(171, 1, '2015-07-09 05:02:08', '::1'),
-(172, 1, '2015-07-09 05:02:30', '::1'),
-(173, 1, '2015-07-09 05:04:00', '192.168.0.5'),
-(174, 1, '2015-07-09 05:18:57', '192.168.0.22'),
-(175, 1, '2015-07-09 05:18:57', '192.168.0.22'),
-(176, 1, '2015-07-09 05:27:48', '::1'),
-(177, 1, '2015-07-09 05:29:21', '::1'),
-(178, 1, '2015-07-09 05:49:38', '::1'),
-(179, 1, '2015-07-09 06:00:41', '192.168.0.16'),
-(180, 1, '2015-07-09 06:01:42', '::1'),
-(181, 1, '2015-07-09 06:02:04', '192.168.0.5'),
-(182, 1, '2015-07-09 06:02:26', '192.168.0.22'),
-(183, 1, '2015-07-09 06:02:26', '192.168.0.22'),
-(184, 1, '2015-07-09 06:08:44', '::1'),
-(185, 1, '2015-07-09 06:18:06', '192.168.0.5'),
-(186, 1, '2015-07-09 06:18:12', '::1'),
-(187, 1, '2015-07-09 06:45:05', '192.168.0.5'),
-(188, 1, '2015-07-09 06:47:44', '192.168.0.5'),
-(189, 1, '2015-07-09 07:20:58', '::1'),
-(190, 1, '2015-07-09 07:26:23', '192.168.0.22'),
-(191, 1, '2015-07-09 07:26:23', '192.168.0.22'),
-(192, 1, '2015-07-09 19:40:06', '::1'),
-(193, 1, '2015-07-10 22:31:00', '::1'),
-(194, 1, '2015-07-11 00:01:37', '::1'),
-(195, 1, '2015-07-11 00:09:46', '192.168.0.23'),
-(196, 1, '2015-07-11 00:11:58', '192.168.0.22'),
-(197, 1, '2015-07-11 00:24:10', '192.168.0.23'),
-(198, 1, '2015-07-11 00:35:04', '192.168.0.23'),
-(199, 1, '2015-07-11 00:58:32', '192.168.0.22'),
-(200, 1, '2015-07-11 01:23:49', '192.168.0.23'),
-(201, 1, '2015-07-11 01:28:53', '::1'),
-(202, 1, '2015-07-11 01:30:48', '192.168.0.22'),
-(203, 1, '2015-07-11 01:31:35', '192.168.0.23'),
-(204, 1, '2015-07-11 01:38:27', '192.168.0.17'),
-(205, 1, '2015-07-11 01:38:27', '192.168.0.17'),
-(206, 1, '2015-07-11 01:58:12', '192.168.0.17'),
-(207, 1, '2015-07-11 01:58:13', '192.168.0.17'),
-(208, 1, '2015-07-11 02:03:01', '::1'),
-(209, 1, '2015-07-11 02:34:38', '192.168.0.23'),
-(210, 1, '2015-07-11 02:46:38', '192.168.0.23'),
-(211, 1, '2015-07-11 02:47:36', '192.168.0.17'),
-(212, 1, '2015-07-11 02:47:36', '192.168.0.17'),
-(213, 1, '2015-07-11 03:03:51', '::1'),
-(214, 1, '2015-07-11 03:09:40', '192.168.0.23'),
-(215, 1, '2015-07-11 03:19:33', '192.168.0.22'),
-(216, 1, '2015-07-11 03:22:06', '192.168.0.17'),
-(217, 1, '2015-07-11 03:22:06', '192.168.0.17'),
-(218, 1, '2015-07-11 03:33:52', '192.168.0.24'),
-(219, 1, '2015-07-11 03:43:37', '192.168.0.23'),
-(220, 1, '2015-07-11 03:54:41', '192.168.0.24'),
-(221, 1, '2015-07-11 03:54:57', '192.168.0.17'),
-(222, 1, '2015-07-11 03:54:57', '192.168.0.17'),
-(223, 1, '2015-07-11 04:21:12', '192.168.0.24'),
-(224, 1, '2015-07-11 04:45:03', '192.168.0.23'),
-(225, 1, '2015-07-11 04:48:12', '192.168.0.22'),
-(226, 1, '2015-07-11 05:17:30', '192.168.0.17'),
-(227, 1, '2015-07-11 05:17:30', '192.168.0.17'),
-(228, 1, '2015-07-11 05:20:43', '::1'),
-(229, 1, '2015-07-11 05:26:21', '::1'),
-(230, 1, '2015-07-11 05:31:27', '192.168.0.24'),
-(231, 1, '2015-07-11 05:43:26', '::1'),
-(232, 1, '2015-07-11 05:45:08', '192.168.0.22'),
-(233, 1, '2015-07-11 06:07:47', '192.168.0.22'),
-(234, 1, '2015-07-11 06:21:10', '192.168.0.24'),
-(235, 1, '2015-07-11 07:01:08', '192.168.0.17'),
-(236, 1, '2015-07-11 07:01:08', '192.168.0.17'),
-(237, 1, '2015-07-11 07:03:38', '192.168.0.24'),
-(258, 1, '2015-07-26 20:15:50', '201.190.18.72'),
-(259, 1, '2015-07-26 20:17:39', '190.5.79.106'),
-(260, 1, '2015-07-26 20:20:44', '190.5.79.106'),
-(261, 1, '2015-07-26 20:51:04', '190.5.79.106'),
-(262, 1, '2015-07-26 23:51:27', '190.92.55.20'),
-(263, 1, '2015-07-27 00:25:10', '186.32.234.114'),
-(264, 1, '2015-07-27 12:33:13', '10.8.73.76'),
-(265, 1, '2015-07-27 16:21:02', '190.4.63.222'),
-(266, 1, '2015-07-27 16:21:36', '186.32.247.135'),
-(267, 1, '2015-07-27 18:11:50', '10.8.92.227'),
-(268, 1, '2015-07-27 18:33:16', '10.8.92.227'),
-(269, 1, '2015-07-28 00:12:45', '186.2.144.142'),
-(270, 1, '2015-07-28 01:06:14', '190.92.55.101'),
-(271, 1, '2015-07-28 01:06:17', '190.56.253.178'),
-(272, 1, '2015-07-28 01:23:01', '190.211.137.19'),
-(273, 1, '2015-07-28 01:37:33', '190.53.87.229'),
-(274, 1, '2015-07-28 10:25:02', '10.8.44.151'),
-(275, 1, '2015-07-28 10:50:11', '10.8.44.244'),
-(276, 1, '2015-07-28 11:01:23', '190.5.79.106'),
-(277, 1, '2015-07-28 11:02:58', '190.5.79.106'),
-(278, 1, '2015-07-28 12:30:10', '10.8.44.244'),
-(279, 1, '2015-07-28 13:13:12', '10.8.44.214'),
-(280, 1, '2015-07-28 13:15:02', '10.8.44.156'),
-(281, 1, '2015-07-28 13:47:05', '10.8.44.244'),
-(282, 1, '2015-07-28 15:12:40', '10.8.44.244'),
-(283, 1, '2015-07-28 15:17:14', '10.8.44.151'),
-(284, 1, '2015-07-28 15:36:43', '10.8.44.151'),
-(285, 1, '2015-07-28 16:17:51', '186.2.136.25'),
-(286, 1, '2015-07-28 16:42:47', '10.8.44.151'),
-(287, 1, '2015-07-28 17:51:51', '10.8.44.239'),
-(288, 1, '2015-07-28 18:33:39', '10.8.44.244'),
-(289, 1, '2015-07-28 18:53:03', '10.8.44.244'),
-(290, 1, '2015-07-28 19:52:14', '190.5.79.106'),
-(291, 1, '2015-07-28 19:54:41', '190.5.79.106'),
-(292, 1, '2015-07-29 00:40:05', '190.56.253.52'),
-(293, 1, '2015-07-29 10:39:38', '10.8.92.181'),
-(294, 1, '2015-07-29 11:03:26', '10.8.92.135'),
-(295, 1, '2015-07-29 11:26:18', '10.8.44.151'),
-(296, 1, '2015-07-29 11:28:08', '10.8.44.244'),
-(297, 1, '2015-07-29 11:57:06', '10.8.44.151'),
-(298, 1, '2015-07-29 12:30:30', '10.8.44.151'),
-(299, 1, '2015-07-29 13:44:51', '10.8.44.151'),
-(300, 1, '2015-07-29 16:19:30', '10.8.44.151'),
-(301, 4, '2015-07-29 16:23:56', '10.8.44.151'),
-(302, 1, '2015-07-29 17:05:56', '10.8.44.151'),
-(303, 4, '2015-07-29 17:11:20', '10.8.44.151'),
-(304, 1, '2015-07-29 19:29:35', '190.181.223.15'),
-(305, 1, '2015-07-29 19:41:36', '190.181.223.15'),
-(306, 1, '2015-07-30 10:43:47', '10.8.44.151'),
-(307, 4, '2015-07-30 10:58:17', '10.8.44.96'),
-(308, 1, '2015-07-30 11:15:33', '10.8.44.151'),
-(309, 1, '2015-07-30 11:35:21', '10.8.44.151'),
-(310, 4, '2015-07-30 11:36:33', '10.8.44.151'),
-(311, 4, '2015-07-30 12:00:26', '10.8.44.151'),
-(312, 4, '2015-07-30 12:36:35', '10.8.44.151'),
-(313, 1, '2015-07-30 12:47:10', '10.8.44.151'),
-(314, 1, '2015-07-30 12:47:26', '190.130.23.12'),
-(315, 4, '2015-07-30 13:22:01', '10.8.44.151'),
-(316, 1, '2015-07-30 13:22:36', '10.8.44.151'),
-(317, 4, '2015-07-30 13:32:54', '10.8.44.151'),
-(318, 4, '2015-07-30 15:18:37', '10.8.44.151'),
-(319, 1, '2015-07-30 15:48:52', '10.8.44.31'),
-(320, 5, '2015-07-30 15:55:48', '10.8.44.31'),
-(321, 1, '2015-07-31 11:58:45', '201.190.18.250'),
-(322, 1, '2015-07-31 12:23:16', '201.190.18.250'),
-(323, 1, '2015-07-31 14:18:07', '201.190.18.250'),
-(324, 1, '2015-07-31 16:19:56', '201.190.18.250'),
-(325, 1, '2015-07-31 16:28:41', '201.190.18.250'),
-(326, 1, '2015-07-31 17:39:35', '201.190.18.250'),
-(327, 1, '2015-07-31 19:19:42', '190.92.55.79'),
-(328, 1, '2015-07-31 20:45:59', '190.181.197.101'),
-(329, 1, '2015-08-01 22:36:38', '190.211.137.59'),
-(330, 1, '2015-08-02 02:01:14', '190.211.137.59'),
-(331, 1, '2015-08-02 12:16:08', '190.5.79.106'),
-(332, 4, '2015-08-02 22:14:06', '161.0.213.124'),
-(333, 1, '2015-08-03 11:47:32', '10.8.92.135'),
-(334, 1, '2015-08-03 19:30:35', '181.209.246.37'),
-(335, 1, '2015-08-03 20:55:29', '190.5.79.106'),
-(336, 1, '2015-08-03 22:44:39', '181.209.246.37'),
-(337, 1, '2015-08-03 22:46:27', '190.211.137.101'),
-(338, 1, '2015-08-03 23:13:36', '190.92.55.100'),
-(339, 1, '2015-08-03 23:14:00', '181.209.246.37'),
-(340, 1, '2015-08-03 23:31:55', '190.181.223.15'),
-(341, 1, '2015-08-04 00:31:35', '190.92.55.100'),
-(342, 1, '2015-08-04 02:25:14', '190.211.137.101'),
-(343, 1, '2015-08-04 03:15:57', '190.211.137.101'),
-(344, 1, '2015-08-04 10:50:15', '10.8.44.111'),
-(345, 1, '2015-08-04 11:41:12', '10.8.44.111'),
-(346, 1, '2015-08-04 11:45:16', '10.8.92.42'),
-(347, 6, '2015-08-04 11:53:49', '10.8.44.111'),
-(348, 1, '2015-08-04 12:01:20', '146.185.28.59'),
-(349, 1, '2015-08-04 12:19:52', '10.8.44.111'),
-(350, 6, '2015-08-04 12:34:15', '10.8.44.111'),
-(351, 6, '2015-08-04 13:04:18', '146.185.28.59'),
-(352, 6, '2015-08-04 15:18:59', '10.8.44.68'),
-(353, 6, '2015-08-04 16:18:48', '10.8.44.68'),
-(354, 6, '2015-08-04 16:39:29', '10.8.44.68'),
-(355, 6, '2015-08-04 18:50:20', '10.8.44.68'),
-(356, 1, '2015-08-04 19:10:12', '190.181.223.15'),
-(357, 1, '2015-08-04 19:16:11', '10.8.44.68'),
-(358, 7, '2015-08-04 19:18:50', '10.8.44.68'),
-(359, 1, '2015-08-04 19:19:14', '10.8.44.68'),
-(360, 7, '2015-08-04 19:20:03', '10.8.44.68'),
-(361, 1, '2015-08-04 19:20:19', '10.8.44.68'),
-(362, 8, '2015-08-04 19:22:37', '10.8.44.68'),
-(363, 1, '2015-08-04 19:23:24', '10.8.44.68'),
-(364, 9, '2015-08-04 19:27:17', '10.8.44.68'),
-(365, 1, '2015-08-04 19:51:52', '181.209.246.148'),
-(366, 1, '2015-08-04 19:54:38', '181.209.246.148'),
-(367, 1, '2015-08-04 20:05:39', '181.209.246.148'),
-(368, 1, '2015-08-04 22:37:18', '181.209.246.54'),
-(369, 1, '2015-08-04 23:13:08', '190.92.55.46'),
-(370, 1, '2015-08-04 23:13:30', '181.209.246.54'),
-(371, 1, '2015-08-04 23:28:38', '190.211.137.69'),
-(372, 1, '2015-08-04 23:35:17', '181.209.246.54'),
-(373, 1, '2015-08-04 23:39:28', '181.209.246.54'),
-(374, 1, '2015-08-04 23:44:57', '190.92.55.46'),
-(375, 1, '2015-08-04 23:44:59', '190.211.137.69'),
-(376, 1, '2015-08-05 00:11:38', '190.211.137.69'),
-(377, 1, '2015-08-05 00:32:18', '181.209.246.54'),
-(378, 1, '2015-08-05 01:42:52', '190.211.137.69'),
-(379, 1, '2015-08-05 07:19:47', '190.92.55.38'),
-(380, 1, '2015-08-05 10:20:01', '190.56.253.90'),
-(381, 1, '2015-08-07 23:20:40', '190.211.137.35'),
-(382, 1, '2015-08-08 10:46:47', '181.209.246.130'),
-(383, 1, '2015-08-08 11:54:51', '181.209.246.130'),
-(384, 1, '2015-08-08 12:23:41', '181.209.246.130'),
-(385, 1, '2015-08-08 15:23:22', '190.53.87.229'),
-(386, 1, '2015-08-08 16:22:22', '181.209.246.48'),
-(387, 1, '2015-08-08 19:16:16', '190.211.137.64'),
-(388, 1, '2015-08-08 19:16:16', '190.211.137.64'),
-(389, 1, '2015-08-09 00:58:27', '190.211.137.64'),
-(390, 1, '2015-08-09 13:16:14', '190.181.223.15'),
-(391, 1, '2015-08-09 16:27:02', '190.181.223.15'),
-(392, 1, '2015-08-09 16:28:34', '190.211.137.57'),
-(393, 1, '2015-08-09 16:36:17', '201.190.18.15'),
-(394, 1, '2015-08-09 17:58:31', '181.210.54.194'),
-(395, 1, '2015-08-09 19:00:08', '181.209.246.130'),
-(396, 1, '2015-08-09 19:35:19', '181.209.246.130'),
-(397, 1, '2015-08-09 19:45:54', '181.210.54.194'),
-(398, 1, '2015-08-09 20:58:22', '201.190.18.15'),
-(399, 1, '2015-08-09 21:12:13', '181.209.246.130'),
-(400, 1, '2015-08-09 21:29:13', '181.210.54.194'),
-(401, 1, '2015-08-09 21:59:32', '181.210.54.194'),
-(402, 1, '2015-08-09 22:50:49', '201.190.18.136'),
-(403, 1, '2015-08-09 22:50:50', '201.190.18.136'),
-(404, 1, '2015-08-09 22:57:22', '181.209.246.130'),
-(405, 1, '2015-08-09 23:01:51', '181.209.246.130'),
-(406, 1, '2015-08-10 14:36:47', '10.10.16.35'),
-(407, 1, '2015-08-10 15:32:53', '10.8.44.39'),
-(408, 4, '2015-08-10 15:48:02', '10.8.44.39'),
-(409, 1, '2015-08-10 15:51:20', '10.8.44.39'),
-(410, 4, '2015-08-10 15:56:53', '10.8.44.39'),
-(411, 1, '2015-08-10 16:01:48', '10.8.44.39'),
-(412, 1, '2015-08-10 16:01:49', '10.8.44.39'),
-(413, 9, '2015-08-10 16:06:28', '10.8.44.39'),
-(414, 1, '2015-08-10 16:23:30', '10.8.44.39'),
-(415, 9, '2015-08-10 16:34:34', '10.8.44.39'),
-(416, 1, '2015-08-10 16:47:22', '10.8.44.39'),
-(417, 10, '2015-08-10 16:50:43', '10.8.44.39'),
-(418, 9, '2015-08-10 16:51:47', '10.8.44.39'),
-(419, 9, '2015-08-10 17:05:32', '10.8.44.39'),
-(420, 9, '2015-08-10 17:28:52', '10.8.44.39'),
-(421, 1, '2015-08-10 17:29:36', '10.8.44.39'),
-(422, 9, '2015-08-10 17:29:55', '10.8.44.39'),
-(423, 1, '2015-08-10 19:27:02', '190.56.253.19'),
-(424, 1, '2015-08-10 23:28:09', '190.56.253.19'),
-(425, 1, '2015-08-10 23:54:13', '190.211.137.69'),
-(426, 9, '2015-08-11 10:53:40', '10.8.44.39'),
-(427, 1, '2015-08-11 11:55:54', '10.10.16.30'),
-(428, 1, '2015-08-11 22:40:39', '186.2.138.212'),
-(429, 1, '2015-08-11 23:24:19', '201.190.18.72'),
-(430, 1, '2015-08-12 00:17:23', '186.2.138.63'),
-(431, 1, '2015-08-12 01:43:32', '186.2.138.63'),
-(432, 4, '2015-08-12 10:33:36', '10.8.44.39'),
-(433, 1, '2015-08-12 11:48:42', '10.8.44.39'),
-(434, 9, '2015-08-12 11:49:39', '10.8.44.39'),
-(435, 1, '2015-08-12 14:54:42', '181.209.246.193'),
-(436, 1, '2015-08-12 23:33:09', '201.190.18.15'),
-(437, 1, '2015-08-17 11:01:36', '10.8.44.110'),
-(438, 1, '2015-08-17 11:37:50', '10.8.44.39'),
-(439, 9, '2015-08-17 12:03:17', '10.8.44.39'),
-(440, 9, '2015-08-17 12:21:01', '10.8.44.39'),
-(441, 1, '2015-08-17 12:59:38', '23.235.227.108'),
-(442, 6, '2015-08-17 13:02:06', '23.235.227.108'),
-(443, 9, '2015-08-17 13:02:19', '10.8.44.39'),
-(444, 6, '2015-08-17 13:06:03', '10.8.44.110'),
-(445, 6, '2015-08-17 13:07:09', '23.235.227.108'),
-(446, 6, '2015-08-17 13:31:54', '10.8.44.110'),
-(447, 9, '2015-08-17 13:40:45', '10.8.44.39'),
-(448, 9, '2015-08-17 13:43:17', '10.8.44.39'),
-(449, 6, '2015-08-17 13:53:27', '23.235.227.108'),
-(450, 9, '2015-08-17 15:22:42', '10.8.44.39'),
-(451, 1, '2015-08-17 15:23:03', '23.235.227.108'),
-(452, 1, '2015-08-17 15:24:19', '10.8.44.110'),
-(453, 1, '2015-08-17 15:39:00', '23.235.227.108'),
-(454, 9, '2015-08-17 16:02:44', '10.8.44.39'),
-(455, 9, '2015-08-17 16:35:21', '23.235.227.108'),
-(456, 9, '2015-08-17 16:48:06', '10.8.44.110'),
-(457, 1, '2015-08-17 16:54:45', '23.235.227.108'),
-(458, 9, '2015-08-17 16:57:45', '23.235.227.108'),
-(459, 1, '2015-08-17 16:59:20', '23.235.227.108'),
-(460, 9, '2015-08-17 17:12:10', '23.235.227.108'),
-(461, 1, '2015-08-18 23:40:15', '190.56.253.255'),
-(462, 1, '2015-08-19 07:16:28', '190.211.137.86'),
-(463, 1, '2015-08-19 09:47:44', '10.10.40.238'),
-(464, 1, '2015-08-19 09:52:09', '10.10.40.238'),
-(465, 1, '2015-08-19 10:18:14', '10.10.40.238'),
-(466, 1, '2015-08-19 10:50:11', '10.10.40.238'),
-(467, 1, '2015-08-19 14:13:30', '10.8.44.39'),
-(468, 1, '2015-08-20 13:51:47', '201.190.18.72'),
-(469, 1, '2015-08-21 01:41:37', '201.190.18.107'),
-(470, 1, '2015-08-21 01:41:50', '201.190.18.107'),
-(471, 1, '2015-08-21 15:55:00', '190.211.137.88'),
-(472, 1, '2015-08-21 20:21:55', '190.92.55.16'),
-(473, 1, '2015-08-22 01:37:32', '190.92.55.16'),
-(474, 1, '2015-08-22 12:30:50', '201.190.18.200'),
-(475, 1, '2015-08-22 12:31:56', '190.92.55.115'),
-(476, 1, '2015-08-22 13:43:07', '186.2.138.222'),
-(477, 1, '2015-08-22 17:26:35', '186.2.139.77'),
-(478, 1, '2015-08-22 18:39:42', '190.92.55.113'),
-(479, 1, '2015-08-23 11:02:41', '190.92.55.19'),
-(480, 1, '2015-08-23 13:26:15', '190.181.223.15'),
-(481, 1, '2015-08-23 13:32:31', '181.210.54.194'),
-(482, 1, '2015-08-23 13:59:58', '190.92.55.19'),
-(483, 1, '2015-08-23 14:25:34', '190.181.223.15'),
-(484, 1, '2015-08-23 14:27:17', '190.181.223.15'),
-(485, 1, '2015-08-23 14:52:37', '190.211.137.9'),
-(486, 1, '2015-08-23 15:07:22', '190.181.223.15'),
-(487, 1, '2015-08-23 15:23:48', '186.2.138.131'),
-(488, 1, '2015-08-23 16:04:11', '190.211.137.9'),
-(489, 1, '2015-08-23 17:17:49', '190.56.253.201'),
-(490, 1, '2015-08-23 23:07:08', '190.53.87.229'),
-(491, 1, '2015-08-23 23:48:34', '201.190.18.200'),
-(492, 1, '2015-08-23 23:49:16', '186.32.234.114'),
-(493, 1, '2015-08-23 23:55:07', '190.56.253.77'),
-(494, 1, '2015-08-23 23:58:51', '201.190.18.200'),
-(495, 1, '2015-08-23 23:58:51', '201.190.18.200'),
-(496, 1, '2015-08-23 23:59:02', '186.2.138.232'),
-(497, 1, '2015-08-24 00:10:06', '190.53.87.229'),
-(498, 1, '2015-08-24 09:42:41', '186.2.138.134'),
-(499, 1, '2015-08-25 02:45:11', '186.32.234.114'),
-(500, 1, '2015-08-25 15:19:54', '10.10.43.222'),
-(501, 1, '2015-08-28 10:32:00', '201.190.18.107'),
-(502, 1, '2015-08-30 21:40:32', '190.211.137.96'),
-(503, 1, '2015-09-01 12:23:02', '10.8.44.56'),
-(504, 1, '2015-09-01 12:23:08', '10.8.44.56'),
-(505, 1, '2015-09-01 12:38:21', '10.8.44.140'),
-(506, 1, '2015-09-01 12:38:46', '10.8.44.246'),
-(507, 1, '2015-09-01 12:38:54', '10.8.44.205'),
-(508, 1, '2015-09-01 12:59:51', '10.8.44.56'),
-(509, 1, '2015-09-01 13:05:09', '10.8.44.56'),
-(510, 1, '2015-09-01 13:05:09', '10.8.44.174'),
-(511, 1, '2015-09-01 13:18:23', '10.8.2.15'),
-(512, 1, '2015-09-01 13:22:15', '10.8.2.158'),
-(513, 1, '2015-09-01 13:40:02', '10.8.44.214'),
-(514, 1, '2015-09-01 13:43:01', '10.8.44.214'),
-(515, 1, '2015-09-01 13:43:44', '10.8.44.246'),
-(516, 1, '2015-09-01 14:32:14', '161.0.213.124'),
-(517, 1, '2015-09-01 14:59:27', '23.235.227.108'),
-(518, 1, '2015-09-01 15:36:17', '10.8.44.39'),
-(519, 1, '2015-09-01 17:14:55', '23.235.227.108'),
-(520, 1, '2015-09-02 10:21:18', '23.235.227.108'),
-(521, 1, '2015-09-02 10:37:07', '23.235.227.108'),
-(522, 9, '2015-09-02 10:38:43', '23.235.227.108'),
-(523, 1, '2015-09-02 11:05:32', '23.235.227.108'),
-(524, 9, '2015-09-02 11:06:25', '23.235.227.108'),
-(525, 1, '2015-09-02 11:22:08', '23.235.227.108'),
-(526, 1, '2015-09-02 11:31:34', '10.8.44.244'),
-(527, 1, '2015-09-02 11:41:03', '10.8.44.81'),
-(528, 1, '2015-09-02 11:58:03', '10.8.44.81'),
-(529, 1, '2015-09-02 12:08:06', '23.235.227.108'),
-(530, 1, '2015-09-02 12:18:12', '10.8.44.81'),
-(531, 1, '2015-09-02 12:30:40', '10.8.44.244'),
-(532, 1, '2015-09-02 12:35:55', '10.8.44.81'),
-(533, 1, '2015-09-02 12:46:16', '10.8.44.39'),
-(534, 1, '2015-09-02 13:18:42', '10.8.44.239'),
-(535, 1, '2015-09-02 14:12:44', '10.8.44.239'),
-(536, 1, '2015-09-02 15:05:28', '23.235.227.108'),
-(537, 1, '2015-09-02 16:40:31', '23.235.227.108'),
-(538, 1, '2015-09-02 22:41:30', '190.92.44.10'),
-(539, 1, '2015-09-02 22:49:46', '190.92.44.10'),
-(540, 1, '2015-09-03 10:16:34', '23.235.227.108'),
-(541, 1, '2015-09-03 11:30:02', '23.235.227.108'),
-(542, 1, '2015-09-03 12:20:46', '23.235.227.108'),
-(543, 1, '2015-09-03 12:49:32', '23.235.227.108'),
-(544, 1, '2015-09-03 15:39:52', '23.235.227.108'),
-(545, 12, '2015-09-03 15:58:01', '23.235.227.108'),
-(546, 5, '2015-09-03 15:58:25', '23.235.227.108'),
-(547, 13, '2015-09-03 15:58:43', '23.235.227.108'),
-(548, 14, '2015-09-03 15:59:02', '23.235.227.108'),
-(549, 17, '2015-09-03 15:59:20', '23.235.227.108'),
-(550, 1, '2015-09-03 15:59:52', '23.235.227.108'),
-(551, 15, '2015-09-03 16:01:15', '23.235.227.108'),
-(552, 16, '2015-09-03 16:01:44', '23.235.227.108'),
-(553, 18, '2015-09-03 16:02:05', '23.235.227.108'),
-(554, 4, '2015-09-03 16:02:18', '23.235.227.108'),
-(555, 1, '2015-09-03 16:04:17', '23.235.227.108'),
-(556, 1, '2015-09-07 09:38:30', '10.10.40.211'),
-(557, 1, '2015-09-07 09:40:21', '10.10.40.211'),
-(558, 1, '2015-09-09 09:40:10', '23.235.227.108'),
-(559, 1, '2015-09-09 11:10:38', '23.235.227.108'),
-(560, 1, '2015-09-09 13:52:41', '23.235.227.108'),
-(561, 4, '2015-09-09 18:47:44', '10.8.44.39'),
-(562, 1, '2015-09-09 18:48:46', '10.8.44.110'),
-(563, 1, '2015-09-09 18:55:12', '10.8.44.110'),
-(564, 5, '2015-09-09 18:55:54', '10.8.44.110'),
-(565, 5, '2015-09-09 18:56:06', '10.8.44.110'),
-(566, 1, '2015-09-10 11:59:22', '10.8.44.87'),
-(567, 1, '2015-09-10 12:23:56', '10.8.44.87'),
-(568, 1, '2015-09-10 12:28:19', '10.8.44.87'),
-(569, 1, '2015-09-10 12:30:36', '10.8.44.87'),
-(570, 1, '2015-09-10 12:51:26', '10.8.44.87'),
-(571, 1, '2015-09-10 12:51:32', '10.8.44.87'),
-(572, 1, '2015-09-10 13:01:55', '10.8.44.87'),
-(573, 1, '2015-09-10 15:32:58', '146.185.31.213'),
-(574, 18, '2015-09-10 17:29:20', '10.8.44.56'),
-(575, 12, '2015-09-10 19:32:31', '10.8.44.247'),
-(576, 1, '2015-09-11 09:39:00', '146.185.31.213'),
-(577, 1, '2015-09-11 10:07:54', '146.185.31.213'),
-(578, 1, '2015-09-11 10:34:34', '146.185.31.213'),
-(579, 1, '2015-09-11 12:46:24', '146.185.31.213'),
-(580, 14, '2015-09-11 15:50:39', '146.185.31.213'),
-(581, 16, '2015-09-11 16:23:03', '146.185.31.213'),
-(582, 16, '2015-09-11 16:32:47', '146.185.31.213'),
-(583, 1, '2015-09-11 17:25:07', '146.185.31.213'),
-(584, 5, '2015-09-11 17:25:55', '146.185.31.213'),
-(585, 5, '2015-09-11 17:28:23', '146.185.31.213'),
-(586, 1, '2015-09-16 09:49:21', '146.185.31.213'),
-(587, 1, '2015-09-16 10:37:18', '146.185.31.213'),
-(588, 1, '2015-09-16 10:42:41', '10.8.44.81'),
-(589, 1, '2015-09-16 12:03:44', '146.185.31.213'),
-(590, 1, '2015-09-16 13:03:24', '146.185.31.213'),
-(591, 1, '2015-09-16 13:33:55', '146.185.31.213'),
-(592, 1, '2015-09-16 16:20:13', '146.185.31.213'),
-(593, 1, '2015-09-16 17:06:53', '146.185.31.213'),
-(594, 1, '2015-09-16 17:53:27', '146.185.31.213'),
-(595, 12, '2015-09-16 19:18:27', '146.185.31.213'),
-(596, 1, '2015-09-17 23:48:36', '190.56.253.48'),
-(597, 1, '2015-09-18 16:14:28', '190.92.43.96'),
-(598, 1, '2015-09-18 16:15:18', '190.92.43.96'),
-(599, 1, '2015-09-18 16:15:19', '190.92.43.96'),
-(600, 1, '2015-09-19 13:00:00', '10.8.44.31'),
-(601, 5, '2015-09-19 13:00:48', '10.8.44.31'),
-(602, 1, '2015-09-20 11:53:15', '190.181.223.15'),
-(603, 1, '2015-09-20 12:44:57', '190.181.223.15'),
-(604, 13, '2015-09-22 16:55:36', '146.185.31.213'),
-(605, 14, '2015-09-23 13:36:20', '10.8.44.91'),
-(606, 14, '2015-09-23 17:13:31', '10.8.44.91'),
-(607, 15, '2015-09-24 12:20:23', '10.8.44.174'),
-(608, 5, '2015-09-24 15:03:45', '10.8.44.31'),
-(609, 5, '2015-09-25 12:36:37', '10.8.44.31'),
-(610, 1, '2015-09-25 12:40:11', '10.8.44.31'),
-(611, 5, '2015-09-25 12:41:54', '10.8.44.31'),
-(612, 1, '2015-09-25 13:17:53', '10.8.44.174'),
-(613, 15, '2015-09-25 17:17:53', '146.185.31.213');
-=======
 
 CREATE TABLE IF NOT EXISTS `usuario_log` (
   `Id_log` int(11) NOT NULL,
   `usuario` int(11) NOT NULL,
   `fecha_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ip_conn` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=343 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=614 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario_log`
 --
 
 INSERT INTO `usuario_log` (`Id_log`, `usuario`, `fecha_log`, `ip_conn`) VALUES
-(141, 1, '2015-07-07 00:51:30', '::1'),
-(142, 1, '2015-07-07 01:04:21', '::1'),
-(143, 1, '2015-07-07 02:04:10', '::1'),
-(144, 1, '2015-07-09 04:56:43', '::1'),
-(145, 1, '2015-07-09 04:57:10', '::1'),
-(146, 1, '2015-07-09 05:24:43', '::1'),
-(147, 1, '2015-07-09 05:26:32', '192.168.0.16'),
-(148, 1, '2015-07-09 05:28:15', '192.168.0.22'),
-(149, 1, '2015-07-09 05:28:15', '192.168.0.22'),
-(150, 1, '2015-07-09 05:28:35', '192.168.0.5'),
-(151, 1, '2015-07-09 05:30:48', '::1'),
-(152, 1, '2015-07-09 05:51:35', '::1'),
-(153, 1, '2015-07-09 05:57:15', '192.168.0.5'),
-(154, 1, '2015-07-09 06:21:13', '192.168.0.5'),
-(155, 1, '2015-07-09 06:36:33', '::1'),
-(156, 1, '2015-07-09 06:38:30', '192.168.0.22'),
-(157, 1, '2015-07-09 06:38:30', '192.168.0.22'),
-(158, 1, '2015-07-09 06:51:17', '::1'),
-(159, 1, '2015-07-09 06:52:33', '::1'),
-(160, 1, '2015-07-09 06:56:41', '::1'),
-(161, 1, '2015-07-09 07:03:03', '::1'),
-(162, 1, '2015-07-09 07:12:31', '192.168.0.16'),
-(163, 1, '2015-07-09 07:39:38', '192.168.0.5'),
-(164, 1, '2015-07-09 07:39:43', '::1'),
-(165, 1, '2015-07-09 07:41:58', '::1'),
-(166, 1, '2015-07-09 08:02:15', '::1'),
-(167, 1, '2015-07-09 08:04:13', '::1'),
-(168, 1, '2015-07-09 08:12:55', '192.168.0.16'),
-(169, 1, '2015-07-09 08:16:36', '::1'),
-(170, 1, '2015-07-09 08:56:39', '::1'),
-(171, 1, '2015-07-09 09:02:08', '::1'),
-(172, 1, '2015-07-09 09:02:30', '::1'),
-(173, 1, '2015-07-09 09:04:00', '192.168.0.5'),
-(174, 1, '2015-07-09 09:18:57', '192.168.0.22'),
-(175, 1, '2015-07-09 09:18:57', '192.168.0.22'),
-(176, 1, '2015-07-09 09:27:48', '::1'),
-(177, 1, '2015-07-09 09:29:21', '::1'),
-(178, 1, '2015-07-09 09:49:38', '::1'),
-(179, 1, '2015-07-09 10:00:41', '192.168.0.16'),
-(180, 1, '2015-07-09 10:01:42', '::1'),
-(181, 1, '2015-07-09 10:02:04', '192.168.0.5'),
-(182, 1, '2015-07-09 10:02:26', '192.168.0.22'),
-(183, 1, '2015-07-09 10:02:26', '192.168.0.22'),
-(184, 1, '2015-07-09 10:08:44', '::1'),
-(185, 1, '2015-07-09 10:18:06', '192.168.0.5'),
-(186, 1, '2015-07-09 10:18:12', '::1'),
-(187, 1, '2015-07-09 10:45:05', '192.168.0.5'),
-(188, 1, '2015-07-09 10:47:44', '192.168.0.5'),
-(189, 1, '2015-07-09 11:20:58', '::1'),
-(190, 1, '2015-07-09 11:26:23', '192.168.0.22'),
-(191, 1, '2015-07-09 11:26:23', '192.168.0.22'),
-(192, 1, '2015-07-09 23:40:06', '::1'),
-(193, 1, '2015-07-11 02:31:00', '::1'),
-(194, 1, '2015-07-11 04:01:37', '::1'),
-(195, 1, '2015-07-11 04:09:46', '192.168.0.23'),
-(196, 1, '2015-07-11 04:11:58', '192.168.0.22'),
-(197, 1, '2015-07-11 04:24:10', '192.168.0.23'),
-(198, 1, '2015-07-11 04:35:04', '192.168.0.23'),
-(199, 1, '2015-07-11 04:58:32', '192.168.0.22'),
-(200, 1, '2015-07-11 05:23:49', '192.168.0.23'),
-(201, 1, '2015-07-11 05:28:53', '::1'),
-(202, 1, '2015-07-11 05:30:48', '192.168.0.22'),
-(203, 1, '2015-07-11 05:31:35', '192.168.0.23'),
-(204, 1, '2015-07-11 05:38:27', '192.168.0.17'),
-(205, 1, '2015-07-11 05:38:27', '192.168.0.17'),
-(206, 1, '2015-07-11 05:58:12', '192.168.0.17'),
-(207, 1, '2015-07-11 05:58:13', '192.168.0.17'),
-(208, 1, '2015-07-11 06:03:01', '::1'),
-(209, 1, '2015-07-11 06:34:38', '192.168.0.23'),
-(210, 1, '2015-07-11 06:46:38', '192.168.0.23'),
-(211, 1, '2015-07-11 06:47:36', '192.168.0.17'),
-(212, 1, '2015-07-11 06:47:36', '192.168.0.17'),
-(213, 1, '2015-07-11 07:03:51', '::1'),
-(214, 1, '2015-07-11 07:09:40', '192.168.0.23'),
-(215, 1, '2015-07-11 07:19:33', '192.168.0.22'),
-(216, 1, '2015-07-11 07:22:06', '192.168.0.17'),
-(217, 1, '2015-07-11 07:22:06', '192.168.0.17'),
-(218, 1, '2015-07-11 07:33:52', '192.168.0.24'),
-(219, 1, '2015-07-11 07:43:37', '192.168.0.23'),
-(220, 1, '2015-07-11 07:54:41', '192.168.0.24'),
-(221, 1, '2015-07-11 07:54:57', '192.168.0.17'),
-(222, 1, '2015-07-11 07:54:57', '192.168.0.17'),
-(223, 1, '2015-07-11 08:21:12', '192.168.0.24'),
-(224, 1, '2015-07-11 08:45:03', '192.168.0.23'),
-(225, 1, '2015-07-11 08:48:12', '192.168.0.22'),
-(226, 1, '2015-07-11 09:17:30', '192.168.0.17'),
-(227, 1, '2015-07-11 09:17:30', '192.168.0.17'),
-(228, 1, '2015-07-11 09:20:43', '::1'),
-(229, 1, '2015-07-11 09:26:21', '::1'),
-(230, 1, '2015-07-11 09:31:27', '192.168.0.24'),
-(231, 1, '2015-07-11 09:43:26', '::1'),
-(232, 1, '2015-07-11 09:45:08', '192.168.0.22'),
-(233, 1, '2015-07-11 10:07:47', '192.168.0.22'),
-(234, 1, '2015-07-11 10:21:10', '192.168.0.24'),
-(235, 1, '2015-07-11 11:01:08', '192.168.0.17'),
-(236, 1, '2015-07-11 11:01:08', '192.168.0.17'),
-(237, 1, '2015-07-11 11:03:38', '192.168.0.24'),
-(258, 1, '2015-07-25 16:06:00', '::1'),
-(259, 1, '2015-07-25 16:06:02', '::1'),
-(260, 1, '2015-07-25 16:06:05', '::1'),
-(261, 1, '2015-07-25 16:06:07', '::1'),
-(262, 1, '2015-07-25 16:06:18', '::1'),
-(263, 1, '2015-07-25 16:06:22', '::1'),
-(264, 1, '2015-07-25 16:06:31', '::1'),
-(265, 1, '2015-07-25 16:06:56', '::1'),
-(266, 1, '2015-07-25 16:07:41', '::1'),
-(267, 1, '2015-07-25 16:07:45', '::1'),
-(268, 1, '2015-07-25 16:08:10', '::1'),
-(269, 1, '2015-07-25 16:45:01', '::1'),
-(270, 1, '2015-07-25 16:45:17', '::1'),
-(271, 1, '2015-07-25 16:45:37', '::1'),
-(272, 1, '2015-07-25 16:45:40', '::1'),
-(273, 1, '2015-07-25 16:45:42', '::1'),
-(274, 1, '2015-07-25 16:45:43', '::1'),
-(275, 1, '2015-07-25 16:46:09', '::1'),
-(276, 1, '2015-07-25 16:49:32', '::1'),
-(277, 1, '2015-07-25 16:49:39', '::1'),
-(278, 1, '2015-07-25 16:49:55', '::1'),
-(279, 1, '2015-07-25 16:52:00', '::1'),
-(280, 1, '2015-07-25 16:56:17', '::1'),
-(281, 1, '2015-07-25 16:56:56', '::1'),
-(282, 1, '2015-07-25 16:57:30', '::1'),
-(283, 1, '2015-07-25 17:00:33', '::1'),
-(284, 1, '2015-07-25 17:00:59', '::1'),
-(285, 1, '2015-07-25 17:04:06', '::1'),
-(286, 1, '2015-07-25 17:24:12', '::1'),
-(287, 1, '2015-07-25 17:24:32', '192.168.43.1'),
-(288, 1, '2015-07-25 17:24:48', '::1'),
-(289, 1, '2015-07-25 20:40:56', '::1'),
-(290, 1, '2015-07-25 20:42:14', '::1'),
-(291, 1, '2015-07-25 20:45:19', '::1'),
-(292, 1, '2015-07-25 20:46:43', '::1'),
-(293, 1, '2015-07-25 20:48:43', '::1'),
-(294, 1, '2015-07-25 20:49:47', '::1'),
-(295, 1, '2015-07-25 20:52:07', '::1'),
-(296, 1, '2015-07-25 20:57:36', '::1'),
-(297, 1, '2015-07-25 21:09:11', '::1'),
-(298, 1, '2015-07-25 21:11:29', '::1'),
-(299, 1, '2015-07-25 21:13:01', '::1'),
-(300, 1, '2015-07-25 21:16:25', '::1'),
-(301, 1, '2015-07-25 21:16:49', '::1'),
-(302, 1, '2015-07-25 21:18:15', '::1'),
-(303, 1, '2015-07-25 21:20:07', '::1'),
-(304, 1, '2015-07-25 21:21:08', '::1'),
-(305, 1, '2015-07-25 21:21:56', '::1'),
-(306, 1, '2015-07-26 20:39:25', '::1'),
-(307, 1, '2015-07-26 21:15:01', '::1'),
-(308, 1, '2015-07-26 21:25:19', '::1'),
-(309, 1, '2015-07-26 21:27:40', '::1'),
-(310, 1, '2015-07-26 21:29:35', '::1'),
-(311, 1, '2015-07-26 21:33:46', '::1'),
-(312, 1, '2015-07-26 21:34:36', '::1'),
-(313, 1, '2015-07-26 21:35:08', '::1'),
-(314, 1, '2015-07-26 21:43:18', '::1'),
-(315, 1, '2015-07-26 21:45:11', '::1'),
-(316, 1, '2015-07-26 21:45:43', '::1'),
-(317, 1, '2015-07-26 21:45:46', '::1'),
-(318, 1, '2015-07-26 21:49:41', '::1'),
-(319, 1, '2015-07-26 22:12:00', '::1'),
-(320, 1, '2015-07-26 22:13:05', '::1'),
-(321, 1, '2015-07-26 22:16:19', '::1'),
-(322, 1, '2015-07-26 22:16:52', '::1'),
-(323, 1, '2015-07-26 22:20:48', '::1'),
-(324, 1, '2015-07-26 22:20:51', '::1'),
-(325, 1, '2015-07-26 22:23:06', '::1'),
-(326, 1, '2015-07-26 22:35:05', '::1'),
-(327, 1, '2015-07-26 22:38:00', '::1'),
-(328, 1, '2015-07-26 22:38:19', '::1'),
-(329, 1, '2015-07-26 22:39:31', '::1'),
-(330, 1, '2015-07-26 23:03:19', '::1'),
-(331, 1, '2015-07-26 23:07:15', '::1'),
-(332, 1, '2015-07-26 23:11:55', '::1'),
-(333, 1, '2015-07-26 23:13:26', '::1'),
-(334, 1, '2015-07-26 23:22:24', '::1'),
-(335, 1, '2015-07-26 23:23:00', '::1'),
-(336, 1, '2015-07-27 03:02:02', '::1'),
-(337, 1, '2015-07-27 23:54:48', '::1'),
-(338, 1, '2015-07-28 00:25:39', '::1'),
-(339, 1, '2015-07-28 00:33:28', '::1'),
-(340, 1, '2015-07-28 05:16:31', '::1'),
-(341, 1, '2015-07-28 05:40:26', '::1'),
-(342, 1, '2015-07-28 15:26:49', '::1');
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
+(141, 1, '2015-07-07 02:51:30', '::1'),
+(142, 1, '2015-07-07 03:04:21', '::1'),
+(143, 1, '2015-07-07 04:04:10', '::1'),
+(144, 1, '2015-07-09 06:56:43', '::1'),
+(145, 1, '2015-07-09 06:57:10', '::1'),
+(146, 1, '2015-07-09 07:24:43', '::1'),
+(147, 1, '2015-07-09 07:26:32', '192.168.0.16'),
+(148, 1, '2015-07-09 07:28:15', '192.168.0.22'),
+(149, 1, '2015-07-09 07:28:15', '192.168.0.22'),
+(150, 1, '2015-07-09 07:28:35', '192.168.0.5'),
+(151, 1, '2015-07-09 07:30:48', '::1'),
+(152, 1, '2015-07-09 07:51:35', '::1'),
+(153, 1, '2015-07-09 07:57:15', '192.168.0.5'),
+(154, 1, '2015-07-09 08:21:13', '192.168.0.5'),
+(155, 1, '2015-07-09 08:36:33', '::1'),
+(156, 1, '2015-07-09 08:38:30', '192.168.0.22'),
+(157, 1, '2015-07-09 08:38:30', '192.168.0.22'),
+(158, 1, '2015-07-09 08:51:17', '::1'),
+(159, 1, '2015-07-09 08:52:33', '::1'),
+(160, 1, '2015-07-09 08:56:41', '::1'),
+(161, 1, '2015-07-09 09:03:03', '::1'),
+(162, 1, '2015-07-09 09:12:31', '192.168.0.16'),
+(163, 1, '2015-07-09 09:39:38', '192.168.0.5'),
+(164, 1, '2015-07-09 09:39:43', '::1'),
+(165, 1, '2015-07-09 09:41:58', '::1'),
+(166, 1, '2015-07-09 10:02:15', '::1'),
+(167, 1, '2015-07-09 10:04:13', '::1'),
+(168, 1, '2015-07-09 10:12:55', '192.168.0.16'),
+(169, 1, '2015-07-09 10:16:36', '::1'),
+(170, 1, '2015-07-09 10:56:39', '::1'),
+(171, 1, '2015-07-09 11:02:08', '::1'),
+(172, 1, '2015-07-09 11:02:30', '::1'),
+(173, 1, '2015-07-09 11:04:00', '192.168.0.5'),
+(174, 1, '2015-07-09 11:18:57', '192.168.0.22'),
+(175, 1, '2015-07-09 11:18:57', '192.168.0.22'),
+(176, 1, '2015-07-09 11:27:48', '::1'),
+(177, 1, '2015-07-09 11:29:21', '::1'),
+(178, 1, '2015-07-09 11:49:38', '::1'),
+(179, 1, '2015-07-09 12:00:41', '192.168.0.16'),
+(180, 1, '2015-07-09 12:01:42', '::1'),
+(181, 1, '2015-07-09 12:02:04', '192.168.0.5'),
+(182, 1, '2015-07-09 12:02:26', '192.168.0.22'),
+(183, 1, '2015-07-09 12:02:26', '192.168.0.22'),
+(184, 1, '2015-07-09 12:08:44', '::1'),
+(185, 1, '2015-07-09 12:18:06', '192.168.0.5'),
+(186, 1, '2015-07-09 12:18:12', '::1'),
+(187, 1, '2015-07-09 12:45:05', '192.168.0.5'),
+(188, 1, '2015-07-09 12:47:44', '192.168.0.5'),
+(189, 1, '2015-07-09 13:20:58', '::1'),
+(190, 1, '2015-07-09 13:26:23', '192.168.0.22'),
+(191, 1, '2015-07-09 13:26:23', '192.168.0.22'),
+(192, 1, '2015-07-10 01:40:06', '::1'),
+(193, 1, '2015-07-11 04:31:00', '::1'),
+(194, 1, '2015-07-11 06:01:37', '::1'),
+(195, 1, '2015-07-11 06:09:46', '192.168.0.23'),
+(196, 1, '2015-07-11 06:11:58', '192.168.0.22'),
+(197, 1, '2015-07-11 06:24:10', '192.168.0.23'),
+(198, 1, '2015-07-11 06:35:04', '192.168.0.23'),
+(199, 1, '2015-07-11 06:58:32', '192.168.0.22'),
+(200, 1, '2015-07-11 07:23:49', '192.168.0.23'),
+(201, 1, '2015-07-11 07:28:53', '::1'),
+(202, 1, '2015-07-11 07:30:48', '192.168.0.22'),
+(203, 1, '2015-07-11 07:31:35', '192.168.0.23'),
+(204, 1, '2015-07-11 07:38:27', '192.168.0.17'),
+(205, 1, '2015-07-11 07:38:27', '192.168.0.17'),
+(206, 1, '2015-07-11 07:58:12', '192.168.0.17'),
+(207, 1, '2015-07-11 07:58:13', '192.168.0.17'),
+(208, 1, '2015-07-11 08:03:01', '::1'),
+(209, 1, '2015-07-11 08:34:38', '192.168.0.23'),
+(210, 1, '2015-07-11 08:46:38', '192.168.0.23'),
+(211, 1, '2015-07-11 08:47:36', '192.168.0.17'),
+(212, 1, '2015-07-11 08:47:36', '192.168.0.17'),
+(213, 1, '2015-07-11 09:03:51', '::1'),
+(214, 1, '2015-07-11 09:09:40', '192.168.0.23'),
+(215, 1, '2015-07-11 09:19:33', '192.168.0.22'),
+(216, 1, '2015-07-11 09:22:06', '192.168.0.17'),
+(217, 1, '2015-07-11 09:22:06', '192.168.0.17'),
+(218, 1, '2015-07-11 09:33:52', '192.168.0.24'),
+(219, 1, '2015-07-11 09:43:37', '192.168.0.23'),
+(220, 1, '2015-07-11 09:54:41', '192.168.0.24'),
+(221, 1, '2015-07-11 09:54:57', '192.168.0.17'),
+(222, 1, '2015-07-11 09:54:57', '192.168.0.17'),
+(223, 1, '2015-07-11 10:21:12', '192.168.0.24'),
+(224, 1, '2015-07-11 10:45:03', '192.168.0.23'),
+(225, 1, '2015-07-11 10:48:12', '192.168.0.22'),
+(226, 1, '2015-07-11 11:17:30', '192.168.0.17'),
+(227, 1, '2015-07-11 11:17:30', '192.168.0.17'),
+(228, 1, '2015-07-11 11:20:43', '::1'),
+(229, 1, '2015-07-11 11:26:21', '::1'),
+(230, 1, '2015-07-11 11:31:27', '192.168.0.24'),
+(231, 1, '2015-07-11 11:43:26', '::1'),
+(232, 1, '2015-07-11 11:45:08', '192.168.0.22'),
+(233, 1, '2015-07-11 12:07:47', '192.168.0.22'),
+(234, 1, '2015-07-11 12:21:10', '192.168.0.24'),
+(235, 1, '2015-07-11 13:01:08', '192.168.0.17'),
+(236, 1, '2015-07-11 13:01:08', '192.168.0.17'),
+(237, 1, '2015-07-11 13:03:38', '192.168.0.24'),
+(258, 1, '2015-07-27 02:15:50', '201.190.18.72'),
+(259, 1, '2015-07-27 02:17:39', '190.5.79.106'),
+(260, 1, '2015-07-27 02:20:44', '190.5.79.106'),
+(261, 1, '2015-07-27 02:51:04', '190.5.79.106'),
+(262, 1, '2015-07-27 05:51:27', '190.92.55.20'),
+(263, 1, '2015-07-27 06:25:10', '186.32.234.114'),
+(264, 1, '2015-07-27 18:33:13', '10.8.73.76'),
+(265, 1, '2015-07-27 22:21:02', '190.4.63.222'),
+(266, 1, '2015-07-27 22:21:36', '186.32.247.135'),
+(267, 1, '2015-07-28 00:11:50', '10.8.92.227'),
+(268, 1, '2015-07-28 00:33:16', '10.8.92.227'),
+(269, 1, '2015-07-28 06:12:45', '186.2.144.142'),
+(270, 1, '2015-07-28 07:06:14', '190.92.55.101'),
+(271, 1, '2015-07-28 07:06:17', '190.56.253.178'),
+(272, 1, '2015-07-28 07:23:01', '190.211.137.19'),
+(273, 1, '2015-07-28 07:37:33', '190.53.87.229'),
+(274, 1, '2015-07-28 16:25:02', '10.8.44.151'),
+(275, 1, '2015-07-28 16:50:11', '10.8.44.244'),
+(276, 1, '2015-07-28 17:01:23', '190.5.79.106'),
+(277, 1, '2015-07-28 17:02:58', '190.5.79.106'),
+(278, 1, '2015-07-28 18:30:10', '10.8.44.244'),
+(279, 1, '2015-07-28 19:13:12', '10.8.44.214'),
+(280, 1, '2015-07-28 19:15:02', '10.8.44.156'),
+(281, 1, '2015-07-28 19:47:05', '10.8.44.244'),
+(282, 1, '2015-07-28 21:12:40', '10.8.44.244'),
+(283, 1, '2015-07-28 21:17:14', '10.8.44.151'),
+(284, 1, '2015-07-28 21:36:43', '10.8.44.151'),
+(285, 1, '2015-07-28 22:17:51', '186.2.136.25'),
+(286, 1, '2015-07-28 22:42:47', '10.8.44.151'),
+(287, 1, '2015-07-28 23:51:51', '10.8.44.239'),
+(288, 1, '2015-07-29 00:33:39', '10.8.44.244'),
+(289, 1, '2015-07-29 00:53:03', '10.8.44.244'),
+(290, 1, '2015-07-29 01:52:14', '190.5.79.106'),
+(291, 1, '2015-07-29 01:54:41', '190.5.79.106'),
+(292, 1, '2015-07-29 06:40:05', '190.56.253.52'),
+(293, 1, '2015-07-29 16:39:38', '10.8.92.181'),
+(294, 1, '2015-07-29 17:03:26', '10.8.92.135'),
+(295, 1, '2015-07-29 17:26:18', '10.8.44.151'),
+(296, 1, '2015-07-29 17:28:08', '10.8.44.244'),
+(297, 1, '2015-07-29 17:57:06', '10.8.44.151'),
+(298, 1, '2015-07-29 18:30:30', '10.8.44.151'),
+(299, 1, '2015-07-29 19:44:51', '10.8.44.151'),
+(300, 1, '2015-07-29 22:19:30', '10.8.44.151'),
+(301, 4, '2015-07-29 22:23:56', '10.8.44.151'),
+(302, 1, '2015-07-29 23:05:56', '10.8.44.151'),
+(303, 4, '2015-07-29 23:11:20', '10.8.44.151'),
+(304, 1, '2015-07-30 01:29:35', '190.181.223.15'),
+(305, 1, '2015-07-30 01:41:36', '190.181.223.15'),
+(306, 1, '2015-07-30 16:43:47', '10.8.44.151'),
+(307, 4, '2015-07-30 16:58:17', '10.8.44.96'),
+(308, 1, '2015-07-30 17:15:33', '10.8.44.151'),
+(309, 1, '2015-07-30 17:35:21', '10.8.44.151'),
+(310, 4, '2015-07-30 17:36:33', '10.8.44.151'),
+(311, 4, '2015-07-30 18:00:26', '10.8.44.151'),
+(312, 4, '2015-07-30 18:36:35', '10.8.44.151'),
+(313, 1, '2015-07-30 18:47:10', '10.8.44.151'),
+(314, 1, '2015-07-30 18:47:26', '190.130.23.12'),
+(315, 4, '2015-07-30 19:22:01', '10.8.44.151'),
+(316, 1, '2015-07-30 19:22:36', '10.8.44.151'),
+(317, 4, '2015-07-30 19:32:54', '10.8.44.151'),
+(318, 4, '2015-07-30 21:18:37', '10.8.44.151'),
+(319, 1, '2015-07-30 21:48:52', '10.8.44.31'),
+(320, 5, '2015-07-30 21:55:48', '10.8.44.31'),
+(321, 1, '2015-07-31 17:58:45', '201.190.18.250'),
+(322, 1, '2015-07-31 18:23:16', '201.190.18.250'),
+(323, 1, '2015-07-31 20:18:07', '201.190.18.250'),
+(324, 1, '2015-07-31 22:19:56', '201.190.18.250'),
+(325, 1, '2015-07-31 22:28:41', '201.190.18.250'),
+(326, 1, '2015-07-31 23:39:35', '201.190.18.250'),
+(327, 1, '2015-08-01 01:19:42', '190.92.55.79'),
+(328, 1, '2015-08-01 02:45:59', '190.181.197.101'),
+(329, 1, '2015-08-02 04:36:38', '190.211.137.59'),
+(330, 1, '2015-08-02 08:01:14', '190.211.137.59'),
+(331, 1, '2015-08-02 18:16:08', '190.5.79.106'),
+(332, 4, '2015-08-03 04:14:06', '161.0.213.124'),
+(333, 1, '2015-08-03 17:47:32', '10.8.92.135'),
+(334, 1, '2015-08-04 01:30:35', '181.209.246.37'),
+(335, 1, '2015-08-04 02:55:29', '190.5.79.106'),
+(336, 1, '2015-08-04 04:44:39', '181.209.246.37'),
+(337, 1, '2015-08-04 04:46:27', '190.211.137.101'),
+(338, 1, '2015-08-04 05:13:36', '190.92.55.100'),
+(339, 1, '2015-08-04 05:14:00', '181.209.246.37'),
+(340, 1, '2015-08-04 05:31:55', '190.181.223.15'),
+(341, 1, '2015-08-04 06:31:35', '190.92.55.100'),
+(342, 1, '2015-08-04 08:25:14', '190.211.137.101'),
+(343, 1, '2015-08-04 09:15:57', '190.211.137.101'),
+(344, 1, '2015-08-04 16:50:15', '10.8.44.111'),
+(345, 1, '2015-08-04 17:41:12', '10.8.44.111'),
+(346, 1, '2015-08-04 17:45:16', '10.8.92.42'),
+(347, 6, '2015-08-04 17:53:49', '10.8.44.111'),
+(348, 1, '2015-08-04 18:01:20', '146.185.28.59'),
+(349, 1, '2015-08-04 18:19:52', '10.8.44.111'),
+(350, 6, '2015-08-04 18:34:15', '10.8.44.111'),
+(351, 6, '2015-08-04 19:04:18', '146.185.28.59'),
+(352, 6, '2015-08-04 21:18:59', '10.8.44.68'),
+(353, 6, '2015-08-04 22:18:48', '10.8.44.68'),
+(354, 6, '2015-08-04 22:39:29', '10.8.44.68'),
+(355, 6, '2015-08-05 00:50:20', '10.8.44.68'),
+(356, 1, '2015-08-05 01:10:12', '190.181.223.15'),
+(357, 1, '2015-08-05 01:16:11', '10.8.44.68'),
+(358, 7, '2015-08-05 01:18:50', '10.8.44.68'),
+(359, 1, '2015-08-05 01:19:14', '10.8.44.68'),
+(360, 7, '2015-08-05 01:20:03', '10.8.44.68'),
+(361, 1, '2015-08-05 01:20:19', '10.8.44.68'),
+(362, 8, '2015-08-05 01:22:37', '10.8.44.68'),
+(363, 1, '2015-08-05 01:23:24', '10.8.44.68'),
+(364, 9, '2015-08-05 01:27:17', '10.8.44.68'),
+(365, 1, '2015-08-05 01:51:52', '181.209.246.148'),
+(366, 1, '2015-08-05 01:54:38', '181.209.246.148'),
+(367, 1, '2015-08-05 02:05:39', '181.209.246.148'),
+(368, 1, '2015-08-05 04:37:18', '181.209.246.54'),
+(369, 1, '2015-08-05 05:13:08', '190.92.55.46'),
+(370, 1, '2015-08-05 05:13:30', '181.209.246.54'),
+(371, 1, '2015-08-05 05:28:38', '190.211.137.69'),
+(372, 1, '2015-08-05 05:35:17', '181.209.246.54'),
+(373, 1, '2015-08-05 05:39:28', '181.209.246.54'),
+(374, 1, '2015-08-05 05:44:57', '190.92.55.46'),
+(375, 1, '2015-08-05 05:44:59', '190.211.137.69'),
+(376, 1, '2015-08-05 06:11:38', '190.211.137.69'),
+(377, 1, '2015-08-05 06:32:18', '181.209.246.54'),
+(378, 1, '2015-08-05 07:42:52', '190.211.137.69'),
+(379, 1, '2015-08-05 13:19:47', '190.92.55.38'),
+(380, 1, '2015-08-05 16:20:01', '190.56.253.90'),
+(381, 1, '2015-08-08 05:20:40', '190.211.137.35'),
+(382, 1, '2015-08-08 16:46:47', '181.209.246.130'),
+(383, 1, '2015-08-08 17:54:51', '181.209.246.130'),
+(384, 1, '2015-08-08 18:23:41', '181.209.246.130'),
+(385, 1, '2015-08-08 21:23:22', '190.53.87.229'),
+(386, 1, '2015-08-08 22:22:22', '181.209.246.48'),
+(387, 1, '2015-08-09 01:16:16', '190.211.137.64'),
+(388, 1, '2015-08-09 01:16:16', '190.211.137.64'),
+(389, 1, '2015-08-09 06:58:27', '190.211.137.64'),
+(390, 1, '2015-08-09 19:16:14', '190.181.223.15'),
+(391, 1, '2015-08-09 22:27:02', '190.181.223.15'),
+(392, 1, '2015-08-09 22:28:34', '190.211.137.57'),
+(393, 1, '2015-08-09 22:36:17', '201.190.18.15'),
+(394, 1, '2015-08-09 23:58:31', '181.210.54.194'),
+(395, 1, '2015-08-10 01:00:08', '181.209.246.130'),
+(396, 1, '2015-08-10 01:35:19', '181.209.246.130'),
+(397, 1, '2015-08-10 01:45:54', '181.210.54.194'),
+(398, 1, '2015-08-10 02:58:22', '201.190.18.15'),
+(399, 1, '2015-08-10 03:12:13', '181.209.246.130'),
+(400, 1, '2015-08-10 03:29:13', '181.210.54.194'),
+(401, 1, '2015-08-10 03:59:32', '181.210.54.194'),
+(402, 1, '2015-08-10 04:50:49', '201.190.18.136'),
+(403, 1, '2015-08-10 04:50:50', '201.190.18.136'),
+(404, 1, '2015-08-10 04:57:22', '181.209.246.130'),
+(405, 1, '2015-08-10 05:01:51', '181.209.246.130'),
+(406, 1, '2015-08-10 20:36:47', '10.10.16.35'),
+(407, 1, '2015-08-10 21:32:53', '10.8.44.39'),
+(408, 4, '2015-08-10 21:48:02', '10.8.44.39'),
+(409, 1, '2015-08-10 21:51:20', '10.8.44.39'),
+(410, 4, '2015-08-10 21:56:53', '10.8.44.39'),
+(411, 1, '2015-08-10 22:01:48', '10.8.44.39'),
+(412, 1, '2015-08-10 22:01:49', '10.8.44.39'),
+(413, 9, '2015-08-10 22:06:28', '10.8.44.39'),
+(414, 1, '2015-08-10 22:23:30', '10.8.44.39'),
+(415, 9, '2015-08-10 22:34:34', '10.8.44.39'),
+(416, 1, '2015-08-10 22:47:22', '10.8.44.39'),
+(417, 10, '2015-08-10 22:50:43', '10.8.44.39'),
+(418, 9, '2015-08-10 22:51:47', '10.8.44.39'),
+(419, 9, '2015-08-10 23:05:32', '10.8.44.39'),
+(420, 9, '2015-08-10 23:28:52', '10.8.44.39'),
+(421, 1, '2015-08-10 23:29:36', '10.8.44.39'),
+(422, 9, '2015-08-10 23:29:55', '10.8.44.39'),
+(423, 1, '2015-08-11 01:27:02', '190.56.253.19'),
+(424, 1, '2015-08-11 05:28:09', '190.56.253.19'),
+(425, 1, '2015-08-11 05:54:13', '190.211.137.69'),
+(426, 9, '2015-08-11 16:53:40', '10.8.44.39'),
+(427, 1, '2015-08-11 17:55:54', '10.10.16.30'),
+(428, 1, '2015-08-12 04:40:39', '186.2.138.212'),
+(429, 1, '2015-08-12 05:24:19', '201.190.18.72'),
+(430, 1, '2015-08-12 06:17:23', '186.2.138.63'),
+(431, 1, '2015-08-12 07:43:32', '186.2.138.63'),
+(432, 4, '2015-08-12 16:33:36', '10.8.44.39'),
+(433, 1, '2015-08-12 17:48:42', '10.8.44.39'),
+(434, 9, '2015-08-12 17:49:39', '10.8.44.39'),
+(435, 1, '2015-08-12 20:54:42', '181.209.246.193'),
+(436, 1, '2015-08-13 05:33:09', '201.190.18.15'),
+(437, 1, '2015-08-17 17:01:36', '10.8.44.110'),
+(438, 1, '2015-08-17 17:37:50', '10.8.44.39'),
+(439, 9, '2015-08-17 18:03:17', '10.8.44.39'),
+(440, 9, '2015-08-17 18:21:01', '10.8.44.39'),
+(441, 1, '2015-08-17 18:59:38', '23.235.227.108'),
+(442, 6, '2015-08-17 19:02:06', '23.235.227.108'),
+(443, 9, '2015-08-17 19:02:19', '10.8.44.39'),
+(444, 6, '2015-08-17 19:06:03', '10.8.44.110'),
+(445, 6, '2015-08-17 19:07:09', '23.235.227.108'),
+(446, 6, '2015-08-17 19:31:54', '10.8.44.110'),
+(447, 9, '2015-08-17 19:40:45', '10.8.44.39'),
+(448, 9, '2015-08-17 19:43:17', '10.8.44.39'),
+(449, 6, '2015-08-17 19:53:27', '23.235.227.108'),
+(450, 9, '2015-08-17 21:22:42', '10.8.44.39'),
+(451, 1, '2015-08-17 21:23:03', '23.235.227.108'),
+(452, 1, '2015-08-17 21:24:19', '10.8.44.110'),
+(453, 1, '2015-08-17 21:39:00', '23.235.227.108'),
+(454, 9, '2015-08-17 22:02:44', '10.8.44.39'),
+(455, 9, '2015-08-17 22:35:21', '23.235.227.108'),
+(456, 9, '2015-08-17 22:48:06', '10.8.44.110'),
+(457, 1, '2015-08-17 22:54:45', '23.235.227.108'),
+(458, 9, '2015-08-17 22:57:45', '23.235.227.108'),
+(459, 1, '2015-08-17 22:59:20', '23.235.227.108'),
+(460, 9, '2015-08-17 23:12:10', '23.235.227.108'),
+(461, 1, '2015-08-19 05:40:15', '190.56.253.255'),
+(462, 1, '2015-08-19 13:16:28', '190.211.137.86'),
+(463, 1, '2015-08-19 15:47:44', '10.10.40.238'),
+(464, 1, '2015-08-19 15:52:09', '10.10.40.238'),
+(465, 1, '2015-08-19 16:18:14', '10.10.40.238'),
+(466, 1, '2015-08-19 16:50:11', '10.10.40.238'),
+(467, 1, '2015-08-19 20:13:30', '10.8.44.39'),
+(468, 1, '2015-08-20 19:51:47', '201.190.18.72'),
+(469, 1, '2015-08-21 07:41:37', '201.190.18.107'),
+(470, 1, '2015-08-21 07:41:50', '201.190.18.107'),
+(471, 1, '2015-08-21 21:55:00', '190.211.137.88'),
+(472, 1, '2015-08-22 02:21:55', '190.92.55.16'),
+(473, 1, '2015-08-22 07:37:32', '190.92.55.16'),
+(474, 1, '2015-08-22 18:30:50', '201.190.18.200'),
+(475, 1, '2015-08-22 18:31:56', '190.92.55.115'),
+(476, 1, '2015-08-22 19:43:07', '186.2.138.222'),
+(477, 1, '2015-08-22 23:26:35', '186.2.139.77'),
+(478, 1, '2015-08-23 00:39:42', '190.92.55.113'),
+(479, 1, '2015-08-23 17:02:41', '190.92.55.19'),
+(480, 1, '2015-08-23 19:26:15', '190.181.223.15'),
+(481, 1, '2015-08-23 19:32:31', '181.210.54.194'),
+(482, 1, '2015-08-23 19:59:58', '190.92.55.19'),
+(483, 1, '2015-08-23 20:25:34', '190.181.223.15'),
+(484, 1, '2015-08-23 20:27:17', '190.181.223.15'),
+(485, 1, '2015-08-23 20:52:37', '190.211.137.9'),
+(486, 1, '2015-08-23 21:07:22', '190.181.223.15'),
+(487, 1, '2015-08-23 21:23:48', '186.2.138.131'),
+(488, 1, '2015-08-23 22:04:11', '190.211.137.9'),
+(489, 1, '2015-08-23 23:17:49', '190.56.253.201'),
+(490, 1, '2015-08-24 05:07:08', '190.53.87.229'),
+(491, 1, '2015-08-24 05:48:34', '201.190.18.200'),
+(492, 1, '2015-08-24 05:49:16', '186.32.234.114'),
+(493, 1, '2015-08-24 05:55:07', '190.56.253.77'),
+(494, 1, '2015-08-24 05:58:51', '201.190.18.200'),
+(495, 1, '2015-08-24 05:58:51', '201.190.18.200'),
+(496, 1, '2015-08-24 05:59:02', '186.2.138.232'),
+(497, 1, '2015-08-24 06:10:06', '190.53.87.229'),
+(498, 1, '2015-08-24 15:42:41', '186.2.138.134'),
+(499, 1, '2015-08-25 08:45:11', '186.32.234.114'),
+(500, 1, '2015-08-25 21:19:54', '10.10.43.222'),
+(501, 1, '2015-08-28 16:32:00', '201.190.18.107'),
+(502, 1, '2015-08-31 03:40:32', '190.211.137.96'),
+(503, 1, '2015-09-01 18:23:02', '10.8.44.56'),
+(504, 1, '2015-09-01 18:23:08', '10.8.44.56'),
+(505, 1, '2015-09-01 18:38:21', '10.8.44.140'),
+(506, 1, '2015-09-01 18:38:46', '10.8.44.246'),
+(507, 1, '2015-09-01 18:38:54', '10.8.44.205'),
+(508, 1, '2015-09-01 18:59:51', '10.8.44.56'),
+(509, 1, '2015-09-01 19:05:09', '10.8.44.56'),
+(510, 1, '2015-09-01 19:05:09', '10.8.44.174'),
+(511, 1, '2015-09-01 19:18:23', '10.8.2.15'),
+(512, 1, '2015-09-01 19:22:15', '10.8.2.158'),
+(513, 1, '2015-09-01 19:40:02', '10.8.44.214'),
+(514, 1, '2015-09-01 19:43:01', '10.8.44.214'),
+(515, 1, '2015-09-01 19:43:44', '10.8.44.246'),
+(516, 1, '2015-09-01 20:32:14', '161.0.213.124'),
+(517, 1, '2015-09-01 20:59:27', '23.235.227.108'),
+(518, 1, '2015-09-01 21:36:17', '10.8.44.39'),
+(519, 1, '2015-09-01 23:14:55', '23.235.227.108'),
+(520, 1, '2015-09-02 16:21:18', '23.235.227.108'),
+(521, 1, '2015-09-02 16:37:07', '23.235.227.108'),
+(522, 9, '2015-09-02 16:38:43', '23.235.227.108'),
+(523, 1, '2015-09-02 17:05:32', '23.235.227.108'),
+(524, 9, '2015-09-02 17:06:25', '23.235.227.108'),
+(525, 1, '2015-09-02 17:22:08', '23.235.227.108'),
+(526, 1, '2015-09-02 17:31:34', '10.8.44.244'),
+(527, 1, '2015-09-02 17:41:03', '10.8.44.81'),
+(528, 1, '2015-09-02 17:58:03', '10.8.44.81'),
+(529, 1, '2015-09-02 18:08:06', '23.235.227.108'),
+(530, 1, '2015-09-02 18:18:12', '10.8.44.81'),
+(531, 1, '2015-09-02 18:30:40', '10.8.44.244'),
+(532, 1, '2015-09-02 18:35:55', '10.8.44.81'),
+(533, 1, '2015-09-02 18:46:16', '10.8.44.39'),
+(534, 1, '2015-09-02 19:18:42', '10.8.44.239'),
+(535, 1, '2015-09-02 20:12:44', '10.8.44.239'),
+(536, 1, '2015-09-02 21:05:28', '23.235.227.108'),
+(537, 1, '2015-09-02 22:40:31', '23.235.227.108'),
+(538, 1, '2015-09-03 04:41:30', '190.92.44.10'),
+(539, 1, '2015-09-03 04:49:46', '190.92.44.10'),
+(540, 1, '2015-09-03 16:16:34', '23.235.227.108'),
+(541, 1, '2015-09-03 17:30:02', '23.235.227.108'),
+(542, 1, '2015-09-03 18:20:46', '23.235.227.108'),
+(543, 1, '2015-09-03 18:49:32', '23.235.227.108'),
+(544, 1, '2015-09-03 21:39:52', '23.235.227.108'),
+(545, 12, '2015-09-03 21:58:01', '23.235.227.108'),
+(546, 5, '2015-09-03 21:58:25', '23.235.227.108'),
+(547, 13, '2015-09-03 21:58:43', '23.235.227.108'),
+(548, 14, '2015-09-03 21:59:02', '23.235.227.108'),
+(549, 17, '2015-09-03 21:59:20', '23.235.227.108'),
+(550, 1, '2015-09-03 21:59:52', '23.235.227.108'),
+(551, 15, '2015-09-03 22:01:15', '23.235.227.108'),
+(552, 16, '2015-09-03 22:01:44', '23.235.227.108'),
+(553, 18, '2015-09-03 22:02:05', '23.235.227.108'),
+(554, 4, '2015-09-03 22:02:18', '23.235.227.108'),
+(555, 1, '2015-09-03 22:04:17', '23.235.227.108'),
+(556, 1, '2015-09-07 15:38:30', '10.10.40.211'),
+(557, 1, '2015-09-07 15:40:21', '10.10.40.211'),
+(558, 1, '2015-09-09 15:40:10', '23.235.227.108'),
+(559, 1, '2015-09-09 17:10:38', '23.235.227.108'),
+(560, 1, '2015-09-09 19:52:41', '23.235.227.108'),
+(561, 4, '2015-09-10 00:47:44', '10.8.44.39'),
+(562, 1, '2015-09-10 00:48:46', '10.8.44.110'),
+(563, 1, '2015-09-10 00:55:12', '10.8.44.110'),
+(564, 5, '2015-09-10 00:55:54', '10.8.44.110'),
+(565, 5, '2015-09-10 00:56:06', '10.8.44.110'),
+(566, 1, '2015-09-10 17:59:22', '10.8.44.87'),
+(567, 1, '2015-09-10 18:23:56', '10.8.44.87'),
+(568, 1, '2015-09-10 18:28:19', '10.8.44.87'),
+(569, 1, '2015-09-10 18:30:36', '10.8.44.87'),
+(570, 1, '2015-09-10 18:51:26', '10.8.44.87'),
+(571, 1, '2015-09-10 18:51:32', '10.8.44.87'),
+(572, 1, '2015-09-10 19:01:55', '10.8.44.87'),
+(573, 1, '2015-09-10 21:32:58', '146.185.31.213'),
+(574, 18, '2015-09-10 23:29:20', '10.8.44.56'),
+(575, 12, '2015-09-11 01:32:31', '10.8.44.247'),
+(576, 1, '2015-09-11 15:39:00', '146.185.31.213'),
+(577, 1, '2015-09-11 16:07:54', '146.185.31.213'),
+(578, 1, '2015-09-11 16:34:34', '146.185.31.213'),
+(579, 1, '2015-09-11 18:46:24', '146.185.31.213'),
+(580, 14, '2015-09-11 21:50:39', '146.185.31.213'),
+(581, 16, '2015-09-11 22:23:03', '146.185.31.213'),
+(582, 16, '2015-09-11 22:32:47', '146.185.31.213'),
+(583, 1, '2015-09-11 23:25:07', '146.185.31.213'),
+(584, 5, '2015-09-11 23:25:55', '146.185.31.213'),
+(585, 5, '2015-09-11 23:28:23', '146.185.31.213'),
+(586, 1, '2015-09-16 15:49:21', '146.185.31.213'),
+(587, 1, '2015-09-16 16:37:18', '146.185.31.213'),
+(588, 1, '2015-09-16 16:42:41', '10.8.44.81'),
+(589, 1, '2015-09-16 18:03:44', '146.185.31.213'),
+(590, 1, '2015-09-16 19:03:24', '146.185.31.213'),
+(591, 1, '2015-09-16 19:33:55', '146.185.31.213'),
+(592, 1, '2015-09-16 22:20:13', '146.185.31.213'),
+(593, 1, '2015-09-16 23:06:53', '146.185.31.213'),
+(594, 1, '2015-09-16 23:53:27', '146.185.31.213'),
+(595, 12, '2015-09-17 01:18:27', '146.185.31.213'),
+(596, 1, '2015-09-18 05:48:36', '190.56.253.48'),
+(597, 1, '2015-09-18 22:14:28', '190.92.43.96'),
+(598, 1, '2015-09-18 22:15:18', '190.92.43.96'),
+(599, 1, '2015-09-18 22:15:19', '190.92.43.96'),
+(600, 1, '2015-09-19 19:00:00', '10.8.44.31'),
+(601, 5, '2015-09-19 19:00:48', '10.8.44.31'),
+(602, 1, '2015-09-20 17:53:15', '190.181.223.15'),
+(603, 1, '2015-09-20 18:44:57', '190.181.223.15'),
+(604, 13, '2015-09-22 22:55:36', '146.185.31.213'),
+(605, 14, '2015-09-23 19:36:20', '10.8.44.91'),
+(606, 14, '2015-09-23 23:13:31', '10.8.44.91'),
+(607, 15, '2015-09-24 18:20:23', '10.8.44.174'),
+(608, 5, '2015-09-24 21:03:45', '10.8.44.31'),
+(609, 5, '2015-09-25 18:36:37', '10.8.44.31'),
+(610, 1, '2015-09-25 18:40:11', '10.8.44.31'),
+(611, 5, '2015-09-25 18:41:54', '10.8.44.31'),
+(612, 1, '2015-09-25 19:17:53', '10.8.44.174'),
+(613, 15, '2015-09-25 23:17:53', '146.185.31.213');
 
 -- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `usuario_notificado`
 --
-<<<<<<< HEAD
--- Creación: 26-07-2015 a las 20:02:42
--- Última actualización: 11-09-2015 a las 17:46:12
--- Última revisión: 26-07-2015 a las 20:03:17
---
-
-DROP TABLE IF EXISTS `usuario_notificado`;
-CREATE TABLE IF NOT EXISTS `usuario_notificado` (
-  `Id_UsuarioNotificado` int(11) NOT NULL auto_increment,
-=======
 
 CREATE TABLE IF NOT EXISTS `usuario_notificado` (
   `Id_UsuarioNotificado` int(11) NOT NULL,
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
   `Id_Notificacion` int(11) NOT NULL,
   `Id_Usuario` int(11) NOT NULL,
   `IdUbicacionNotificacion` tinyint(4) NOT NULL,
   `Estado` tinyint(11) NOT NULL,
-<<<<<<< HEAD
-  `Fecha` datetime NOT NULL,
-  PRIMARY KEY  (`Id_UsuarioNotificado`),
-  KEY `fk_usuario_notificado_notificaciones_folios_idx` (`Id_Notificacion`),
-  KEY `fk_usuario_notificado_ubicacion_notificacionesFolios` (`IdUbicacionNotificacion`),
-  KEY `fk_usuario_notificado_usuario_idx` (`Id_Usuario`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `Fecha` datetime NOT NULL
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
--- Volcar la base de datos para la tabla `usuario_notificado`
+-- Volcado de datos para la tabla `usuario_notificado`
 --
 
 INSERT INTO `usuario_notificado` (`Id_UsuarioNotificado`, `Id_Notificacion`, `Id_Usuario`, `IdUbicacionNotificacion`, `Estado`, `Fecha`) VALUES
@@ -8773,9 +6681,6 @@ INSERT INTO `usuario_notificado` (`Id_UsuarioNotificado`, `Id_Notificacion`, `Id
 (2, 2, 1, 3, 1, '2015-09-11 17:45:23'),
 (3, 2, 2, 3, 1, '2015-09-11 17:45:23'),
 (4, 2, 3, 3, 1, '2015-09-11 17:45:23');
-=======
-  `Fecha` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Índices para tablas volcadas
@@ -9362,7 +7267,7 @@ ALTER TABLE `universidad`
 ALTER TABLE `usuario`
   ADD PRIMARY KEY (`id_Usuario`),
   ADD KEY `fk_usuarios_roles_idx` (`Id_Rol`),
-  ADD KEY `fk_usuario_empleado_idx` (`No_Empleado`);
+  ADD KEY `fk_usuario_empleado_` (`No_Empleado`);
 
 --
 -- Indices de la tabla `usuario_alertado`
@@ -9395,12 +7300,12 @@ ALTER TABLE `usuario_notificado`
 -- AUTO_INCREMENT de la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_actividad` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `actividades_terminadas`
 --
 ALTER TABLE `actividades_terminadas`
-  MODIFY `id_Actividades_Terminadas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Actividades_Terminadas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `alerta`
 --
@@ -9410,67 +7315,67 @@ ALTER TABLE `alerta`
 -- AUTO_INCREMENT de la tabla `area`
 --
 ALTER TABLE `area`
-  MODIFY `id_Area` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Area` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `ID_cargo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `ID_cargo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `categorias_folios`
 --
 ALTER TABLE `categorias_folios`
-  MODIFY `Id_categoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_categoria` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `ca_acondicionamientos`
 --
 ALTER TABLE `ca_acondicionamientos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `ca_areas`
 --
 ALTER TABLE `ca_areas`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT de la tabla `ca_aulas`
 --
 ALTER TABLE `ca_aulas`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `ca_cargas_academicas`
 --
 ALTER TABLE `ca_cargas_academicas`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `ca_contratos`
 --
 ALTER TABLE `ca_contratos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `ca_cursos`
 --
 ALTER TABLE `ca_cursos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `ca_dias`
 --
 ALTER TABLE `ca_dias`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `ca_facultades`
 --
 ALTER TABLE `ca_facultades`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de la tabla `ca_instancias_acondicionamientos`
 --
 ALTER TABLE `ca_instancias_acondicionamientos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `ca_proyectos`
 --
 ALTER TABLE `ca_proyectos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `ca_roles_proyecto`
 --
@@ -9480,117 +7385,117 @@ ALTER TABLE `ca_roles_proyecto`
 -- AUTO_INCREMENT de la tabla `ca_vinculaciones`
 --
 ALTER TABLE `ca_vinculaciones`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12346;
 --
 -- AUTO_INCREMENT de la tabla `clases`
 --
 ALTER TABLE `clases`
-  MODIFY `ID_Clases` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `ID_Clases` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT de la tabla `costo_porcentaje_actividad_por_trimestre`
 --
 ALTER TABLE `costo_porcentaje_actividad_por_trimestre`
-  MODIFY `id_Costo_Porcentaje_Actividad_Por_Trimesrte` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Costo_Porcentaje_Actividad_Por_Trimesrte` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `departamento_laboral`
 --
 ALTER TABLE `departamento_laboral`
-  MODIFY `Id_departamento_laboral` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `Id_departamento_laboral` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `edificios`
 --
 ALTER TABLE `edificios`
-  MODIFY `Edificio_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `Edificio_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT de la tabla `estado_seguimiento`
 --
 ALTER TABLE `estado_seguimiento`
-  MODIFY `Id_Estado_Seguimiento` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Estado_Seguimiento` tinyint(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `estudios_academico`
 --
 ALTER TABLE `estudios_academico`
-  MODIFY `ID_Estudios_academico` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
+  MODIFY `ID_Estudios_academico` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `experiencia_academica`
 --
 ALTER TABLE `experiencia_academica`
-  MODIFY `ID_Experiencia_academica` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `ID_Experiencia_academica` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `experiencia_laboral`
 --
 ALTER TABLE `experiencia_laboral`
-  MODIFY `ID_Experiencia_laboral` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `ID_Experiencia_laboral` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `grupo_o_comite`
 --
 ALTER TABLE `grupo_o_comite`
-  MODIFY `ID_Grupo_o_comite` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `ID_Grupo_o_comite` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `idioma`
 --
 ALTER TABLE `idioma`
-  MODIFY `ID_Idioma` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID_Idioma` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `idioma_has_persona`
 --
 ALTER TABLE `idioma_has_persona`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `indicadores`
 --
 ALTER TABLE `indicadores`
-  MODIFY `id_Indicadores` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Indicadores` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `motivos`
 --
 ALTER TABLE `motivos`
-  MODIFY `Motivo_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Motivo_ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `notificaciones_folios`
 --
 ALTER TABLE `notificaciones_folios`
-  MODIFY `Id_Notificacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Notificacion` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `objetivos_institucionales`
 --
 ALTER TABLE `objetivos_institucionales`
-  MODIFY `id_Objetivo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Objetivo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `organizacion`
 --
 ALTER TABLE `organizacion`
-  MODIFY `Id_Organizacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Organizacion` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `pais`
 --
 ALTER TABLE `pais`
-  MODIFY `Id_pais` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `Id_pais` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
-  MODIFY `id_Permisos` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Permisos` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de la tabla `poa`
 --
 ALTER TABLE `poa`
-  MODIFY `id_Poa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Poa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `prioridad_folio`
 --
 ALTER TABLE `prioridad_folio`
-  MODIFY `Id_PrioridadFolio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_PrioridadFolio` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `responsables_por_actividad`
 --
 ALTER TABLE `responsables_por_actividad`
-  MODIFY `id_Responsable_por_Actividad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Responsable_por_Actividad` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `sa_ciudades`
 --
 ALTER TABLE `sa_ciudades`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de la tabla `sa_estados_solicitud`
 --
@@ -9600,17 +7505,17 @@ ALTER TABLE `sa_estados_solicitud`
 -- AUTO_INCREMENT de la tabla `sa_menciones_honorificas`
 --
 ALTER TABLE `sa_menciones_honorificas`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `sa_orientaciones`
 --
 ALTER TABLE `sa_orientaciones`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT de la tabla `sa_planes_estudio`
 --
 ALTER TABLE `sa_planes_estudio`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT de la tabla `sa_solicitudes`
 --
@@ -9620,27 +7525,27 @@ ALTER TABLE `sa_solicitudes`
 -- AUTO_INCREMENT de la tabla `sa_tipos_estudiante`
 --
 ALTER TABLE `sa_tipos_estudiante`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `sa_tipos_solicitud`
 --
 ALTER TABLE `sa_tipos_solicitud`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=123477;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=123487;
 --
 -- AUTO_INCREMENT de la tabla `seguimiento`
 --
 ALTER TABLE `seguimiento`
-  MODIFY `Id_Seguimiento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Seguimiento` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `seguimiento_historico`
 --
 ALTER TABLE `seguimiento_historico`
-  MODIFY `Id_SeguimientoHistorico` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_SeguimientoHistorico` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `sub_actividad`
 --
 ALTER TABLE `sub_actividad`
-  MODIFY `id_sub_Actividad` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sub_Actividad` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `sub_actividades_realizadas`
 --
@@ -9650,47 +7555,47 @@ ALTER TABLE `sub_actividades_realizadas`
 -- AUTO_INCREMENT de la tabla `telefono`
 --
 ALTER TABLE `telefono`
-  MODIFY `ID_Telefono` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `ID_Telefono` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT de la tabla `tipo_area`
 --
 ALTER TABLE `tipo_area`
-  MODIFY `id_Tipo_Area` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Tipo_Area` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tipo_estudio`
 --
 ALTER TABLE `tipo_estudio`
-  MODIFY `ID_Tipo_estudio` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `ID_Tipo_estudio` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `titulo`
 --
 ALTER TABLE `titulo`
-  MODIFY `id_titulo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id_titulo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `ubicacion_archivofisico`
 --
 ALTER TABLE `ubicacion_archivofisico`
-  MODIFY `Id_UbicacionArchivoFisico` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_UbicacionArchivoFisico` int(5) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `ubicacion_notificaciones`
 --
 ALTER TABLE `ubicacion_notificaciones`
-  MODIFY `Id_UbicacionNotificaciones` tinyint(4) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_UbicacionNotificaciones` tinyint(4) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `unidad_academica`
 --
 ALTER TABLE `unidad_academica`
-  MODIFY `Id_UnidadAcademica` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_UnidadAcademica` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `universidad`
 --
 ALTER TABLE `universidad`
-  MODIFY `Id_universidad` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `Id_universidad` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_Usuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id_Usuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT de la tabla `usuario_alertado`
 --
@@ -9700,343 +7605,12 @@ ALTER TABLE `usuario_alertado`
 -- AUTO_INCREMENT de la tabla `usuario_log`
 --
 ALTER TABLE `usuario_log`
-  MODIFY `Id_log` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=343;
+  MODIFY `Id_log` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=614;
 --
 -- AUTO_INCREMENT de la tabla `usuario_notificado`
 --
 ALTER TABLE `usuario_notificado`
-  MODIFY `Id_UsuarioNotificado` int(11) NOT NULL AUTO_INCREMENT;
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `actividades_terminadas`
---
-ALTER TABLE `actividades_terminadas`
-  ADD CONSTRAINT `actividades_terminadas_ibfk_3` FOREIGN KEY (`id_Actividad`) REFERENCES `actividades` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `alerta`
---
-ALTER TABLE `alerta`
-  ADD CONSTRAINT `fk_alerta_folios` FOREIGN KEY (`NroFolioGenera`) REFERENCES `folios` (`NroFolio`);
-
---
--- Filtros para la tabla `area`
---
-ALTER TABLE `area`
-  ADD CONSTRAINT `area_ibfk_1` FOREIGN KEY (`id_tipo_area`) REFERENCES `tipo_area` (`id_Tipo_Area`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ca_aulas`
---
-ALTER TABLE `ca_aulas`
-  ADD CONSTRAINT `aulas_edificios_FK` FOREIGN KEY (`cod_edificio`) REFERENCES `edificios` (`Edificio_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ca_aulas_instancias_acondicionamientos`
---
-ALTER TABLE `ca_aulas_instancias_acondicionamientos`
-  ADD CONSTRAINT `a_i_a_aulas_FK` FOREIGN KEY (`cod_aula`) REFERENCES `ca_aulas` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `a_i_a_instancias_acondicionamientos_FK` FOREIGN KEY (`cod_instancia_acondicionamiento`) REFERENCES `ca_instancias_acondicionamientos` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ca_cargas_academicas`
---
-ALTER TABLE `ca_cargas_academicas`
-  ADD CONSTRAINT `cargas_academicas_empleados_FK` FOREIGN KEY (`no_empleado`, `dni_empleado`) REFERENCES `empleado` (`No_Empleado`, `N_identidad`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cargas_academicas_estados_FK` FOREIGN KEY (`cod_estado`) REFERENCES `ca_estados_carga` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cargas_academicas_periodos_FK` FOREIGN KEY (`cod_periodo`) REFERENCES `sa_periodos` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ca_cursos`
---
-ALTER TABLE `ca_cursos`
-  ADD CONSTRAINT `cursos_asignaturas_FK` FOREIGN KEY (`cod_asignatura`) REFERENCES `clases` (`ID_Clases`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cursos_aulas_FK` FOREIGN KEY (`cod_aula`) REFERENCES `ca_aulas` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cursos_cargas_FK` FOREIGN KEY (`cod_carga`) REFERENCES `ca_cargas_academicas` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cursos_empleados_FK` FOREIGN KEY (`no_empleado`, `dni_empleado`) REFERENCES `empleado` (`No_Empleado`, `N_identidad`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cursos_secciones_FK` FOREIGN KEY (`cod_seccion`) REFERENCES `ca_secciones` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ca_cursos_dias`
---
-ALTER TABLE `ca_cursos_dias`
-  ADD CONSTRAINT `cursos_dias_clases_FK` FOREIGN KEY (`cod_curso`) REFERENCES `ca_cursos` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `cursos_dias_dias_FK` FOREIGN KEY (`cod_dia`) REFERENCES `ca_dias` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ca_empleados_contratos`
---
-ALTER TABLE `ca_empleados_contratos`
-  ADD CONSTRAINT `e_c_contratos_FK` FOREIGN KEY (`cod_contrato`) REFERENCES `ca_contratos` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `e_c_empleados_FK` FOREIGN KEY (`no_empleado`, `dni_empleado`) REFERENCES `empleado` (`No_Empleado`, `N_identidad`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ca_empleados_proyectos`
---
-ALTER TABLE `ca_empleados_proyectos`
-  ADD CONSTRAINT `d_e_p_empleados_FK` FOREIGN KEY (`no_empleado`, `dni_empleado`) REFERENCES `empleado` (`No_Empleado`, `N_identidad`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `d_e_p_proyectos_FK` FOREIGN KEY (`cod_proyecto`) REFERENCES `ca_proyectos` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `d_e_p_roles_proyecto_FK` FOREIGN KEY (`cod_rol_proyecto`) REFERENCES `ca_roles_proyecto` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ca_instancias_acondicionamientos`
---
-ALTER TABLE `ca_instancias_acondicionamientos`
-  ADD CONSTRAINT `instancias_acondicionamientos_acondicionamientos_FK` FOREIGN KEY (`cod_acondicionamiento`) REFERENCES `ca_acondicionamientos` (`codigo`);
-
---
--- Filtros para la tabla `ca_proyectos`
---
-ALTER TABLE `ca_proyectos`
-  ADD CONSTRAINT `proyectos_areas_FK` FOREIGN KEY (`cod_area`) REFERENCES `ca_areas` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `proyectos_vinculaciones_FK` FOREIGN KEY (`cod_vinculacion`) REFERENCES `ca_vinculaciones` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `ca_vinculaciones`
---
-ALTER TABLE `ca_vinculaciones`
-  ADD CONSTRAINT `vinculaciones_facultades_FK` FOREIGN KEY (`cod_facultad`) REFERENCES `ca_facultades` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `clases_has_experiencia_academica`
---
-ALTER TABLE `clases_has_experiencia_academica`
-  ADD CONSTRAINT `fk_Clases_has_Experiencia_academica_Clases1` FOREIGN KEY (`ID_Clases`) REFERENCES `clases` (`ID_Clases`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Clases_has_Experiencia_academica_Experiencia_academica1` FOREIGN KEY (`ID_Experiencia_academica`) REFERENCES `experiencia_academica` (`ID_Experiencia_academica`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `costo_porcentaje_actividad_por_trimestre`
---
-ALTER TABLE `costo_porcentaje_actividad_por_trimestre`
-  ADD CONSTRAINT `costo_porcentaje_actividad_por_trimestre_ibfk_1` FOREIGN KEY (`id_Actividad`) REFERENCES `actividades` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `empleado`
---
-ALTER TABLE `empleado`
-  ADD CONSTRAINT `fk_Empleado_Persona1` FOREIGN KEY (`N_identidad`) REFERENCES `persona` (`N_identidad`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_empleado_dep` FOREIGN KEY (`Id_departamento`) REFERENCES `departamento_laboral` (`Id_departamento_laboral`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `empleado_has_cargo`
---
-ALTER TABLE `empleado_has_cargo`
-  ADD CONSTRAINT `fk_Empleado_has_Cargo_Cargo1` FOREIGN KEY (`ID_cargo`) REFERENCES `cargo` (`ID_cargo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Empleado_has_Cargo_Empleado1` FOREIGN KEY (`No_Empleado`) REFERENCES `empleado` (`No_Empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `estudios_academico`
---
-ALTER TABLE `estudios_academico`
-  ADD CONSTRAINT `fk_Estudios_academico_Persona1` FOREIGN KEY (`N_identidad`) REFERENCES `persona` (`N_identidad`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Estudios_academico_Tipo_estudio1` FOREIGN KEY (`ID_Tipo_estudio`) REFERENCES `tipo_estudio` (`ID_Tipo_estudio`),
-  ADD CONSTRAINT `fk_estudio_universidad` FOREIGN KEY (`Id_universidad`) REFERENCES `universidad` (`Id_universidad`);
-
---
--- Filtros para la tabla `experiencia_academica`
---
-ALTER TABLE `experiencia_academica`
-  ADD CONSTRAINT `fk_Experiencia_academica_Persona1` FOREIGN KEY (`N_identidad`) REFERENCES `persona` (`N_identidad`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `experiencia_laboral`
---
-ALTER TABLE `experiencia_laboral`
-  ADD CONSTRAINT `fk_Experiencia_laboral_Persona1` FOREIGN KEY (`N_identidad`) REFERENCES `persona` (`N_identidad`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `experiencia_laboral_has_cargo`
---
-ALTER TABLE `experiencia_laboral_has_cargo`
-  ADD CONSTRAINT `fk_Experiencia_laboral_has_Cargo_Cargo1` FOREIGN KEY (`ID_cargo`) REFERENCES `cargo` (`ID_cargo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Experiencia_laboral_has_Cargo_Experiencia_laboral1` FOREIGN KEY (`ID_Experiencia_laboral`) REFERENCES `experiencia_laboral` (`ID_Experiencia_laboral`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `folios`
---
-ALTER TABLE `folios`
-  ADD CONSTRAINT `fk_folio_folioRespuesta` FOREIGN KEY (`NroFolioRespuesta`) REFERENCES `folios` (`NroFolio`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_folios_categoria` FOREIGN KEY (`Categoria`) REFERENCES `categorias_folios` (`Id_categoria`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_folios_organizacion_organizacion` FOREIGN KEY (`Organizacion`) REFERENCES `organizacion` (`Id_Organizacion`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_folios_tblTipoPrioridad` FOREIGN KEY (`Prioridad`) REFERENCES `prioridad` (`Id_Prioridad`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_folios_ubicacion_archivofisico_ubicacionFisica` FOREIGN KEY (`UbicacionFisica`) REFERENCES `ubicacion_archivofisico` (`Id_UbicacionArchivoFisico`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_folios_unidad_academica_unidadAcademica` FOREIGN KEY (`UnidadAcademica`) REFERENCES `unidad_academica` (`Id_UnidadAcademica`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `grupo_o_comite_has_empleado`
---
-ALTER TABLE `grupo_o_comite_has_empleado`
-  ADD CONSTRAINT `fk_Grupo_o_comite_has_Empleado_Empleado1` FOREIGN KEY (`No_Empleado`) REFERENCES `empleado` (`No_Empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Grupo_o_comite_has_Empleado_Grupo_o_comite1` FOREIGN KEY (`ID_Grupo_o_comite`) REFERENCES `grupo_o_comite` (`ID_Grupo_o_comite`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `idioma_has_persona`
---
-ALTER TABLE `idioma_has_persona`
-  ADD CONSTRAINT `fk_Idioma_has_Persona_Idioma` FOREIGN KEY (`ID_Idioma`) REFERENCES `idioma` (`ID_Idioma`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_Idioma_has_Persona_Persona1` FOREIGN KEY (`N_identidad`) REFERENCES `persona` (`N_identidad`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `indicadores`
---
-ALTER TABLE `indicadores`
-  ADD CONSTRAINT `indicadores_ibfk_1` FOREIGN KEY (`id_ObjetivosInsitucionales`) REFERENCES `objetivos_institucionales` (`id_Objetivo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `notificaciones_folios`
---
-ALTER TABLE `notificaciones_folios`
-  ADD CONSTRAINT `fk_notificaciones_folios_folios` FOREIGN KEY (`NroFolio`) REFERENCES `folios` (`NroFolio`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_usuario_notificaciones` FOREIGN KEY (`IdEmisor`) REFERENCES `usuario` (`id_Usuario`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `objetivos_institucionales`
---
-ALTER TABLE `objetivos_institucionales`
-  ADD CONSTRAINT `objetivos_institucionales_ibfk_2` FOREIGN KEY (`id_Poa`) REFERENCES `poa` (`id_Poa`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `objetivos_institucionales_ibfk_3` FOREIGN KEY (`id_Area`) REFERENCES `area` (`id_Area`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `permisos`
---
-ALTER TABLE `permisos`
-  ADD CONSTRAINT `fk_departamento` FOREIGN KEY (`id_departamento`) REFERENCES `departamento_laboral` (`Id_departamento_laboral`),
-  ADD CONSTRAINT `fk_edificio_registro` FOREIGN KEY (`id_Edificio_Registro`) REFERENCES `edificios` (`Edificio_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_empleado` FOREIGN KEY (`No_Empleado`) REFERENCES `empleado` (`No_Empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_motivo` FOREIGN KEY (`id_motivo`) REFERENCES `motivos` (`Motivo_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_revisado` FOREIGN KEY (`revisado_por`) REFERENCES `usuario` (`No_Empleado`),
-  ADD CONSTRAINT `fk_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_Usuario`);
-
---
--- Filtros para la tabla `prioridad_folio`
---
-ALTER TABLE `prioridad_folio`
-  ADD CONSTRAINT `fk_prioridad_folio_folios` FOREIGN KEY (`IdFolio`) REFERENCES `folios` (`NroFolio`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_prioridad_folio_prioridad` FOREIGN KEY (`Id_Prioridad`) REFERENCES `prioridad` (`Id_Prioridad`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `responsables_por_actividad`
---
-ALTER TABLE `responsables_por_actividad`
-  ADD CONSTRAINT `responsables_por_actividad_ibfk_3` FOREIGN KEY (`id_Actividad`) REFERENCES `actividades` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `responsables_por_actividad_ibfk_4` FOREIGN KEY (`id_Responsable`) REFERENCES `grupo_o_comite` (`ID_Grupo_o_comite`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `sa_estudiantes`
---
-ALTER TABLE `sa_estudiantes`
-  ADD CONSTRAINT `estudiante_ciudad_FK` FOREIGN KEY (`cod_ciudad_origen`) REFERENCES `sa_ciudades` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `estudiante_orientacion_FK` FOREIGN KEY (`cod_orientacion`) REFERENCES `sa_orientaciones` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `estudiante_plan_FK` FOREIGN KEY (`cod_plan_estudio`) REFERENCES `sa_planes_estudio` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `estudiante_residencia_actual_FK` FOREIGN KEY (`cod_residencia_actual`) REFERENCES `sa_ciudades` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `estudiantes_persona_FK` FOREIGN KEY (`dni`) REFERENCES `persona` (`N_identidad`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `sa_estudiantes_correos`
---
-ALTER TABLE `sa_estudiantes_correos`
-  ADD CONSTRAINT `estudiante_correo_estudiante_FK` FOREIGN KEY (`dni_estudiante`) REFERENCES `sa_estudiantes` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `sa_estudiantes_menciones_honorificas`
---
-ALTER TABLE `sa_estudiantes_menciones_honorificas`
-  ADD CONSTRAINT `estudiante_mencion_estudiante_FK` FOREIGN KEY (`dni_estudiante`) REFERENCES `sa_estudiantes` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `estudiante_mencion_mencion_FK` FOREIGN KEY (`cod_mencion`) REFERENCES `sa_menciones_honorificas` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `sa_estudiantes_tipos_estudiantes`
---
-ALTER TABLE `sa_estudiantes_tipos_estudiantes`
-  ADD CONSTRAINT `sa_estudiantes_tipos_estudiantes_estudiantes` FOREIGN KEY (`dni_estudiante`) REFERENCES `sa_estudiantes` (`dni`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `sa_examenes_himno`
---
-ALTER TABLE `sa_examenes_himno`
-  ADD CONSTRAINT `examen_himno_solicitud_FK` FOREIGN KEY (`cod_solicitud`, `fecha_solicitud`) REFERENCES `sa_solicitudes` (`codigo`, `fecha_solicitud`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `sa_solicitudes`
---
-ALTER TABLE `sa_solicitudes`
-  ADD CONSTRAINT `solicitud_estados_solicitud_FK` FOREIGN KEY (`cod_estado`) REFERENCES `sa_estados_solicitud` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `solicitud_estudiante_FK` FOREIGN KEY (`dni_estudiante`) REFERENCES `sa_estudiantes` (`dni`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `solicitud_periodo_FK` FOREIGN KEY (`cod_periodo`) REFERENCES `sa_periodos` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `solicitud_solicitud_FK` FOREIGN KEY (`cod_solicitud_padre`, `fecha_solicitud_padre`) REFERENCES `sa_solicitudes` (`codigo`, `fecha_solicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `solicitud_tipo_solicitud_FK` FOREIGN KEY (`cod_tipo_solicitud`) REFERENCES `sa_tipos_solicitud` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `sa_tipos_solicitud_tipos_alumnos`
---
-ALTER TABLE `sa_tipos_solicitud_tipos_alumnos`
-  ADD CONSTRAINT `tipo_alumno_tipo_solicitud_t_a_FK` FOREIGN KEY (`cod_tipo_alumno`) REFERENCES `sa_tipos_estudiante` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tipo_alumno_tipo_solicitud_t_s_FK` FOREIGN KEY (`cod_tipo_solicitud`) REFERENCES `sa_tipos_solicitud` (`codigo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `seguimiento`
---
-ALTER TABLE `seguimiento`
-  ADD CONSTRAINT `fk_seguimiento_folios` FOREIGN KEY (`NroFolio`) REFERENCES `folios` (`NroFolio`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_seguimiento_usuarioAsignado` FOREIGN KEY (`UsuarioAsignado`) REFERENCES `usuario` (`id_Usuario`) ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `seguimiento_historico`
---
-ALTER TABLE `seguimiento_historico`
-  ADD CONSTRAINT `fk_seguimiento_historico_seguimiento1` FOREIGN KEY (`Id_Seguimiento`) REFERENCES `seguimiento` (`Id_Seguimiento`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_seguimiento_historico_tblEstdoSeguimiento` FOREIGN KEY (`Id_Estado_Seguimiento`) REFERENCES `estado_seguimiento` (`Id_Estado_Seguimiento`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `sub_actividad`
---
-ALTER TABLE `sub_actividad`
-  ADD CONSTRAINT `sub_actividad_ibfk_3` FOREIGN KEY (`idActividad`) REFERENCES `actividades` (`id_actividad`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `sub_actividad_ibfk_4` FOREIGN KEY (`id_Encargado`) REFERENCES `empleado` (`No_Empleado`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `sub_actividades_realizadas`
---
-ALTER TABLE `sub_actividades_realizadas`
-  ADD CONSTRAINT `sub_actividades_realizadas_ibfk_2` FOREIGN KEY (`id_SubActividad`) REFERENCES `sub_actividad` (`id_sub_Actividad`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `telefono`
---
-ALTER TABLE `telefono`
-  ADD CONSTRAINT `fk_Telefono_Persona1` FOREIGN KEY (`N_identidad`) REFERENCES `persona` (`N_identidad`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `universidad`
---
-ALTER TABLE `universidad`
-  ADD CONSTRAINT `fk_universidad_pais` FOREIGN KEY (`Id_pais`) REFERENCES `pais` (`Id_pais`);
-
---
--- Filtros para la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `fk_usuario_empleado` FOREIGN KEY (`No_Empleado`) REFERENCES `empleado` (`No_Empleado`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_usuarios_roles` FOREIGN KEY (`Id_Rol`) REFERENCES `roles` (`Id_Rol`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `usuario_alertado`
---
-ALTER TABLE `usuario_alertado`
-  ADD CONSTRAINT `fk_usuario_alertado_alerta` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`id_Usuario`),
-  ADD CONSTRAINT `fk_usuario_alertado_usuario` FOREIGN KEY (`Id_Alerta`) REFERENCES `alerta` (`Id_Alerta`);
-
---
--- Filtros para la tabla `usuario_notificado`
---
-ALTER TABLE `usuario_notificado`
-  ADD CONSTRAINT `fk_usuario_notificado_notificaciones_folios` FOREIGN KEY (`Id_Notificacion`) REFERENCES `notificaciones_folios` (`Id_Notificacion`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_usuario_notificado_usuario` FOREIGN KEY (`Id_Usuario`) REFERENCES `usuario` (`id_Usuario`);
-
+  MODIFY `Id_UsuarioNotificado` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
->>>>>>> c774b94ef89b2f7d12c4145b0dcf8923979ff076
