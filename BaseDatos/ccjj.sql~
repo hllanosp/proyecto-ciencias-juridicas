@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-10-2015 a las 08:06:34
+-- Tiempo de generación: 27-09-2015 a las 19:23:33
 -- Versión del servidor: 5.6.24
 -- Versión de PHP: 5.5.24
 
@@ -611,29 +611,6 @@ END;
 COMMIT;   
 end$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ACTUALIZAR_ORIENTACION`(
-IN `pcnombre` VARCHAR(50), -- nuevo nombre que se le quiere poner a la orientacion
-IN `pcCodigo` INT, -- codigo de la ciudad que queremos modificar
-OUT `mensajeError` VARCHAR(500)
-)
-BEGIN 
-
-DECLARE EXIT HANDLER FOR SQLEXCEPTION
-BEGIN
-ROLLBACK;
-SET mensajeError = "No se pudo actualizar la orientacion, por favor revise los datos que desea modificar";
-END;
-
-   START TRANSACTION;
-        UPDATE sa_orientaciones
-        SET  sa_orientaciones.descripcion=pcnombre
-        where sa_orientaciones.codigo = pcCodigo;
-
-		SET mensajeError = "La Orientacion se ha actualizado satisfactoriamente."; 
-               
-COMMIT;   
-END$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ACTUALIZAR_ORIENTACIONES`(
 IN `pcnombre` VARCHAR(50), -- nuevo nombre que se le quiere poner a la orientacion
 IN `pcCodigo` INT, -- codigo de la ciudad que queremos modificar
@@ -770,6 +747,8 @@ DECLARE errror VARCHAR(500);
 DECLARE EXIT HANDLER FOR SQLEXCEPTION
 BEGIN
 
+GET DIAGNOSTICS CONDITION 1 errror = message_text;
+select errror;
 
 ROLLBACK;
 
@@ -887,31 +866,10 @@ BEGIN
     
 		ROLLBACK;
     
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError, ' Server: ');
+        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError, ' Server: ', error4);
         SET pcMensajeError := vcTempMensajeError;
     
     END;    
-    
-    IF pcNumeroIdentidad IS  NULL AND pdFechaSolicitud IS NULL AND  pnCodigoTipoSolicitud IS NULL THEN
-
-	SELECT
-		PERSONA.*, ESTUDIANTE.no_cuenta AS NUMERO_CUENTA, ESTUDIANTE.indice_academico AS INDICE_ACADEMICO, 
-        TIPO_ESTUDIANTE.descripcion AS DESCRIPCION_TIPO_ESTUDIANTE,
-        TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
-	FROM
-		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
-            N_identidad AS NUMERO_IDENTIDAD
-            FROM persona AS PERSONA
-        )
-        PERSONA INNER JOIN sa_estudiantes  as ESTUDIANTE ON(ESTUDIANTE.dni = PERSONA.NUMERO_IDENTIDAD)
-        INNER JOIN sa_solicitudes AS SOLICITUDES ON(SOLICITUDES.dni_estudiante = PERSONA.NUMERO_IDENTIDAD)
-        INNER JOIN sa_tipos_solicitud AS TIPOS_SOLICITUDES ON(TIPOS_SOLICITUDES.codigo = SOLICITUDES.cod_tipo_solicitud)
-        INNER JOIN sa_estudiantes_tipos_estudiantes AS TIPOS_ESTUDIANTE_ESTUDIANTE 
-        ON(TIPOS_ESTUDIANTE_ESTUDIANTE.dni_estudiante = PERSONA.NUMERO_IDENTIDAD)
-        INNER JOIN sa_tipos_estudiante AS TIPO_ESTUDIANTE ON(TIPO_ESTUDIANTE.codigo = TIPOS_ESTUDIANTE_ESTUDIANTE.codigo_tipo_estudiante);  
-        
-	END IF;
     
     -- Buscar por número de identidad
     IF pcNumeroIdentidad IS  NOT NULL AND pdFechaSolicitud IS NULL AND  pnCodigoTipoSolicitud IS NULL THEN
@@ -922,7 +880,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -947,7 +905,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -982,7 +940,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -1029,7 +987,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona
 			WHERE
@@ -1058,7 +1016,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -1097,7 +1055,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -1128,7 +1086,7 @@ BEGIN
         TIPOS_SOLICITUDES.nombre as NOMBRE_TIPO_SOLICITUD, SOLICITUDES.fecha_solicitud AS FECHA_SOLICITUD 
 	FROM
 		(
-			SELECT CONCAT(Primer_nombre,' ', Primer_apellido) AS NOMBRE,
+			SELECT CONCAT(Primer_nombre, ' ', Segundo_nombre, ' ', Primer_apellido, ' ', Segundo_apellido) AS NOMBRE,
             N_identidad AS NUMERO_IDENTIDAD
             FROM persona AS PERSONA
 			WHERE
@@ -1270,40 +1228,6 @@ SP:BEGIN
     COMMIT;
     
 END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ELIMINAR_ACONDICIONAMIENTOS`(
-    IN pnCodigoAcondicionamiento INT, -- Código de acondicionamiento (En caso de que acción sea actualizar o eliminar)
-    OUT pcMensajeError VARCHAR(1000) -- Parámetro para los mensajes de error
-)
-SP: BEGIN
- DECLARE vcTempMensajeError VARCHAR(1000); -- Variable para anteponer los posibles mensajes de error
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN    
-  ROLLBACK;
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
-        SET pcMensajeError := vcTempMensajeError;
-        END;
--- Determinar si el acondicionamiento tiene vinculacion con algun 
-        SET vcTempMensajeError := 'Error determinar si acondicionamiento tiene vinculación en instancias_acondicionamientos ';
-        IF EXISTS
-        (
-SELECT cod_acondicionamiento
-            FROM ca_instancias_acondicionamientos
-            WHERE cod_acondicionamiento = pnCodigoAcondicionamiento
-        )
-        THEN
-   BEGIN
-    SET pcMensajeError := 'Hay instancias_acondicionamientos que estan viculadas con este acondicionamiento, no puede ser borrada.';
-                LEAVE SP;
-   END;
-  END IF;         
-  -- Eliminar el acondicionamiento
-        SET vcTempMensajeError := 'Error al eliminar el acondicionamiento';        
-        START TRANSACTION;
-        DELETE FROM ca_acondicionamientos
-        WHERE codigo = pnCodigoAcondicionamiento;
-        COMMIT;
-end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ELIMINAR_AREAS`(
     IN pnCodigoArea INT, -- Código de area (En caso de que acción sea actualizar o eliminar)
@@ -1481,40 +1405,6 @@ START TRANSACTION;
 DELETE FROM ca_facultades
 WHERE codigo = pnCodigoFacultad;        
 COMMIT;
-end$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ELIMINAR_INSTANCIA_ACONDICIONAMIENTO`(
-    IN pnCodigoInstanciaA INT, -- Código de instancia_acondicionamiento (En caso de que acción sea actualizar o eliminar)
-    OUT pcMensajeError VARCHAR(1000) -- Parámetro para los mensajes de error
-)
-SP: BEGIN
- DECLARE vcTempMensajeError VARCHAR(1000); -- Variable para anteponer los posibles mensajes de error
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN    
-  ROLLBACK;
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
-        SET pcMensajeError := vcTempMensajeError;
-        END;
--- Determinar si el acondicionamiento tiene vinculacion con algun 
-        SET vcTempMensajeError := 'Error determinar si la instancia_acondicionamiento tiene vinculación en aulas_instancias_acondicionamientos ';
-        IF EXISTS
-        (
-SELECT cod_instancia_acondicionamiento
-            FROM ca_aulas_instancias_acondicionamientos
-            WHERE cod_instancia_acondicionamiento = pnCodigoInstanciaA
-        )
-        THEN
-   BEGIN
-    SET pcMensajeError := 'Hay aulas_instancias_acondicionamientos que estan viculadas con esta instancia_acondicionamiento, no puede ser borrada.';
-                LEAVE SP;
-   END;
-  END IF;         
-  -- Eliminar el acondicionamiento
-        SET vcTempMensajeError := 'Error al eliminar la instancia_acondicionamiento';        
-        START TRANSACTION;
-        DELETE FROM ca_instancias_acondicionamientos
-        WHERE codigo = pnCodigoInstanciaA;
-        COMMIT;
 end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_ELIMINAR_MENCION_HONORIFICA`(
@@ -2171,7 +2061,9 @@ SP:BEGIN
     BEGIN
     
 		ROLLBACK;
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
+    
+		GET DIAGNOSTICS CONDITION 1 vcMensajeErrorServidor = MESSAGE_TEXT;
+        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError, ' Error servidor: ', vcMensajeErrorServidor);
         SET pcMensajeError := vcTempMensajeError;    
     END;
     
@@ -2238,7 +2130,8 @@ SP:BEGIN
     
 		ROLLBACK;
     
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
+		GET DIAGNOSTICS CONDITION 1 vcMensajeErrorServidor = MESSAGE_TEXT;
+        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError, ' Error servidor: ', vcMensajeErrorServidor);
         SET pcMensajeError := vcTempMensajeError;    
     END;
     
@@ -2449,7 +2342,7 @@ BEGIN
 
    IF NOT EXISTS (SELECT 1 FROM usuario WHERE nombre = nombre_) THEN 
 
-     INSERT INTO usuario VALUES(NULL,numEmpleado_,nombre_,udf_Encrypt_derecho(Password_),rol_,fechaCreacion_,NULL,1,0);
+     INSERT INTO usuario VALUES(NULL,numEmpleado_,nombre_,udf_Encrypt_derecho(Password_),rol_,fechaCreacion_,NULL,1);
 
      SET mensaje = "El usuario ha sido insertado satisfactoriamente."; 
      SET codMensaje = 1;  
@@ -2495,25 +2388,6 @@ begin
     insert into usuario_log values (null,usuario_,now(),ip);
 end$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_MODIFICAR_ACONDICIONAMIENTOS`(
-	IN pccodigo CHAR(7), -- Almacena el codigo del acondicionamiento que se va a MODIFICAR
-    IN pcnombre VARCHAR(50), -- Almacena el nombre del acondicionamiento
-    OUT pcMensajeError VARCHAR(500) -- Mensaje mostrado el sistema
-)
-BEGIN
-	DECLARE vcTempMensajeError VARCHAR(500) DEFAULT ''; -- Variable para posibles errores no control
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN    
-		ROLLBACK;    
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
-        SET pcMensajeError := vcTempMensajeError;
-	END;    
-    SET vcTempMensajeError := 'Error al MODIFICAR el registro en la tabla ca_acondicionamientos';
-    UPDATE ca_acondicionamientos SET nombre=pcnombre
-    WHERE 
-    codigo = pccodigo;
-END$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_MODIFICAR_AREAS`(
 	IN pccodigo CHAR(7), -- Almacena el codigo de la solicitud que se va a MODIFICAR
     IN pcnombre VARCHAR(50), -- Almacena el nombre de la solicitud
@@ -2526,7 +2400,8 @@ BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN    
 		ROLLBACK;    
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeErrorf);
+		GET DIAGNOSTICS CONDITION 1 vcMensajeErrorServidor = MESSAGE_TEXT;
+        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError, ' Error servidor: ', vcMensajeErrorServidor);
         SET pcMensajeError := vcTempMensajeError;
 	END;    
     
@@ -2598,7 +2473,8 @@ DECLARE vcMensajeErrorServidor TEXT; -- Variable para almacenar el mensaje de er
 DECLARE EXIT HANDLER FOR SQLEXCEPTION
 BEGIN    
 ROLLBACK;    
-SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
+GET DIAGNOSTICS CONDITION 1 vcMensajeErrorServidor = MESSAGE_TEXT;
+SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError, ' Error servidor: ', vcMensajeErrorServidor);
 SET pcMensajeError := vcTempMensajeError;
 END;        
 SET vcTempMensajeError := 'Error al MODIFICAR el registro en la tabla ca_facultads';
@@ -2619,7 +2495,8 @@ BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN    
 		ROLLBACK;    
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
+		GET DIAGNOSTICS CONDITION 1 vcMensajeErrorServidor = MESSAGE_TEXT;
+        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError, ' Error servidor: ', vcMensajeErrorServidor);
         SET pcMensajeError := vcTempMensajeError;
 	END;    
     
@@ -2640,7 +2517,8 @@ DECLARE vcMensajeErrorServidor TEXT; -- Variable para almacenar el mensaje de er
 DECLARE EXIT HANDLER FOR SQLEXCEPTION
 BEGIN    
 ROLLBACK;    
-SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
+GET DIAGNOSTICS CONDITION 1 vcMensajeErrorServidor = MESSAGE_TEXT;
+SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError, ' Error servidor: ', vcMensajeErrorServidor);
 SET pcMensajeError := vcTempMensajeError;
 END;        
 SET vcTempMensajeError := 'Error al MODIFICAR el registro en la tabla sa_tipos_solicitud';
@@ -2994,13 +2872,6 @@ SP: BEGIN
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_INSTANCIAS_ACONDICIONAMIENTOS`(
-IN codInstanciaA INT)
-BEGIN
-SELECT codigo, cod_acondicionamiento FROM ca_instancias_acondicionamientos where 
-cod_acondicionamiento=codInstanciaA;
-end$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_MENCIONES_HONORIFICAS`(
 OUT pcMensajeError VARCHAR(500) -- Para mensajes de error
 )
@@ -3103,7 +2974,6 @@ BEGIN
     
 	SELECT 
 		sa_solicitudes.codigo AS CODIGO,
-		concat(Primer_nombre," ",Primer_apellido) AS NOMBRE,
 		sa_solicitudes.fecha_solicitud AS FECHA_SOLICITUD,
 		IF(sa_solicitudes.observaciones IS NULL, 'Niguna', sa_solicitudes.observaciones) AS OBSERVACIONES,
         sa_estados_solicitud.descripcion AS ESTADO, 
@@ -3114,8 +2984,7 @@ BEGIN
 	FROM sa_solicitudes LEFT JOIN sa_examenes_himno ON(sa_solicitudes.codigo = sa_examenes_himno.cod_solicitud) 
 		 INNER JOIN sa_periodos ON(sa_solicitudes.cod_periodo = sa_periodos.codigo)
 		 INNER JOIN sa_tipos_solicitud ON(sa_tipos_solicitud.codigo = sa_solicitudes.cod_tipo_solicitud)
-         INNER JOIN sa_estados_solicitud ON (sa_estados_solicitud.codigo = sa_solicitudes.cod_estado)
-		inner join persona on (persona.N_identidad = sa_solicitudes.dni_estudiante);
+         INNER JOIN sa_estados_solicitud ON (sa_estados_solicitud.codigo = sa_solicitudes.cod_estado);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_TIPOS_ESTUDIANTES`(
@@ -3303,40 +3172,6 @@ SP: BEGIN
     
     COMMIT;
 
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REGISTRAR_ACONDICIONAMIENTOS`(
-	IN pcnombre VARCHAR(50), -- Almacena el nombre del acondicionamiento
-    OUT pcMensajeError VARCHAR(500) -- Mensaje mostrado el sistema
-)
-SP:BEGIN
-	DECLARE vcTempMensajeError VARCHAR(500) DEFAULT ''; -- Variable para almacenar posibles errores no controlados de servidor
-	DECLARE vnContadorAcondicionamiento INT DEFAULT 0; -- Variable para determinar si el nombre del acondicionamiento ya estÃ¡ siendo usado
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-		ROLLBACK;
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
-        SET pcMensajeError := vcTempMensajeError;
-    END;    
-     -- Determinar si el nombre del acondicionamiento ya estÃ¡ siendo usado
-    SET vcTempMensajeError := 'Error al seleccionar COUNT de nombre del acondicionamiento';
-	SELECT
-		COUNT(nombre)
-	INTO
-		vnContadorAcondicionamiento
-	FROM
-		ca_acondicionamientos
-	WHERE
-		nombre = pcnombre;
-	-- El nombre del acondicionamiento ya estÃ¡ siendo usado
-	IF vnContadorAcondicionamiento > 0 then
-    
-		SET pcMensajeError := 'El nombre del acondicionamiento ya esta¡ siendo usado, intentelo de nuevo.';
-        LEAVE SP;
-    END IF;
-    SET vcTempMensajeError := 'Error al crear el registro en la tabla ca_acondicionamientos';
-    INSERT INTO ca_acondicionamientos (nombre)
-    VALUES (pcnombre);    
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REGISTRAR_CIUDAD`(
@@ -3609,35 +3444,6 @@ END IF;
 SET vcTempMensajeError := 'Error al crear el registro en la tabla ca_facultades';
 INSERT INTO ca_facultades (nombre)
 VALUES (pcnombre);    
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REGISTRAR_INSTANCIA_ACONDICIONAMIENTO`(
-	IN pcnombre VARCHAR(50), -- Almacena el nombre de la instancia_acondicionamiento
-    OUT pcMensajeError VARCHAR(500) -- Mensaje mostrado el sistema
-)
-SP:BEGIN
-	DECLARE vcTempMensajeError VARCHAR(500) DEFAULT ''; -- Variable para almacenar posibles errores no controlados de servidor
-	DECLARE vnContadorInstanciaAcondicionamiento INT DEFAULT 0; -- Variable para determinar si el nombre de la instancia_acondicionamiento ya estÃ¡ siendo usado
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-		ROLLBACK;
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
-        SET pcMensajeError := vcTempMensajeError;
-    END;    
-     -- Determinar si el nombre de la  instancia_acondicionamiento ya estÃ¡ siendo usado
-    SET vcTempMensajeError := 'Error al seleccionar COUNT de nombre de la instancia_acondicionamiento';
-	SELECT
-		COUNT(cod_acondicionamiento)
-	INTO
-		vnContadorInstanciaAcondicionamiento
-	FROM
-		ca_instancias_acondicionamientos
-	WHERE
-		cod_acondicionamiento = pcnombre;
-    
-    SET vcTempMensajeError := 'Error al crear el registro en la tabla ca_instancias_acondicionamientos';
-    INSERT INTO ca_instancias_acondicionamientos (cod_acondicionamiento)
-    VALUES (pcnombre);    
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REGISTRAR_MENCION_HONORIFICA`(
@@ -4030,54 +3836,6 @@ SP:BEGIN
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REPORTE_CARGA_ACADEMICA`(IN anio YEAR, IN periodo INT)
-BEGIN
-
-select ca_cursos.cod_carga, ca_cargas_academicas.cod_periodo,
-persona.Primer_nombre , persona.Primer_apellido, clases.Clase, ca_secciones.codigo, ca_secciones.hora_inicio,
-ca_secciones.hora_fin FROM ca_cargas_academicas inner JOIN ca_cursos on ca_cargas_academicas.codigo=
-ca_cursos.cod_carga inner join clases on ca_cursos.cod_asignatura=clases.ID_Clases inner join ca_secciones on 
-ca_cursos.cod_seccion=ca_secciones.codigo inner join empleado on ca_cursos.no_empleado=
-empleado.No_empleado inner join persona on empleado.N_identidad= persona.N_identidad 
-where ca_cargas_academicas.anio=anio and ca_cargas_academicas.cod_periodo=periodo order by ca_cargas_academicas.codigo;
-END$$
-
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REPORTE_PROYECTOS`(
-	OUT pcMensajeError VARCHAR(500) -- Para mensajes de error
-)
-BEGIN
-
-    DECLARE vcTempMensajeError VARCHAR(500) DEFAULT ''; -- Variable para posibles errores no con	trolados
-    
-    DECLARE EXIT HANDLER FOR SQLEXCEPTION
-    BEGIN
-    
-		ROLLBACK;
-        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
-        SET pcMensajeError := vcTempMensajeError;
-    
-    END;  
-    
-    
-    SELECT 
-		PROYECTOS.codigo AS CODIGO_PROYECTO,
-		PROYECTOS.nombre AS PROYECTO_NOMBRE,
-        VINCULACIONES.nombre AS VINCULACION_NOMBRE,
-        AREAS.nombre AS NOMBRE_AREA,
-        CONCAT(Primer_nombre, ' ', Primer_apellido) AS NOMBRE_COORDINADOR
-    FROM    
-		ca_proyectos PROYECTOS INNER JOIN ca_vinculaciones VINCULACIONES ON(PROYECTOS.cod_vinculacion =  VINCULACIONES.codigo)
-        INNER JOIN ca_areas AREAS ON(AREAS.codigo = PROYECTOS.cod_area)
-        INNER JOIN ca_empleados_proyectos EMPLEADOS_PROYECTOS ON (EMPLEADOS_PROYECTOS.cod_proyecto = PROYECTOS.codigo)
-        INNER JOIN ca_roles_proyecto EMPLEADOS_ROLES_PROYECTO ON (EMPLEADOS_PROYECTOS.cod_rol_proyecto = EMPLEADOS_ROLES_PROYECTO.codigo)
-		INNER JOIN persona PERSONA ON (PERSONA.N_identidad = EMPLEADOS_PROYECTOS.dni_empleado);
-        
-		
-    
-    
-
-END$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REPROGRAMAR_SOLICITUD`(
 	IN pnCodigoSolicitud INT, -- Código de la solicitud a reprogramar
     IN pdFechaNuevaSolicitud DATE, -- Fecha de la nueva solicitud
@@ -4095,6 +3853,7 @@ SP: BEGIN
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
 		
+		GET DIAGNOSTICS CONDITION 1 vcTempMensajeError = MESSAGE_TEXT;
 		ROLLBACK;
     
         SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
@@ -4209,7 +3968,7 @@ CREATE TABLE IF NOT EXISTS `actividades_terminadas` (
   `fecha` date NOT NULL,
   `estado` varchar(15) NOT NULL,
   `observaciones` text
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -4317,7 +4076,7 @@ INSERT INTO `categorias_folios` (`Id_categoria`, `NombreCategoria`, `Descripcion
 CREATE TABLE IF NOT EXISTS `ca_acondicionamientos` (
   `codigo` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ca_acondicionamientos`
@@ -4346,7 +4105,7 @@ INSERT INTO `ca_acondicionamientos` (`codigo`, `nombre`) VALUES
 CREATE TABLE IF NOT EXISTS `ca_areas` (
   `codigo` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ca_areas`
@@ -4370,7 +4129,7 @@ CREATE TABLE IF NOT EXISTS `ca_aulas` (
   `codigo` int(11) NOT NULL,
   `cod_edificio` int(11) NOT NULL,
   `numero_aula` varchar(100) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ca_aulas`
@@ -4415,7 +4174,7 @@ CREATE TABLE IF NOT EXISTS `ca_cargas_academicas` (
   `dni_empleado` varchar(20) DEFAULT NULL,
   `cod_estado` int(11) DEFAULT NULL,
   `anio` year(4) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -4426,7 +4185,7 @@ CREATE TABLE IF NOT EXISTS `ca_cargas_academicas` (
 CREATE TABLE IF NOT EXISTS `ca_contratos` (
   `codigo` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -4443,7 +4202,7 @@ CREATE TABLE IF NOT EXISTS `ca_cursos` (
   `cod_aula` int(11) DEFAULT NULL,
   `no_empleado` varchar(20) DEFAULT NULL,
   `dni_empleado` varchar(20) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -4591,7 +4350,7 @@ INSERT INTO `ca_estados_carga` (`codigo`, `descripcion`) VALUES
 CREATE TABLE IF NOT EXISTS `ca_facultades` (
   `codigo` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `ca_facultades`
@@ -4714,7 +4473,7 @@ INSERT INTO `ca_vinculaciones` (`codigo`, `nombre`, `cod_facultad`) VALUES
 CREATE TABLE IF NOT EXISTS `clases` (
   `ID_Clases` int(11) NOT NULL,
   `Clase` varchar(45) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=73 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `clases`
@@ -5512,7 +5271,7 @@ CREATE TABLE IF NOT EXISTS `poa` (
   `fecha_de_Inicio` date NOT NULL,
   `fecha_Fin` date NOT NULL,
   `descripcion` text NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `poa`
@@ -6395,7 +6154,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`id_Usuario`, `No_Empleado`, `nombre`, `Password`, `Id_Rol`, `Fecha_Creacion`, `Fecha_Alta`, `Estado`, `esta_logueado`) VALUES
-(1, '123444', 'prueba', 0x3831444637443233344633423846353438374146353038433243373942303041, 100, '2015-07-06', NULL, 1, 1),
+(1, '123444', 'prueba', 0x3831444637443233344633423846353438374146353038433243373942303041, 100, '2015-07-06', NULL, 1, 0),
 (2, '123444', 'lmrd1', 0x4334343432303341463343313144324633424638343431374636334344333342, 100, '2015-07-28', NULL, 1, 0),
 (3, '12968', 'elizabeth', 0x3938434430463341433330434338463533333338364546344135463244413339, 100, '2015-07-29', NULL, 1, 0),
 (4, '12969', 'jorgeaguilar', 0x4637463839324138413446413633443635354334393833313736454645383542, 100, '2015-07-29', NULL, 1, 0),
@@ -6437,7 +6196,7 @@ CREATE TABLE IF NOT EXISTS `usuario_log` (
   `usuario` int(11) NOT NULL,
   `fecha_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ip_conn` varchar(45) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=615 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=614 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario_log`
@@ -6896,8 +6655,7 @@ INSERT INTO `usuario_log` (`Id_log`, `usuario`, `fecha_log`, `ip_conn`) VALUES
 (610, 1, '2015-09-25 18:40:11', '10.8.44.31'),
 (611, 5, '2015-09-25 18:41:54', '10.8.44.31'),
 (612, 1, '2015-09-25 19:17:53', '10.8.44.174'),
-(613, 15, '2015-09-25 23:17:53', '146.185.31.213'),
-(614, 1, '2015-10-02 06:03:03', '127.0.0.1');
+(613, 15, '2015-09-25 23:17:53', '146.185.31.213');
 
 -- --------------------------------------------------------
 
@@ -7547,7 +7305,7 @@ ALTER TABLE `actividades`
 -- AUTO_INCREMENT de la tabla `actividades_terminadas`
 --
 ALTER TABLE `actividades_terminadas`
-  MODIFY `id_Actividades_Terminadas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Actividades_Terminadas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `alerta`
 --
@@ -7572,32 +7330,32 @@ ALTER TABLE `categorias_folios`
 -- AUTO_INCREMENT de la tabla `ca_acondicionamientos`
 --
 ALTER TABLE `ca_acondicionamientos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `ca_areas`
 --
 ALTER TABLE `ca_areas`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT de la tabla `ca_aulas`
 --
 ALTER TABLE `ca_aulas`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT de la tabla `ca_cargas_academicas`
 --
 ALTER TABLE `ca_cargas_academicas`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `ca_contratos`
 --
 ALTER TABLE `ca_contratos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `ca_cursos`
 --
 ALTER TABLE `ca_cursos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT de la tabla `ca_dias`
 --
@@ -7607,7 +7365,7 @@ ALTER TABLE `ca_dias`
 -- AUTO_INCREMENT de la tabla `ca_facultades`
 --
 ALTER TABLE `ca_facultades`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT de la tabla `ca_instancias_acondicionamientos`
 --
@@ -7632,7 +7390,7 @@ ALTER TABLE `ca_vinculaciones`
 -- AUTO_INCREMENT de la tabla `clases`
 --
 ALTER TABLE `clases`
-  MODIFY `ID_Clases` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=72;
+  MODIFY `ID_Clases` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT de la tabla `costo_porcentaje_actividad_por_trimestre`
 --
@@ -7722,7 +7480,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `poa`
 --
 ALTER TABLE `poa`
-  MODIFY `id_Poa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `id_Poa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `prioridad_folio`
 --
@@ -7847,7 +7605,7 @@ ALTER TABLE `usuario_alertado`
 -- AUTO_INCREMENT de la tabla `usuario_log`
 --
 ALTER TABLE `usuario_log`
-  MODIFY `Id_log` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=615;
+  MODIFY `Id_log` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=614;
 --
 -- AUTO_INCREMENT de la tabla `usuario_notificado`
 --
