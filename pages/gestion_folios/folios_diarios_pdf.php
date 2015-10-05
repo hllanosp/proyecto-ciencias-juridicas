@@ -26,11 +26,11 @@ $pdf->Image($maindir.'assets/img/logo-cienciasjuridicas.png' , 170,8, 35 , 35,'P
 $pdf->Cell(18, 10, '', 0);
 $pdf->SetFont('Arial', '', 18);
 $pdf->Cell(5, 10, '', 0);
-$pdf->Cell(70, 10, 'Universidad Nacional Autónoma de Honduras', 0);
+$pdf->Cell(143, 10, utf8_decode("Universidad Nacional Autónoma de Honduras"), 0, 0, "C");
 $pdf->Ln(25);
 $pdf->SetFont('Arial', 'U', 14);
 $pdf->Cell(30, 8, ' ', 0,0,"C");
-$pdf->Cell(130, 8, ' Reporte de Folios Diarios', 0,0,"C");
+$pdf->Cell(133, 8, utf8_decode("Reporte de Folios Diarios"), 0,0,"C");
 $pdf->Rect(6, 45, 200, 200 ,'D');
 $pdf->SetFont('Arial', '', 12);
 $pdf->Ln(10);
@@ -38,11 +38,11 @@ $pdf->Cell(115, 15, 'Fecha: '.date('Y-m-d'), 0);
 $pdf->Ln(7);
 $pdf->Ln(5);
 $pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(30, 8, 'No. de Folio', 0);
-$pdf->Cell(40, 8, 'Persona Referente', 0);
-$pdf->Cell(50, 8, 'Unidad académica u Organización', 0);
-$pdf->Cell(40, 8, 'Fecha de Entrada', 0);
-$pdf->Cell(40, 8, 'Tipo de Folio', 0);
+$pdf->Cell(30, 8, utf8_decode("No. de Folio"), 0);
+$pdf->Cell(40, 8, utf8_decode("Persona Referente"), 0);
+$pdf->Cell(50, 8, utf8_decode("Unidad académica u Organización"), 0);
+$pdf->Cell(40, 8, utf8_decode("Fecha de Entrada"), 0);
+$pdf->Cell(40, 8, utf8_decode("Tipo de Folio"), 0);
 $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 foreach( $rows as $row ){
@@ -51,11 +51,11 @@ foreach( $rows as $row ){
     }elseif($row['TipoFolio'] == 1){
 		$tipo = "Folio de salida";
   	}
-		$pdf->Cell(30, 8, $row["NroFolio"], 0);
-		$pdf->Cell(40, 8, $row["PersonaReferente"], 0);
-		$pdf->Cell(50, 8, $row["ENTIDAD"], 0);
-		$pdf->Cell(40, 8, $row["FechaEntrada"], 0);
-		$pdf->Cell(40, 8, $tipo, 0);
+		$pdf->Cell(30, 8, utf8_decode($row["NroFolio"]), 0);
+		$pdf->Cell(40, 8, utf8_decode($row["PersonaReferente"]), 0);
+		$pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]), 0);
+		$pdf->Cell(40, 8, utf8_decode($row["FechaEntrada"]), 0);
+		$pdf->Cell(40, 8, utf8_decode($tipo), 0);
 		
 		$pdf->Ln(5);
 	}

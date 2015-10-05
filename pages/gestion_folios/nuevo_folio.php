@@ -74,12 +74,12 @@ require_once("datos/datos_nuevo_folio.php");
 	            <!-- begin box -->
 	            <div class="box box-primary">  
 				
-				    <div class="box-header with-border">
-					    <h3 class="box-title">Nuevo folio</h3>
-						<div class="box-tools pull-right">
-				            <button name="cancel" id="cancel" class="btn btn-box-tool"><i class="fa fa-times"></i> Cancelar </button>
-						</div>
-					</div><!-- /.box-header -->
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Nuevo folio</h3>
+                            <div class="box-tools pull-right">
+                                <button name="cancel" id="cancel" class="btn btn-box-tool"><i class="fa fa-times"></i> Cancelar </button>
+                            </div>
+                        </div><!-- /.box-header -->
 	
 	                <!-- begin box-body -->
 	                <div class="box-body">
@@ -87,7 +87,7 @@ require_once("datos/datos_nuevo_folio.php");
 	                <div class="row"><!-- left column -->
         
                         <div class="col-md-12">
-						    <div class="stepwizard">
+                            <div class="stepwizard">
                                 <div class="stepwizard-row setup-panel">
                                     <div class="stepwizard-step">
                                         <a href="#step-1" type="button" class="btn btn-primary btn-circle">1</a>
@@ -109,7 +109,7 @@ require_once("datos/datos_nuevo_folio.php");
                                     <div class="col-xs-12">
                                         <div class="col-md-12">
                                             <h3> Datos Generales</h3>
-											<div class="form-group">
+                                            <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"style="width: 200px"><strong>Número del folio</strong></span>
                                                     <input type="text" name="NroFolio" class="form-control" style="width: 550px" required="required" id="NroFolio" placeholder="Folio" maxlength="25">
@@ -130,8 +130,8 @@ require_once("datos/datos_nuevo_folio.php");
                                                     <input type="text" maxlength="50" name="personaReferente" class="form-control" style="width: 550px" required="required" id="personaReferente" placeholder="Persona Referente">
                                                 </div>
                                             </div>
-									        <div class="form-group">
-										        <label>Tipo de folio</label>
+                                            <div class="form-group">
+                                                <label>Tipo de folio</label>
                                                 <div class="input-group">	    
                                                     <select id="TipoFolio" class="form-control" width="420" style="width: 420px" name="TipoFolio">
                                                         <option value=-1> -- Seleccione el tipo de folio -- </option>
@@ -140,17 +140,17 @@ require_once("datos/datos_nuevo_folio.php");
                                                     </select>
                                                 </div>
                                             </div>
-											<div class="form-group">
-								                <label>Categoría del folio</label>
+                                            <div class="form-group">
+                                                <label>Categoría del folio</label>
                                                 <div class="input-group">
                                                     <select id="Categoria" class="form-control" width="420" style="width: 420px" name="Categoria">
                                                         <option value=-1> -- Seleccione la categoría del folio -- </option>
                                                         <?php while($filas = mysqli_fetch_assoc($result6)) { ?>
                                                         <option value="<?php echo $filas["Id_categoria"];?>"><?php echo $filas["NombreCategoria"];?></option><?php } mysqli_free_result($result6); mysqli_close($conexion); ?>
-											        </select>
+                                                    </select>
                                                 </div>
                                             </div>
-											<nav>
+                                            <nav>
                                                 <ul class="pager">
                                                     <li class="next"><a href="#" class="nextBtn">Siguiente <span aria-hidden="true">&rarr;</span></a></li>
                                                 </ul>
@@ -163,59 +163,59 @@ require_once("datos/datos_nuevo_folio.php");
                                     <div class="col-xs-12">
                                         <div class="col-md-12">
                                             <h3> Datos de almacenamiento</h3>
-											<h3 >Selecciones una organización o una unidad académica</h3>
-										        <div class="col-sm-12">
-											        <div class="col-sm-6">
-										                <div class="form-group">
-                                                            <div class="input-group">
-                                                                <select id="Organizacion" class="form-control"name="Organizacion" >
-                                                                    <option value=-1> -- Organización -- </option>
-                                                                    <?php while($filas = mysqli_fetch_assoc($result2)) { ?>
-                                                                    <option value="<?php echo $filas["Id_Organizacion"];?>"><?php echo $filas["NombreOrganizacion"];?></option><?php } mysqli_free_result($result2); ?>
-														        </select>
-                                                            </div>
+                                            <h3>Selecciones una organización o una unidad académica</h3>
+                                            <div class="col-sm-12">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <select id="Organizacion" class="form-control"name="Organizacion" >
+                                                                <option value=-1> -- Organización -- </option>
+                                                                <?php while($filas = mysqli_fetch_assoc($result2)) { ?>
+                                                                <option value="<?php echo $filas["Id_Organizacion"];?>"><?php echo $filas["NombreOrganizacion"];?></option><?php } mysqli_free_result($result2); ?>
+                                                            </select>
                                                         </div>
-											        </div>
-									                <div class="col-sm-6">
-                                                        <div class="form-group">
-                                                            <div class="input-group">
-                                                                <select id="unidadAcademica" class="form-control" name="unidadAcademica">
-                                                                    <option value=-1> -- Unidad Académica -- </option>>
-                                                                    <?php while($filas = mysqli_fetch_assoc($result1)) { ?>
-                                                                    <option value="<?php echo $filas["Id_UnidadAcademica"];?>"><?php echo $filas["NombreUnidadAcademica"];?></option><?php } mysqli_free_result($result); ?>
-														        </select>
-                                                            </div>
-                                                        </div>
-											        </div>
-													<p id="error_entidad" class="error_text" style="color:red"></p>
-										        </div>
-                                                <div class="form-group">
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon"><strong>Descripción</strong></span>
-                                                        <textarea id="Descripcion" class="form-control" name="Descripcion" required="required" rows="3" maxlength="300" placeholder="Ingrese una descripcion..."></textarea>
                                                     </div>
                                                 </div>
-												<div class="form-group">
-											        <label>Ubicación física del folio</label>
-                                                        <div class="input-group">          
-                                                            <select id="ubicacionFisica"class="form-control" width="420" style="width: 420px" name="ubicacionFisica">
-                                                                <option value=-1> -- Seleccione la ubicación física -- </option>
-                                                                <?php while($filas = mysqli_fetch_assoc($result3)) { ?>
-                                                                <option value="<?php echo $filas["Id_UbicacionArchivoFisico"];?>"><?php echo $filas["DescripcionUbicacionFisica"];?></option><?php } mysqli_free_result($result3); ?>
-												            </select>
-                                                        </div>
-                                                </div>
-                                                <div class="form-group">
-												    <label>Prioridad del folio</label>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
                                                         <div class="input-group">
-                                                            <select id="Prioridad" class="form-control" width="420" style="width: 420px" name="Prioridad">
-                                                                <option value=-1> -- Seleccione la prioridad del folio -- </option>
-                                                                <?php while($filas = mysqli_fetch_assoc($result4)) { ?>
-                                                                <option value="<?php echo $filas["Id_Prioridad"];?>"><?php echo $filas["DescripcionPrioridad"];?></option><?php } mysqli_free_result($result4); mysqli_close($conexion); ?>
-											                </select>
+                                                            <select id="unidadAcademica" class="form-control" name="unidadAcademica">
+                                                                <option value=-1> -- Unidad Académica -- </option>>
+                                                                <?php while($filas = mysqli_fetch_assoc($result1)) { ?>
+                                                                <option value="<?php echo $filas["Id_UnidadAcademica"];?>"><?php echo $filas["NombreUnidadAcademica"];?></option><?php } mysqli_free_result($result); ?>
+                                                            </select>
                                                         </div>
+                                                    </div>
                                                 </div>
-											<nav>
+                                                <p id="error_entidad" class="error_text" style="color:red"></p>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><strong>Descripción</strong></span>
+                                                    <textarea style="resize: vertical" id="Descripcion" class="form-control" name="Descripcion" required="required" rows="3" maxlength="300" placeholder="Ingrese una descripcion..."></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Ubicación física del folio</label>
+                                                <div class="input-group">          
+                                                    <select id="ubicacionFisica"class="form-control" width="420" style="width: 420px" name="ubicacionFisica">
+                                                        <option value=-1> -- Seleccione la ubicación física -- </option>
+                                                        <?php while($filas = mysqli_fetch_assoc($result3)) { ?>
+                                                        <option value="<?php echo $filas["Id_UbicacionArchivoFisico"];?>"><?php echo $filas["DescripcionUbicacionFisica"];?></option><?php } mysqli_free_result($result3); ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Prioridad del folio</label>
+                                                <div class="input-group">
+                                                    <select id="Prioridad" class="form-control" width="420" style="width: 420px" name="Prioridad">
+                                                        <option value=-1> -- Seleccione la prioridad del folio -- </option>
+                                                        <?php while($filas = mysqli_fetch_assoc($result4)) { ?>
+                                                        <option value="<?php echo $filas["Id_Prioridad"];?>"><?php echo $filas["DescripcionPrioridad"];?></option><?php } mysqli_free_result($result4); mysqli_close($conexion); ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <nav>
                                                 <ul class="pager">
                                                     <li class="previous"><a href="#" class="prevBtn"><span aria-hidden="true">&larr;</span> Anterior</a></li>
                                                     <li class="next"><a href="#" class="nextBtn">Siguiente <span aria-hidden="true">&rarr;</span></a></li>
@@ -229,27 +229,27 @@ require_once("datos/datos_nuevo_folio.php");
                                     <div class="col-xs-12">
                                         <div class="col-md-12">
                                             <h3> Datos del seguimiento</h3>
-											<div class="form-group">
-											    <label>Persona encargada</label>
-										            <div class="input-group">
-                                                        <select id="Encargado" name="Encargado" class="form-control" width="420" style="width: 420px">
-                                                            <option value=-1> -- Sin encargado -- </option>
-                                                            <?php while($filas = mysqli_fetch_assoc($result7)) { ?>
-                                                            <option value="<?php echo $filas["id_Usuario"];?>"><?php echo $filas["Nombre"];?></option><?php } mysqli_free_result($result7); mysqli_close($conexion); ?>
-											            </select>
-                                                    </div>
-										    </div>
-											<div class="form-group">
-											    <label>Estado del seguimiento</label>
-										        <div class="input-group">
+                                            <div class="form-group">
+                                                <label>Persona encargada</label>
+                                                <div class="input-group">
+                                                    <select id="Encargado" name="Encargado" class="form-control" width="420" style="width: 420px">
+                                                        <option value=-1> -- Sin encargado -- </option>
+                                                        <?php while($filas = mysqli_fetch_assoc($result7)) { ?>
+                                                        <option value="<?php echo $filas["id_Usuario"];?>"><?php echo $filas["Nombre"];?></option><?php } mysqli_free_result($result7); mysqli_close($conexion); ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Estado del seguimiento</label>
+                                                <div class="input-group">
                                                     <select id="Seguimiento" name="Seguimiento" class="form-control" width="420" style="width: 420px">
                                                         <option value=-1> -- Seleccione el estado del seguimiento -- </option>
                                                         <?php while($filas = mysqli_fetch_assoc($result5)) { ?>
                                                         <option value="<?php echo $filas["Id_Estado_Seguimiento"];?>"><?php echo $filas["DescripcionEstadoSeguimiento"];?></option><?php } mysqli_free_result($result5); mysqli_close($conexion); ?>
-											        </select>
+                                                    </select>
                                                 </div>
-										    </div>
-									        <div class="form-group">
+                                            </div>
+                                            <div class="form-group">
                                                 <div class="checkbox">
                                                     <label>
                                                         <input id="chkFinalizado" type="checkbox"/>
@@ -257,13 +257,13 @@ require_once("datos/datos_nuevo_folio.php");
                                                     </label>
                                                 </div>
                                             </div>
-										    <div class="form-group">
+                                            <div class="form-group">
                                                 <div class="input-group">
-                                                    <span class="input-group-addon"><strong>Notas d el seguimiento</strong></span>
-                                                    <textarea id="NotasSeguimiento" maxlength="300" class="form-control" name="NotasSeguimiento" rows="5" placeholder="Ingrese una nota referente al sequimiento..."></textarea>
+                                                    <span class="input-group-addon"><strong>Notas del seguimiento</strong></span>
+                                                    <textarea style="resize: vertical" id="NotasSeguimiento" maxlength="300" class="form-control" name="NotasSeguimiento" rows="5" placeholder="Ingrese una nota referente al sequimiento..."></textarea>
                                                 </div>
                                             </div>
-											<nav>
+                                            <nav>
                                                 <ul class="pager">
                                                     <li class="previous"><a href="#" class="prevBtn"><span aria-hidden="true">&larr;</span> Anterior</a></li>
                                                     <button id="fin" class="btn btn-success btn-lg pull-right fin" type="submit">Finalizar!</button>
