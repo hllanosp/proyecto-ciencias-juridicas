@@ -1,23 +1,22 @@
 <?php
 include '../Datos/conexion.php';
-require_once("../conexion/config.inc.php");
 
 $id = $_POST['id'];
 $idPOA = $_POST['idPOA'];
-$consulta = $db->prepare("CALL pa_eliminar_objetivo_institucional(?, @mensaje, @codMensaje)");
-$consulta->bindParam(1, $id, PDO::PARAM_INT);
+$consulta = $conectar->prepare("CALL pa_eliminar_objetivo_institucional(?)");
+$consulta->bind_param('i', $id);
 $resultado = $consulta->execute();
 
-$output = $db->query("select @mensaje, @codMensaje")->fetch(PDO::FETCH_ASSOC);
-$mensaje = $output['@mensaje'];
-$codMensaje = $output['@codMensaje'];
-
-if ($mensaje == NULL) {
+if ($resultado == 1) {
     echo '<div id="resultado" class="alert alert-success">
-        Se ha eliminado el objetivo institucional.</div>';
+        se ha elinado un objetivo
+         
+         </div>';
 } else {
     echo '<div id="resultado" class="alert alert-danger">
-         ' . $mensaje . '</div>';
+        hubo problemas al Eliminar el objetivo institucional
+         
+         </div>';
 }
 
 $query = mysql_query("SELECT * FROM objetivos_institucionales where id_Poa='" . $idPOA . "'", $enlace);

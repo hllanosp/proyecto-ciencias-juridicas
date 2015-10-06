@@ -19,10 +19,20 @@
         $temp=mysql_fetch_row($rec2);
         
         
-        $t=$temp[0];      
+        $t=$temp[0];
               
-     $enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
-     mysql_select_db("ccjj", $enlace);
+   if($codigo===$t){
+     
+     
+       $mensaje = 'Numero de empleado invalido o ya existente';
+      $codMensaje = 0;
+      $existe=TRUE;
+     
+     
+ }else{      
+              
+     $enlace = mysql_connect('localhost', 'root', '');
+     mysql_select_db("sistema_ciencias_juridicas", $enlace);
 		 
 	$queryAE = mysql_query("UPDATE `empleado` SET `No_Empleado`='$codigo',`Id_departamento`='$id_departamento',`Fecha_ingreso`='$fechaIngreso',`Observacion`='$obs'  WHERE N_identidad ='".$n_identidad."'");
         
@@ -40,11 +50,12 @@
 	
 	}else{
             
-             $mensaje = 'error al actualizar el empleado' . mysql_errno();
+             $mensaje = 'error al actualizar el empleado';
              $codMensaje = 0;
              $existe=TRUE;
             
         }
+ }
         
 	
         mysql_close($enlace);

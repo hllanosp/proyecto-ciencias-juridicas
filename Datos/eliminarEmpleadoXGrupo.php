@@ -1,7 +1,7 @@
 <?php
 
-$enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
-mysql_select_db("ccjj", $enlace);
+$enlace = mysql_connect('localhost', 'root', '');
+mysql_select_db("sistema_ciencias_juridicas", $enlace);
 
 
 if (isset($_POST['codigoE'])) {
