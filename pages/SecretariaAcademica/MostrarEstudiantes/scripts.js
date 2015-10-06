@@ -64,12 +64,17 @@ function request(id){
       xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
       xmlhttp.send(params);
     }
-  }else if(id=="mostrar"){
+
+  }
+    // fin id modificar
+  else if(id=="mostrar"){
     $("#contenedor").load( "pages/SecretariaAcademica/MostrarEstudiantes/mostrarEstudiantes.php");
   }else{
     $("#contenedor").load("pages/SecretariaAcademica/RegistroEstudiantes/RegistroDeEstudiantes.php");
   }
 }
+
+
 
 $(document).on("click",".elimina",function () {
       var respuesta = confirm("¿Está seguro que desea eliminar el registro seleccionado?");
@@ -100,7 +105,8 @@ $(document).on("click",".elimina",function () {
       }
 });
    
-$( document).on("click",".editar",function () {
+$( document).on("click",".edit_estudiante",function () {
+  //alert("editar datos");
 
   var no_cuenta = $(this).parents("tr").find("td").eq(0).attr('id');
   var xmlhttp;

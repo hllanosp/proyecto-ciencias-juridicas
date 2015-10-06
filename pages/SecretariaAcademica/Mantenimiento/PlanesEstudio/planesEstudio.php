@@ -7,7 +7,7 @@ $(document).ready(function() {
     cargarPlanes(); //Hacemos el llamado para que se cargue la tabla siempre que se cargue la pag.
 
     /* Este evento se levanta cada vez que le damos click al bottton eliminar */
-    $(document).on("click",".elimina",function () {
+    $(document).on("click",".elimina_plan",function () {
              
         var respuesta = confirm("¿Esta seguro de que desea eliminar el registro seleccionado?");
         if (respuesta)
@@ -23,14 +23,14 @@ $(document).ready(function() {
                 type: "POST",
                 dataType: "html",
                 data: data,
+                url: "pages/SecretariaAcademica/Mantenimiento/PlanesEstudio/eliminarPlan.php",
+                timeout: 4000,
                 contentType: "application/x-www-form-urlencoded",
                 success: function(data){
                     $("#notificaciones1").html(data);
-                    $("#notificaciones1").fadeOut(1500);
+                    // $("#notificaciones1").fadeOut(1500);
                     cargarPlanes();
-                },
-                url: "pages/SecretariaAcademica/Mantenimiento/PlanesEstudio/eliminarPlan.php",
-                timeout: 4000
+                }
             });
         }                 
     });
@@ -133,7 +133,7 @@ $(document).ready(function() {
                                         '<button data-id = "'+ response[index].codPlan +'" href= "#" class = "editar btn_editar btn btn-info"  data-toggle="modal" data-target = ""><i class="glyphicon glyphicon-edit"></i></button>'+
                                     '</td></center>' +
                                     '<td><center>'+
-                                        '<button data-id = "'+ response[index].codPlan +'" href= "#" class = "elimina btn_editar btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>'+
+                                        '<button data-id = "'+ response[index].codPlan +'" href= "#" class = "elimina_plan btn_editar btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>'+
                                     '</td></center>' +             
                               '</tr>';
                 }

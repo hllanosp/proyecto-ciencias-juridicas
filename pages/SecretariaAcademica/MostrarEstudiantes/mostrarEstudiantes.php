@@ -1,12 +1,12 @@
 <?php
-include '../../../conexion/config.inc.php';
+include ('../../../conexion/config.inc.php');
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <script type="text/javascript" src="pages/SecretariaAcademica/MostrarEstudiantes/scripts.js"></script>
     
-    <script type="text/javascript" src="js/jquery.js"></script>
+    <!-- // <script type="text/javascript" src="js/jquery.js"></script> -->
   </head>
   <body>
       <!-- .panel-heading -->
