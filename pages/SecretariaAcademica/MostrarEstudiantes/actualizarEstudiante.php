@@ -38,28 +38,38 @@ include($maindir."conexion/config.inc.php");
     $direccion = $_POST["direccion"];
     $sexo = $_POST["sexo"];
 
-    $queryString1 = "UPDATE sa_estudiantes SET no_cuenta='".$noCuenta."',anios_estudio=".$aniosEstudio.",indice_academico=".$indiceAcademico.
-                    ",uv_acumulados=".$uvAcumulados.",cod_plan_estudio=".$planEstudio.",cod_ciudad_origen=".$ciudadOrigen.",cod_orientacion=".$orientacion.
-                    ",cod_residencia_actual=".$residenciaActual." WHERE dni='".$dni."'";
+    // $queryString1 = "update sa_estudiantes set no_cuenta='".$noCuenta."',anios_estudio='".$aniosEstudio."',indice_academico='".$indiceAcademico."',uv_acumulados='".$uvAcumulados.",cod_plan_estudio='".$planEstudio."',cod_ciudad_origen='".$ciudadOrigen."',cod_orientacion='".$orientacion."',cod_residencia_actual='".$residenciaActual."' where dni='".$dni."' ";
 
-    $query1 = mysql_query($queryString1);
-    
-    if($query1){
+    // $query1 = mysql_query($queryString1);
+
+
+    $query1 = $db -> prepare('UPDATE `sa_estudiantes` SET `no_cuenta`=?,`anios_inicio_estudio`=?,`indice_academico`=?,`uv_acumulados`=?,`cod_plan_estudio`=?,`cod_ciudad_origen`=?,`cod_orientacion`=?,`cod_residencia_actual`=? WHERE `dni`=?');
+    $query1 -> execute(array($noCuenta, $aniosEstudio, $indiceAcademico, $uvAcumulados, $planEstudio, $ciudadOrigen, $orientacion, $residenciaActual, $dni));
+
+    $query2 = $db ->prepare('UPDATE sa_estudiantes_tipos_estudiantes  SET codigo_tipo_estudiante  = ? where dni_estudiante = ?');
+    $query2 -> execute(array($tipoEstudiante, $dni));
+
+
+    $query3 = $db ->prepare('UPDATE sa_estudiantes_menciones_honorificas  SET cod_mencion  = ? where dni_estudiante = ?');
+    $query3 -> execute(array($mencion, $dni));
+
+   
+    if($query1 && $query2 && $query3){
       if(actualizarPersona($primerNombre,$segundoNombre,$primerApellido,$segundoApellido,$fechaNacimiento,$estadoCivil,$nacionalidad,$direccion,$sexo,$correo,$dni,$telefono)){
         $mensaje = "<strong>¡Éxito! </strong> Se ha actualizado el estudiante.";
         http_response_code(200);  
       } else{
-        $mensaje = "<strong>¡Error! </strong> Error al actualizar el estudiante.";
+        $mensaje = "<strong>¡Error! </strong> Error al actualizar el estudiante1.";
         http_response_code(400);
       }
     }else{
-      $mensaje = "<strong>¡Error! </strong> Error al actualizar el estudiante.";
+      $mensaje = "<strong>¡Error! </strong> Error al actualizar el estudiante2.";
       http_response_code(400);
     }
     
     echo $mensaje;
   }catch(PDOExecption $e){
-    $mensaje = "<strong>¡Error! </strong> Error al actualizar.";
+    $mensaje = "<strong>¡Error! </strong> Error al actualizar3.";
     $codMensaje = 0;
     echo $mensaje;
     http_response_code(500);
@@ -78,4 +88,6 @@ include($maindir."conexion/config.inc.php");
     $query = mysql_query($queryString);
     return $query;
   }
+
+
 ?>

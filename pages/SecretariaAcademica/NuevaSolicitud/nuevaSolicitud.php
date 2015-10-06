@@ -1,3 +1,8 @@
+<?php 
+$maindir = "../../../";
+include ($maindir .'Datos/conexion.php');
+include($maindir . "conexion/config.inc.php");
+ ?>
 <script >
     //verifica que el checbok este seleccionado
     function validarControles()
@@ -70,9 +75,9 @@
                         url: "Datos/ObtenerTipoSolicitud.php",
                         //beforeSend: inicioVer,
                         success: function(response){
-                                                       
+                                                    
                             var arr = JSON.parse(response);
-                            
+                            alert("que ondas con esas solicitudes" + arr);   
                             var options = '';
                             var val='NULL';
                             var def='Seleccione una opción';
@@ -268,6 +273,7 @@
              
              //con este se llena el combobox del tipo de solicitud del estudiante
              $(document).on("focusout","#identidad",function () {                    
+                    
                     obtenerSolicitudEstudiante();
                     return false;
              });
@@ -341,6 +347,28 @@
                         <div class="col-sm-8">                            
                             <select class="form-control" id="selectTiposSolicitud" name="selectTiposSolicitud">
                                 <option value="NULL">Seleccione una opción</option>
+                                 <?php 
+                                //     $consulta="CALL SP_OBTENER_TIPOS_SOLICITUDES_POR_ESTUDIANTE('".$pcIdentidadEstudiante."',@pcMensajeError)";
+                                //     $resultado=mysql_query($consulta);
+
+                                    
+
+                                //     WHILE($linea=mysql_fetch_array($resultado))
+                                //      {
+                                //           echo "<option value= $linea[codigo]> $linea[nombre]</option>";
+                                //      }
+
+
+
+
+                                // $query = 'SELECT codigo, nombre FROM sa_tipos_solicitud';
+                                // $result = mysql_query($query);
+
+                                //  while ($fila = mysql_fetch_array($result)) {
+                                //    echo "<option value= $fila[codigo]> $fila[nombre]</option>";
+                                //  }
+                              
+                                  ?>
                             </select>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
 
 
 $maindir = "../../../";
-include $maindir . 'Datos/conexion.php';
+include ($maindir . 'Datos/conexion.php');
 include($maindir . "conexion/config.inc.php");
 
 if (isset($_POST['accion'])) {
