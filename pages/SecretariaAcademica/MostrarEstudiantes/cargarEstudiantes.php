@@ -1,5 +1,5 @@
 <?php
-	include '../../../conexion/config.inc.php';
+	include ('../../../conexion/config.inc.php');
 	
 	$queryString = "SELECT * FROM sa_estudiantes";
 
@@ -33,7 +33,7 @@
 		          			 	"<td id='".$mencion."'>".$mencion."</td>".
 		          			 	"<td id='".$solicitudes."'>".$solicitudes."</td>".
 		          			 	// Botones
-		          				"<td><a class='editar btn btn-info fa fa-pencil'></a>".
+		          				"<td><a class='edit_estudiante btn btn-info fa fa-pencil'></a>".
 		              			"&nbsp;&nbsp;<a class='elimina btn btn-danger fa fa-trash-o'></a></td> ".
 					      	"</tr></tbody>";
 
@@ -71,3 +71,4 @@
 		return $row['cuenta'];
 	}
 ?>
+

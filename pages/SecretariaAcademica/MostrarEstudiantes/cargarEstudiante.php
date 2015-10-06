@@ -24,7 +24,7 @@ include($maindir."conexion/config.inc.php");
     $row = mysql_fetch_assoc($query);
     
     $dni = $row['dni'];
-    $anios_estudio = $row['anios_estudio'];
+    $anios_estudio = $row['anios_inicio_estudio'];
     $indice_academico = $row['indice_academico'];
     $fecha_registro = $row['fecha_registro'];
     $uv_acumulados = $row['uv_acumulados'];

@@ -1,3 +1,9 @@
+<?php 
+$maindir = "../../../";
+include ($maindir .'Datos/conexion.php');
+include($maindir . "conexion/config.inc.php");
+ ?>
+
 <script>
     
 function generarReporte()
@@ -39,7 +45,7 @@ function generarReporte()
 
 $( document ).ready(function()
 {
-    obtenerTipoSolicitud();
+    //obtenerTipoSolicitud();
 });
 
 $('#filtrar').click(function(event) 
@@ -286,6 +292,15 @@ function obtenerTipoSolicitud()
                 <div class="form-group">
                     <select disabled="true" class="form-control" id="cmbTipoSolicitud">
                         <option value="NULL">Seleccione una opción</option>
+                        <?php 
+                           $query = 'SELECT codigo, nombre FROM sa_tipos_solicitud';
+                           $result = mysql_query($query);
+
+                            while ($fila = mysql_fetch_array($result)) {
+                              echo "<option value= $fila[codigo]> $fila[nombre]</option>";
+                            }
+                              
+                         ?>
                     </select>
                 </div>
               </div>

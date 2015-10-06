@@ -1,8 +1,8 @@
 <?php
-include '../../../conexion/config.inc.php'
+include ('../../../conexion/config.inc.php');
 ?>
   <head>
-    <script type="text/javascript" src="js/jquery.js"></script>
+    <!-- // <script type="text/javascript" src="js/jquery.js"></script> -->
     <script type="text/javascript" src="pages/SecretariaAcademica/MostrarEstudiantes/scripts.js"></script>
     <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
     <script id="funcionModificar" type="text/javascript"></script>
@@ -39,7 +39,7 @@ include '../../../conexion/config.inc.php'
                     <label class="col-sm-5 control-label">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Número de Identidad</label>
                     <div class="col-sm-7">
-                      <input id="dni" class="form-control" name="dni" placeholder="Ejemplo: 0000-0000-00000" pattern="[0-9]{4}[\-][0-9]{4}[\-][0-9]{5}" disabled required>
+                      <input id="dni" class="form-control" name="dni" placeholder="Ejemplo: 0000-0000-00000" pattern="[0-9]{4}[\-][0-9]{4}[\-][0-9]{5}"  required>
                     </div>
                   </div>
                   <div class="form-group" id="cuenta">
