@@ -106,7 +106,7 @@ $(document).on("click",".elimina",function () {
 });
    
 $( document).on("click",".edit_estudiante",function () {
-  alert("editar datos");
+  //alert("editar datos");
 
   var no_cuenta = $(this).parents("tr").find("td").eq(0).attr('id');
   var xmlhttp;
