@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-10-2015 a las 08:06:34
+-- Tiempo de generación: 08-10-2015 a las 08:06:41
 -- Versión del servidor: 5.6.24
--- Versión de PHP: 5.5.24
+-- Versión de PHP: 5.6.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -431,6 +431,83 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `pa_modificar_tipo_area`(IN id_Tipo_
 begin
 	 update tipo_area set nombre=nombre,observaciones=observaciones where tipo_area.id_Tipo_Area=id_Tipo_Area;
 end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PL_POA_MANTENIMIENTO_ELIMINAR_AREA`(IN `id_` INT(11), OUT `message_` VARCHAR(150), OUT `Tmessage_` TINYINT)
+    NO SQL
+BEGIN START TRANSACTION; IF NOT EXISTS (
+	SELECT 
+		1 
+	FROM 
+		objetivos_institucionales 
+	WHERE 
+		objetivos_institucionales.id_Area = id_
+) THEN 
+delete from 
+	area 
+where 
+	area.id_Area = id_; 
+SET 
+	message_ = "La área ha sido eliminada exitósamente."; 
+SET 
+	Tmessage_ = 1; ELSE 
+SET 
+	message_ = "No se puede eliminar la área, se encuentra asociada con un objetivo institucional."; 
+SET 
+	Tmessage_ = 0; END IF; COMMIT; END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PL_POA_MANTENIMIENTO_INSERTAR_NUEVA_AREA`(IN `name_` TEXT, IN `typeOfArea_` INT(11), IN `observation_` TEXT, OUT `message_` VARCHAR(150), OUT `Tmessage_` TINYINT)
+    MODIFIES SQL DATA
+    SQL SECURITY INVOKER
+BEGIN START TRANSACTION; IF NOT EXISTS (
+	SELECT 
+		1 
+	FROM 
+		area 
+	WHERE 
+		area.nombre = name_ 
+		AND area.id_tipo_area = typeOfArea_
+) THEN INSERT INTO area (
+	area.nombre, area.id_tipo_area, area.observacion
+) 
+VALUES 
+	(name_, typeOfArea_, observation_); 
+SET 
+	message_ = "La nueva área ha sido ingresada exitósamente."; 
+SET 
+	Tmessage_ = 1; ELSE 
+SET 
+	message_ = "La área que quiere ingresar ya existe."; 
+SET 
+	Tmessage_ = 0; END IF; COMMIT; END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `PL_POA_MANTENIMIENTO_MODIFICAR_AREA`(IN `name_` TEXT, IN `typeOfArea_` INT(11), IN `observation_` TEXT, OUT `message_` VARCHAR(150), OUT `Tmessage_` TINYINT, IN `id_` INT(11))
+    MODIFIES SQL DATA
+    SQL SECURITY INVOKER
+BEGIN START TRANSACTION; IF NOT EXISTS (
+	SELECT 
+		1 
+	FROM 
+		area 
+	WHERE 
+		area.nombre = name_ 
+		AND area.id_tipo_area = typeOfArea_
+) THEN 
+update 
+	area 
+set 
+	area.nombre = name_, 
+	area.id_tipo_area = typeOfArea_, 
+	area.observacion = observation_ 
+where 
+	area.id_Area = id_; 
+SET 
+	message_ = "La área ha sido modificada exitósamente."; 
+SET 
+	Tmessage_ = 1; ELSE 
+SET 
+	message_ = "La modificación es inválida, ya existen esos valores."; 
+SET 
+	Tmessage_ = 0; END IF; COMMIT; END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_actualizar_asignado_folio`(
     IN numFolio_ VARCHAR(25), 
@@ -4030,17 +4107,18 @@ SP:BEGIN
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REPORTE_CARGA_ACADEMICA`(IN anio YEAR, IN periodo INT)
-BEGIN
-
-select ca_cursos.cod_carga, ca_cargas_academicas.cod_periodo,
-persona.Primer_nombre , persona.Primer_apellido, clases.Clase, ca_secciones.codigo, ca_secciones.hora_inicio,
-ca_secciones.hora_fin FROM ca_cargas_academicas inner JOIN ca_cursos on ca_cargas_academicas.codigo=
-ca_cursos.cod_carga inner join clases on ca_cursos.cod_asignatura=clases.ID_Clases inner join ca_secciones on 
-ca_cursos.cod_seccion=ca_secciones.codigo inner join empleado on ca_cursos.no_empleado=
-empleado.No_empleado inner join persona on empleado.N_identidad= persona.N_identidad 
-where ca_cargas_academicas.anio=anio and ca_cargas_academicas.cod_periodo=periodo order by ca_cargas_academicas.codigo;
-END$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REPORTE_CARGA_ACADEMICA`(IN `pcAnio` YEAR, IN `pcPeriodo` INT)
+SELECT
+		ca.codigo,ca.cod_periodo,p.Primer_nombre, p.Primer_apellido,
+        clases.Clase,cu.cod_seccion,ca_secciones.hora_inicio,hora_fin 
+	FROM
+		ca_cargas_academicas ca
+        inner join persona p on ca.dni_empleado = p.N_identidad
+        inner join ca_cursos cu on ca.codigo = cod_carga
+        inner join clases on clases.ID_Clases = cu.cod_asignatura
+        inner join ca_secciones on ca_secciones.codigo = cu.cod_seccion
+	where
+		ca.anio = pcAnio and pcPeriodo = ca.cod_periodo$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_REPORTE_PROYECTOS`(
 	OUT pcMensajeError VARCHAR(500) -- Para mensajes de error
@@ -4209,7 +4287,14 @@ CREATE TABLE IF NOT EXISTS `actividades_terminadas` (
   `fecha` date NOT NULL,
   `estado` varchar(15) NOT NULL,
   `observaciones` text
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `actividades_terminadas`
+--
+
+INSERT INTO `actividades_terminadas` (`id_Actividades_Terminadas`, `id_Actividad`, `No_Empleado`, `fecha`, `estado`, `observaciones`) VALUES
+(1, 11, 'prueba', '2015-10-04', 'REALIZADA', '');
 
 -- --------------------------------------------------------
 
@@ -4232,20 +4317,19 @@ CREATE TABLE IF NOT EXISTS `alerta` (
 
 CREATE TABLE IF NOT EXISTS `area` (
   `id_Area` int(11) NOT NULL,
-  `nombre` varchar(20) NOT NULL,
+  `nombre` text NOT NULL,
   `id_tipo_area` int(11) NOT NULL,
   `observacion` text NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `area`
 --
 
 INSERT INTO `area` (`id_Area`, `nombre`, `id_tipo_area`, `observacion`) VALUES
-(2, 'prueba', 2, 'prueba15'),
-(3, 'area septiembre', 0, 'n.a.'),
-(4, 'area septiembre', 2, 'n.a'),
-(5, 'area septiembre', 5, '');
+(20, 'Competición', 8, ''),
+(18, 'Hola', 1, ''),
+(19, 'Fútbol', 8, '');
 
 -- --------------------------------------------------------
 
@@ -4324,9 +4408,8 @@ CREATE TABLE IF NOT EXISTS `ca_acondicionamientos` (
 --
 
 INSERT INTO `ca_acondicionamientos` (`codigo`, `nombre`) VALUES
-(3, 'datashow'),
-(13, 'PruebaAllanModificado'),
-(5, 'datashow con pantalla'),
+(3, 'datashow234'),
+(5, 'datashow con pantalla...'),
 (6, 'datashow'),
 (9, 'SOPORTE'),
 (15, 'PruebaAllan'),
@@ -4415,7 +4498,15 @@ CREATE TABLE IF NOT EXISTS `ca_cargas_academicas` (
   `dni_empleado` varchar(20) DEFAULT NULL,
   `cod_estado` int(11) DEFAULT NULL,
   `anio` year(4) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ca_cargas_academicas`
+--
+
+INSERT INTO `ca_cargas_academicas` (`codigo`, `cod_periodo`, `no_empleado`, `dni_empleado`, `cod_estado`, `anio`) VALUES
+(1, 1, '85863', '0501-1994-05961', 2, 2015),
+(2, 2, '11456464', '0801-9123-12323', 4, 2015);
 
 -- --------------------------------------------------------
 
@@ -4443,7 +4534,14 @@ CREATE TABLE IF NOT EXISTS `ca_cursos` (
   `cod_aula` int(11) DEFAULT NULL,
   `no_empleado` varchar(20) DEFAULT NULL,
   `dni_empleado` varchar(20) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ca_cursos`
+--
+
+INSERT INTO `ca_cursos` (`codigo`, `cupos`, `cod_carga`, `cod_seccion`, `cod_asignatura`, `cod_aula`, `no_empleado`, `dni_empleado`) VALUES
+(1, 5, 1, 1500, 8, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -4681,6 +4779,13 @@ CREATE TABLE IF NOT EXISTS `ca_secciones` (
   `hora_inicio` time DEFAULT NULL,
   `hora_fin` time DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `ca_secciones`
+--
+
+INSERT INTO `ca_secciones` (`codigo`, `hora_inicio`, `hora_fin`) VALUES
+(1500, '08:22:00', '09:12:00');
 
 -- --------------------------------------------------------
 
@@ -4934,7 +5039,9 @@ INSERT INTO `empleado` (`No_Empleado`, `N_identidad`, `Id_departamento`, `Fecha_
 ('7908', '0801-1969-02793', 11, '0000-00-00', NULL, '', 1),
 ('01', '0801-1978-12387', 12, '0000-00-00', NULL, '', 1),
 ('11910', '0801-1988-16746', 13, '0000-00-00', NULL, '', 1),
-('1414', '1414-1414-14141', 4, '2015-06-24', NULL, 'asd', 1);
+('1414', '1414-1414-14141', 4, '2015-06-24', NULL, 'asd', 1),
+('1515', '0301-1993-04250', 15, '2015-10-07', '2015-10-31', NULL, NULL),
+('0921', '0601-1993-01279', 10, '0000-00-00', NULL, 'Prueba', 1);
 
 -- --------------------------------------------------------
 
@@ -4974,7 +5081,8 @@ INSERT INTO `empleado_has_cargo` (`No_Empleado`, `ID_cargo`, `Fecha_ingreso_carg
 ('7908', 6, '0000-00-00', NULL),
 ('01', 22, '0000-00-00', NULL),
 ('11910', 2, '0000-00-00', NULL),
-('1414', 2, '2015-06-24', NULL);
+('1414', 2, '2015-06-24', NULL),
+('0921', 2, '0000-00-00', NULL);
 
 -- --------------------------------------------------------
 
@@ -5254,7 +5362,7 @@ CREATE TABLE IF NOT EXISTS `motivos` (
 --
 
 INSERT INTO `motivos` (`Motivo_ID`, `descripcion`) VALUES
-(1, 'salud'),
+(1, 'saludd'),
 (2, 'Familiar'),
 (3, 'Laboral'),
 (4, 'Otros'),
@@ -5300,7 +5408,7 @@ CREATE TABLE IF NOT EXISTS `objetivos_institucionales` (
   `resultados_Esperados` text NOT NULL,
   `id_Area` int(11) NOT NULL,
   `id_Poa` int(11) NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `objetivos_institucionales`
@@ -5498,7 +5606,8 @@ INSERT INTO `persona` (`N_identidad`, `Primer_nombre`, `Segundo_nombre`, `Primer
 ('0801-1988-16746', 'EVELIN ', 'ROCIO ', 'CANACA ', 'ARRIOLA', '1988-09-06', 'F', '', 'ecanaca@unah.edu.hn', 'Soltero', 'hondureña', ''),
 ('0801-1971-10136', 'JUAN', 'JUAN', 'SSS', 'SS', '0000-00-00', 'F', 'SS', 'SDJDJD@GMAIL.COM', 'Soltero', 'SS', ''),
 ('0801-1987-09326', 'IRIS', 'ALEJANDRA', 'CHAVARRÍA', 'LAGOS', '1987-04-24', 'F', '', 'irishawi@hotmail.com', 'Soltero', 'hondureña', ''),
-('1414-1414-14141', 'Prueba de error', '', 'Prueba de error', 'Prueba de error', '2015-06-24', 'M', 'Direccion', 'q@gmail.com', 'Soltero', 'Hondurena', '');
+('1414-1414-14141', 'Prueba de error', '', 'Prueba de error', 'Prueba de error', '2015-06-24', 'M', 'Direccion', 'q@gmail.com', 'Soltero', 'Hondurena', ''),
+('0601-1993-01279', 'Alex', 'Dario', 'Flores', 'Aplicano', '0000-00-00', 'M', 'Col. Hato de Enmedio', 'floresalex@unah.hn', 'Soltero', 'HondureÃ±o', '');
 
 -- --------------------------------------------------------
 
@@ -5512,7 +5621,7 @@ CREATE TABLE IF NOT EXISTS `poa` (
   `fecha_de_Inicio` date NOT NULL,
   `fecha_Fin` date NOT NULL,
   `descripcion` text NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `poa`
@@ -6206,15 +6315,15 @@ CREATE TABLE IF NOT EXISTS `tipo_area` (
   `id_Tipo_Area` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `observaciones` text NOT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tipo_area`
 --
 
 INSERT INTO `tipo_area` (`id_Tipo_Area`, `nombre`, `observaciones`) VALUES
-(2, 'prueba', 'prueba15'),
-(5, 'tipo de area septiembre', '');
+(9, 'ExpediciÃ³n', ''),
+(8, 'Deportes', '');
 
 -- --------------------------------------------------------
 
@@ -6388,14 +6497,14 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `Fecha_Alta` date DEFAULT NULL,
   `Estado` tinyint(1) NOT NULL,
   `esta_logueado` tinyint(1) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`id_Usuario`, `No_Empleado`, `nombre`, `Password`, `Id_Rol`, `Fecha_Creacion`, `Fecha_Alta`, `Estado`, `esta_logueado`) VALUES
-(1, '123444', 'prueba', 0x3831444637443233344633423846353438374146353038433243373942303041, 100, '2015-07-06', NULL, 1, 1),
+(1, '123444', 'prueba', 0x3831444637443233344633423846353438374146353038433243373942303041, 100, '2015-07-06', NULL, 1, 0),
 (2, '123444', 'lmrd1', 0x4334343432303341463343313144324633424638343431374636334344333342, 100, '2015-07-28', NULL, 1, 0),
 (3, '12968', 'elizabeth', 0x3938434430463341433330434338463533333338364546344135463244413339, 100, '2015-07-29', NULL, 1, 0),
 (4, '12969', 'jorgeaguilar', 0x4637463839324138413446413633443635354334393833313736454645383542, 100, '2015-07-29', NULL, 1, 0),
@@ -6412,7 +6521,8 @@ INSERT INTO `usuario` (`id_Usuario`, `No_Empleado`, `nombre`, `Password`, `Id_Ro
 (15, '11022', 'carlosburgos', 0x3142344630413545433942344636413344394534414335333537313243453230, 10, '2015-09-03', NULL, 1, 0),
 (16, '7908', 'jhonnymembreno', 0x3042304138364245334543343739383538453742303839354139394530363031, 10, '2015-09-03', NULL, 1, 0),
 (17, '01', 'monicadormes', 0x4341394335364533393834313041323844303343423942433833343032413239, 40, '2015-09-03', NULL, 1, 0),
-(18, '11910', 'evelincanaca', 0x3331433135313943324334433839323238353643333739383739413438364336, 10, '2015-09-03', NULL, 1, 0);
+(18, '11910', 'evelincanaca', 0x3331433135313943324334433839323238353643333739383739413438364336, 10, '2015-09-03', NULL, 1, 0),
+(19, '0921', 'adfaplicano', 0x3042413039313445323636393246444635303041374634343238464430373332, 50, '2015-10-08', NULL, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -6437,7 +6547,7 @@ CREATE TABLE IF NOT EXISTS `usuario_log` (
   `usuario` int(11) NOT NULL,
   `fecha_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ip_conn` varchar(45) DEFAULT NULL
-) ENGINE=MyISAM AUTO_INCREMENT=615 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=645 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `usuario_log`
@@ -6897,7 +7007,37 @@ INSERT INTO `usuario_log` (`Id_log`, `usuario`, `fecha_log`, `ip_conn`) VALUES
 (611, 5, '2015-09-25 18:41:54', '10.8.44.31'),
 (612, 1, '2015-09-25 19:17:53', '10.8.44.174'),
 (613, 15, '2015-09-25 23:17:53', '146.185.31.213'),
-(614, 1, '2015-10-02 06:03:03', '127.0.0.1');
+(614, 1, '2015-10-02 06:03:03', '127.0.0.1'),
+(615, 1, '2015-10-03 20:40:45', '127.0.0.1'),
+(616, 1, '2015-10-03 21:09:25', '127.0.0.1'),
+(617, 1, '2015-10-03 21:09:25', '127.0.0.1'),
+(618, 1, '2015-10-03 21:57:16', '127.0.0.1'),
+(619, 1, '2015-10-03 21:57:16', '127.0.0.1'),
+(620, 1, '2015-10-04 00:09:57', '127.0.0.1'),
+(621, 1, '2015-10-04 00:09:57', '127.0.0.1'),
+(622, 1, '2015-10-04 01:35:02', '127.0.0.1'),
+(623, 1, '2015-10-04 01:35:02', '127.0.0.1'),
+(624, 1, '2015-10-04 04:38:05', '127.0.0.1'),
+(625, 1, '2015-10-04 04:38:05', '127.0.0.1'),
+(626, 1, '2015-10-04 05:02:51', '127.0.0.1'),
+(627, 1, '2015-10-04 05:02:51', '127.0.0.1'),
+(628, 1, '2015-10-04 05:13:11', '127.0.0.1'),
+(629, 1, '2015-10-04 05:13:11', '127.0.0.1'),
+(630, 1, '2015-10-07 17:52:40', '127.0.0.1'),
+(631, 1, '2015-10-07 17:52:40', '127.0.0.1'),
+(632, 1, '2015-10-08 00:48:05', '127.0.0.1'),
+(633, 1, '2015-10-08 00:48:05', '127.0.0.1'),
+(634, 1, '2015-10-08 01:26:33', '127.0.0.1'),
+(635, 1, '2015-10-08 01:27:35', '127.0.0.1'),
+(636, 1, '2015-10-08 01:46:24', '127.0.0.1'),
+(637, 1, '2015-10-08 02:36:21', '127.0.0.1'),
+(638, 1, '2015-10-08 03:40:56', '127.0.0.1'),
+(639, 1, '2015-10-08 05:17:11', '127.0.0.1'),
+(640, 1, '2015-10-08 05:17:11', '127.0.0.1'),
+(641, 1, '2015-10-08 05:39:35', '127.0.0.1'),
+(642, 1, '2015-10-08 05:39:35', '127.0.0.1'),
+(643, 19, '2015-10-08 05:51:15', '127.0.0.1'),
+(644, 19, '2015-10-08 05:51:15', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -7547,7 +7687,7 @@ ALTER TABLE `actividades`
 -- AUTO_INCREMENT de la tabla `actividades_terminadas`
 --
 ALTER TABLE `actividades_terminadas`
-  MODIFY `id_Actividades_Terminadas` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_Actividades_Terminadas` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `alerta`
 --
@@ -7557,7 +7697,7 @@ ALTER TABLE `alerta`
 -- AUTO_INCREMENT de la tabla `area`
 --
 ALTER TABLE `area`
-  MODIFY `id_Area` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id_Area` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de la tabla `cargo`
 --
@@ -7587,7 +7727,7 @@ ALTER TABLE `ca_aulas`
 -- AUTO_INCREMENT de la tabla `ca_cargas_academicas`
 --
 ALTER TABLE `ca_cargas_academicas`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `ca_contratos`
 --
@@ -7597,7 +7737,7 @@ ALTER TABLE `ca_contratos`
 -- AUTO_INCREMENT de la tabla `ca_cursos`
 --
 ALTER TABLE `ca_cursos`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `ca_dias`
 --
@@ -7702,7 +7842,7 @@ ALTER TABLE `notificaciones_folios`
 -- AUTO_INCREMENT de la tabla `objetivos_institucionales`
 --
 ALTER TABLE `objetivos_institucionales`
-  MODIFY `id_Objetivo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+  MODIFY `id_Objetivo` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `organizacion`
 --
@@ -7722,7 +7862,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `poa`
 --
 ALTER TABLE `poa`
-  MODIFY `id_Poa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `id_Poa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT de la tabla `prioridad_folio`
 --
@@ -7802,7 +7942,7 @@ ALTER TABLE `telefono`
 -- AUTO_INCREMENT de la tabla `tipo_area`
 --
 ALTER TABLE `tipo_area`
-  MODIFY `id_Tipo_Area` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id_Tipo_Area` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT de la tabla `tipo_estudio`
 --
@@ -7837,7 +7977,7 @@ ALTER TABLE `universidad`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_Usuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
+  MODIFY `id_Usuario` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `usuario_alertado`
 --
@@ -7847,7 +7987,7 @@ ALTER TABLE `usuario_alertado`
 -- AUTO_INCREMENT de la tabla `usuario_log`
 --
 ALTER TABLE `usuario_log`
-  MODIFY `Id_log` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=615;
+  MODIFY `Id_log` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=645;
 --
 -- AUTO_INCREMENT de la tabla `usuario_notificado`
 --
