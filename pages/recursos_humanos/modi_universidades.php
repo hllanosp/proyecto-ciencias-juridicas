@@ -22,8 +22,8 @@ include '../../Datos/conexion.php';
 ?>
 
 
-<!--mysql_connect("mysqlv115","root",""); 
-mysql_select_db("ccjj"); -->
+<!--mysql_connect("localhost","root",""); 
+mysql_select_db("sistema_ciencias_juridicas"); -->
 
 
 <!DOCTYPE html>

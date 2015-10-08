@@ -1,7 +1,5 @@
 <?php
 include '../Datos/conexion.php';
-require_once("../conexion/config.inc.php");
-
 $cor = $_POST['cor'];
 $act = $_POST['act'];
 $sup = $_POST['sup'];
@@ -13,24 +11,21 @@ $fin = $_POST['fin'];
 $idInd = $_POST['id'];
 
 
-$consulta = $conectar->prepare("CALL pa_insertar_actividad(?,?,?,?,?,?,?,?,?, @mensaje, @codMensaje)");
-
+$consulta = $conectar->prepare("CALL pa_insertar_actividad(?,?,?,?,?,?,?,?,?)");
 $consulta->bind_param('issssssss', $idInd, $act, $cor, $sup, $jus, $ver, $pob, $ini, $fin);
 $resultado = $consulta->execute();
 
-$output = $db->query("select @mensaje, @codMensaje")->fetch(PDO::FETCH_ASSOC);
-$mensaje = $output['@mensaje'];
-$codMensaje = $output['@codMensaje'];
-
-if ($mensaje == NULL) {
+if ($resultado >= 1) {
     echo '<div id="resultado" class="alert alert-success">
-        La actividad se ha creado exitosamente.</div>';
+        se ha Creado un Nuevo Elemento
+         
+         </div>';
 } else {
     echo '<div id="resultado" class="alert alert-danger">
-         ' . $mensaje . '</div>';
+        No se Inserto ningun Nuevo elemento 
+         
+         </div>';
 }
-//include 'cargarPOAs.php';
-
 
 //include 'cargarObjetivos.php';
 //$ide= $_POST['id'];
@@ -54,11 +49,10 @@ $query = mysql_query("SELECT * FROM actividades where id_indicador='" . $idInd .
         $(document).ready(function () {
             $('#tabla_prioridad').dataTable({
                 "order": [[0, "asc"]],
-                "fnDrawCallback": function (oSettings) 
-                {
-                },
-                paging: false,
-                searching: false
+                "fnDrawCallback": function (oSettings) {
+
+
+                }
             }); // example es el id de la tabla
         });
 

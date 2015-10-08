@@ -167,7 +167,7 @@ and open the template in the editor.
              
                 function soloLetrasYNumeros(text)
              {
-                var letters = /^[ 0-9a-zA-ZáéíóúÁÉÍÓÚÑñ]+$/; 
+                var letters = /^[ 0-9a-zA-ZáéíóúÁÉÍÓÚ]+$/; 
 		if(text.match(letters)){
                     return true;
 			}
