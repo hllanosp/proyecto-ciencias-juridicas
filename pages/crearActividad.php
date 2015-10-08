@@ -36,21 +36,6 @@ and open the template in the editor.
 
 
                 }
-                ,
-                "language":
-                {
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "zeroRecords": "No se han encontrado registros",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(Filtrado de _MAX_ registros)"   ,
-                    "search": "Buscar",
-                    "paginate":
-                            {
-                                "previous": "Anterior",
-                                "next" : "Siguiente"
-                            }
-                }                
             }); // example es el id de la tabla
         });
 
@@ -277,9 +262,7 @@ $(document).on("click",".editarActividad",function () {
                     inicioP = new Date(inicioP);
                     finalP = new Date(finalP);
                     if (inicioA > finalA || inicioA < inicioP || finalA > finalP) {
-                        alert("La fecha de inicio y fin del POA son " + document.getElementById('inicioPOA').value
-                              + " y " + document.getElementById('finPOA').value 
-                              + " correspondiente. Las actividades deben de estar dentro de esas fechas.");
+                        alert("Fechas Erroneas");
                     } else {
 
 

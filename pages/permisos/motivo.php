@@ -81,9 +81,10 @@ $rec = mysqli_query($conexion, "SELECT * from motivos");
                                     <table id="tabla_Motivos" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                            <th><strong>ID Motivo</strong></th>
+                                            <th style='display:none'><strong>ID Motivo</strong></th>
                                              <th><strong>Descripci&#243;n Motivo</strong></th>
                                              <th><strong>Editar</strong></th>
+                                             <th><strong>Eliminar</strong></th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
@@ -95,20 +96,25 @@ HTML;
 				$dmotivo = $row['descripcion'];
             
             
-                echo "<tr data-id='".$idM."'>";
+                echo "<tr   data-id='".$idM."'>";
                 echo <<<HTML
-                <td>$idM</td>
+                <td style='display:none' >$idM</td>
 
 HTML;
-                //echo <<<HTML <td><a href='javascript:ajax_("'$url'");'>$NroFolio</a></td>HTML;
+                
                 echo <<<HTML
 				
-                <td>$dmotivo</td>
+                <td>   $dmotivo </td>
 				
 				<td><center>
                     <a class="open-Modal btn btn-primary" data-toggle="modal" data-id=$idM data-target="#compose-modal"><i class="fa fa-edit"></i></a>
+                    
                 </center></td>
-
+                <td><center>
+                    
+                    <a  onclick="eliminarMotivos()" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                </center></td>
+ 
 
 HTML;
                 echo "</tr>";
@@ -131,6 +137,8 @@ HTML;
 				</div>						
 			</div>							
 	</div>
+ 
+ 
 	
  <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
@@ -138,6 +146,7 @@ HTML;
 	  <form role="form" id="form" name="form" action="#">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
         <h4 class="modal-title"><i class="glyphicon glyphicon-floppy-disk"></i>Editando Motivo</h4>
       </div>
               <div class="modal-body">
@@ -148,6 +157,8 @@ HTML;
                                   <input id="descripcionm" type="text" class="form-control" placeholder="Descripci&#243;n de motivo"    required>
                                   <span class="input-group-btn">
 									<button id="editaM" class="edita btn btn-danger glyphicon glyphicon-edit"> </button>
+
+
                                       <!--<button id="guardarJ" class="guardarJ btn btn-primary" type="button">Finalizar</button>-->
                                   </span>
                               </div>
@@ -171,7 +182,7 @@ HTML;
 </div> 
 
 <script>
-$(document).on("click", ".open-Modal", function () {
+$(document).on("click",".open-Modal", function () {
 	id = $(this).parents("tr").find("td").eq(0).html();
 	var myDNI = $(this).data('id');
 	$(".modal-body #codmotivo").val(myDNI);
@@ -191,7 +202,35 @@ $(document).on("click", ".open-Modal", function () {
        var x;
         x=$("#editaM");
         x.click(editarMotivo);
+      //  var x;
+       // x=$("#eliminarmotivo");
+       // x.click(eliminarMotivos);
+
 	}
+  function eliminarMotivos()
+  {
+    var respuesta=confirm("¿Esta seguro de que desea Eliminar el registro seleccionado?");
+        if (respuesta){  
+      data = {Motivo_ID:$('#codmotivo').val()};
+      $.ajax({
+        async:true,
+        type: "GET",
+        dataType: "html",
+        data:data,
+        contentType: "application/x-www-form-urlencoded",
+        url:"pages/permisos/eliminarMotivo.php",     
+        beforeSend:inicioEnvio,
+        success:llegadaEliminarMotivo,
+        timeout:4000,
+        error:problemas
+      });
+      return false;
+    }
+    
+
+
+  }
+
 	
 	function consulta() {
             var dmotivo=$("#motivo").val(); 
@@ -221,7 +260,7 @@ $(document).on("click", ".open-Modal", function () {
 		//var id = $(this).parents("tr").find("td").eq(0).html();
 		var respuesta=confirm("¿Esta seguro de que desea cambiar el registro seleccionado?");
         if (respuesta){  
-			data = {Motivo_ID:$('#codmotivo').val(), dmotivo:$('#descripcionm').val()};
+			data = {Motivo_ID:$('#codmotivo').val(),dmotivo:$('#descripcionm').val()};
 			$.ajax({
 				async:true,
 				type: "GET",
@@ -259,6 +298,12 @@ $(document).on("click", ".open-Modal", function () {
 		$("#contenedor").load('pages/permisos/editarMotivos.php',data);
 		alert("Transacción completada correctamente");
 		$("#contenedor").load('pages/permisos/motivo.php');
+    }
+    function llegadaEliminarMotivo()
+    {
+    $("#contenedor").load('pages/permisos/eliminarMotivo.php',data);
+    alert("Transacción completada correctamente");
+    $("#contenedor").load('pages/permisos/motivo.php');
     }
 	
 </script>

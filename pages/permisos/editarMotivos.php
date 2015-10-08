@@ -4,10 +4,11 @@
 	$id=$_POST['Motivo_ID'];	
 	$desc=$_POST['dmotivo'];
 	
-	require_once("conexion.php");
+	require_once("../../conexion/conn.php");  
+	$conexion = mysqli_connect($host, $username, $password, $dbname);
+	$query="update motivos set descripcion = '$desc' WHERE Motivo_ID='$id'";
 	
-	mysql_query("update motivos set descripcion = '$desc' WHERE Motivo_ID='$id'", $enlace);	
-	
-	mysql_close($enlace);
+	$resultado = mysqli_query($conexion, $query) or die("Error " . mysqli_error($link));
+	mysqli_close($conexion);
 
 ?>

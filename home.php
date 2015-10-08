@@ -8,7 +8,7 @@
     {
       $contenido = 'home';
     }
-    
+
   require_once("funciones/check_session.php");
 
   require_once("funciones/timeout.php");
@@ -35,15 +35,3 @@
 </div>
 </div>
 <!-- /Main -->
-
-<script>
-  window.onbeforeunload = function(event) {
-    // do something
-    alert('alert()');
-    $.ajax("funciones/eventoCerrarPestaña.php");
-};
-
-$( window ).unload(function() {
-  return "Bye now!";
-});
-</script>
