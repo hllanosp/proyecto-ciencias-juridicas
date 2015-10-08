@@ -75,11 +75,9 @@ $rec = mysqli_query($conexion, "SELECT * from edificios");
                                     <table id="tabla_Edificios" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                            <th style='display:none'><strong>ID Edificio</strong></th>
+                                            <th><strong>ID Edificio</strong></th>
                                              <th><strong>Nombre Edificio</strong></th>
                                              <th><strong>Editar</strong></th>
-                                             <th><strong>Eliminar</strong></th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -93,19 +91,16 @@ HTML;
             
                 echo "<tr data-id='".$idE."'>";
                 echo <<<HTML
-                <td style='display:none'> $idE</td> 
-HTML;
-               
+                <td>$idE</td>
 
-               echo <<<HTML
+HTML;
+                //echo <<<HTML <td><a href='javascript:ajax_("'$url'");'>$NroFolio</a></td>HTML;
+                echo <<<HTML
 				
                 <td>$dedificio</td>
 				
 				<td><center>
                     <a class="open-Modal btn btn-primary" data-toggle="modal" data-id=$idE data-target="#compose-modal"><i class="fa fa-edit"></i></a>
-                </center></td>
-                <td><center>
-                    <a onclick="EliminarEdificio()" class=" open-Modal btn btn-danger" ><i class=" fa fa-trash-o"></i></a>
                 </center></td>
   
 HTML;
@@ -134,7 +129,7 @@ HTML;
 	  <form role="form" id="form" name="form" action="#">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-floppy-disk"></i> Editando Edificio</h4>
+        <h4 class="modal-title"><i class="glyphicon glyphicon-floppy-disk"></i> Editando Motivo</h4>
       </div>
               <div class="modal-body">
                   <div class="form-group">
@@ -188,30 +183,8 @@ $(document).on("click", ".open-Modal", function () {
         var x;
         x=$("#editaE");
         x.click(editarEdificio);
-        
-        
 	}
 	
-  function EliminarEdificio(){
-
-   var respuesta=confirm("¿Esta seguro de que desea Eliminar el registro seleccionado?");
-        if (respuesta){  
-      data = {Edificio_ID:$('#idedificio').val(), dedificio:$('#descripcione').val()};
-      $.ajax({
-        async:true,
-        type: "GET",
-        dataType: "html",
-        data:data,
-        contentType: "application/x-www-form-urlencoded",
-        url:"pages/permisos/EliminarEdificios.php",     
-        beforeSend:inicioEnvio,
-        success:llegadaEliminarEdificio,
-        timeout:4000,
-        error:problemas
-      });
-      return false;
-    }
-  }
 	function consultaEdificio() {
             var dedificio=$("#nmedificio").val(); 
 			if(dedificio != ''){
@@ -278,12 +251,6 @@ $(document).on("click", ".open-Modal", function () {
 		alert("Transacción completada correctamente");
 		$("#contenedor").load('pages/permisos/Edificios.php');
 	}
-  function llegadaEliminarEdificio()
-  {
-    $("#contenedor").load('pages/permisos/EliminarEdificios.php',data);
-    alert("Transacción completada correctamente");
-    $("#contenedor").load('pages/permisos/Edificios.php');
-  }
 
 	
 </script>

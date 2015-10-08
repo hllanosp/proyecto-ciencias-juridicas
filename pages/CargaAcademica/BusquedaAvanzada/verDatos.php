@@ -35,17 +35,18 @@
 	$pdf->Cell(25,10,"Hora Inicio",1,'C');
 	$pdf->Cell(25,10,"Hora Fin",1,'C');
 	$pdf->Ln(10);
-
-	$query=mysql_query("CALL SP_REPORTE_CARGA_ACADEMICA(".$anio.",".$periodoC.")");
-
-	while ($datos=mysql_fetch_array($query)) 
+        
+	$query = $db -> prepare("CALL SP_REPORTE_CARGA_ACADEMICA(?,?)");
+        $query -> execute(array($anio, $periodoC));
+        
+	while ($datos = $query ->fetch(PDO::FETCH_ASSOC) ) 
 	{
-		$carga=$datos['cod_carga'];
+		$carga=$datos['codigo'];
 		$periodo=$datos['cod_periodo'];	
 		$profesor=$datos['Primer_nombre'] ." ". $datos['Primer_apellido'];
 	
 		$asignatura=$datos['Clase'];
-		$seccion=$datos['codigo'];
+		$seccion=$datos['cod_seccion'];
 		$hora_inicio=$datos['hora_inicio'];
 		$hora_fin=$datos['hora_fin'];
 

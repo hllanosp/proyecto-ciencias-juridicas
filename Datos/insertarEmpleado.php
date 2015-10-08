@@ -1,7 +1,7 @@
 <?php
 
-//include "../Datos/conexion.php";
-//require_once('funciones.php');
+include "../../Datos/conexion.php";
+require_once('funciones.php');
 
 //include "$root\curriculo\Datos\funciones.php";
 
@@ -18,14 +18,7 @@
 		 $identi=$_POST['identi'];
                  $cargo=$_POST['cargo'];
                //  $fechaingreso=$_POST['fecha2'];
-                 
-            	
-		 
-		
-               //  $fechaingreso=$_POST['fecha2'];
-               //  
-                 $enlace = mysql_connect('localhost', 'root', '');
-                 mysql_select_db("sistema_ciencias_juridicas", $enlace);
+
            
               
               $rec2=mysql_query("SELECT N_identidad FROM empleado WHERE N_identidad='".$identi."'");

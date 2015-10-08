@@ -17,9 +17,13 @@ else
   {
     $contenido = 'index';
   }
+
   
+if(isset($_COOKIE['user_id']))
+{
+}
 //Check whether the session variable SESS_MEMBER_ID is present or not
-if(!isset($_SESSION['user_id']) || (trim($_SESSION['user_id']) == '')) 
+else if(!isset($_SESSION['user_id']) || (trim($_SESSION['user_id']) == '')) 
   {
     header('Location: '.$maindir.'login/logout.php?code=100&contenido='.$contenido);
     exit();
@@ -43,7 +47,7 @@ require_once($maindir."funciones/timeout.php");
         <title>Sistema Ciencias Jurídicas</title>
         <meta name="generator" content="Bootply" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		
+		    <link rel="stylesheet" type="text/css" href="">
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
         <link rel="stylesheet" type="text/css" href="css/datatables/dataTables.bootstrap.css">
 
@@ -67,7 +71,7 @@ require_once($maindir."funciones/timeout.php");
         <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
     
 	    <!-- switch CSS -->
-	    <link href="bower_components/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css" rel="stylesheet">
+	      <link href="bower_components/bootstrap-switch-master/dist/css/bootstrap3/bootstrap-switch.css" rel="stylesheet">
 	
         <!-- Timeline CSS -->
         <link href="dist/css/timeline.css" rel="stylesheet">
@@ -86,7 +90,7 @@ require_once($maindir."funciones/timeout.php");
     
     <!-- HTML code from Bootply.com editor -->
 
-  <body class="skin-green">
+    <body class="skin-green" onload="inicio()">
 	
   <nav class="navbar navbar-inverse navbar-fixed-top header">
   <div class="col-md-12">
@@ -122,3 +126,15 @@ HTML;
   </div> 
   </nav>
 <!-- /Header -->
+
+<script>
+  window.onbeforeunload = function(event) {
+    // do something
+    alert('alert()');
+    $.ajax("funciones/eventoCerrarPestaña.php");
+};
+
+$( window ).unload(function() {
+  return "Bye now!";
+});
+</script>

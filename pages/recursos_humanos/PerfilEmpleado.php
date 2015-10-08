@@ -7,8 +7,8 @@ include '../../Datos/conexion.php';
      $idCargoE='';
       $fechacE='';
       
-$enlace = mysql_connect('localhost', 'root', '');
-mysql_select_db("sistema_ciencias_juridicas", $enlace);
+$enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
+mysql_select_db("ccjj", $enlace);
 
 $codigoE = $_POST['codigo'];
 
