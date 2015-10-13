@@ -1,30 +1,27 @@
 
 <?php
-//En este archivo se realizo mantenimiento por Alex Flores (IIIP - 2015)
-//Se corrigieron errores ortográficos
-
-
 include '../Datos/conexion.php';
 $query = mysql_query("Select distinct area.id_area,area.nombre, tipo_area.nombre as n, tipo_area.id_tipo_area as idT, area.observacion from area,tipo_area where area.id_tipo_area=tipo_area.id_tipo_area order by area.id_area desc", $enlace);
-$sql = mysql_query("Select * from tipo_area", $enlace);
 
+$sql = mysql_query("Select * from tipo_area", $enlace);
 ?>
+
 
 
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        
+
     </head>
     <body>
         <div class="panel-body">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th hidden>id área</th>
+                        <tr>   
+                            <th>id Area</th>
                             <th>Nombre</th>
-                            <th>Tipo de área</th>
+                            <th>Tipo de Area</th>
                             <th>Observaciones</th>
                             <th></th>
                         </tr>
@@ -33,12 +30,13 @@ $sql = mysql_query("Select * from tipo_area", $enlace);
                         <?php
                         $contador = 0;
                         while ($row = mysql_fetch_array($query)) {
+                            $id = $row['id_area'];
                             ?>
                             <tr>
-                                <td hidden><?php echo $row['id_area'] ?></td>
-                                <td><?php echo utf8_decode($row['nombre']) ?></td>
-                                <td id="<?php echo utf8_decode($row['idT']) ?>"><?php echo utf8_decode($row['n']) ?></td>
-                                <td><?php echo utf8_decode($row['observacion']) ?></td>
+                                <td ><?php echo $row['id_area'] ?></td>
+                                <td><?php echo $row['nombre'] ?></td>
+                                <td id="<?php echo $row['idT'] ?>"><?php echo $row['n'] ?></td>
+                                <td><?php echo $row['observacion'] ?></td>
                                 <td>
                                     <a class="editarArea btn btn-info fa fa-pencil" data-toggle="modal" data-target="#miModalDeArea"></a>
                                     <a class="eliminarArea btn btn-danger fa fa-trash-o"></a>
@@ -57,15 +55,14 @@ $sql = mysql_query("Select * from tipo_area", $enlace);
                     <form role="form" id="eFormXX" name="form" >
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel">Editando área</h4>
+                            <h4 class="modal-title" id="myModalLabel">Nueva Area</h4>
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Nombre del área</label>
+                                <label>Nombre del Area</label>
                                 <input id="editarNombreDeArea" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label>Tipo de área</label>
                                 <select class="form-control" id="eTipoArea">
                                     <option>Seleccione</option>
                                     <?php
@@ -78,7 +75,7 @@ $sql = mysql_query("Select * from tipo_area", $enlace);
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Observación</label>
+                                <label>Observacion</label>
                                 <textarea id="editarObsDeArea" class="form-control" rows="3"></textarea>
                             </div>
                         </div>
@@ -101,7 +98,7 @@ $sql = mysql_query("Select * from tipo_area", $enlace);
             aNombre = $(this).parents("tr").find("td").eq(1).html();
             aIdTipo = $(this).parents("tr").find("td").eq(2).attr('id').valueOf();
             aObs = $(this).parents("tr").find("td").eq(3).html();
-            
+
             $("#editarNombreDeArea").val(aNombre.toString());
             $("#editarObsDeArea").val(aObs.toString());
             $("#eTipoArea").val(aIdTipo);
@@ -112,7 +109,7 @@ $sql = mysql_query("Select * from tipo_area", $enlace);
             if (respuesta)
             {
                 id = $(this).parents("tr").find("td").eq(0).html();
-                dataArea = {idA: id};
+                dataArea = {idA: id}
                 $.ajax({
                     async: true,
                     type: "POST",
@@ -136,6 +133,7 @@ $sql = mysql_query("Select * from tipo_area", $enlace);
                 nombreDA: $("#editarNombreDeArea").val(),
                 tipoDA: $("#eTipoArea").val(),
                 observacionDA: $("#editarObsDeArea").val()
+
             };
 
             $.ajax({

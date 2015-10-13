@@ -1,23 +1,26 @@
 <?php
-require_once("../conexion/config.inc.php");
+include '../Datos/conexion.php';
 
 $id= $_POST['id'];
 //echo $id;
-$consulta=$db->prepare("CALL pa_eliminar_poa(?,  @mensaje, @codMensaje)");
-$consulta->bindParam(1, $id, PDO::PARAM_INT);
+$consulta=$conectar->prepare("CALL pa_eliminar_poa(?)");
+$consulta->bind_param('i',$id);
 $resultado=$consulta->execute();
 
-$output = $db->query("select @mensaje, @codMensaje")->fetch(PDO::FETCH_ASSOC);
-$mensaje = $output['@mensaje'];
-$codMensaje = $output['@codMensaje'];
-
-if ($mensaje == NULL) {
+if($resultado==1)
+    {
     echo '<div id="resultado" class="alert alert-success">
-        Se ha eliminado el POA correctamente.</div>';
-} else {
-    echo '<div id="resultado" class="alert alert-danger">
-         ' . $mensaje . '</div>';
-}
+        se ha elimanado con exito el Plan Operativo Anual
+         
+         </div>';
+    
+    }else{
+         echo '<div id="resultado" class="alert alert-danger">
+        No se pud ejecutar la accion de eliminar 
+         
+         </div>';
+    }
+
 include 'cargarPOAs.php';
 ?>
 

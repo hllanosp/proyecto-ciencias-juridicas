@@ -75,9 +75,11 @@ $rec = mysqli_query($conexion, "SELECT * from edificios");
                                     <table id="tabla_Edificios" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                            <th><strong>ID Edificio</strong></th>
+                                            <th style='display:none'><strong>ID Edificio</strong></th>
                                              <th><strong>Nombre Edificio</strong></th>
                                              <th><strong>Editar</strong></th>
+                                             <th><strong>Eliminar</strong></th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -91,16 +93,19 @@ HTML;
             
                 echo "<tr data-id='".$idE."'>";
                 echo <<<HTML
-                <td>$idE</td>
-
+                <td style='display:none'> $idE</td> 
 HTML;
-                //echo <<<HTML <td><a href='javascript:ajax_("'$url'");'>$NroFolio</a></td>HTML;
-                echo <<<HTML
+               
+
+               echo <<<HTML
 				
                 <td>$dedificio</td>
 				
 				<td><center>
                     <a class="open-Modal btn btn-primary" data-toggle="modal" data-id=$idE data-target="#compose-modal"><i class="fa fa-edit"></i></a>
+                </center></td>
+                <td><center>
+                    <a class="open-Modal-Eliminar btn btn-danger"  data-toggle="modal" data-idEliminar=$idE data-target="#Eliminar-modal" ><i class=" fa fa-trash-o"></i></a>
                 </center></td>
   
 HTML;
@@ -129,7 +134,7 @@ HTML;
 	  <form role="form" id="form" name="form" action="#">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title"><i class="glyphicon glyphicon-floppy-disk"></i> Editando Motivo</h4>
+        <h4 class="modal-title"><i class="glyphicon glyphicon-floppy-disk"></i> Editando Edificio</h4>
       </div>
               <div class="modal-body">
                   <div class="form-group">
@@ -160,6 +165,30 @@ HTML;
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 </div> 
+
+<div class="modal fade" id="Eliminar-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class=" modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 style="font-size:large;" class="modal-title">Confirmacion</h4>
+      </div>
+      <div  class="modal-body">
+
+        <p style='display:none' id="codigo"></p>
+        <center><p style="font-size:large;"  id="informacion"></p></center>
+        
+       
+        
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="button-Eliminar"type="button" data-dismiss="modal" class="btn btn-danger ">Eliminar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 	
 
 <script>
@@ -169,6 +198,13 @@ $(document).on("click", ".open-Modal", function () {
 	$(".modal-body #idedificio").val(myDNI);
 });
 
+$(document).on("click",".open-Modal-Eliminar",function(){
+  var id=$(this).parents("tr").find("td").eq(0).html();
+$('#Eliminar-modal #codigo').text(id);
+ var descripcion= $(this).parents("tr").find("td").eq(1).html();
+  var d = " Desea Eliminar "+descripcion;
+$('#Eliminar-modal #informacion').text(d);
+});
  var id;
  var data;
  var x;
@@ -183,8 +219,68 @@ $(document).on("click", ".open-Modal", function () {
         var x;
         x=$("#editaE");
         x.click(editarEdificio);
+
+        x=$("#button-Eliminar");
+        x.click(EliminarEdificio);
+        
+        
 	}
 	
+  function EliminarEdificio()
+  {
+     $ID=$('#Eliminar-modal #codigo').text();
+    var dat={'Edificio_ID':$ID};
+
+   $.ajax({
+                data:  dat,
+                url:   'pages/permisos/EliminarEdificio.php',
+                type:  'post',
+                dataType:'json',
+                beforeSend: function () {
+                        $("#contenedor").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        if(response.exito)
+                        {
+
+                          alert(response.mensaje);
+
+                        }
+                        else
+                        {
+                          if(response.errores.Edificio_ID)
+                          {
+                            alert(response.errores.Edificio_ID);
+                          }
+                          if(response.errores.Servido_Base)
+                          {
+                            alert(response.errores.Servido_Base);
+                          }
+                          if(response.errores.consultaservidor)
+                          {
+                            alert(response.errores.consultaservidor);
+                          }
+                          
+                          if(response.errores.motivorelacionado)
+                          {
+                            alert(response.errores.motivorelacionado);
+                          }
+                          if(response.errores.ErrorEliminar)
+                          {
+                            alert(response.errores.ErrorEliminar);
+                          }  
+                        }
+                        
+                          $("#contenedor").load('pages/permisos/Edificios.php');
+                },
+                error : function(xhr, status) {
+        alert('Disculpe, existió un problema');
+    }
+ 
+    
+        });
+
+  }
 	function consultaEdificio() {
             var dedificio=$("#nmedificio").val(); 
 			if(dedificio != ''){
@@ -251,6 +347,7 @@ $(document).on("click", ".open-Modal", function () {
 		alert("Transacción completada correctamente");
 		$("#contenedor").load('pages/permisos/Edificios.php');
 	}
+  
 
 	
 </script>

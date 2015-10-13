@@ -337,7 +337,7 @@ $( document ).ready(function() {
 		});
         
 		
-	$("#exp").on('click',function(){
+	$(".btn-default").on('click',function(){
           mode = $(this).data('mode');
           id1 = $(this).data('id');
           if(mode == "verPDF"){

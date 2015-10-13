@@ -52,6 +52,10 @@ require_once($maindir . "funciones/timeout.php");
     var f = new Date();
     var $fecha_a = (f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear()); //Este codigo obtiene los elementos de la fecha actual del sistema
 
+   //  $( "#fecha" ).datepicker({
+		//changeMonth: true,
+		//changeYear: true
+	//});
 //Esta función se realiza cuando el documento ya esta listo
     $(document).ready(function() {
 
@@ -79,7 +83,7 @@ require_once($maindir . "funciones/timeout.php");
 								type: "POST",
 								// dataType: "html",
 								// contentType: "application/x-www-form-urlencoded",
-								url: "pages/permisos/Isolicitud.php",
+								url: "../SistemaCienciasJuridicas/pages/permisos/Isolicitud.php",
 								success: llegadaGuardar,
 								data: data,
 								timeout: 4000,
@@ -88,6 +92,8 @@ require_once($maindir . "funciones/timeout.php");
 							//documentos que realizaran otros procedimientos sin necesidad de refrescar toda la pagina
 							return false;
 						}
+						
+		
 		);
     });
 
@@ -111,7 +117,7 @@ require_once($maindir . "funciones/timeout.php");
 
 <!--<script type="text/javascript" src="../sl/jquery-2.1.3.js"></script>
 <script language="javascript" type="text/javascript"></script>-->
-
+         <link href="css/bootstrap.min.css" rel="stylesheet">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -215,7 +221,7 @@ require_once($maindir . "funciones/timeout.php");
                                             </select>                                       
                                         </div>
                                         <div>
-                                            <label>Cantidad de días:</label>											 
+                                            <label>Rango de fechas:</label>											 
 
                                             <p> <input type="number" id="cantidad" name="cantidad" min="0" max="5" value="0" required ></p>
                                         </div>
@@ -223,7 +229,7 @@ require_once($maindir . "funciones/timeout.php");
                                         <div>
                                             <label>Fecha:</label>
 
-                                            <p> <input type="date" id="fecha" name="datepicker" required ></p>												
+                                            <p> <input type="date" id="fecha" ></p>												
                                         <table>
                                             <tr><label>Hora Inicio:</label>											
                                             <p>	<input type="time" name="horai" min=6:00 max=22:00 step=900 id="horai" value="1:00 pm" required></p>

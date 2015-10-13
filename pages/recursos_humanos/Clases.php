@@ -168,10 +168,10 @@ $maindir = "../../";
             {
                 $("#contenedor").text('Problemas en el servidor.');
             }
-            //metodo modificado para que acepte la ñ y puntuaciones
+            
             function soloLetrasYNumeros(text)
              {
-                var letters = /^[ 0-9a-zA-ZáéíóúÁÉÍÓÚñ.,;:_-]+$/; 
+                var letters = /^[ 0-9a-zA-ZáéíóúÁÉÍÓÚ]+$/; 
 		if(text.match(letters)){
                     return true;
 			}

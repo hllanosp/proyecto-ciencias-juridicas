@@ -800,13 +800,13 @@ if (isset($_POST['identi'])) {
                                 <div class="col-sm-7 control-label">
 
                                     <?php
-                                    if ($estCivil == "soltero")
+                                    if ($estCivil == "Soltero")
                                         echo 'Soltero';
-                                    if ($estCivil == "casado")
+                                    if ($estCivil == "Casado")
                                         echo 'Casado';
-                                    if ($estCivil == "divorciado")
+                                    if ($estCivil == "Divorciado")
                                         echo 'Divorciado';
-                                    if ($estCivil == "viudo")
+                                    if ($estCivil == "Viudo")
                                         echo 'Viudo';
                                     ?>
                                 </div>

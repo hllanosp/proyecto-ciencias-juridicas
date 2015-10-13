@@ -37,13 +37,13 @@ if($result['TipoFolio'] == 0){
     }elseif($result['TipoFolio'] == 1){
 		$tipo = "Folio de salida";
   	}
-$pdf->Cell(120, 8, '                            Tipo de Folio: '.utf8_decode($tipo), 0);
+$pdf->Cell(120, 8, '                            Tipo de Folio: '.$tipo, 0);
 $pdf->Ln(5);
-$pdf->Cell(125, 8, '                            Descripcion: '.utf8_decode($result['DescripcionPrioridad']), 0);
+$pdf->Cell(125, 8, '                            Descripcion: '.$result['DescripcionPrioridad'], 0);
 $pdf->Ln(5);
-$pdf->Cell(130, 8, '                            Fecha de Entrada: '.utf8_decode($result['FechaEntrada']), 0);
+$pdf->Cell(130, 8, '                            Fecha de Entrada: '.$result['FechaEntrada'], 0);
 $pdf->Ln(5);
-$pdf->Cell(135, 8, '                            Asunto: '.utf8_decode($result['DescripcionAsunto']), 0);
+$pdf->Cell(135, 8, '                            Asunto: '.$result['DescripcionAsunto'], 0);
 $pdf->Ln(10);
 $pdf->SetFont('Arial', 'B', 11);
 $pdf->Cell(70, 8, '', 0);
@@ -85,8 +85,8 @@ $query = $db->prepare("SELECT * FROM seguimiento WHERE NroFolio = :NroFolio");
 	}
 if($seguimiento == 1){
 	foreach( $rows as $row ){
-		$pdf->Cell(15, 8, utf8_decode($row["Id_SeguimientoHistorico"]), 0);
-		$pdf->Cell(70, 8, utf8_decode($row["DescripcionEstadoSeguimiento"]), 0);
+		$pdf->Cell(15, 8, $row["Id_SeguimientoHistorico"], 0);
+		$pdf->Cell(70, 8, $row["DescripcionEstadoSeguimiento"], 0);
 		$date = date_create($row["FechaCambio"]);
 		date_format($date, 'Y-m-d H:i:s');
 		$pdf->Cell(40, 8, date_format($date, 'd/m/y'), 0);
