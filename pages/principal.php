@@ -52,7 +52,7 @@
                             <a  id="estadisticas" href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Estadisticas</a>
                             
                         </li>
-                                               <li data-popover="true" rel="popover" data-placement="right"><a href="#" data-target=".premium-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-gears fa-fw"></i>Mantenimineto<i class="fa fa-collapse"></i></a></li>
+                                               <li data-popover="true" rel="popover" data-placement="right"><a href="#" data-target=".premium-menu" class="nav-header collapsed" data-toggle="collapse"><i class="fa fa-gears fa-fw"></i>Mantenimiento<i class="fa fa-collapse"></i></a></li>
                     <li><ul class="premium-menu nav nav-list collapse">
                             <li ><a id="areas" href="premium-profile.html"><span class="fa fa-caret-right"></span> Areas</a></li>
                             <li ><a id="tipoDeAreas" href="premium-blog.html"><span class="fa fa-caret-right"></span> Tipos De Areas</a></li>
@@ -75,12 +75,12 @@
                         //include 'pages/crearPOA.php';
                     
                     ?>
-                    <h2>Bienvenido al Sistema de Administracion de POA</h2>
+                    <h2>Administración de POA</h2>
                     
                     <div class="col-lg-4">
                     <div class="panel panel-red">
                         <div class="panel-heading">
-                            Actividades Urgentes A Realizar
+                            Actividades urgentes
                         </div>
                         <div class="panel-body">
                             <?php
@@ -100,15 +100,12 @@
                                 }
                             ?>
                         </div>
-                        <div class="panel-footer">
-                            Panel Footer
-                        </div>
                     </div>
                 </div>
                     <div class="col-lg-4">
                     <div class="panel panel-yellow">
                         <div class="panel-heading">
-                            Actividades De esta Semana
+                            Actividades de esta semana
                         </div>
                         <div class="panel-body">
                             <?php
@@ -127,9 +124,6 @@
                             <?php
                                 }
                             ?>
-                        </div>
-                        <div class="panel-footer">
-                            Panel Footer
                         </div>
                     </div>
                 </div>
@@ -155,9 +149,6 @@
                             <?php
                                 }
                             ?>
-                        </div>
-                        <div class="panel-footer">
-                            Panel Footer
                         </div>
                     </div>
                 </div>

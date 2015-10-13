@@ -8,12 +8,12 @@ if(!isset($_SESSION))
   session_start(); 
 } 
 
-if(isset( $_SESSION['user_id'] ))
+/* Codigo que valida para que no se pueda cargar de retroseso el login */
+if(isset($_SESSION['user_id']))
 {
-    //$message = 'Users is already logged in';
     header('Location: '.$maindir.'index.php');
+    exit();
 }
- 
 ?>
 
 <script type="text/javascript">
@@ -61,7 +61,7 @@ if(isset( $_SESSION['user_id'] ))
 <!--login modal-->
       <div id="login-page">
         <div class="container">
-          <form class="form-login">
+          <form class="form-login" action = "login_submit.php" method = "" >
             <h2 class="form-login-heading">Inicio de sesión sistema de Ciencias Jurídicas</h2>
               <div class="login-wrap">
 
@@ -89,6 +89,8 @@ if(isset( $_SESSION['user_id'] ))
             case 5:
                 error_print(5);
                 break;
+            case 6:
+                error_print(6);
             default:
                 break;
         }
@@ -116,6 +118,9 @@ if(isset( $_SESSION['user_id'] ))
             case 5:
                 $mensaje = "Lo sentimos pero su sesión ya ha expirado, por favor ingrese otra vez";
                 break;
+            case 6:
+                $mensaje = "Este usuario ya esta logueado, comuniquese con el administrador del sistema";
+                break;
             default:
                 break;
         }
@@ -137,7 +142,7 @@ if(isset( $_SESSION['user_id'] ))
                     </span>
                 </label>
 				-->
-                <input type="button" class="btn btn-primary btn-lg btn-block" value="Acceder" onclick="login();">
+                <input type="submit" class="btn btn-primary btn-lg btn-block" value="Acceder" onclick="login();">
                    </input>
                 <hr>
               </div>

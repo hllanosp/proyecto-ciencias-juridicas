@@ -20,8 +20,8 @@ if (isset($_POST['pid'])) {
     }
 }
 ?>
-<!--mysql_connect("localhost","root",""); 
-mysql_select_db("sistema_ciencias_juridicas"); -->
+<!--mysql_connect("mysqlv115","root",""); 
+mysql_select_db("ccjj"); -->
 
 
 <!DOCTYPE html>

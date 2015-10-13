@@ -1,9 +1,13 @@
+
 <?php
 
- $host = '127.0.0.1';
+error_reporting(E_ALL ^ E_DEPRECATED);
+
+ $host = 'localhost';
  $dbname = 'ccjj';
- $username = 'jose';
- $password = '12';
- $db = null;
+ $username = 'root';
+ $password = '';
+ $conexion = mysql_connect($host, $username, $password);
+ mysql_select_db($dbname);
 
 ?> 

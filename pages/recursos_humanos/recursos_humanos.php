@@ -1,19 +1,14 @@
 <?php
    include '../../Datos/conexion.php';
     $maindir = "../../";
-    
-  echo $_SERVER['SERVER_NAME'];
  
   if(isset($_GET['contenido']))
     {
       $contenido = $_GET['contenido'];
-     
     }
   else
     {
       $contenido = 'recursos_humanos';
-   
-      $navbar_loc = 'contenido';
     }
 
   require_once($maindir."funciones/check_session.php");
@@ -579,7 +574,7 @@
             
                 function llegadaTipos()
             {
-                $("#contenedor").load('pages/recursos_humanos/Tipo_estudio.php');
+                $("#contenedor").load('pages/recursos_humanos/Tipo_Estudio.php');
                 //$("#contenedor").load('../cargarPOAs.php');
             }
             

@@ -1,15 +1,6 @@
-
-
-
 <?php
-	require_once("../../conexion/conn.php");
-    $enlace = mysql_connect($host, $username, $password);
-mysql_select_db($dbname, $enlace);
-if (!$enlace) {
-    die('No se pudo conectar: ' . mysql_error());
-}
+	include '../../Datos/conexion.php';
 ?>
-
 
 <!DOCTYPE html>
 <html lang="utf-8">
