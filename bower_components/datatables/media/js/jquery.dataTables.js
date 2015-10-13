@@ -10967,7 +10967,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sFirst": "Primero",
+				"sFirst": "First",
 	
 	
 				/**
@@ -10990,7 +10990,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sLast": "Último",
+				"sLast": "Last",
 	
 	
 				/**
@@ -11013,7 +11013,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sNext": "Siguiente",
+				"sNext": "Next",
 	
 	
 				/**
@@ -11036,7 +11036,7 @@
 				 *      } );
 				 *    } );
 				 */
-				"sPrevious": "Anterior"
+				"sPrevious": "Previous"
 			},
 	
 			/**
@@ -11059,7 +11059,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sEmptyTable": "No hay datos disponibles en la tabla",
+			"sEmptyTable": "No data available in table",
 	
 	
 			/**
@@ -11091,7 +11091,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Mostrando del _START_ al _END_ de _TOTAL_ entradas",
+			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
 	
 	
 			/**
@@ -11112,7 +11112,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Mostrando 0 - 0 de 0 entradas",
+			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
 	
 	
 			/**
@@ -11134,7 +11134,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoFiltered": "(Filtrado de _MAX_ registros)",
+			"sInfoFiltered": "(filtered from _MAX_ total entries)",
 	
 	
 			/**
@@ -11252,7 +11252,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Mostrando _MENU_ entradas",
+			"sLengthMenu": "Show _MENU_ entries",
 	
 	
 			/**
@@ -11276,7 +11276,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLoadingRecords": "Cargando...",
+			"sLoadingRecords": "Loading...",
 	
 	
 			/**
@@ -11297,7 +11297,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sProcessing": "Procesando...",
+			"sProcessing": "Processing...",
 	
 	
 			/**
@@ -11332,7 +11332,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Búsqueda:",
+			"sSearch": "Search:",
 	
 	
 			/**
@@ -11390,7 +11390,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sZeroRecords": "No hay registros coincidentes encontrados"
+			"sZeroRecords": "No matching records found"
 		},
 	
 	

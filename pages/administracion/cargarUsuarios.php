@@ -123,28 +123,8 @@ echo '</tr>';
 		    });
         });
       }
-      
-      ,
-                "language":
-                {
-                    "lengthMenu": "Mostrando _MENU_ registros por página",
-                    "zeroRecords": "No se han encontrado registros",
-                    "info": "Mostrando pagina _PAGE_ de _PAGES_",
-                    "infoEmpty": "No records available",
-                    "infoFiltered": "(Filtro de _MAX_ total registros)",
-                    //Modificado por Enderson Mendez= cambio de lengiaje
-                    "search":         "Buscar:",
-                    "paginate": {
-                        "first":      "Primero",
-                        "last":       "Ultimo",
-                        "next":       "Siguiente",
-                        "previous":   "Anterior"
-                    }
-                } 
 	}); // example es el id de la tabla
 	
-        
-        
 	  $('#tabla_usuarios')
     .removeClass( 'display' )
     .addClass('table table-striped table-bordered');

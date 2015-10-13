@@ -139,9 +139,9 @@ require_once('../../../Datos/conexion.php');
 			}
 	}
             
-         function soloLetras(text)
-         {
-	    var letters = /^[ a-zA-ZáéíóúÁÉÍÓÚÑñ]+$/; 
+            
+         function soloLetras(text){
+	    var letters = /^[ a-zA-ZáéíóúÁÉÍÓÚ]+$/; 
 			if(text.match(letters)){
 			    return true;
 			}else{
@@ -204,23 +204,16 @@ require_once('../../../Datos/conexion.php');
 		    $("#primerN").removeClass("has-warning");
 			$("#primerN").find("label").text("Primer nombre");
 		}
-                
-                //Validar segundo nombre
-                if (snombre !== '')
-                {
-                    if(soloLetras(snombre) == false){
-                        $("#Snombre").addClass("has-warning");
-                            $("#Snombre").find("label").text("Segundo nombre:Solo letras");
-                            $("#segundoNombre").focus();
-                            return false;
-                    }else{
-                        $("#Snombre").removeClass("has-warning");
-                            $("#Snombre").find("label").text("Segundo nombre");
-                    }                    
-                }
-                
 		
-
+		if(soloLetras(snombre) == false){
+		    $("#Snombre").addClass("has-warning");
+			$("#Snombre").find("label").text("Segundo nombre:Solo letras");
+			$("#segundoNombre").focus();
+			return false;
+		}else{
+		    $("#Snombre").removeClass("has-warning");
+			$("#Snombre").find("label").text("Segundo nombre");
+		}
                 
                 if(soloLetras(pApellido) == false){
 		    $("#pApellido").addClass("has-warning");

@@ -1,10 +1,10 @@
 <?php 
-//$conectar = new mysqli("mysqlv115", "root","inding115","test8");
-//$cn = mysql_connect("mysqlv115","root","");
+//$conectar = new mysqli("localhost", "root","inding115","test8");
+//$cn = mysql_connect("localhost","root","");
 //mysql_select_db("poa", $cn);
 
-$enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
-mysql_select_db("ccjj", $enlace);
+$enlace = mysql_connect('localhost', 'root', '');
+mysql_select_db("sistema_ciencias_juridicas", $enlace);
 if (!$enlace) {
     die('No se pudo conectar: ' . mysql_error());
 }

@@ -27,7 +27,7 @@
     
     if($tipoProcedimiento == "insertar"){
        
-    require_once("../../Datos/insertarCargo.php");
+    require_once("../../Datos/insertarcargo.php");
     }
      if($tipoProcedimiento == "actualizar"){
        

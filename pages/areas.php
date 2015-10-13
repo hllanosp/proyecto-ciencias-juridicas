@@ -1,14 +1,14 @@
 <!doctype html>
 <html>
     <head>
-        
+
     </head>
     <body>
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Áreas
+                        Areas
                     </div>
                     <!-- .panel-heading -->
                     <div class="panel-body">
@@ -17,7 +17,7 @@
                                 <div class="panel-body">
                                     <div class="col-lg-8">
                                         <button id="nuevaA" class="btn btn-success" data-toggle="modal" data-target="#modalNuevaArea">
-                                            Nuevo área
+                                            Nueva Area
                                         </button>
                                     </div>
                                 </div>
@@ -25,7 +25,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <label >Mis áreas</label>
+                                        <label >Mis Areas</label>
                                     </h4>
                                 </div>
                                 <div >
@@ -48,21 +48,20 @@
                         <form role="form" id="form1" name="form" >
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel">Nuevo área</h4>
+                                <h4 class="modal-title" id="myModalLabel">Nueva Area</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label>Nombre del área</label>
+                                    <label>Nombre del Area</label>
                                     <input id="nombreDeArea" class="form-control" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Tipo de área</label>
                                     <?php
                                     include '../Datos/mostrarTiposDeAreas.php';
                                     ?>
                                 </div>
                                 <div class="form-group">
-                                    <label>Observación</label>
+                                    <label>Observacion</label>
                                     <textarea id="observacionDeArea" class="form-control" rows="3"></textarea>
                                 </div>
                             </div>
