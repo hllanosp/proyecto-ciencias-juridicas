@@ -27,6 +27,21 @@ while ($row = mysql_fetch_array($query)) {
 
 
                 }
+                ,
+                "language":
+                {
+                    "lengthMenu": "Mostrar _MENU_ registros por página",
+                    "zeroRecords": "No se han encontrado registros",
+                    "info": "Mostrando página _PAGE_ de _PAGES_",
+                    "infoEmpty": "No hay registros disponibles",
+                    "infoFiltered": "(Filtrado de _MAX_ registros)"   ,
+                    "search": "Buscar",
+                    "paginate":
+                            {
+                                "previous": "Anterior",
+                                "next" : "Siguiente"
+                            }
+                }
             }); // example es el id de la tabla
         });
 
@@ -67,7 +82,7 @@ while ($row = mysql_fetch_array($query)) {
  
    function llegadaCrear()
 {
-    $("#contenedor").load('pages/crearPOA.php');
+    $("#contenedor").load('pages/crearEdificios.php');
      //$("#contenedor").load('../cargarPOAs.php');
 }
  
@@ -242,7 +257,7 @@ while ($row = mysql_fetch_array($query)) {
 
             <div class="row">            
                 <div class="panel panel-default">
-                    <a id="retonoPOA" href="#"><i class="fa fa-table fa-fw"></i>POA:<strong> <?php echo " ".$nombre; ?></strong></a>
+                    <a id="retornoEdificio" href="#"><i class="fa fa-table fa-fw"></i>Edificio:<strong> <?php echo " ".$nombre; ?></strong></a>
                     
                 </div>
                 

@@ -1,4 +1,6 @@
-
+<?php
+	include '../../Datos/conexion.php';
+?>
 
 <!DOCTYPE html>
 <html lang="utf-8">

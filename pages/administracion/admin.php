@@ -68,13 +68,14 @@
 		   <div class="panel-body">
               <p><strong>alertas automáticas de los folios</strong></p>
               <div class="clearfix"></div>
+                           <!--Modificado por Enderson Mendez= cambio de lengiaje-->
 			  <?php $event = $result2_event['Value'];
 			    if($event == "OFF"){
-				   echo '<input type="checkbox" name="event" id="event">';   
+				   echo '<input type="checkbox" name="event" id="event" data-on-text="SI" data-off-text="NO">';   
 				}else{
-				   echo '<input type="checkbox" name="event" id="event" checked>';
+				   echo '<input type="checkbox" name="event" id="event" checked data-on-text="SI" data-off-text="NO">'; 
 				}
-			  ?>
+			  ?>              
               <hr>
               Las alertas automáticas de los folios se crearan conforme se ingresen los folios y se les de seguimiento a estos, en el caso que no se les de seguimiento o no se finalice el seguimiento se crearan alertas cada 3 días después de el ultimo seguimiento.
            </div>

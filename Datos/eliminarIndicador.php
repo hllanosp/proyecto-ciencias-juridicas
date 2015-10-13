@@ -1,22 +1,25 @@
 <?php
 include '../Datos/conexion.php';
+require_once("../conexion/config.inc.php");
+
 $idIndicador = $_POST['ide'];
 $idObj = $_POST['obj'];
 
-$consulta = $conectar->prepare("CALL pa_eliminar_indicador(?)");
-$consulta->bind_param('i', $idIndicador);
+$consulta = $db->prepare("CALL pa_eliminar_indicador(?, @mensaje, @codMensaje)");
+$consulta->bindParam(1, $idIndicador, PDO::PARAM_INT);
 $resultado = $consulta->execute();
 
-if ($resultado == 1) {
+$output = $db->query("select @mensaje, @codMensaje")->fetch(PDO::FETCH_ASSOC);
+$mensaje = $output['@mensaje'];
+$codMensaje = $output['@codMensaje'];
+
+if ($mensaje == NULL) {
     echo '<div id="resultado" class="alert alert-success">
-        se ha eliminado el Indicador
-         
+       Se ha eliminado el indicador.
          </div>';
 } else {
     echo '<div id="resultado" class="alert alert-danger">
-        No se ejecuto la accion de eliminar
-         
-         </div>';
+        ' . $mensaje .' </div>';
 }
 
 //include 'cargarObjetivos.php';

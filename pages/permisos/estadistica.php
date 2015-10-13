@@ -36,23 +36,10 @@ if(isset($_GET['contenido']))
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 	
 <body>
-	<script>
-     $( "#fecha_i" ).datepicker({
-		//changeMonth: true,
-		//changeYear: true
-	});
-     $( "#fecha_f" ).datepicker({
-		//changeMonth: true,
-		//changeYear: true
-	});
-
-
-    </script>
 
 		      <!-- /.Filtracion Principal-->							
                                         
@@ -64,13 +51,12 @@ if(isset($_GET['contenido']))
 				<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headingTwo">
 			  <h4 class="panel-title">
-				<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-extended="false" aria-expanded="false" aria-controls="collapseThree" >
+				<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
 				  Seleccione el Período de Tiempo
-				  <span class="caret"></span>
 				</a>
 			  </h4>
 			</div>
-			<div id="collapseThree" class="panel-collapse collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+			<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 			  <div class="panel-body">
 								
 							   <div class="panel panel-green">
@@ -90,9 +76,8 @@ if(isset($_GET['contenido']))
 	  <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-        Avanzada
-        <span class="caret"></span> 
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Avanzada 
 			</a>
       </h4>
     </div>

@@ -4,14 +4,9 @@
 	$id = $_POST['Edificio_ID'];
 	$desc = $_POST['dedificio'];
 
-	require_once("../../conexion/conn.php");  
-	$conexion = mysqli_connect($host, $username, $password, $dbname);
-	$query="update edificios set descripcion = '$desc' where Edificio_ID = '$id';";
-	$resultado = mysqli_query($conexion, $query) or die("Error " . mysqli_error($link));
-	mysqli_close($conexion);
-
+	require_once('conexion.php');
 	
-	//mysql_query("update edificios set descripcion = '$desc' where Edificio_ID = '$id';", $enlace);
+	mysql_query("update edificios set descripcion = '$desc' where Edificio_ID = '$id';", $enlace);
 	
-	//mysql_close($enlace);
+	mysql_close($enlace);
 ?>
