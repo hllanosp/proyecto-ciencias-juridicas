@@ -1,5 +1,5 @@
 <?php
-	include '../../../conexion/config.inc.php';
+	require_once '../../../conexion/config.inc.php';
 	
 	$queryString = "SELECT * FROM ca_cursos";
 
@@ -56,46 +56,51 @@
 	}
 
 	function obtenerDias($cod_curso){
-		$dias = array();
-		$queryString = "SELECT cod_dia from ca_cursos_dias where cod_curso =".$cod_curso;
-		$query = mysql_query($queryString);
-		
-		while($row = mysql_fetch_assoc($query)){
-			switch ($row['cod_dia']) {
-				case 1: array_push($dias,"lun");break;
-				case 2: array_push($dias,"mar");break;
-				case 3: array_push($dias,"mier");break;
-				case 4: array_push($dias,"ju");break;
-				case 5: array_push($dias,"vi");break;
-				case 6: array_push($dias,"sa");break;
-				default:
-					echo "ERROR AL OBTENER DÏAS";
-					break;
-			}
-		}
-		
-		return $dias;
+            $dias = array();
+            $queryString = "SELECT cod_dia from ca_cursos_dias where cod_curso =".$cod_curso;
+            $query = mysql_query($queryString);
+
+            while($row = mysql_fetch_assoc($query)){
+                    switch ($row['cod_dia']) {
+                            case 1: array_push($dias,"lun");break;
+                            case 2: array_push($dias,"mar");break;
+                            case 3: array_push($dias,"mier");break;
+                            case 4: array_push($dias,"ju");break;
+                            case 5: array_push($dias,"vi");break;
+                            case 6: array_push($dias,"sa");break;
+                            default:
+                                    echo "ERROR AL OBTENER DÏAS";
+                                    break;
+                    }
+            }
+
+            return $dias;
 	}
 
 	function obtenerEdificio($cod_aula){
-		$queryString = "SELECT descripcion FROM 
-						edificios where Edificio_ID in (select cod_edificio from ca_aulas where codigo =".$cod_aula." ) ";
-		$query = mysql_query($queryString);
-		$row = mysql_fetch_assoc($query);		
-		return $row['descripcion'];
+            global $db;
+            $cod_aula = (int)$cod_aula;
+            $queryString = $db -> prepare("SELECT descripcion FROM edificios where Edificio_ID in (select cod_edificio from ca_aulas where codigo =".$cod_aula.")");
+            $queryString -> execute();
+            $row = $queryString -> fetch(PDO::FETCH_ASSOC);		
+            return $row['descripcion'];
 	}
 
 	function obtenerCodEdificio($cod_aula){
-		$queryString = "SELECT cod_edificio FROM ca_aulas WHERE codigo =".$cod_aula;
-		$query = mysql_query($queryString);
-		$row = mysql_fetch_assoc($query);		
-		return $row['cod_edificio'];
+            global $db;
+            $cod_aula = (int)$cod_aula;
+            $queryString = $db -> prepare("SELECT cod_edificio FROM ca_aulas WHERE codigo =".$cod_aula);
+            $queryString -> execute();
+            $row = $queryString -> fetch(PDO::FETCH_ASSOC);		
+            return $row['cod_edificio'];
 	}
 
 	function obtenerAula($cod_aula){
-		$queryString = "SELECT numero_aula FROM ca_aulas where codigo =".$cod_aula;
-		$query = mysql_query($queryString);
-		$row = mysql_fetch_assoc($query);
-		return $row['numero_aula'];
+            global $db;
+            $cod_aula = (int)$cod_aula;
+            $queryString = $db -> prepare("SELECT numero_aula FROM ca_aulas where codigo =".$cod_aula);
+            $queryString -> execute();
+            $row = $queryString -> fetch(PDO::FETCH_ASSOC);
+            return $row['numero_aula'];
 	}
 ?>
