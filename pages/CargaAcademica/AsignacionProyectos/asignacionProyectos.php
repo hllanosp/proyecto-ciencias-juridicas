@@ -52,8 +52,24 @@ include '../../../conexion/config.inc.php'
                     <div class="col-sm-7"  style="width:100%;">
                       <select class="form-control" id="docentes" name="docentes" style="height:250px" multiple>
                         <?php
-                            $stringQuery = "SELECT No_Empleado, Primer_nombre,Segundo_nombre,Primer_apellido,Segundo_apellido FROM persona p INNER JOIN empleado e ON p.N_Identidad = e.N_Identidad 
-                                            WHERE e.No_Empleado not in (SELECT No_Empleado FROM ca_empleados_proyectos)";
+                            $stringQuery = "SELECT 
+                                                    No_Empleado, 
+                                                    Primer_nombre, 
+                                                    Segundo_nombre, 
+                                                    Primer_apellido, 
+                                                    Segundo_apellido 
+                                            FROM 
+                                                    persona p 
+                                                    INNER JOIN empleado e ON p.N_Identidad = e.N_Identidad 
+                                                    INNER JOIN departamento_laboral dl ON dl.Id_departamento_laboral = e.Id_departamento 
+                                            WHERE 
+                                                    e.No_Empleado not in (
+                                                            SELECT 
+                                                                    No_Empleado 
+                                                            FROM 
+                                                                    ca_empleados_proyectos
+                                                    ) 
+                                                    AND dl.nombre_departamento = 'Docencia'";
                             //$query = mysql_query("SELECT No_Empleado, Primer_nombre,Segundo_nombre,Primer_apellido,Segundo_apellido FROM persona p INNER JOIN empleado e ON p.N_Identidad = e.N_Identidad WHERE (Id_departamento = (SELECT Id_departamento_laboral from departamento_laboral WHERE nombre_departamento = 'Docencia'))");                            
                             $query = mysql_query($stringQuery);
                             while($row = mysql_fetch_assoc($query)){
