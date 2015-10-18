@@ -1,22 +1,34 @@
 <?php
-$id = $_POST['ide'];
-$nombre;
-session_start();
-include '../Datos/conexion.php';
-
-$query = mysql_query("SELECT * FROM poa where id_Poa='" . $id . "'", $enlace);
-while ($row = mysql_fetch_array($query)) {
-    $nombre = $row['nombre'];
-    $_SESSION['inicio_Poa']=$row['fecha_de_Inicio'];
-    $_SESSION['fin_Poa']=$row['fecha_Fin'];
-}
+    //En este archivo se realizo mantenimiento por Alex Flores (IIIP - 2015)
+    include '../Datos/conexion.php';
+    $maindir = '../';
+    
+    //Se obtienen los datos mediante POST desde pages/POA/POAs/index.php
+    //Se necesito parsear el id, sino no devolvía dato la consulta
+    $id = (int)$_POST['ide'];
+    
+    //Se declaran variables necesarias
+    session_start();
+    
+    //Incluimos el contenido del archivo config.inc.php
+    include $maindir.'conexion/config.inc.php';
+    
+    //Se realiza una consulta obtienendo toda la informacion del POA segun id
+    $query = $db -> prepare("SELECT * FROM poa WHERE id_Poa = ?");
+    $query -> execute(array($id));
+    
+    //Se guarda la información de la consulta
+    while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+        $nombre                 =   $row['nombre'];
+        $_SESSION['inicio_Poa'] =   $row['fecha_de_Inicio'];
+        $_SESSION['fin_Poa']    =   $row['fecha_Fin'];
+        $_SESSION['idPOA']      =   $id;
+    }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es">
-
-    <head>
+    <head>        
         
         <script type="text/javascript">
 
@@ -248,38 +260,33 @@ while ($row = mysql_fetch_array($query)) {
 
 
     </head>
-
     <body>
-
         <input type="hidden" id="idPOA" value="<?php echo $id; ?>">     
-
         <div class="col-lg-12">
-
             <div class="row">            
                 <div class="panel panel-default">
-                    <a id="retornoEdificio" href="#"><i class="fa fa-table fa-fw"></i>Edificio:<strong> <?php echo " ".$nombre; ?></strong></a>
-                    
+                    <a id="retornoEdificio" href="#">
+                        <i class="fa fa-table fa-fw"></i>Edificio:
+                        <strong> <?php echo " ".$nombre; ?></strong>
+                    </a>
                 </div>
-                
-                          
-                                <div class="panel panel-default">
-                                    <div class="panel-body">
-                                        <div class="col-lg-8">
-                                            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
-                                                Nuevo Objetivo
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <label >Mis Objetivos </label>
-                                    </h4>
-                                </div>
-                                <div >
-                                    <div id="contenedor2" class="panel-body">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-lg-8">
+                            <button class="btn btn-success" data-toggle="modal" data-target="#myModal">
+                                Nuevo Objetivo
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <label >Mis Objetivos </label>
+                        </h4>
+                    </div>
+                    <div >
+                        <div id="contenedor2" class="panel-body">
 
 
 
@@ -332,115 +339,79 @@ while ($row = mysql_fetch_array($query)) {
                                                     </tbody>
                                                 </table>
                                             </div>
-                                          
-
-
-
-
-
-
-
-
-                                    </div>
-                                </div>
-                            </div> 
-
-                    
-        </div>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Agregar Nuevo Objetivo</h4>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <form role='form' id="form" name="form">
-                            <div class="form-group">
-                                <label>Definición </label>
-                                <textarea id="def" class="form-control" rows="2" required 
-                                          pattern="[^0-9]"
-                                          ></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Area Estrategica </label>
-                                <textarea id="area" class="form-control" rows="2" required
-                                          pattern="[^0-9]"
-                                          ></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Resultado</label>
-                                <textarea id="res" class="form-control" rows="2" required
-                                          pattern="[^0-9]"
-                                          ></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Area a la que pertenece </label>
-                                <select id="tipArea" class="form-control">
-                                    <option value="0">Seleccione..</option>
-                                    <?php
-                                    $consulta = "SELECT * FROM area";
-
-                                    if ($resultado = $conectar->query($consulta)) {
-
-                                        while ($fila = $resultado->fetch_row()) {
-                                            $id = $fila[0];
-                                            $area = $fila[1];
+                </div> 
+            </div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Nuevo Objetivo Institucional</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form role='form' id="form" name="form">
+                                <div class="form-group">
+                                    <label>Definición </label>
+                                    <textarea id="def" class="form-control" rows="2" required 
+                                        pattern="[^0-9]"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Área estratégica </label>
+                                    <textarea id="area" class="form-control" rows="2" required
+                                              pattern="[^0-9]"
+                                              ></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Resultado</label>
+                                    <textarea id="res" class="form-control" rows="2" required
+                                              pattern="[^0-9]"
+                                              ></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Área a la que pertenece </label>
+                                    <select id="tipArea" class="form-control">
+                                        <option value="0">Seleccione..</option>
+                                        <?php
+                                        $consulta = "SELECT * FROM area";
+                                        $resultado = $db->prepare($consulta);
+                                        $resultado -> execute();
+                                        while ($fila = $resultado->fetch(PDO::FETCH_ASSOC)) {
+                                            $id = $fila['id_Area'];
+                                            $area = $fila['nombre'];
                                             ?>
                                             <option value="<?php echo $id; ?>"><?php echo $area; ?></option>
                                             <?php
                                         }
-                                        $resultado->close();
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                                <button  class="btn btn-primary" >Guardar</button>
-                            </div>
-
-                        </form>
-
+                                        $resultado -> closeCursor();
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button"  class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    <button  class="btn btn-primary" >Guardar</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-
+                    <!-- /.modal-content -->
                 </div>
-                <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-        </div>  
+                <!-- /.modal-dialog -->
+            </div>  
+            <div class="modal fade" id="editarObjetivo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Editar Objetivo Institucional</h4>
+                        </div>
+                        <div class="modal-body" id="cuerpoEditarObjetivo">
 
-
-
-        <div class="modal fade" id="editarObjetivo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="myModalLabel">Editar Objetivo Institucional</h4>
+                        </div>
                     </div>
-                    <div class="modal-body" id="cuerpoEditarObjetivo">
-
-                    </div>
-
                 </div>
             </div>
-
-        </div> 
-
-
-
-
-
-
-
-
-
-
+        </div>
     </body>
-
 </html>
-
-<?php
-mysql_close($enlace);
-?>
