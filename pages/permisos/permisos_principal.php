@@ -35,23 +35,36 @@ if(!isset( $_SESSION['user_id'] ))
 <?php 
 
 	$rol = $_SESSION['user_rol'];
-	require_once("../../conexion/conn.php"); 
-	$conexion = mysqli_connect($host, $username, $password, $dbname);
+	require("../../conexion/config.inc.php");
+
+	
 	$encontro=1;
 		//$query1 = mysqli_query($conexion, "SELECT Id_departamento FROM empleado where ='".$unidad."'");
-		$query = mysqli_query($conexion, "SELECT  Id_departamento, No_Empleado FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')");
-		mysqli_data_seek ($query,0);
-		$extraido = mysqli_fetch_array($query);
-//		echo $extraido['No_Empleado'];
-	
-		
-		
-		$consulta  = mysqli_query($conexion, "Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+
+	$sql="SELECT  Id_departamento, No_Empleado FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')";
+    $rec =$db->prepare($sql);
+     $rec->execute();
+		//$query = mysqli_query($conexion, "SELECT  Id_departamento, No_Empleado FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')");
+		//mysqli_data_seek ($query,0);
+		//$extraido = mysqli_fetch_array($query);
+     $extraido=$rec->fetch();
+      $sql1="Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
 			DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, 
 			departamento_laboral.nombre_departamento,estado from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
 			inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
 			inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento where  
-			 permisos.id_departamento = '".$extraido['Id_departamento']."' and permisos.No_Empleado='".$extraido['No_Empleado']."' ORDER BY fecha asc");
+			 permisos.id_departamento = '".$extraido['Id_departamento']."' and permisos.No_Empleado='".$extraido['No_Empleado']."' ORDER BY fecha asc";
+          $consulta  =$db->prepare($sql1);
+          $consulta ->execute();
+	   
+		
+		
+		//$consulta  = mysqli_query($conexion, "Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+		//	DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, 
+		//	departamento_laboral.nombre_departamento,estado from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
+		//	inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
+		//	inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento where  
+		//	 permisos.id_departamento = '".$extraido['Id_departamento']."' and permisos.No_Empleado='".$extraido['No_Empleado']."' ORDER BY fecha asc");
 	
 		require_once($maindir."pages/permisos/menu_permisos.php");
 	?>
@@ -76,7 +89,7 @@ if(!isset( $_SESSION['user_id'] ))
 					<table id="tabla_Solicitudes" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th><strong>Permiso</strong></th>
+								<th style='display:none'><strong>Permiso</strong></th>
 								<th><strong> Nombre</strong></th>
 								<!--<th><strong>Segundo Nombre</strong></th>
 								<th><strong>Primer Apellido</strong></th>
@@ -94,7 +107,7 @@ if(!isset( $_SESSION['user_id'] ))
 						<tbody>
 HTML;
 
-            while ($row = mysqli_fetch_array($consulta))  {
+            while ($row =$consulta->fetch())  {
 
             $idP = $row['id_Permisos'];
             $pnombre = $row['Primer_nombre'];
@@ -112,7 +125,7 @@ HTML;
             
                 echo "<tr data-id='".$idP."'>";
                 echo <<<HTML
-                <td>$idP</td>
+                <td style='display:none'>$idP</td>
 
 HTML;
              

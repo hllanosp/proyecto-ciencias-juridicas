@@ -20,9 +20,8 @@ if(isset($_GET['contenido']))
     header('Location: '.$maindir.'login/logout.php?code=100');
     exit();
   }
+  require("../../conexion/config.inc.php");
   
- 	require_once("../../conexion/conn.php");  
-	$conexion = mysqli_connect($host, $username, $password, $dbname);
 ?>
 <!DOCTYPE html>
 
@@ -55,7 +54,7 @@ if(isset($_GET['contenido']))
 				</a>
 			  </h4>
 			</div>
-			<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+			<div id="collapseThree" class="panel-collapse collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
 			  <div class="panel-body">
 								
 							   <div class="panel panel-green">
@@ -93,8 +92,11 @@ if(isset($_GET['contenido']))
 					<option value=-1>Ninguno</option>
 					
 					<?php
-						$rec1 = mysqli_query($conexion, "select departamento_laboral.nombre_departamento from departamento_laboral");
-						while ($row = mysqli_fetch_array($rec1)) {
+					    $sql="select departamento_laboral.nombre_departamento from departamento_laboral";
+                        $rec =$db->prepare($sql);
+                        $rec->execute();
+						//$rec1 = mysqli_query($conexion, "select departamento_laboral.nombre_departamento from departamento_laboral");
+						while ($row = $rec->fetch()) {
 							echo "<option>";
 							echo $row['nombre_departamento'];
 							echo "</option>";
@@ -110,8 +112,13 @@ if(isset($_GET['contenido']))
 
 					
 					<?php
-						$rec1 = mysqli_query($conexion, "SELECT descripcion from motivos");
-						while ($row = mysqli_fetch_array($rec1)) {
+						$sql="SELECT descripcion from motivos";
+                        $rec =$db->prepare($sql);
+                        $rec->execute();
+
+
+						//$rec1 = mysqli_query($conexion, "SELECT descripcion from motivos");
+						while ($row =$rec->fetch()) {
 							echo "<option>";
 							echo $row['descripcion'];
 							echo "</option>";
@@ -162,8 +169,7 @@ $( document ).ready(function() {
 		fecha_i= $("#fecha_i").val();
 		fecha_f= $("#fecha_f").val();
 		
-		alert(area,fecha_i);
-								
+			
    
 			data={
 									area: area,
@@ -191,7 +197,7 @@ $( document ).ready(function() {
 	$("#btpersona").on('click',function(){
           mode = $(this).data('mode');
           id1 = $(this).data('id');
-		  alert(id1);
+		  
           if(mode == "verPDF"){
            
 			data={

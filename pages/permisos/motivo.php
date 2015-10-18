@@ -24,12 +24,11 @@ if(isset($_GET['contenido']))
 ?>
 
 <?php
-//include 'conexion.php';
-require_once("../../conexion/conn.php");  
+require("../../conexion/config.inc.php");
+$sql="SELECT * from motivos";
+$rec =$db->prepare($sql);
+$rec->execute();
 
-$conexion = mysqli_connect($host, $username, $password, $dbname);
-
-$rec = mysqli_query($conexion, "SELECT * from motivos");
 ?>
 
 <!DOCTYPE html>
@@ -68,7 +67,7 @@ $rec = mysqli_query($conexion, "SELECT * from motivos");
 									
                                         <div class="form-group">
                                             <label>Motivo</label>
-                                            <input class="form-control" id ="motivo" name="motivo">
+                                            <input type="text" class="form-control"  id ="motivo" name="motivo" onpaste="return false">
                                         </div>
 										
                                         <button id = "guardar" class="guardarMotivo btn btn-default">Agregar</button>
@@ -81,34 +80,40 @@ $rec = mysqli_query($conexion, "SELECT * from motivos");
                                     <table id="tabla_Motivos" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                            <th><strong>ID Motivo</strong></th>
+                                            <th style='display:none'><strong>ID Motivo</strong></th>
                                              <th><strong>Descripci&#243;n Motivo</strong></th>
                                              <th><strong>Editar</strong></th>
+                                             <th><strong>Eliminar</strong></th>
                                             </tr>
                                         </thead>
                                         <tbody></tbody>
 HTML;
 
-               while ($row = mysqli_fetch_array($rec))  {
+               while ($row = $rec->fetch() ) {
 
 				$idM = $row['Motivo_ID'];
 				$dmotivo = $row['descripcion'];
             
             
-                echo "<tr data-id='".$idM."'>";
+                echo "<tr   data-id='".$idM."'>";
                 echo <<<HTML
-                <td>$idM</td>
+                <td style='display:none' >$idM</td>
 
 HTML;
-                //echo <<<HTML <td><a href='javascript:ajax_("'$url'");'>$NroFolio</a></td>HTML;
+                
                 echo <<<HTML
 				
-                <td>$dmotivo</td>
+                <td>   $dmotivo </td>
 				
 				<td><center>
                     <a class="open-Modal btn btn-primary" data-toggle="modal" data-id=$idM data-target="#compose-modal"><i class="fa fa-edit"></i></a>
+                    
                 </center></td>
-
+                <td><center>
+                    
+                    <a class="open-Modal-Eliminar btn btn-danger"  data-toggle="modal" data-idEliminar=$idM data-target="#Eliminar-modal" ><i class="fa fa-trash-o"></i></a>
+                </center></td>
+ 
 
 HTML;
                 echo "</tr>";
@@ -131,6 +136,8 @@ HTML;
 				</div>						
 			</div>							
 	</div>
+ 
+ 
 	
  <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
@@ -138,6 +145,7 @@ HTML;
 	  <form role="form" id="form" name="form" action="#">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
         <h4 class="modal-title"><i class="glyphicon glyphicon-floppy-disk"></i>Editando Motivo</h4>
       </div>
               <div class="modal-body">
@@ -145,9 +153,11 @@ HTML;
                       <div class="input-group">
                               <div class="input-group">
 								  <input id="codmotivo" type="hidden" class="form-control" value = ""  required>
-                                  <input id="descripcionm" type="text" class="form-control" placeholder="Descripci&#243;n de motivo"    required>
+                                  <input id="descripcionm" type="text" onpaste="return false"  class="form-control" placeholder="Descripci&#243;n de motivo"    required>
                                   <span class="input-group-btn">
 									<button id="editaM" class="edita btn btn-danger glyphicon glyphicon-edit"> </button>
+
+
                                       <!--<button id="guardarJ" class="guardarJ btn btn-primary" type="button">Finalizar</button>-->
                                   </span>
                               </div>
@@ -170,11 +180,52 @@ HTML;
 </div><!-- /.modal -->
 </div> 
 
+
+<div class="modal fade" id="Eliminar-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class=" modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h4 style="font-size:large;" class="modal-title">Confirmacion</h4>
+      </div>
+      <div  class="modal-body">
+
+        <p style='display:none' id="codigo"></p>
+        <center><p style="font-size:large;"  id="informacion"></p></center>
+        
+       
+        
+      </div>
+      <div class="modal-footer">
+       
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="button-Eliminar"type="button" data-dismiss="modal" class="btn btn-danger ">Eliminar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 <script>
-$(document).on("click", ".open-Modal", function () {
+$(document).on("click",".open-Modal", function () {
 	id = $(this).parents("tr").find("td").eq(0).html();
 	var myDNI = $(this).data('id');
 	$(".modal-body #codmotivo").val(myDNI);
+
+});
+$(document).on("click",".open-Modal-Eliminar",function(){
+  var id=$(this).parents("tr").find("td").eq(0).html();
+$('#Eliminar-modal #codigo').text(id);
+ var descripcion= $(this).parents("tr").find("td").eq(1).html();
+  var d = " Desea Eliminar "+descripcion;
+$('#Eliminar-modal #informacion').text(d);
+
+
+
+
 });
 			
  var id;
@@ -191,7 +242,68 @@ $(document).on("click", ".open-Modal", function () {
        var x;
         x=$("#editaM");
         x.click(editarMotivo);
+        var x;
+      
+        x=$("#button-Eliminar");
+        x.click(FeliminarMotivo);
+        
+        
+      
+
 	}
+  function FeliminarMotivo()
+  {   $ID=$('#Eliminar-modal #codigo').text();
+    var dat={'Motivo_ID':$ID};
+  //$("#contenedor").load('pages/permisos/EliminarMotivo.php',dat);
+  $.ajax({
+                data:  dat,
+                url:   'pages/permisos/EliminarMotivo.php',
+                type:  'post',
+                dataType:'json',
+                beforeSend: function () {
+                        $("#contenedor").html("Procesando, espere por favor...");
+                },
+                success:  function (response) {
+                        if(response.exito)
+                        {
+
+                          alert(response.mensaje);
+
+                        }
+                        else
+                        {
+                          if(response.errores.Motivo_ID)
+                          {
+                            alert(response.errores.Motivo_ID);
+                          }
+                          
+                          if(response.errores.motivorelacionado)
+                          {
+                            alert(response.errores.motivorelacionado);
+                          }
+                          if(response.errores.ErrorEliminar)
+                          {
+                            alert(response.errores.ErrorEliminar);
+                          }  
+                        }
+                        
+                          $("#contenedor").load('pages/permisos/motivo.php');
+                },
+                error : function(xhr, status) {
+                  $("#contenedor").html("error");
+        
+    }
+ 
+    
+        });
+  
+                    
+     
+    
+  }
+ 
+ 
+
 	
 	function consulta() {
             var dmotivo=$("#motivo").val(); 
@@ -221,7 +333,7 @@ $(document).on("click", ".open-Modal", function () {
 		//var id = $(this).parents("tr").find("td").eq(0).html();
 		var respuesta=confirm("¿Esta seguro de que desea cambiar el registro seleccionado?");
         if (respuesta){  
-			data = {Motivo_ID:$('#codmotivo').val(), dmotivo:$('#descripcionm').val()};
+			data = {Motivo_ID:$('#codmotivo').val(),dmotivo:$('#descripcionm').val()};
 			$.ajax({
 				async:true,
 				type: "GET",
@@ -231,7 +343,8 @@ $(document).on("click", ".open-Modal", function () {
 				url:"pages/permisos/editarMotivos.php",     
 				beforeSend:inicioEnvio,
 				success:llegadaEditarMotivo,
-				timeout:4000,
+
+				//timeout:4000,
 				error:problemas
 			});
 			return false;
@@ -251,6 +364,7 @@ $(document).on("click", ".open-Modal", function () {
 	
 	function problemas()
 	{
+
     $("#contenedor").text('Problemas en el servidor.');
 	}
 
@@ -260,8 +374,12 @@ $(document).on("click", ".open-Modal", function () {
 		alert("Transacción completada correctamente");
 		$("#contenedor").load('pages/permisos/motivo.php');
     }
+   
 	
+
+
 </script>
+
 	
 </body>
 

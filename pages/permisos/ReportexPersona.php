@@ -8,8 +8,7 @@
   require_once($maindir."funciones/check_session.php");
 
   require_once($maindir."funciones/timeout.php");
- 	require_once("../../conexion/conn.php");  
-	$conexion = mysqli_connect($host, $username, $password, $dbname);
+ 	require("../../conexion/config.inc.php");
 		$idempleado= $_POST['no_empleado'];
 		//echo $idempleado;
 ?>
@@ -80,8 +79,12 @@
 					<option value=-1>Ninguno</option>
 					
 					<?php
-						$rec1 = mysqli_query($conexion, "select departamento_laboral.nombre_departamento from departamento_laboral");
-						while ($row = mysqli_fetch_array($rec1)) {
+						$sql="select departamento_laboral.nombre_departamento from departamento_laboral";
+                        $rec =$db->prepare($sql);
+                        $rec->execute();
+
+						//$rec1 = mysqli_query($conexion, "select departamento_laboral.nombre_departamento from departamento_laboral");
+						while ($row =$rec->fetch()) {
 							echo "<option>";
 							echo $row['nombre_departamento'];
 							echo "</option>";
@@ -97,8 +100,12 @@
 
 					
 					<?php
-						$rec1 = mysqli_query($conexion, "SELECT descripcion from motivos");
-						while ($row = mysqli_fetch_array($rec1)) {
+					$sq2="SELECT descripcion from motivos";
+                        $rec2 =$db->prepare($sq2);
+                        $rec2->execute();
+
+						//$rec1 = mysqli_query($conexion, "SELECT descripcion from motivos");
+						while ($row = $rec2->fetch()) {
 							echo "<option>";
 							echo $row['descripcion'];
 							echo "</option>";

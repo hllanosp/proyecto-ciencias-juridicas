@@ -58,6 +58,7 @@ if(!isset( $_SESSION['user_id'] ))
                         </ul>
                     </li>
                     <!-- Seccion Manejo de solicitudes -->
+
                     <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu2">
                       <h5><i class="fa fa-users "></i> Gestión de solicitudes<i class="glyphicon glyphicon-chevron-down"></i></h5>
                       </a>
@@ -65,6 +66,21 @@ if(!isset( $_SESSION['user_id'] ))
                         <ul class="list-unstyled collapse in" id="userMenu2">     
                            
                             <li><a id="SolicitudEstudiante" href="#"><i class="fa fa-user fa-fw"></i> Solicitudes</a></li> 
+                        </ul>
+                    </li>
+
+                     <!-- seccion de reportes -->
+                    <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu2">
+                      <h5><i class="glyphicon glyphicon-list-alt "></i> Modulo de Reportes<i class="glyphicon glyphicon-chevron-down"></i></h5>
+                      </a>
+                        <!--Ingreso sub menu seccion de Gestion de solicitudes  -->
+                        <ul class="list-unstyled collapse in" id="userMenu2">     
+                           
+                            <li><a id="secre_reportes" href="#"><i class="fa fa-file fa-fw"></i> Reportes</a></li> 
+                        </ul>
+                         <ul class="list-unstyled collapse in" id="userMenu2">     
+                           
+                            <li><a id="secre_generacion_documentos" href="#"><i class="glyphicon glyphicon-save-file"></i> Generacion de Documentos</a></li> 
                         </ul>
                     </li>
                     <!-- Seccion Manejo de docmumentos -->
@@ -77,6 +93,7 @@ if(!isset( $_SESSION['user_id'] ))
                       <h5><i class="glyphicon glyphicon-search"></i> Búsqueda avanzada</h5>
                       </a>
                     </li>
+
                     <!-- Seccion de Mantenimiento -->
                     <li class="nav-header" id = "Mantenimiento"> <a href="#" data-toggle="collapse" data-target="#userMenu3">
                         <?php

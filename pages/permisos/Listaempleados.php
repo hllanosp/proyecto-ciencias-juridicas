@@ -2,7 +2,7 @@
 //Este codigo hace una validación de la sesión del usuario y del tiempo que esta lleva inactiva, para proceder a cerrarla
 $maindir = "../../";
 
-require_once("../../conexion/conn.php");
+
 
 if (isset($_GET['contenido'])) {
     $contenido = $_GET['contenido'];
@@ -28,11 +28,23 @@ if(!isset( $_SESSION['user_id'] ))
 ?>
 
 <?php
-	$conexion = mysqli_connect($host, $username, $password, $dbname);
-	$result = mysqli_query($conexion, "SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
-		persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
-		inner join persona on empleado.N_identidad=persona.N_identidad 
-		inner join departamento_laboral on departamento_laboral.Id_departamento_laboral=empleado.Id_departamento");
+
+require("../../conexion/config.inc.php");
+
+
+$sql="SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
+    persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
+    inner join persona on empleado.N_identidad=persona.N_identidad 
+    inner join departamento_laboral on departamento_laboral.Id_departamento_laboral=empleado.Id_departamento";
+$rec =$db->prepare($sql);
+$rec->execute();
+	
+
+  //$conexion = mysqli_connect($host, $username, $password, $dbname);
+	//$result = mysqli_query($conexion, "SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
+//		persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
+	//	inner join persona on empleado.N_identidad=persona.N_identidad 
+	//	inner join departamento_laboral on departamento_laboral.Id_departamento_laboral=empleado.Id_departamento");
 
 ?>
 
@@ -166,7 +178,7 @@ HTML;
 	//$field_cnt = $result->field_count;
 	//if($field_cnt > 0){
 
-            while ($row = mysqli_fetch_array($result))  {
+            while ($row = $rec->fetch())  {
 
             $Noempleado = $row['No_Empleado'];
             $Noidentidad = $row['N_identidad'];

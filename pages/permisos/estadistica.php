@@ -22,8 +22,10 @@ if(isset($_GET['contenido']))
     exit();
   }
   
- 	require_once("../../conexion/conn.php");  
-	$conexion = mysqli_connect($host, $username, $password, $dbname);
+ 	//require_once("../../conexion/conn.php");  
+	//$conexion = mysqli_connect($host, $username, $password, $dbname);
+	require("../../conexion/config.inc.php");
+   
 ?>
 <!DOCTYPE html>
 
@@ -36,10 +38,12 @@ if(isset($_GET['contenido']))
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 	
 <body>
+	
 
 		      <!-- /.Filtracion Principal-->							
                                         
@@ -51,12 +55,13 @@ if(isset($_GET['contenido']))
 				<div class="panel panel-default">
 			<div class="panel-heading" role="tab" id="headingTwo">
 			  <h4 class="panel-title">
-				<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+				<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-extended="false" aria-expanded="false" aria-controls="collapseThree" >
 				  Seleccione el Período de Tiempo
+				  <span class="caret"></span>
 				</a>
 			  </h4>
 			</div>
-			<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+			<div id="collapseThree" class="panel-collapse collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
 			  <div class="panel-body">
 								
 							   <div class="panel panel-green">
@@ -76,8 +81,9 @@ if(isset($_GET['contenido']))
 	  <div class="panel panel-default">
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
-        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        Avanzada 
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        Avanzada
+        <span class="caret"></span> 
 			</a>
       </h4>
     </div>
@@ -99,8 +105,11 @@ if(isset($_GET['contenido']))
 
 					
 					<?php
-						$rec1 = mysqli_query($conexion, "SELECT descripcion from motivos");
-						while ($row = mysqli_fetch_array($rec1)) {
+					    $sql="SELECT descripcion from motivos";
+                        $rec =$db->prepare($sql);
+                        $rec->execute();
+						//$rec1 = mysqli_query($conexion, "SELECT descripcion from motivos");
+						while ($row = $rec->fetch()) {
 							echo "<option>";
 							echo $row['descripcion'];
 							echo "</option>";
