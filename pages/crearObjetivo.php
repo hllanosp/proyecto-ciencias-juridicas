@@ -9,6 +9,7 @@ while ($row = mysql_fetch_array($query)) {
     $nombre = $row['nombre'];
     $_SESSION['inicio_Poa']=$row['fecha_de_Inicio'];
     $_SESSION['fin_Poa']=$row['fecha_Fin'];
+    $_SESSION['idPOA']      =   $id;
 }
 ?>
 
