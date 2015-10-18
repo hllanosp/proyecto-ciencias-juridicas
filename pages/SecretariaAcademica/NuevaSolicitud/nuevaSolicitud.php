@@ -1,6 +1,6 @@
 <?php 
 $maindir = "../../../";
-include ($maindir .'Datos/conexion.php');
+// include ($maindir .'Datos/conexion.php');
 include($maindir . "conexion/config.inc.php");
  ?>
 <script >
@@ -60,6 +60,7 @@ include($maindir . "conexion/config.inc.php");
     function obtenerSolicitudEstudiante()
     {
         id =$("#identidad").val();
+
                     
                     var datos = 
                         {
@@ -77,7 +78,7 @@ include($maindir . "conexion/config.inc.php");
                         success: function(response){
                                                     
                             var arr = JSON.parse(response);
-                            alert("que ondas con esas solicitudes" + arr);   
+                            //alert("que ondas con esas solicitudes" + arr);   
                             var options = '';
                             var val='NULL';
                             var def='Seleccione una opción';
@@ -95,7 +96,8 @@ include($maindir . "conexion/config.inc.php");
                                 options += '<option value="' + codigoTipoSolicitud + '">' +
                                             nombreTipoSolicitud + '</option>';
                             }                            
-                            $("#selectTiposSolicitud").html(options);                                                                                    
+                            $("#selectTiposSolicitud").html(options);  
+                                                                                                           ;
                         },
                         timeout: 4000,
                         
@@ -103,7 +105,8 @@ include($maindir . "conexion/config.inc.php");
     }
     
     function obtenerPeriodos()
-    {                        
+    {                  
+      
                 id =$("#identidad").val();
                     
                     var datos = 
@@ -154,6 +157,7 @@ include($maindir . "conexion/config.inc.php");
         options += '<option value="' + val + '">' +def+ '</option>';
         $("#selectTiposSolicitud").html(options);
     }
+
     //guarda una solicitud echa para un estudiante
     $(document).ready(function () {
         obtenerPeriodos();
@@ -273,8 +277,8 @@ include($maindir . "conexion/config.inc.php");
              
              //con este se llena el combobox del tipo de solicitud del estudiante
              $(document).on("focusout","#identidad",function () {                    
-                    
                     obtenerSolicitudEstudiante();
+                    // ObtenerPeriodosSolicitudEstudiante();
                     return false;
              });
              
@@ -348,15 +352,15 @@ include($maindir . "conexion/config.inc.php");
                             <select class="form-control" id="selectTiposSolicitud" name="selectTiposSolicitud">
                                 <option value="NULL">Seleccione una opción</option>
                                  <?php 
-                                //     $consulta="CALL SP_OBTENER_TIPOS_SOLICITUDES_POR_ESTUDIANTE('".$pcIdentidadEstudiante."',@pcMensajeError)";
-                                //     $resultado=mysql_query($consulta);
+                                    // $consulta="CALL SP_OBTENER_TIPOS_SOLICITUDES_POR_ESTUDIANTE('".$pcIdentidadEstudiante."',@pcMensajeError)";
+                                    // $resultado=mysql_query($consulta);
 
                                     
 
-                                //     WHILE($linea=mysql_fetch_array($resultado))
-                                //      {
-                                //           echo "<option value= $linea[codigo]> $linea[nombre]</option>";
-                                //      }
+                                    // WHILE($linea=mysql_fetch_array($resultado))
+                                    //  {
+                                    //       echo "<option value= $linea[codigo]> $linea[nombre]</option>";
+                                    //  }
 
 
 

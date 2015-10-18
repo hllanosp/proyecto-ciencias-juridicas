@@ -4,13 +4,14 @@ require_once("../conexion/config.inc.php");
 $pcIdentidadEstudiante= $_POST['id'];
 
 
-$consulta="CALL SP_OBTENER_TIPOS_SOLICITUDES_POR_ESTUDIANTE('".$pcIdentidadEstudiante."',@pcMensajeError)";
-$resultado=mysql_query($consulta);
+$consulta= $db ->prepare ("CALL SP_OBTENER_TIPOS_SOLICITUDES_POR_ESTUDIANTE('".$pcIdentidadEstudiante."',@pcMensajeError)");
+$consulta ->execute();
+$resultado = $consulta;
 
 $json = array();
 $interacion = 0;
 
-WHILE($linea=mysql_fetch_array($resultado))
+WHILE($linea = $resultado -> fetch(PDO::FETCH_ASSOC))
 	{
 	    $json[$interacion] = array
         	(                
