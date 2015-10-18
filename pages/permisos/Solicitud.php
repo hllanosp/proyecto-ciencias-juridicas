@@ -17,23 +17,39 @@ require_once($maindir . "funciones/timeout.php");
 	//Esta seccion obtiene el nombre de usuario que ha iniciado sesión y lo guarda en una variable
 	$idusuario = $_SESSION['user_id'];
 
-	include("../../conexion/conn.php");  
-	$conexion = mysqli_connect($host, $username, $password, $dbname);
-	$rec = mysqli_query($conexion, "select departamento_laboral.nombre_departamento from departamento_laboral where Id_departamento_laboral in( SELECT Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='$idusuario'))");
-	$row = mysqli_fetch_array($rec);
-	//consulta datos del empleado
 	
-	$rec7 = mysqli_query($conexion, "Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido,empleado.No_Empleado from persona 
+	require("../../conexion/config.inc.php");
+    $sql="select departamento_laboral.nombre_departamento from departamento_laboral where Id_departamento_laboral in( SELECT Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='$idusuario'))";
+    $rec =$db->prepare($sql);
+    $rec->execute();
+    $row = $rec->fetch();
+	//$conexion = mysqli_connect($host, $username, $password, $dbname);
+	//$rec = mysqli_query($conexion, "select departamento_laboral.nombre_departamento from departamento_laboral where Id_departamento_laboral in( SELECT Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='$idusuario'))");
+	//$row = mysqli_fetch_array($rec);
+	//consulta datos del empleado
+	$sql1="Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido,empleado.No_Empleado from persona 
 			inner join empleado on persona.N_identidad=empleado.N_identidad
-			where empleado.No_Empleado in (select usuario.No_Empleado from usuario where usuario.id_Usuario='".$idusuario."')");
-													
-													
-	$row7= mysqli_fetch_array($rec7);
+			where empleado.No_Empleado in (select usuario.No_Empleado from usuario where usuario.id_Usuario='".$idusuario."')";
+    $rec =$db->prepare($sql1);
+    $rec->execute();
+    $row7 = $rec->fetch();
+    // $rec7 = mysqli_query($conexion, "Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido,empleado.No_Empleado from persona 
+	//		inner join empleado on persona.N_identidad=empleado.N_identidad
+	//		where empleado.No_Empleado in (select usuario.No_Empleado from usuario where usuario.id_Usuario='".$idusuario."')");												
+	//$row7= mysqli_fetch_array($rec7);
 	//consulta de cantidad de Dias en el mes 
-	$Solicitudes_mes= mysqli_query($conexion, "Select COUNT(permisos.id_Permisos)
+	$sql4="Select COUNT(permisos.id_Permisos)
 	as Solicitudes from permisos where No_Empleado= '".$row7['No_Empleado']."' and MONTH(fecha )= MONTH(NOW()) and YEAR(fecha)=YEAR(NOW())
-	 and estado='Aprobado'" );
-	$row_solicitud = mysqli_fetch_array($Solicitudes_mes);
+	 and estado='Aprobado'" ;
+//	$Solicitudes_mes= mysqli_query($conexion, "Select COUNT(permisos.id_Permisos)
+//	as Solicitudes from permisos where No_Empleado= '".$row7['No_Empleado']."' and MONTH(fecha )= MONTH(NOW()) and YEAR(fecha)=YEAR(NOW())
+//	 and estado='Aprobado'" );
+    $rec =$db->prepare($sql4);
+    $rec->execute();
+    $row_solicitud = $rec->fetch();
+
+
+	//$row_solicitud = mysqli_fetch_array($Solicitudes_mes);
 
 	
 	//$result = mysqli_query($conexion, "SELECT No_Empleado FROM usuario  where id_Usuario='$idusuario'");
@@ -52,6 +68,10 @@ require_once($maindir . "funciones/timeout.php");
     var f = new Date();
     var $fecha_a = (f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear()); //Este codigo obtiene los elementos de la fecha actual del sistema
 
+   //  $( "#fecha" ).datepicker({
+		//changeMonth: true,
+		//changeYear: true
+	//});
 //Esta función se realiza cuando el documento ya esta listo
     $(document).ready(function() {
 
@@ -79,7 +99,7 @@ require_once($maindir . "funciones/timeout.php");
 								type: "POST",
 								// dataType: "html",
 								// contentType: "application/x-www-form-urlencoded",
-								url: "pages/permisos/Isolicitud.php",
+								url: 'pages/permisos/Isolicitud.php',
 								success: llegadaGuardar,
 								data: data,
 								timeout: 4000,
@@ -88,14 +108,18 @@ require_once($maindir . "funciones/timeout.php");
 							//documentos que realizaran otros procedimientos sin necesidad de refrescar toda la pagina
 							return false;
 						}
+						
+		
 		);
     });
 
     function llegadaGuardar(datos)
     {
         $("#bt").fadeOut("slow");
-        alert(datos);
-        $("#div_contenido").load('pages/permisos/permisos_principal.php', data);
+       alert(datos);
+      
+        //$("#contenedor").html(datos);
+       $("#div_contenido").load('pages/permisos/permisos_principal.php', data);
     }
 
 
@@ -111,7 +135,7 @@ require_once($maindir . "funciones/timeout.php");
 
 <!--<script type="text/javascript" src="../sl/jquery-2.1.3.js"></script>
 <script language="javascript" type="text/javascript"></script>-->
-
+         <link href="css/bootstrap.min.css" rel="stylesheet">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -189,9 +213,11 @@ require_once($maindir . "funciones/timeout.php");
 											<?php
 											/* Este codigo jala los datos que hay en la tabla de motivos y los muestra en el 
 											  combobox */
-											  
-												$rec1 = mysqli_query($conexion, "SELECT descripcion from motivos");
-												while ($row = mysqli_fetch_array($rec1)) {
+											     $ql2="SELECT descripcion from motivos";
+											     $rec2 =$db->prepare($ql2);
+                                                 $rec2->execute();
+                                                 
+												while ($row = $row = $rec2->fetch()) {
 													echo "<option>";
 													echo $row['descripcion'];
 													echo "</option>";
@@ -204,8 +230,11 @@ require_once($maindir . "funciones/timeout.php");
                                             <label>Edificio donde tiene registrada su asistencia :</label>
                                             <select class="form-control" Id="edificio" name="edificio">
                                                 <?php
-													$rec2 = mysqli_query($conexion, "SELECT descripcion from edificios");
-													while ($row = mysqli_fetch_array($rec2)) {
+													$sql3="SELECT descripcion from edificios";
+													$rec2 =$db->prepare($sql3);
+                                                    $rec2->execute();
+													
+													while ($row = $rec2->fetch()) {
 														echo "<option>";
 														echo $row['descripcion'];
 														echo "</option>";
@@ -215,7 +244,7 @@ require_once($maindir . "funciones/timeout.php");
                                             </select>                                       
                                         </div>
                                         <div>
-                                            <label>Cantidad de días:</label>											 
+                                            <label>Rango de fechas:</label>											 
 
                                             <p> <input type="number" id="cantidad" name="cantidad" min="0" max="5" value="0" required ></p>
                                         </div>
@@ -223,7 +252,7 @@ require_once($maindir . "funciones/timeout.php");
                                         <div>
                                             <label>Fecha:</label>
 
-                                            <p> <input type="date" id="fecha" name="datepicker" required ></p>												
+                                            <p> <input type="date" id="fecha" ></p>												
                                         <table>
                                             <tr><label>Hora Inicio:</label>											
                                             <p>	<input type="time" name="horai" min=6:00 max=22:00 step=900 id="horai" value="1:00 pm" required></p>

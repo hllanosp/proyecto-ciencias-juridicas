@@ -20,12 +20,21 @@ require_once($maindir . "funciones/timeout.php");
 
 <?php
 
-
- $query4 = mysql_query(" SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
+ require("../../conexion/config.inc.php");
+ $sql="SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
  persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
  inner join persona on empleado.N_identidad=persona.N_identidad 
- inner join departamento_laboral on departamento_laboral.Id_departamento_laboral =empleado.Id_departamento
-	");
+ inner join departamento_laboral on departamento_laboral.Id_departamento_laboral =empleado.Id_departamento" ;
+ $rec =$db->prepare($sql);
+ $rec->execute();
+
+
+
+ //$query4 = mysql_query(" SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
+ //persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
+ //inner join persona on empleado.N_identidad=persona.N_identidad 
+ //inner join departamento_laboral on departamento_laboral.Id_departamento_laboral =empleado.Id_departamento
+	//");
 
 ?>
 
@@ -136,7 +145,7 @@ require_once($maindir . "funciones/timeout.php");
                                             <tr>                                            
                                             <th>No empleado</th>
                                             <th>No identidad</th>
-                                            <th>nombre</th>
+                                            <th>Nombre</th>
                                             <th>Apellido</th>
                                             <th>Departamento</th>
                                             <th>Seleccionar</th>
@@ -146,7 +155,7 @@ require_once($maindir . "funciones/timeout.php");
                                         <tbody>
 HTML;
 
-            while ($row2 = mysql_fetch_array($query4))  {
+            while ($row2= $rec->fetch()  {
 
             $Noempleado = $row2['No_Empleado'];
             $Noidentidad = $row2['N_identidad'];

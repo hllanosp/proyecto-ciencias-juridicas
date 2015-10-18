@@ -1,6 +1,12 @@
+
+
+
 <?php
-	include '../../Datos/conexion.php';
+	
+    require("../../conexion/config.inc.php");
+ 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="utf-8">
@@ -55,7 +61,7 @@
 
             function llegadabuscar()
             {
-                $("#contenedor2").load('Datos/BuscarPersona.php',data);
+                $("#contenedor2").load('BuscarPersona.php',data);
                 //$("#contenedor").load('../cargarPOAs.php');
             }
             

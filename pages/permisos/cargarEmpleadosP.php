@@ -1,6 +1,7 @@
 <?php
 //Este codigo hace una validación de la sesión del usuario y del tiempo que esta lleva inactiva, para proceder a cerrarla
 $maindir = "../../";
+require("../../conexion/config.inc.php");
 
 if (isset($_GET['contenido'])) {
     $contenido = $_GET['contenido'];
@@ -20,12 +21,23 @@ require_once($maindir . "funciones/timeout.php");
 
 <?php
 
-
- $query = mysql_query(" SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
+ $ql1=" SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
  persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
  inner join persona on empleado.N_identidad=persona.N_identidad 
  inner join departamento_laboral on departamento_laboral.Id_departamento_laboral =empleado.Id_departamento
-	");
+  ";
+
+
+
+
+
+
+
+ //$query = mysql_query(" SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
+ //persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
+ //inner join persona on empleado.N_identidad=persona.N_identidad 
+ //inner join departamento_laboral on departamento_laboral.Id_departamento_laboral =empleado.Id_departamento
+//	");
 
 ?>
 
@@ -156,8 +168,11 @@ require_once($maindir . "funciones/timeout.php");
                                         </thead>
                                         <tbody>
 HTML;
+            
 
-            while ($row = mysql_fetch_array($query))  {
+              $rec =$db->prepare($ql1);
+              $rec->execute();
+            while ($row = $rec->fetch()) {
 
             $Noempleado = $row['No_Empleado'];
             $Noidentidad = $row['N_identidad'];

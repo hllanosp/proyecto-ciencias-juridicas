@@ -1,6 +1,8 @@
 <?php
 
 $maindir = "../../";
+require("../../conexion/config.inc.php");
+
  
 if(isset($_GET['contenido']))
     {
@@ -28,29 +30,59 @@ if(isset($_GET['contenido']))
 <?php 
 	
 	$rol = $_SESSION['user_rol'];
-	require_once("../../conexion/conn.php"); 
-	$conexion = mysqli_connect($host, $username, $password, $dbname);
+	
 	if($rol == 30){
-		$query = mysqli_query($conexion, "SELECT  Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')");
-		mysqli_data_seek ($query,0);
-		$extraido = mysqli_fetch_array($query);
-		
-		
-		$consulta  = mysqli_query($conexion, "Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+		$sql1="SELECT  Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')";
+        $rec =$db->prepare($sql1);
+        $rec->execute();
+        $extraido=$rec->fetch();
+		//$query = mysqli_query($conexion, "SELECT  Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')");
+		//mysqli_data_seek ($query,0);
+		 // $extraido = mysqli_fetch_array($query);
+		  $query= "Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
 			DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado,
 			departamento_laboral.nombre_departamento from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
 			inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
 			inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento where permisos.id_departamento = '".$extraido['Id_departamento']."' and
-			permisos.estado = 'Espera' or permisos.estado = 'Aprobado' ORDER BY fecha asc");
+			permisos.estado = 'Espera' or permisos.estado = 'Aprobado' ORDER BY fecha asc";
+			$consulta =$db->prepare($query);
+            $consulta->execute();
+
+			//$consulta = mysqli_query($conexion, $query) or die("Error " . mysqli_error($link));
+	    // mysqli_close($conexion);
+
+
+		
+		
+		//$consulta  = mysqli_query($conexion, "Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+		//	DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado,
+	//	departamento_laboral.nombre_departamento from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
+	//		inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
+	//		inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento where permisos.id_departamento = '".$extraido['Id_departamento']."' and
+	//		permisos.estado = 'Espera' or permisos.estado = 'Aprobado' ORDER BY fecha asc");
 
 	}else{
 		if($rol == 50){
-			$consulta = mysqli_query($conexion, "Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+			$query ="Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
 			DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado,
 			departamento_laboral.nombre_departamento from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
 			inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
 			inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
-			where permisos.estado = 'Visto' or permisos.estado = 'Aprobado' ORDER BY fecha asc");
+			where permisos.estado = 'Espera' or permisos.estado = 'Aprobado' ORDER BY fecha asc";
+			$consulta =$db->prepare($query);
+            $consulta->execute();
+
+
+			//$consulta = mysqli_query($conexion, $query) or die("Error " . mysqli_error($link));
+	        //mysqli_close($conexion);
+
+
+		//	$consulta = mysqli_query($conexion, "Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+		//	DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado,
+		//	departamento_laboral.nombre_departamento from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
+		//	inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
+	//		inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
+	//		where permisos.estado = 'Visto' or permisos.estado = 'Aprobado' ORDER BY fecha asc");
 		}
 	}
 ?>
@@ -102,9 +134,12 @@ if(isset($_GET['contenido']))
 						</thead>
 						<tbody>
 HTML;
+               
 
-            while ($row = mysqli_fetch_array($consulta))  {
-
+               $rowcount=$consulta->rowCount();
+  printf("Result set has %d rows.\n",$rowcount);
+            while ($row = $consulta->fetch())  {
+             
             $idP = $row['id_Permisos'];
             $pnombre = $row['Primer_nombre'];
 			$snombre = $row['Segundo_nombre'];
@@ -308,7 +343,7 @@ x.ready(inicio);
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
-		    url:"../SistemaCienciasJuridicas/pages/permisos/aprobarSolicitud.php",  
+		    url:'pages/permisos/aprobarSolicitud.php',  
 			beforeSend: inicioEnvio,
 			success: llegadaAprobar,
 			data:data,
@@ -329,7 +364,7 @@ x.ready(inicio);
 			dataType: "html",
 			data:data,
 			contentType: "application/x-www-form-urlencoded",
-		    url:"../SistemaCienciasJuridicas/pages/permisos/denegarSolicitud.php",  
+		    url:'pages/permisos/denegarSolicitud.php',  
 			beforeSend: inicioEnvio,
 			success: llegadaDenegar,
 			timeout: 4000,
@@ -345,14 +380,15 @@ x.ready(inicio);
 	}
 	
 	function llegadaAprobar()
-	{
+
+	{   $("#contenedor").load('pages/permisos/aprobarSolicitud.php', data);
 		alert("Transacción completada correctamente");
 		$("#contenedor").load('pages/permisos/revision.php', data);
 	}
 	
 	function llegadaDenegar()
 	{
-		$("#contenedor").load('../SistemaCienciasJuridicas/pages/permisos/denegarSolicitud.php', data);
+		$("#contenedor").load('pages/permisos/denegarSolicitud.php', data);
 		alert("Transacción completada correctamente");
 		$("#contenedor").load('pages/permisos/revision.php');
 	}

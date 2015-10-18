@@ -17,9 +17,15 @@ $motivo =  $_GET['motivo'];
 $fechai =  $_GET['fecha_i'];
 $fechaf =  $_GET['fecha_f'];
 $rol = $_SESSION['user_rol'];
-$query = mysqli_query($conexion, "SELECT  Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')");
-		mysqli_data_seek ($query,0);
-		$extraido = mysqli_fetch_array($query);
+
+$sql="SELECT  Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')";
+$rec =$db->prepare($sql);
+$rec->execute();
+$extraido=$rec->fetch();
+
+//$query = mysqli_query($conexion, "SELECT  Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')");
+//		mysqli_data_seek ($query,0);
+		//$extraido = mysqli_fetch_array($query);
 $consulta2=0;
 
 if( $fechai!="" and $fechaf!=""){

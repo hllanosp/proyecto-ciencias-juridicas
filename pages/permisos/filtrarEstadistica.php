@@ -20,6 +20,11 @@ if(isset($_GET['contenido']))
     header('Location: '.$maindir.'login/logout.php?code=100');
     exit();
   }
+  require("../../conexion/config.inc.php");
+$sql="SELECT * from edificios";
+$rec =$db->prepare($sql);
+$rec->execute();
+
   
 require_once("../../conexion/conn.php");  
 $conexion = mysqli_connect($host, $username, $password, $dbname);
@@ -41,17 +46,18 @@ $consulta=0;
 if( ($fechai!="" and $fechaf!="")){
 $consulta=1;
 }
-	
-	$query = mysqli_query($conexion, "SELECT  Id_departamento, No_Empleado FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')");
-	mysqli_data_seek ($query,0);
-	$extraido2 = mysqli_fetch_array($query);
+	$sql="SELECT  Id_departamento, No_Empleado FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')";
+    $rec1 =$db->prepare($sql);
+    $rec1->execute();
+	//$query = mysqli_query($conexion, "SELECT  Id_departamento, No_Empleado FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')");
+	//mysqli_data_seek ($query,0);
+	//$extraido2 = mysqli_fetch_array($query);
+	$extraido2=$rec1->fetch();
 	
 	//Filtrado por fechas
 if($motivo!='-1'  ){
                            
-	
-		
-	$query1  = mysqli_query($conexion, " Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+	 $sql=" Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
 		DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado
 		from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
 		inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
@@ -59,21 +65,42 @@ if($motivo!='-1'  ){
 		motivos.descripcion='".$motivo." ' and 
 		permisos.No_Empleado='".$extraido2['No_Empleado']."' and
 		date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
-		GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc");
+		GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc";
+     	 $rec =$db->prepare($sql);
+        $rec->execute();
+		
+	//$query1  = mysqli_query($conexion, " Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+	//	DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado
+	//	from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
+	//	inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
+	//	inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento where 
+	//	motivos.descripcion='".$motivo." ' and 
+	//	permisos.No_Empleado='".$extraido2['No_Empleado']."' and
+	//	date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
+	//	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc");
 
 	}
 
 if($motivo=='-1'  ){
-                           
-		
-	$query1  = mysqli_query($conexion, " Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+        $sql= " Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
 		DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado
 		from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
 		inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
 		inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento where 
 		permisos.No_Empleado='".$extraido2['No_Empleado']."' and
 		date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
-		GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc");
+		GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc";
+		 $rec =$db->prepare($sql);
+        $rec->execute();                 
+		
+	//$query1  = mysqli_query($conexion, " Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+	//	DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado
+	//	from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
+	//	inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
+	//	inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento where 
+	//	permisos.No_Empleado='".$extraido2['No_Empleado']."' and
+	//	date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
+	//	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc");
 
 	}	
 
@@ -88,7 +115,7 @@ if($motivo=='-1'  ){
 					<table id="tabla_Solicitudes" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th><strong>Permiso</strong></th>
+								<th style='display:none'><strong>Permiso</strong></th>
 								<th><strong> Nombre</strong></th>
 								<!--<th><strong>Segundo Nombre</strong></th>
 								<th><strong>Primer Apellido</strong></th>
@@ -104,7 +131,7 @@ if($motivo=='-1'  ){
 						<tbody>
 HTML;
 if ($consulta==1){
-            while ($row = mysqli_fetch_array($query1))  {
+            while ($row = $rec->fetch())  {
 
             $idP = $row['id_Permisos'];
             $pnombre = $row['Primer_nombre'];
@@ -120,7 +147,7 @@ if ($consulta==1){
 					
                 echo "<tr data-id='".$idP."'>";
                 echo <<<HTML
-                <td>$idP</td>
+                <td style='display:none'>$idP</td>
 
 HTML;
                 echo <<<HTML
