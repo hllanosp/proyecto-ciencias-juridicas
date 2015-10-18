@@ -1,13 +1,11 @@
 <?php
 	//Se recibe el nuevo valor que se asignara al campo Nombre del registro seleccionado y se guarda en la base de datos
-	
+	require("../../conexion/config.inc.php");
 	$id=$_POST['Motivo_ID'];	
-	$desc=$_POST['dmotivo'];
+	$desc=$_POST['dmotivo'];	 
+	$query="update motivos set descripcion = '$desc' WHERE Motivo_ID='$id'";
 	
-	require_once("conexion.php");
-	
-	mysql_query("update motivos set descripcion = '$desc' WHERE Motivo_ID='$id'", $enlace);	
-	
-	mysql_close($enlace);
+            $rec =$db->prepare($query);
+            $rec->execute();
 
 ?>

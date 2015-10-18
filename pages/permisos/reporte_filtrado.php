@@ -21,8 +21,8 @@
     exit();
   }
   
-require_once("../../conexion/conn.php");  
-$conexion = mysqli_connect($host, $username, $password, $dbname);
+
+require("../../conexion/config.inc.php");
   
 ?>
 
@@ -46,9 +46,7 @@ $consulta=1;
 // sin filtros	
  if( $depto=='-1' and  $motivo=='-1'){
         
-                     
-		
-	$query1  = mysqli_query($conexion, " 
+    $sql1= " 
 Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento, motivos.descripcion, 
 COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasistencias from permisos
  inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
@@ -56,7 +54,21 @@ COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasis
  inner join persona on persona.N_identidad=empleado.N_identidad 
  inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
  where date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
-	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento ORDER BY Primer_nombre asc");
+	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento ORDER BY Primer_nombre asc";
+	$rec =$db->prepare($sql1);
+    $rec->execute();                
+		
+	
+
+	//$query1  = mysqli_query($conexion, " 
+//Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento, motivos.descripcion, 
+//COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasistencias from permisos
+// inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
+ //inner join empleado on empleado.No_Empleado=permisos.No_Empleado 
+ //inner join persona on persona.N_identidad=empleado.N_identidad 
+ //inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
+ //where date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
+//	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento ORDER BY Primer_nombre asc");
 
 
 	}
@@ -64,7 +76,7 @@ COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasis
 // 	con filtro del departemento
 	if( $depto!='-1' and  $motivo=='-1'   and ($fechai!="" and $fechaf!="")){
     		
-	$query1  = mysqli_query($conexion, " 
+	$sql2=" 
 Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion,  
 COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasistencias from permisos
  inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
@@ -73,15 +85,30 @@ COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasis
  inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
  where  departamento_laboral.nombre_departamento='".$depto."'
  and date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
-	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento ORDER BY Primer_nombre asc");
+	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento ORDER BY Primer_nombre asc";
+
+
+     $rec =$db->prepare($sql2);
+    $rec->execute();                
+		
+//	$query1  = mysqli_query($conexion, " 
+//Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion,  
+//COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasistencias from permisos
+ //inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
+ //inner join empleado on empleado.No_Empleado=permisos.No_Empleado 
+ //inner join persona on persona.N_identidad=empleado.N_identidad 
+ //inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
+ //where  departamento_laboral.nombre_departamento='".$depto."'
+ //and date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
+//	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento ORDER BY Primer_nombre asc");
+
+
 }
 		
 	// 	con filtro del motivos y depattamento 	
 		if( $depto!='-1' and  $motivo!='-1'   and ($fechai!="" and $fechaf!="")){
                            
-	
-			
-	$query1  = mysqli_query($conexion, " 
+	$sql3=" 
 Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion, 
 COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasistencias from permisos
  inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
@@ -90,16 +117,27 @@ COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasis
  inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
  where  departamento_laboral.nombre_departamento='".$depto."' and motivos.descripcion='".$motivo."' and 
  date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
-	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc");
+	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc";
+	$rec =$db->prepare($sql3);
+    $rec->execute(); 
+			
+	//$query1  = mysqli_query($conexion, " 
+//Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion, 
+//COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasistencias from permisos
+ //inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
+ //inner join empleado on empleado.No_Empleado=permisos.No_Empleado 
+ //inner join persona on persona.N_identidad=empleado.N_identidad 
+ //inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
+ //where  departamento_laboral.nombre_departamento='".$depto."' and motivos.descripcion='".$motivo."' and 
+ //date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
+	//GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc");
 
 	}
 	
 // 	por fechas 
 		if( $depto=='-1' and  $motivo!='-1'  ){
                            
-	
-		
-	$query1  = mysqli_query($conexion, " 
+	$sql4=" 
 Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento, motivos.descripcion, 
 COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasistencias from permisos
  inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
@@ -108,7 +146,20 @@ COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasis
  inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
  where  motivos.descripcion='".$motivo."' and 
  date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
-	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc");
+	GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc";
+   $rec =$db->prepare($sql4);
+   $rec->execute(); 
+		
+	//$query1  = mysqli_query($conexion, " 
+//Select Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento, motivos.descripcion, 
+//COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasistencias from permisos
+ //inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
+ //inner join empleado on empleado.No_Empleado=permisos.No_Empleado 
+ //inner join persona on persona.N_identidad=empleado.N_identidad 
+ //inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
+ //where  motivos.descripcion='".$motivo."' and 
+ //date_format(permisos.fecha,'%d-%m-%Y') between  date_format('".$fechai." ','%d-%m-%Y')and date_format('".$fechaf."','%d-%m-%Y')	
+	//GROUP BY Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, departamento_laboral.nombre_departamento,motivos.descripcion ORDER BY Primer_nombre asc");
 
 	}
 ?>      
@@ -136,7 +187,7 @@ COUNT(permisos.id_Permisos) as Solicitudes, SUM(permisos.dias_permiso) as Inasis
 						<tbody>
 HTML;
 if ($consulta==1){
-            while ($row = mysqli_fetch_array($query1))  {
+            while ($row = $rec->fetch())  {
 
            
             $pnombre = $row['Primer_nombre'];

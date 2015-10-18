@@ -2,17 +2,26 @@
 <?php
 
  $maindir = "../../";
+ 
 
 require_once($maindir."fpdf/fpdf.php");
 require($maindir."conexion/config.inc.php");
-$conexion = mysqli_connect($host, $username, $password, $dbname);
+
 
 $idPermiso = $_GET['id1'];
+$sql="Select permisos.estado from permisos where permisos.id_Permisos = '$idPermiso'";
+$rec =$db->prepare($sql);
+$rec->execute();
+$row=$rec->fetch();
 
-$query = mysqli_query($conexion, "Select permisos.estado from permisos where permisos.id_Permisos = '$idPermiso'");
-$row = mysqli_fetch_array($query);
+//$query = mysqli_query($conexion, "Select permisos.estado from permisos where permisos.id_Permisos = '$idPermiso'");
+//$row = mysqli_fetch_array($query);
 if($row['estado'] == 'Aprobado'){
-	$query2 = mysqli_query($conexion, "update permisos set estado = 'Finalizado' where id_Permisos = '$idPermiso'") or die("Error " . mysqli_error($conexion));
+	$sql2="update permisos set estado = 'Finalizado' where id_Permisos = '$idPermiso'";
+	$rec2 =$db->prepare($sql2);
+    $rec2->execute();
+
+	//$query2 = mysqli_query($conexion, "update permisos set estado = 'Finalizado' where id_Permisos = '$idPermiso'") or die("Error " . mysqli_error($conexion));
 }
 
 

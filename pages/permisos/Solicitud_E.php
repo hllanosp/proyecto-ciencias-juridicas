@@ -71,7 +71,7 @@ require_once($maindir . "funciones/timeout.php");
 								type: "POST",
 								// dataType: "html",
 								// contentType: "application/x-www-form-urlencoded",
-								url: "../SistemaCienciasJuridicas/pages/permisos/IsolicitudE.php",
+								url: 'pages/permisos/IsolicitudE.php',
 								success: llegadaGuardar,
 								data: data,
 								timeout: 4000,
