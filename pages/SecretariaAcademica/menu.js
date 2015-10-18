@@ -90,6 +90,19 @@
       $("#contenedor").load( "pages/SecretariaAcademica/Mantenimiento/Orientaciones/orientaciones.php"
                             );
       });
+
+    
+    $("#secre_reportes").click(function(event) {
+      event.preventDefault();
+    
+      $("#contenedor").load( "pages/SecretariaAcademica/GeneracionReportes/principal_reportes.php");
+      });
+
+    // $("#secre_generacion_reportes").click(function(event) {
+    //   event.preventDefault();
+    //   $("#contenedor").load( "pages/SecretariaAcademica/Mantenimiento/Orientaciones/orientaciones.php"
+    //                         );
+    //   });
     
 });
 
