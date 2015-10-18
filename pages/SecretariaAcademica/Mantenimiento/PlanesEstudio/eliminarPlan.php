@@ -16,12 +16,12 @@ include($mkdir."conexion/config.inc.php");
 
 
         if(is_null($mensaje)){
-            echo'<div class="alert alert-success  alert-dismissable" >
-            <strong> Error! </strong>EL plan de estudio se ha borrado correctamente</div>';
+            echo'<div id = "mensaje" class="alert alert-success  alert-dismissable" >
+            <strong> Exito! </strong>EL plan de estudio se ha borrado correctamente</div>';
         }
         else{
-              echo'<div class="alert alert-danger  alert-dismissable class="close"">
-             <strong> Exito! </strong>'.$mensaje.'</div>';
+              echo'<div id = "mensaje"class="alert alert-danger  alert-dismissable class="close"">
+             <strong> Error! </strong>'.$mensaje.'</div>';
         }
 
 
@@ -30,10 +30,19 @@ include($mkdir."conexion/config.inc.php");
 
     }catch(PDOExecption $e){
 
-        echo '<div class="alert alert-danger alert-error">
+        echo '<div id = "mensaje" class="alert alert-danger alert-error">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
             <strong> Error! </strong> error al intentar realizar la accion</div>';
 
     }
 
 ?>
+
+<script>
+    $(document).ready(function(){
+        setTimeout(function(){
+            $('#mensaje').fadeOut(3000);
+        },3000);
+    });
+</script
+>

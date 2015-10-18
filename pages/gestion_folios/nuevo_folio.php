@@ -189,7 +189,7 @@ require_once("datos/datos_nuevo_folio.php");
                                                 </div>
                                                 <p id="error_entidad" class="error_text" style="color:red"></p>
                                             </div>
-                                            <div class="form-group">
+                                            <div class="form-group" style="float: left; width: -moz-available;">
                                                 <div class="input-group">
                                                     <span class="input-group-addon"><strong>Descripción</strong></span>
                                                     <textarea style="resize: vertical" id="Descripcion" class="form-control" name="Descripcion" required="required" rows="3" maxlength="300" placeholder="Ingrese una descripcion..."></textarea>
