@@ -116,7 +116,7 @@ if(isset($_GET['contenido']))
 					<table id="tabla_Solicitudes" class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th><strong>Permiso</strong></th>
+								<th style='display:none'><strong>Permiso</strong></th>
 								<th><strong> Nombre</strong></th>
 								<!--<th><strong>Segundo Nombre</strong></th>
 								<th><strong>Primer Apellido</strong></th>
@@ -154,9 +154,9 @@ HTML;
 			$Depto = $row['nombre_departamento'];
 			
             
-                echo "<tr data-id='".$idP."'>";
+                echo "<tr  data-id='".$idP."'>";
                 echo <<<HTML
-                <td>$idP</td>
+                <td style='display:none'>$idP</td>
 
 HTML;
                 //echo <<<HTML <td><a href='javascript:ajax_("'$url'");'>$NroFolio</a></td>HTML;
@@ -193,12 +193,12 @@ HTML;
 			   if($estado=="Espera" or $estado == "Visto"){
 				echo<<<HTML
 				<td><center>
-					<button class="aprobarb btn btn-primary glyphicon glyphicon-thumbs-up"  title="Aprobar">
+					<button class="aprobarlo btn btn-primary  glyphicon glyphicon-thumbs-up"  title="Aprobar">
                 </center></td>
 HTML;
 				}else{ echo <<<HTML
 				<td><center>
-					<button class="btn btn-primary glyphicon glyphicon-thumbs-up"  title="Aprobar">
+					<button class="btn btn-default  glyphicon glyphicon-thumbs-up" disabled = "true" title="Aprobar">
                 </center></td>
 HTML;
 				}
@@ -211,14 +211,14 @@ HTML;
 HTML;
 				}else{ echo <<<HTML
 				<td><center>
-					<a class="btn btn-primary" data-toggle="modal" data-target="#"><i class="fa fa-edit"></i></a>
+					<a class="btn btn-default" data-toggle="modal" disabled = "true" data-target="#"><i class="fa fa-edit"></i></a>
                 </center></td>
 HTML;
 				}
 			    if($estado=="Aprobado"){
 				echo<<<HTML
 				<td><center>
-					<button class="btn btn-default pull-right" data-mode="verPDF" data-id=$idP href="#">ExportarPDF</button>
+					<button class=" Exportar btn btn-danger pull-right" data-mode="verPDF" data-id=$idP href="#">ExportarPDF</button>
                 </center></td>
 HTML;
 				}else{
@@ -282,6 +282,8 @@ HTML;
 
 
 <script language="javascript" type="text/javascript">
+
+
 $(document).on("click", ".open-Modal", function () {
 	id = $(this).parents("tr").find("td").eq(0).html();
 	var myDNI = $(this).data('id');
@@ -289,7 +291,7 @@ $(document).on("click", ".open-Modal", function () {
 });
 
 $(document).ready(function() {
-	$(".btn-default").on('click',function(){
+	$(".Exportar").on('click',function(){
           mode = $(this).data('mode');
           id1 = $(this).data('id');
           if(mode == "verPDF"){
@@ -305,7 +307,11 @@ $(document).ready(function() {
                 url:"pages/permisos/crear_pdfpermiso.php", 
                 success:reportePDF,
                 timeout:4000,
-                error:problemas
+                error:function()
+                {
+
+                	$("#contenedor").text('Problemas en el servidor.');
+                }
             }); 
             return false;
           }
@@ -314,6 +320,7 @@ $(document).ready(function() {
 
 function reportePDF(data){
 		window.open('pages/permisos/crear_pdfpermiso.php?id1='+id1);
+		 $("#contenedor").load('pages/permisos/Revision.php');
 }
 
 var x;
@@ -323,7 +330,7 @@ x.ready(inicio);
 	function inicio()
 	{
 		var x;
-		x = $(".aprobarb");
+		x = $(".aprobarlo");
 		x.click(Aprobacion);
 		
 		var x;
@@ -337,20 +344,38 @@ x.ready(inicio);
 		var pid=$(this).parents("tr").find("td").eq(0).html();
 		var diasp=$(this).parents("tr").find("td").eq(2).html();
 		
+		
 		data ={codigo:pid, cdias:diasp, usr:"<?php echo $idusuario ?>", rol:"<?php echo $rol ?>"}; 
+	
 		$.ajax({
-			async: true,
+			data:data,
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
 		    url:'pages/permisos/aprobarSolicitud.php',  
-			beforeSend: inicioEnvio,
-			success: llegadaAprobar,
-			data:data,
-			timeout: 4000,
-			error: problemas
+
+		    timeout: 4000,
+			beforeSend: function(){ 
+
+             $("#contenedor").text('Cargando...............');
+			 },
+			success: function(datos)
+			{
+			 alert(datos);
+            $("#contenedor").load('pages/permisos/Revision.php');
+
+
+			},
+			error: function(data)
+			{
+
+				$("#contenedor").text('Problemas en el servidor.');
+			}		
+		
 		});
-		return false;
+
+            
+		
 	}
 	
 	
@@ -360,44 +385,32 @@ x.ready(inicio);
 		data ={idpermiso:$('#Permiso').val(), obs:$('#observacion').val()};
 		$.ajax({
 			async: true,
-			type: "GET",
+			type: "POST",
 			dataType: "html",
 			data:data,
 			contentType: "application/x-www-form-urlencoded",
 		    url:'pages/permisos/denegarSolicitud.php',  
-			beforeSend: inicioEnvio,
-			success: llegadaDenegar,
+			beforeSend: function(){
+            $("#contenedor").text('Cargando...............');
+
+
+			},
+			success: function(datos)
+			{
+			    alert(datos);
+				$("#contenedor").load('pages/permisos/revision.php');
+  
+			},
 			timeout: 4000,
-			error: problemas
+			error: function(datos){ 
+				$("#contenedor").text('Problemas en el servidor.');
+
+			}
 		});
 		return false;
 	}
             
-	function inicioEnvio()
-	{
-		var x = $("#contenedor");
-		x.html('Cargando...');
-	}
 	
-	function llegadaAprobar()
-
-	{   $("#contenedor").load('pages/permisos/aprobarSolicitud.php', data);
-		alert("Transacción completada correctamente");
-		$("#contenedor").load('pages/permisos/revision.php', data);
-	}
-	
-	function llegadaDenegar()
-	{
-		$("#contenedor").load('pages/permisos/denegarSolicitud.php', data);
-		alert("Transacción completada correctamente");
-		$("#contenedor").load('pages/permisos/revision.php');
-	}
-	
-	//Muestra un mensaje de error cuando la transacción falla
-	function problemas()
-	{
-    $("#contenedor").text('Problemas en el servidor.');
-	}
 
 </script>
 
