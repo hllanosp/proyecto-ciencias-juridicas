@@ -95,8 +95,13 @@
     $("#secre_reportes").click(function(event) {
       event.preventDefault();
     
-      $("#contenedor").load( "pages/SecretariaAcademica/GeneracionReportes/principal_reportes.php");
-      });
+        $("#contenedor").load( "pages/SecretariaAcademica/GeneracionReportes/principal_reportes.php");
+        });
+      
+    $("#secre_generacion_documentos").click(function(){
+        event.preventDefault();
+        $("#contenedor").load("pages/SecretariaAcademica/GeneracionReportes/DocumentosReporte/principal_documentos.php");
+    });
 
     // $("#secre_generacion_reportes").click(function(event) {
     //   event.preventDefault();

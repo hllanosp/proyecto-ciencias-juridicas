@@ -12,6 +12,13 @@
                 <input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '0' data-on-color = 'primary' data-off-color  = 'success' data-off-text = 'Solicitudes' data-on-text = 'Estudiantes' type='checkbox' name='my-checkbox'>  
 
                 </div>
+<<<<<<< HEAD
+            </section>
+        </div>
+    </div>
+</div>
+
+=======
                 <div class="col-md-6">
                     <p>Tienes que elegir entre Estudiantes y solicitudes y luego seleccionar las columnas que se deseen exportar</p>
                 </div>
@@ -176,11 +183,31 @@
                     </section>
                 </div>
             </div>
+>>>>>>> refs/remotes/origin/master
         </div>
             </form>
     </div>
 
 <script>
+<<<<<<< HEAD
+	
+	$(document).ready(function() {
+    var table = $('#tabla_reportes_solicitudes').DataTable( {
+        
+    } );
+ 
+    $('.toggle-vis').on( 'click', function (e) {
+        e.preventDefault();
+ 		
+        // Get the column API object
+        var column = table.column( $(this).attr('data-column') );
+ 
+        // Toggle the visibility
+        column.visible( ! column.visible() );
+        $(this).attr('color', ' blue');
+    } );      
+} );
+=======
     
     $(document).ready(function() {
         $.ajax('pages/SecretariaAcademica/GeneracionReportes/cargar_tablaSolicitudes.php')
@@ -251,5 +278,6 @@
           if(document.f1.elements[i].type == "checkbox")    
                 document.f1.elements[i].checked=1
     }
+>>>>>>> refs/remotes/origin/master
 </script>
                                
