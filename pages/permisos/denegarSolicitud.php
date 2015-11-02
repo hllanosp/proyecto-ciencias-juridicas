@@ -37,6 +37,7 @@
 				where id_Permisos = '$codpermiso' and estado = 'Espera'";
 		        $rec2 =$db->prepare($sql2);
                $rec2->execute();
+               echo " permiso  Denegado";
 
 
 
@@ -48,6 +49,7 @@
 				where id_Permisos = '$codpermiso' and estado = 'Visto'";
 		     $rec2 =$db->prepare($sql2);
              $rec2->execute();
+             echo "permiso Denegado";
 
 
 			//$resultado = mysqli_query($conexion, "update permisos set estado = 'Denegado', observacion = '".$obsr."', revisado_por = '".$NoEmp['No_Empleado']."' 

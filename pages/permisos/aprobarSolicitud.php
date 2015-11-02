@@ -23,6 +23,7 @@
 		$sql="update permisos set estado = 'Aprobado', revisado_por = '".$NoEmp['No_Empleado']."' where id_Permisos = '$codpermiso' and estado = 'Espera'";
         $rec =$db->prepare($sql);
         $rec->execute();
+        echo "aprobado";
         
         //$resultado = mysqli_query($conexion, "update permisos set estado = 'Aprobado', revisado_por = '".$NoEmp['No_Empleado']."' where id_Permisos = '$codpermiso' and estado = 'Espera'") or die("Error " . mysqli_error($conexion));
 	}elseif($rol==30 and $cant >=3){
@@ -30,14 +31,14 @@
        $sql="update permisos set estado = 'Visto', revisado_por = '".$NoEmp['No_Empleado']."' where id_Permisos = '$codpermiso' and estado = 'Espera'";
        $rec =$db->prepare($sql);
        $rec->execute();
-       
-
+       echo "aprobado";
 
 		//$resultado = mysqli_query($conexion, "update permisos set estado = 'Visto', revisado_por = '".$NoEmp['No_Empleado']."' where id_Permisos = '$codpermiso' and estado = 'Espera'") or die("Error " . mysqli_error($conexion));
 	}elseif($rol==50){
 		   $sql="update permisos set estado = 'Aprobado', revisado_por = '".$NoEmp['No_Empleado']."' where id_Permisos = '$codpermiso' and (estado = 'Espera' or estado = 'Visto')";
            $rec =$db->prepare($sql);
            $rec->execute();
+           echo "aprobado";
            
 		//$resultado = mysqli_query($conexion, "update permisos set estado = 'Aprobado', revisado_por = '".$NoEmp['No_Empleado']."' where id_Permisos = '$codpermiso' and (estado = 'Espera' or estado = 'Visto')") or die("Error " . mysqli_error($conexion));		
 	}
