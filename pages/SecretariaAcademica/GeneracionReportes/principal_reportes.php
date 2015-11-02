@@ -103,7 +103,6 @@
     </div>
 </div>
 
-
         </div>
     </div>
 </div>
@@ -124,6 +123,6 @@
         // Toggle the visibility
         column.visible( ! column.visible() );
         $(this).attr('color', ' blue');
-    } );
+    } );      
 } );
 </script>
