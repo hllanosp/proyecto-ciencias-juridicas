@@ -11,6 +11,7 @@ if (isset($_GET['contenido'])) {
 require_once($maindir . "funciones/check_session.php");
 
 require_once($maindir . "funciones/timeout.php");
+
 ?>
 
 <?php
@@ -116,10 +117,10 @@ require_once($maindir . "funciones/timeout.php");
     function llegadaGuardar(datos)
     {
         $("#bt").fadeOut("slow");
-       alert(datos);
+     
       
         //$("#contenedor").html(datos);
-       $("#div_contenido").load('pages/permisos/permisos_principal.php', data);
+       $("#div_contenido").load('pages/permisos/permisos_principal.php');
     }
 
 

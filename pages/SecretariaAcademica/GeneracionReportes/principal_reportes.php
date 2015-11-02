@@ -1,113 +1,195 @@
 <!-- Tabla de solicitdes en el sistema -->
-
-<div class="container"> <h1>Modulo de Reportes</h1> </div>
-        
-
-     
-<div class = "col-md-12">
     <div class="panel panel-default">
-        <div class="panel-body" id = "Solicitudes">
-           
-<div class = "col-md-12">
-
-    <div class="panel panel-default">
-        <div class="panel-heading"></div>
-
-    </div>
-    <div class="well">
-    	<div class="page-header">
-  <h1>Columnas a exportar <small></small></h1>
-</div>
-				<label  class="checkbox-inline">
-  					<input  class="toggle-vis" data-column="0" type="checkbox" id="checkboxEnLinea1" value="opcion_1"> Codigo
-				</label>
-				<label class="checkbox-inline">
-  					<input class="toggle-vis" data-column="1" type="checkbox" type="checkbox" id="checkboxEnLinea2" value="opcion_2"> Estudiante
-				</label>
-				<label class="checkbox-inline">
-  					<input class="toggle-vis" data-column="2" type="checkbox"type="checkbox" id="checkboxEnLinea3" value="opcion_3"> Observaciones
-				</label>
-
-     			<label class="checkbox-inline">
-  					<input class="toggle-vis" data-column="3" type="checkbox" type="checkbox" id="checkboxEnLinea3" value="opcion_3"> Estado
-				</label>
-
-     			<label class="checkbox-inline">
-  					<input class="toggle-vis" data-column="4" type="checkbox" type="checkbox" id="checkboxEnLinea3" value="opcion_3"> DNI
-				</label>
-
-     			<label class="checkbox-inline">
-  					<input class="toggle-vis" data-column="5" type="checkbox"type="checkbox" id="checkboxEnLinea3" value="opcion_3"> Tipo Solicitud
-				</label>
-    			 <label class="checkbox-inline">
-  					<input class="toggle-vis" data-column="6" type="checkbox" type="checkbox" id="checkboxEnLinea3" value="opcion_3" > Himno
-				</label>
-
-               
-
-     <!-- 
-            <div>
-					Toggle column: <a class="toggle-vis" data-column="0">Cod</a>
-					 - <a class="toggle-vis" data-column="1">Estudiante</a> - 
-					 <a class="toggle-vis" data-column="2">Fecha</a> - 
-					 <a class="toggle-vis" data-column="3">Observaciones</a> - 
-					 <a class="toggle-vis" data-column="4">Estado</a> - 
-					 <a class="toggle-vis" data-column="5">DNI</a>
-					 <a class="toggle-vis" data-column="6">Tipo Solicitud</a>
-					 <a class="toggle-vis" data-column="7">Himno</a>
-
-				</div>
- -->
-    	
-
-    </div>
-        	
-          
-      
-</div>
-
-<!-- Tabla de solicitdes en el sistema -->
-<div class = "col-md-12">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <label><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Solicitudes </label>
-        </div>
-        <div class="panel-body" id = "Solicitudes" style = "background-color : white;">
-            <section class="content" style = "background-color : ;">
-                <div class="table-responsive">
-                    <table id= "tabla_reportes_solicitudes" border="1" class="table table-bordered table-hover">
-                        <thead class = "well">
-                            <tr>
-                                <th>Cod</th>
-                                <th>Estudiante</th>  
-                                <th>Fecha</th>   
-                                <th>Observaciones</th>
-                                <th>Estado</th>  
-                                <th>DNI</th>
-                                <th>Tipo Solicitud</th>
-                                <th>Himno</th>
-                               
-
-                            </tr>
-                        </thead>
-                        <tbody id = "tabla_filtrada">
-                            <!-- Contenido de la tabla generado atravez de la consulta a 
-                                la base de datos -->
-
-                                <?php include("cargar_datosReportes.php"); ?>
-                        </tbody>
-                    </table>       
+        <form name="f1" class="panel-body" id = "Solicitudes">
+            <div class="row"> 
+                <div class="col-md-5 col-md-offset-4">
+                    <h1>Modulo de Reportes</h1> 
                 </div>
+               
+            </div>
+            <div class="row well">
+                 <div class="col-md-4 col-md-offset-1" >
+                <input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '0' data-on-color = 'primary' data-off-color  = 'success' data-off-text = 'Solicitudes' data-on-text = 'Estudiantes' type='checkbox' name='my-checkbox'>  
+
+                </div>
+<<<<<<< HEAD
             </section>
         </div>
     </div>
 </div>
 
+=======
+                <div class="col-md-6">
+                    <p>Tienes que elegir entre Estudiantes y solicitudes y luego seleccionar las columnas que se deseen exportar</p>
+                </div>
+            </div>
+           <!-- Tabla de solicitdes en el sistema -->
+            
+                    <div class = "col-md-6">
+                        <div class="panel panel-default ">
+                            <div class="panel-body">   
+                                <div class="col-xs-6">
+                                    <div class="checkbox checkbox-primary">
+                                        <input id="check_numeroCuenta" class=" toggle-vis styled" data-column="0"   type="checkbox" checked>
+                                        <label for="checkbox1">
+                                            Numero de Cuenta
+                                        </label>
+                                    </div>
+                                    <div class="checkbox checkbox-primary">
+                                        <input id="check_numeroIdentidad" class="toggle-vis styled" data-column="1" type="checkbox" checked >
+                                        <label for="checkbox2">
+                                            Numero de Identidad
+                                        </label>
+                                    </div>
+                                    <div class="checkbox checkbox-primary">
+                                        <input id="check_nombre" class="toggle-vis styled" data-column="2"  type="checkbox"checked>
+                                        <label for="checkbox3">
+                                            Nombre
+                                        </label>
+                                    </div>
+                                    <div class="checkbox checkbox-primary">
+                                        <input id="check_correo" class="toggle-vis styled" data-column="3"  type="checkbox"checked>
+                                        <label for="checkbox4">
+                                            Correo
+                                        </label>
+                                    </div>
+                                    <div class="checkbox checkbox-primary">
+                                        <input id="check_indice" class="toggle-vis styled" data-column="4"  type="checkbox"checked>
+                                        <label for="checkbox5">
+                                            Indice Academico
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6">
+                                    <div class="checkbox checkbox-primary">
+                                            <input id="check_mencion" class="toggle-vis styled" data-column="5" type="checkbox"checked>
+                                            <label for="checkbox6">
+                                                Mencion Honorifica
+                                            </label>
+                                        </div>
+                                        <div class="checkbox checkbox-primary">
+                                            <input id="check_solicitudes" class="toggle-vis styled"  data-column="6" type="checkbox"checked >
+                                            <label for="checkbox7">
+                                                Solicitudes
+                                            </label>
+                                        </div>
+                                        <div class="checkbox checkbox-primary">
+                                            <input id="check_plan" class=" toggle-vis styled" data-column="7" type="checkbox"checked>
+                                            <label for="checkbox8">
+                                               Plan de Estudio
+                                            </label>
+                                        </div>
+                                        <div class="checkbox checkbox-primary">
+                                            <input id="check_orientacion" class="toggle-vis styled" data-column="8"  type="checkbox"checked>
+                                            <label for="checkbox9">
+                                               Orientacion
+                                            </label>
+                                        </div>
+                                        <div class="checkbox checkbox-primary">
+                                            <input id="check_ciudadOrigen" class="toggle-vis styled" data-column="9"  type="checkbox"checked>
+                                            <label for="checkbox10">
+                                               Ciudad Origen
+                                            </label>
+                                        </div>
+                                        <div class="checkbox checkbox-primary">
+                                            <input id="check_residencia" class="toggle-vis styled" data-column="10"  type="checkbox"checked>
+                                            <label for="checkbox11">
+                                               Residencia Actual
+                                            </label>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            <div class = "col-md-6">
+
+                <div class="panel panel-default ">
+                    <div class="panel-body">
+                            <div class="col-xs-6">
+                               <div class="checkbox checkbox-success">
+                                    <input id="check_soliEstudiante" class=" toggle-vis1 styled" data-column="0"   type="checkbox" checked>
+                                    <label for="checkbox12">
+                                        Estudiante
+                                    </label>
+                                </div>
+                                <div class="checkbox checkbox-success">
+                                    <input id="check_fechaSolicitud" class="toggle-vis1 styled" data-column="1"  type="checkbox"checked>
+                                    <label for="checkbox13">
+                                        Fecha
+                                    </label>
+                                </div>
+                                <div class="checkbox checkbox-success">
+                                    <input id="check_observaciones" class="toggle-vis1 styled" data-column="2"  type="checkbox"checked>
+                                    <label for="checkbox14">
+                                        Observaciones
+                                    </label>
+                                </div>
+                                <div class="checkbox checkbox-success">
+                                    <input id="check_estado" class="toggle-vis1 styled" data-column="3" type="checkbox" checked >
+                                    <label for="checkbox15">
+                                        Estado
+                                    </label>
+                                </div>
+                                <div class="checkbox checkbox-success">
+                                    <input id="check_solidni" class="toggle-vis1 styled" data-column="4"  type="checkbox"checked>
+                                    <label for="checkbox16">
+                                        DNI Estudiante
+                                    </label>
+                                </div>
+                                <div class="checkbox checkbox-success">
+                                    <input id="check_tipoSolicitud" class=" toggle-vis1 styled" data-column="5"   type="checkbox" checked>
+                                    <label for="checkbox17">
+                                        Tipo de Solicitud
+                                    </label>
+                                </div>
+                                <!-- <div class="checkbox checkbox-success">
+                                    <input id="check_periodo" class="toggle-vis1 styled" data-column="6"  type="checkbox"checked>
+                                    <label for="checkbox18">
+                                        Periodo de solicitud
+                                    </label>
+                                </div> -->
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="checkbox checkbox-success">
+                                    <input id="check_himno" class="toggle-vis1 styled" data-column="6"  type="checkbox"checked>
+                                    <label for="checkbox19">
+                                        himno
+                                    </label>
+                                </div>
+                                
+                            </div>
+                        
+                    </div>
+                </div>
+                              
+                    </div>
+        <!-- Tabla de solicitdes en el sistema -->
+        <div class = "col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <label><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Solicitudes </label>
+                </div>
+                <div class="panel-body" id = "Solicitudes" style = "background-color : white;">
+                    <section class="content" style = "  padding: 20px 15px; background: #f9f9f9;">
+                        <div class="table-responsive" id = "tablaReportes">
+                            
+                                    <!-- Se carga todo el contenido de la tabla, dependiendo de la opcion seleccionada
+                                     Solicitudes o Estudiantes -->
+
+                                       
+                                  
+                        </div>
+                    </section>
+                </div>
+            </div>
+>>>>>>> refs/remotes/origin/master
         </div>
+            </form>
     </div>
-</div>
 
 <script>
+<<<<<<< HEAD
 	
 	$(document).ready(function() {
     var table = $('#tabla_reportes_solicitudes').DataTable( {
@@ -125,4 +207,77 @@
         $(this).attr('color', ' blue');
     } );      
 } );
+=======
+    
+    $(document).ready(function() {
+        $.ajax('pages/SecretariaAcademica/GeneracionReportes/cargar_tablaSolicitudes.php')
+            .done(function(data){
+                $('#tablaReportes').html(data);
+                aplicarSolicitudes();
+            });
+
+       $("[name='my-checkbox']").bootstrapSwitch();
+       $('[name="my-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+          if (state == true) {
+            estado = 1;
+            $.ajax({
+               url: 'pages/SecretariaAcademica/GeneracionReportes/cargar_tablaEstudiantes.php',
+               type : 'post',
+               success: function(data) {
+                     $('#tablaReportes').html(data);
+                     aplicarEstudiantes();
+                     marcarCheckbox();
+                }
+             });
+          }
+          else {
+            estado = 0;
+            $.ajax({
+               url: 'pages/SecretariaAcademica/GeneracionReportes/cargar_tablaSolicitudes.php',
+               type : 'post',
+               success: function(data) {
+                     $('#tablaReportes').html(data);
+                     aplicarSolicitudes();
+                     marcarCheckbox();
+                 }
+            });
+          }
+       });
+    } );
+    // fin de document.ready
+
+
+    function aplicarEstudiantes(){
+        var table = $('#ddd').DataTable({});
+        $('.toggle-vis').on( 'click', function (e) {
+            // Get the column API object
+            var column = table.column( $(this).attr('data-column') );
+     
+            // Toggle the visibility
+            column.visible( ! column.visible() );
+            $(this).attr('color', ' blue');
+        });
+        $(".toggle-vis1").prop("disabled", "disabled");
+    }
+
+    function aplicarSolicitudes(){
+        var table = $('#ddd').DataTable({});
+        $('.toggle-vis1').on( 'click', function (e) {
+            // Get the column API object
+            var column = table.column( $(this).attr('data-column') );
+     
+            // Toggle the visibility
+            column.visible( ! column.visible() );
+            $(this).attr('color', ' blue');
+        });
+        $(".toggle-vis1").prop("disabled", "");
+    }
+   
+   function marcarCheckbox(){
+        for (i=0;i<document.f1.elements.length;i++) 
+          if(document.f1.elements[i].type == "checkbox")    
+                document.f1.elements[i].checked=1
+    }
+>>>>>>> refs/remotes/origin/master
 </script>
+                               
