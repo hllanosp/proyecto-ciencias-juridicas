@@ -84,6 +84,8 @@ require_once($maindir."funciones/timeout.php");
         <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="css/datepicker.css" rel="stylesheet" media="screen">
 
+        <link href="bower_components/build.css" rel="stylesheet"> 
+
         <!-- <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" /> -->
 
     </head>
