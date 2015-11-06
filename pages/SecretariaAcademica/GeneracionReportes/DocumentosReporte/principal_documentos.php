@@ -28,33 +28,6 @@ $statement->closeCursor();
         <label><span class="glyphicon glyphicon-file" aria-hidden="true"></span> Generar Constancias </label>
     </div>
     <div class="panel-body ">
-<!--        <div class="page-header">
-            <h3>Filtros</h3>
-        </div>
-        <label  class="checkbox-inline">
-            <input  class="toggle-vis" data-column="0" type="checkbox" id="checkboxEnLinea1" value="opcion_1"> Codigo
-        </label>
-        <label class="checkbox-inline">
-            <input class="toggle-vis" data-column="1" type="checkbox" type="checkbox" id="checkboxEnLinea2" value="opcion_2"> Estudiante
-        </label>
-        <label class="checkbox-inline">
-            <input class="toggle-vis" data-column="2" type="checkbox"type="checkbox" id="checkboxEnLinea3" value="opcion_3"> Observaciones
-        </label>
-
-        <label class="checkbox-inline">
-            <input class="toggle-vis" data-column="3" type="checkbox" type="checkbox" id="checkboxEnLinea3" value="opcion_3"> Estado
-        </label>
-
-        <label class="checkbox-inline">
-            <input class="toggle-vis" data-column="4" type="checkbox" type="checkbox" id="checkboxEnLinea3" value="opcion_3"> DNI
-        </label>
-
-        <label class="checkbox-inline">
-            <input class="toggle-vis" data-column="5" type="checkbox"type="checkbox" id="checkboxEnLinea3" value="opcion_3"> Tipo Solicitud
-        </label>
-        <label class="checkbox-inline">
-            <input class="toggle-vis" data-column="6" type="checkbox" type="checkbox" id="checkboxEnLinea3" value="opcion_3" > Himno
-        </label>-->
         <div class="col-md-12 well">
             <div class="table-responsive">
                 <table id="lista_solicitudes" class="table table-striped table-bordered table-hover">
@@ -69,7 +42,7 @@ $statement->closeCursor();
                         </tr>
                     <!--<a class="fa fa-file-pdf-o"></a>-->
                     </thead>
-                    <tbody id="tablaBody">
+                    <tbody id="tbl_body_enviarTodo">
                         <?php
                         foreach ($tabla as $fila){
                             echo '<tr>'.
@@ -78,7 +51,7 @@ $statement->closeCursor();
                                     '<td class="'.$fila['DNI'].'">'.$fila['DNI'].'</td>'.
                                     '<td>'.$fila['FECHA'].'</td>'.
                                     '<td>'.$fila['TIPOSOLICITUD'].'</td>'.
-                                    '<td><center><a title="'.$fila['TIPOSOLICITUD'].'" class="'.$fila['TIPOSOLICITUD'].' btn btn-danger fa fa-file-pdf-o"></a></center></td>'.
+                                    '<td><center><a title="'.$fila['TIPOSOLICITUD'].'" class="'.$fila['TIPOSOLICITUD'].' btn btn-danger fa fa-file-pdf-o"  ></a></center></td>'.
                                     '</tr>';
                         }
                         ?>
@@ -90,10 +63,14 @@ $statement->closeCursor();
             <button class="btn btn-default" id="btnExportarDocumentos1">Constancia de Conducta</button>
             <button class="btn btn-default" id="btnExportarDocumentos2">Constancia de Himno </button>
             <button class="btn btn-default" id="btnExportarDocumentos3">Constancia de Egresado</button>
-            <button class="btn btn-default" id="btnExportarDocumentos4">Constancia de PPS</button>    
+            <button class="btn btn-default" id="btnExportarDocumentos4">Constancia de PPS</button> 
+            <button id = "imprimir_todo" class = "btn btn-success">Imprimir todas</button>   
         </div>
     </div>    
 </div>
+
+
+
 
 <script>
     $(document).ready(function(){
@@ -158,8 +135,35 @@ $statement->closeCursor();
             }
         }
 
+
         f.submit();
 
         f.remove();
     }
+
+
+
+
+    // script para imprimir todas las constancias disponibles
+
+    $("#imprimir_todo").click(function(){
+        alert("imprimir todo");
+        var matrizResumen = [,];
+        var i = 0;
+        var j = 0;
+
+        $("#tbl_body_enviarTodo tr").each(function(){
+            $(this).find('td').each(function(){
+                matrizResumen[i,j] = $(this).text();
+                j++;
+            });
+            i++;
+        });
+
+        $.get("pages/SecretariaAcademica/GeneracionReportes/exportar_todos.php", {matrizResumen: matrizResumen, i: i, j: j},function(html){
+
+        
+              });
+    });
+
 </script>
