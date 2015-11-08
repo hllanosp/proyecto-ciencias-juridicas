@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-11-2015 a las 18:00:10
+-- Tiempo de generación: 08-11-2015 a las 02:02:41
 -- Versión del servidor: 5.6.26-log
 -- Versión de PHP: 5.5.12
 
@@ -3030,6 +3030,36 @@ BEGIN
     	sa_estudiantes.anios_inicio_estudio as ANIO
 	FROM persona
 		INNER JOIN sa_estudiantes on persona.N_identidad = sa_estudiantes.dni
+	WHERE persona.N_identidad = Identidad;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_ESTUDIANTE_CONSTANCIA_EGRESADO`(IN `Identidad` VARCHAR(20), OUT `pcMensajeError` VARCHAR(500))
+    NO SQL
+BEGIN
+
+    DECLARE vcTempMensajeError VARCHAR(500) DEFAULT ''; -- Variable para posibles errores no con	trolados
+    
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+    
+		ROLLBACK;
+    
+        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
+        SET pcMensajeError := vcTempMensajeError;
+    
+    END;    
+    
+    SET  vcTempMensajeError := 'Error al obtener las solicitudes';
+    
+SELECT 
+	concat(persona.Primer_nombre, " ", persona.Segundo_nombre, " ", persona.Primer_apellido, " ", persona.Segundo_apellido) as NOMBRE,
+    persona.N_identidad AS DNI,
+    sa_estudiantes.no_cuenta as CUENTA,
+    sa_estudiantes.uv_acumulados as UV,
+    sa_orientaciones.descripcion as ORIENTACION,
+    concat(sa_estudiantes.anios_inicio_estudio, " al ",  sa_estudiantes.anios_final_estudio) as ANIOESTUDIO
+FROM persona
+	INNER JOIN (sa_estudiantes INNER JOIN sa_orientaciones on sa_estudiantes.cod_orientacion = sa_orientaciones.codigo) ON persona.N_identidad = sa_estudiantes.dni
 	WHERE persona.N_identidad = Identidad;
 END$$
 
@@ -6075,7 +6105,7 @@ INSERT INTO `sa_estudiantes_tipos_estudiantes` (`codigo_tipo_estudiante`, `dni_e
 (1, '0801-1990-77778', '2015-07-31 17:43:12'),
 (1, '0802-1991-33333', '2015-07-31 17:46:52'),
 (2, '0802-1991-33333', '2015-07-31 17:47:50'),
-(1, '0801-1991-21784', '2015-08-01 22:41:26'),
+(9, '0801-1991-21784', '2015-08-01 22:41:26'),
 (2, '0801-1991-21784', '2015-08-02 02:02:14'),
 (1, '0801-1991-21785', '2015-08-04 02:31:10'),
 (8, '0002-0002-00002', '2015-08-04 12:48:31'),
@@ -6083,7 +6113,7 @@ INSERT INTO `sa_estudiantes_tipos_estudiantes` (`codigo_tipo_estudiante`, `dni_e
 (2, '8888-8888-88888', '2015-08-04 23:58:53'),
 (2, '0801-1991-21786', '2015-08-05 02:03:17'),
 (1, '0801-1991-21786', '2015-08-05 02:05:27'),
-(1, '0801-1990-12345', '2015-08-05 11:14:04'),
+(9, '0801-1990-12345', '2015-08-05 11:14:04'),
 (2, '0801-1990-12345', '2015-08-05 11:16:24'),
 (4, '0801-1991-77777', '2015-08-12 01:55:15'),
 (7, '0801-1991-77777', '2015-08-12 02:10:06'),
@@ -6095,7 +6125,7 @@ INSERT INTO `sa_estudiantes_tipos_estudiantes` (`codigo_tipo_estudiante`, `dni_e
 (4, '0007-0007-00007', '2015-08-17 13:57:25'),
 (2, '0801-1977-13759', '2015-08-19 09:54:47'),
 (6, '0801-1971-10136', '2015-09-11 18:00:51'),
-(6, '0801-1987-09326', '2015-09-19 13:13:45');
+(9, '0801-1987-09326', '2015-09-19 13:13:45');
 
 -- --------------------------------------------------------
 
@@ -6139,7 +6169,13 @@ INSERT INTO `sa_examenes_himno` (`cod_solicitud`, `fecha_solicitud`, `nota_himno
 (41, '2015-10-30', '20151030', '2015-10-25'),
 (42, '2015-10-30', '20151030', '0000-00-00'),
 (43, '2015-10-30', '20151030', '0000-00-00'),
-(44, '2015-10-31', '20151031', '0000-00-00');
+(44, '2015-10-31', '20151031', '0000-00-00'),
+(45, '2015-11-06', '20151106', '0000-00-00'),
+(46, '2015-11-06', '20151106', '0000-00-00'),
+(47, '2015-11-06', '20151106', '0000-00-00'),
+(48, '2015-11-07', '20151107', '0000-00-00'),
+(49, '2015-11-07', '20151107', '0000-00-00'),
+(50, '2015-11-07', '20151107', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -6259,7 +6295,7 @@ CREATE TABLE IF NOT EXISTS `sa_solicitudes` (
   KEY `solicitud_estados_solicitud_FK_idx` (`cod_estado`),
   KEY `solicitud_tipo_solicitud_FK_idx` (`cod_tipo_solicitud`),
   KEY `solicitud_solicitud_FK_idx` (`cod_solicitud_padre`,`fecha_solicitud_padre`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=45 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Volcado de datos para la tabla `sa_solicitudes`
@@ -6281,7 +6317,13 @@ INSERT INTO `sa_solicitudes` (`codigo`, `fecha_solicitud`, `observaciones`, `dni
 (41, '2015-10-30', NULL, '0801-1991-21784', 6, 1, 123485, NULL, NULL),
 (42, '2015-10-30', NULL, '0801-1990-12345', 3, 1, 1, NULL, NULL),
 (43, '2015-10-30', NULL, '0301-1993-04251', 3, 1, 123488, NULL, NULL),
-(44, '2015-10-31', NULL, '0301-1990-00604', 3, 1, 123491, NULL, NULL);
+(44, '2015-10-31', NULL, '0301-1990-00604', 3, 1, 123491, NULL, NULL),
+(45, '2015-11-06', NULL, '0801-1987-09326', 3, 1, 123491, NULL, NULL),
+(46, '2015-11-06', NULL, '0301-1990-00604', 3, 1, 123490, NULL, NULL),
+(47, '2015-11-06', NULL, '0801-1987-09326', 3, 1, 123489, NULL, NULL),
+(48, '2015-11-07', NULL, '0301-1993-04251', 6, 1, 123490, NULL, NULL),
+(49, '2015-11-07', NULL, '0301-1990-00604', 3, 1, 123488, NULL, NULL),
+(50, '2015-11-07', NULL, '0301-1993-04251', 3, 1, 123489, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6744,7 +6786,7 @@ CREATE TABLE IF NOT EXISTS `usuario` (
 --
 
 INSERT INTO `usuario` (`id_Usuario`, `No_Empleado`, `nombre`, `Password`, `Id_Rol`, `Fecha_Creacion`, `Fecha_Alta`, `Estado`, `esta_logueado`) VALUES
-(1, '123444', 'prueba', '81DF7D234F3B8F5487AF508C2C79B00A', 100, '2015-07-06', NULL, 1, 0),
+(1, '123444', 'prueba', '81DF7D234F3B8F5487AF508C2C79B00A', 100, '2015-07-06', NULL, 1, 1),
 (2, '123444', 'lmrd1', 'C444203AF3C11D2F3BF84417F63CD33B', 100, '2015-07-28', NULL, 1, 0),
 (3, '12968', 'elizabeth', '98CD0F3AC30CC8F533386EF4A5F2DA39', 100, '2015-07-29', NULL, 1, 0),
 (4, '12969', 'jorgeaguilar', 'F7F892A8A4FA63D655C4983176EFE85B', 100, '2015-07-29', NULL, 1, 0),
@@ -6790,7 +6832,7 @@ CREATE TABLE IF NOT EXISTS `usuario_log` (
   `fecha_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ip_conn` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id_log`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=694 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=740 ;
 
 --
 -- Volcado de datos para la tabla `usuario_log`
@@ -7329,7 +7371,53 @@ INSERT INTO `usuario_log` (`Id_log`, `usuario`, `fecha_log`, `ip_conn`) VALUES
 (690, 1, '2015-11-01 04:22:07', '::1'),
 (691, 1, '2015-11-01 04:22:15', '::1'),
 (692, 1, '2015-11-01 05:14:43', '::1'),
-(693, 1, '2015-11-02 14:36:36', '::1');
+(693, 1, '2015-11-02 14:36:36', '::1'),
+(694, 1, '2015-11-02 17:06:38', '::1'),
+(695, 1, '2015-11-02 17:20:18', '::1'),
+(696, 1, '2015-11-02 17:20:25', '::1'),
+(697, 1, '2015-11-02 17:54:04', '::1'),
+(698, 1, '2015-11-02 17:57:51', '::1'),
+(699, 1, '2015-11-02 18:01:36', '::1'),
+(700, 1, '2015-11-02 18:08:04', '::1'),
+(701, 1, '2015-11-02 18:10:50', '::1'),
+(702, 1, '2015-11-02 18:15:13', '::1'),
+(703, 1, '2015-11-02 18:18:29', '::1'),
+(704, 1, '2015-11-02 18:28:21', '::1'),
+(705, 1, '2015-11-02 18:30:30', '::1'),
+(706, 1, '2015-11-02 18:39:40', '::1'),
+(707, 1, '2015-11-02 18:43:28', '::1'),
+(708, 1, '2015-11-02 18:46:20', '::1'),
+(709, 1, '2015-11-02 19:37:39', '::1'),
+(710, 1, '2015-11-02 19:41:28', '::1'),
+(711, 1, '2015-11-03 19:35:25', '::1'),
+(712, 1, '2015-11-03 19:35:25', '::1'),
+(713, 1, '2015-11-03 20:34:01', '::1'),
+(714, 1, '2015-11-04 03:35:41', '::1'),
+(715, 1, '2015-11-06 18:30:55', '::1'),
+(716, 1, '2015-11-06 19:42:33', '::1'),
+(717, 1, '2015-11-06 20:39:15', '::1'),
+(718, 1, '2015-11-06 21:11:47', '::1'),
+(719, 1, '2015-11-06 22:00:28', '::1'),
+(720, 1, '2015-11-06 23:43:31', '::1'),
+(721, 1, '2015-11-06 23:43:56', '::1'),
+(722, 1, '2015-11-07 01:09:48', '::1'),
+(723, 1, '2015-11-07 01:43:13', '::1'),
+(724, 1, '2015-11-07 03:32:04', '::1'),
+(725, 1, '2015-11-07 03:32:30', '::1'),
+(726, 1, '2015-11-07 03:56:03', '::1'),
+(727, 1, '2015-11-07 04:28:50', '::1'),
+(728, 1, '2015-11-07 16:34:43', '::1'),
+(729, 1, '2015-11-07 21:38:51', '::1'),
+(730, 1, '2015-11-07 22:42:45', '::1'),
+(731, 1, '2015-11-07 22:50:51', '::1'),
+(732, 1, '2015-11-07 23:28:47', '::1'),
+(733, 1, '2015-11-07 23:46:14', '::1'),
+(734, 1, '2015-11-07 23:46:44', '::1'),
+(735, 1, '2015-11-07 23:47:39', '::1'),
+(736, 1, '2015-11-07 23:48:15', '::1'),
+(737, 1, '2015-11-08 00:23:09', '::1'),
+(738, 1, '2015-11-08 00:45:48', '::1'),
+(739, 1, '2015-11-08 00:58:50', '::1');
 
 -- --------------------------------------------------------
 
