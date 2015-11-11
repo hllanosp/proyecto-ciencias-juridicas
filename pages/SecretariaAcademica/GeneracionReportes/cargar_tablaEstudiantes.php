@@ -6,20 +6,20 @@
   $query = mysql_query($queryString);
 
   echo "<div class='table-responsive'>
-          <table id= 'ddd' class='table table-striped table-bordered'cellspacing='0' width='100%'>
-            <thead class = '' style = 'background-color: gray; color: white;'>
+          <table id= 'tableEstudiantes' class='table table-striped table-bordered'cellspacing='0' width='100%'>
+            <thead class = '' style = 'background-color:#428bca; color: white;'>
                <tr>
-                  <td>Cuenta</td>
-                  <td>DNI</td>
-                   <td >Nombre Estudiante</td>
-                   <td>correo</td>
-                   <td> Indice Academico</td>
-                   <td>Mencion Honorifica</td>
-                   <td>Solicitudes</td>
-                   <td>Plan de Estudio</td>
-                   <td>Orientacion</td>
-                   <td>Ciudad Origen</td>
-                   <td>Residencia Actual</td>
+                  <th>Cuenta</td>
+                  <th>DNI</td>
+                   <th style='width: 600px'>Nombre Estudiante</td>
+                   <th>correo</td>
+                   <th> Indice Academico</td>
+                   <th>Mencion Honorifica</td>
+                   <th>Solicitudes</td>
+                   <th>Plan de Estudio</td>
+                   <th>Orientacion</td>
+                   <th>Ciudad Origen</td>
+                   <th>Residencia Actual</td>
                 </tr>
             </thead>
             <tbody id = 'tabla_filtrada'>";
@@ -50,7 +50,8 @@
                   "</tr>";
   }
   echo "</tbody>
-          </table>  ";
+          </table>
+            </div>  ";
 
   function obtenerEstudiante($dni){
     $queryString = "SELECT Primer_nombre,Segundo_nombre,Primer_apellido,Segundo_apellido FROM 
