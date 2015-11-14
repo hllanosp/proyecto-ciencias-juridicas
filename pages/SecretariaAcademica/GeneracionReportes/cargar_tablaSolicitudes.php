@@ -7,8 +7,8 @@
 
 
   echo "<div class='table-responsive'>
-          <table id= 'ddd' class='table table-striped table-bordered'cellspacing='0' width='100%'>
-            <thead class = '' style = 'background-color: gray; color: white;'>
+          <table id= 'tableSolicitudes' class='table table-striped table-bordered'cellspacing='0' width='100%'>
+            <thead class = '' >
                <tr>
                     <th>Estudiante</th>  
                     <th>Fecha</th>   
@@ -33,5 +33,6 @@
               </tr>";
         }
         echo "</tbody>
-          </table>  ";
+          </table> 
+            </div> ";
  ?>

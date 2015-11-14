@@ -87,6 +87,18 @@ require_once($maindir."funciones/timeout.php");
         <link href="bower_components/build.css" rel="stylesheet"> 
 
         <!-- <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" /> -->
+        <script src = "//code.jquery.com/jquery-1.11.3.min.js"></script>
+        <script src = "https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+        <script src = "https://cdn.datatables.net/buttons/1.1.0/js/dataTables.buttons.min.js"></script>
+        <script src = "//cdn.datatables.net/buttons/1.1.0/js/buttons.flash.min.js"></script>
+        <script src = "//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+        <script src = "//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+        <script src = "//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+        <script src = "//cdn.datatables.net/buttons/1.1.0/js/buttons.html5.min.js"></script>
+        <script src = "//cdn.datatables.net/buttons/1.1.0/js/buttons.print.min.js"></script>
+        <script src = "//cdn.datatables.net/buttons/1.1.0/js/buttons.colVis.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.1.0/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.10/css/jquery.dataTables.min.css">
 
     </head>
     
