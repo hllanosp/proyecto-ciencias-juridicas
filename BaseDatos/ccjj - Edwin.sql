@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-11-2015 a las 02:02:41
+-- Tiempo de generación: 18-11-2015 a las 04:56:26
 -- Versión del servidor: 5.6.26-log
 -- Versión de PHP: 5.5.12
 
@@ -3033,6 +3033,39 @@ BEGIN
 	WHERE persona.N_identidad = Identidad;
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_ESTUDIANTE_CONSTANCIA`(IN `Identidad` VARCHAR(20), IN `pcMensajeError` VARCHAR(500))
+    NO SQL
+BEGIN
+
+    DECLARE vcTempMensajeError VARCHAR(500) DEFAULT ''; -- Variable para posibles errores no con	trolados
+    
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+    
+		ROLLBACK;
+    
+        SET vcTempMensajeError := CONCAT('Error: ', vcTempMensajeError);
+        SET pcMensajeError := vcTempMensajeError;
+    
+    END;    
+    
+    SET  vcTempMensajeError := 'Error al obtener las solicitudes';
+    
+    SELECT
+		concat(persona.Primer_nombre, " ", persona.Segundo_nombre, " ", persona.Primer_apellido, " ", persona.Segundo_apellido) as NOMBRE,
+    	persona.N_identidad as DNI,
+        sa_estudiantes.no_cuenta as CUENTA,
+        sa_planes_estudio.nombre as PLANESTUDIO,
+        sa_orientaciones.descripcion as ORIENTACION
+	FROM persona
+		INNER JOIN (sa_estudiantes 
+			INNER JOIN sa_planes_estudio on sa_estudiantes.cod_plan_estudio 			= sa_planes_estudio.codigo
+			INNER JOIN sa_orientaciones on sa_estudiantes.cod_orientacion = 			sa_orientaciones.codigo) 
+        	on persona.N_identidad = sa_estudiantes.dni
+     WHERE persona.N_identidad = Identidad;
+    
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_ESTUDIANTE_CONSTANCIA_EGRESADO`(IN `Identidad` VARCHAR(20), OUT `pcMensajeError` VARCHAR(500))
     NO SQL
 BEGIN
@@ -3282,7 +3315,8 @@ FROM sa_solicitudes
 	INNER JOIN persona on sa_solicitudes.dni_estudiante = 	persona.N_identidad
     INNER JOIN sa_tipos_solicitud on sa_solicitudes.cod_tipo_solicitud = sa_tipos_solicitud.codigo
     WHERE sa_solicitudes.cod_tipo_solicitud = 123488 or sa_solicitudes.cod_tipo_solicitud = 123489
-    or sa_solicitudes.cod_tipo_solicitud = 123490 or sa_solicitudes.cod_tipo_solicitud = 123491;
+    or sa_solicitudes.cod_tipo_solicitud = 123490 or sa_solicitudes.cod_tipo_solicitud = 123491
+	or sa_solicitudes.cod_tipo_solicitud = 123492;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SP_OBTENER_TIPOS_ESTUDIANTES`(
@@ -6175,7 +6209,9 @@ INSERT INTO `sa_examenes_himno` (`cod_solicitud`, `fecha_solicitud`, `nota_himno
 (47, '2015-11-06', '20151106', '0000-00-00'),
 (48, '2015-11-07', '20151107', '0000-00-00'),
 (49, '2015-11-07', '20151107', '0000-00-00'),
-(50, '2015-11-07', '20151107', '0000-00-00');
+(50, '2015-11-07', '20151107', '0000-00-00'),
+(51, '2015-11-13', '20151113', '0000-00-00'),
+(52, '2015-11-17', '20151117', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -6295,7 +6331,7 @@ CREATE TABLE IF NOT EXISTS `sa_solicitudes` (
   KEY `solicitud_estados_solicitud_FK_idx` (`cod_estado`),
   KEY `solicitud_tipo_solicitud_FK_idx` (`cod_tipo_solicitud`),
   KEY `solicitud_solicitud_FK_idx` (`cod_solicitud_padre`,`fecha_solicitud_padre`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
 
 --
 -- Volcado de datos para la tabla `sa_solicitudes`
@@ -6323,7 +6359,8 @@ INSERT INTO `sa_solicitudes` (`codigo`, `fecha_solicitud`, `observaciones`, `dni
 (47, '2015-11-06', NULL, '0801-1987-09326', 3, 1, 123489, NULL, NULL),
 (48, '2015-11-07', NULL, '0301-1993-04251', 6, 1, 123490, NULL, NULL),
 (49, '2015-11-07', NULL, '0301-1990-00604', 3, 1, 123488, NULL, NULL),
-(50, '2015-11-07', NULL, '0301-1993-04251', 3, 1, 123489, NULL, NULL);
+(50, '2015-11-07', NULL, '0301-1993-04251', 3, 1, 123489, NULL, NULL),
+(52, '2015-11-17', NULL, '0801-1987-09326', 3, 1, 123492, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -6360,7 +6397,7 @@ CREATE TABLE IF NOT EXISTS `sa_tipos_solicitud` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=123492 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=123493 ;
 
 --
 -- Volcado de datos para la tabla `sa_tipos_solicitud`
@@ -6388,7 +6425,8 @@ INSERT INTO `sa_tipos_solicitud` (`codigo`, `nombre`) VALUES
 (123488, 'Constancia de Conducta'),
 (123489, 'Constancia de Egresado'),
 (123490, 'Constancia de Himno'),
-(123491, 'Certificación para PPS');
+(123491, 'Certificación para PPS'),
+(123492, 'Constancia de Ultimo Año');
 
 -- --------------------------------------------------------
 
@@ -6422,7 +6460,8 @@ INSERT INTO `sa_tipos_solicitud_tipos_alumnos` (`cod_tipo_solicitud`, `cod_tipo_
 (123488, 9),
 (123489, 9),
 (123490, 9),
-(123491, 9);
+(123491, 9),
+(123492, 9);
 
 -- --------------------------------------------------------
 
@@ -6832,7 +6871,7 @@ CREATE TABLE IF NOT EXISTS `usuario_log` (
   `fecha_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ip_conn` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id_log`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=740 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=752 ;
 
 --
 -- Volcado de datos para la tabla `usuario_log`
@@ -7417,7 +7456,19 @@ INSERT INTO `usuario_log` (`Id_log`, `usuario`, `fecha_log`, `ip_conn`) VALUES
 (736, 1, '2015-11-07 23:48:15', '::1'),
 (737, 1, '2015-11-08 00:23:09', '::1'),
 (738, 1, '2015-11-08 00:45:48', '::1'),
-(739, 1, '2015-11-08 00:58:50', '::1');
+(739, 1, '2015-11-08 00:58:50', '::1'),
+(740, 1, '2015-11-08 01:14:06', '::1'),
+(741, 1, '2015-11-08 01:14:53', '::1'),
+(742, 1, '2015-11-14 00:44:38', '::1'),
+(743, 1, '2015-11-14 02:24:01', '::1'),
+(744, 1, '2015-11-14 03:00:47', '::1'),
+(745, 1, '2015-11-14 03:46:16', '::1'),
+(746, 1, '2015-11-14 05:17:56', '::1'),
+(747, 1, '2015-11-14 05:47:29', '::1'),
+(748, 1, '2015-11-14 05:48:06', '::1'),
+(749, 1, '2015-11-17 19:10:42', '::1'),
+(750, 1, '2015-11-18 03:13:44', '::1'),
+(751, 1, '2015-11-18 03:39:29', '::1');
 
 -- --------------------------------------------------------
 
