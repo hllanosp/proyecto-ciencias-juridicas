@@ -189,7 +189,34 @@ $statement->closeCursor();
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
+    
+    <div class="modal fade" id="modalConstancia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <!-- Botón para cerrar la ventana -->
+                    <button type="button" class="close" data-dismiss="modal">
+                            <span aria-hidden="true">×</span>
+                            <span class="sr-only">Close</span>
+                    </button>
+                    <!-- Título de la ventana -->
+                    <h3 class="title">Constancia</h3>
+                </div>
+                <div class="modal-body" style="padding-left: 45px">
+                    <div role="form" class="form-group form-horizontal">
+                        <div class="row">
+                            <label class="label label-default">Fecha en la que se emite la constancia:</label>
+                        </div>
+                        <input placeholder="ejem: siete dias del mes de noviembre de dos mil quince." style="margin-bottom: 10px; margin-top: 10px; width: 450px" class="form-control" id="txtFechaPalabrasConstancia" type="text">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="btnAceptarConstancia" class="btn btn-success">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div> 
     
     <div class="modal fade" id="modalEgresado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -216,8 +243,7 @@ $statement->closeCursor();
                 </div>
             </div>
         </div>
-    </div>    
-    
+    </div>   
 </div>
 
 <script>
@@ -228,6 +254,32 @@ $statement->closeCursor();
         var matrizPPS = [];
         var matrizHimno = []; //al parecer solo se enviaran los dni
         var matrizEgresado = [];
+        var matrizConstancia = [];
+        
+        $(".Constancia.de.Ultimo.Año").click(function(){
+            DNI = $(this).parents("tr").find("td").eq(2).attr('class');
+            matrizConstancia[0] = DNI;
+            $("#modalConstancia").modal("show");
+            $("#txtFechaPalabrasConstancia").val(null);
+        });
+        
+        $("#btnAceptarConstancia").click(function(){
+            if(!$.trim($("#txtFechaPalabrasConstancia").val())){
+                alert("Introduzca la fecha en la que se emitie la constancia");
+            }
+            else{
+                var cadena = $.trim($("#txtFechaPalabrasConstancia").val());
+                var arregloConstancia = matrizConstancia.toString();
+                submit_post_via_hidden_form(
+                    'pages/SecretariaAcademica/Constancia.php',
+                    {
+                        arregloConstancia: arregloConstancia,
+                        cadena: cadena
+                    }
+                );
+                $("#modalConstancia").modal("hide");
+            }
+        });
         
         $(".Constancia.de.Egresado").click(function(){
             DNI = $(this).parents("tr").find("td").eq(2).attr('class');
@@ -337,6 +389,7 @@ $statement->closeCursor();
             var contPPS = 0;
             var contConducta = 0;
             var contEgresado = 0;
+            var contConstancia = 0;
             
 //            var matrizConducta = [];
 //            var matrizPPS = [];
@@ -377,6 +430,16 @@ $statement->closeCursor();
                     matrizEgresado[contEgresado] = matrizSolicitudes[i][0];
                     contEgresado++;
                 }
+                
+                if(matrizSolicitudes[i][1] === "Constancia de Ultimo Año"){
+                    matrizConstancia[contConstancia] = matrizSolicitudes[i][0];
+                    contConstancia++;
+                }
+            }
+            
+            if(matrizConstancia.length >= 1){
+                $("#modalConstancia").modal("show");
+                $("#txtFechaPalabrasConstancia").val(null);
             }
             
             if(matrizHimno.length >= 1){
