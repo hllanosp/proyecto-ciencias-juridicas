@@ -39,7 +39,7 @@ if(!isset( $_SESSION['user_id'] ))
     </head>
       <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <ul class="list-unstyled">
                    <li  class="nav-header active"> <a id="SecretariaAcademica" href="#"><i class="glyphicon glyphicon-home"></i> Inicio Secretaria Academica</a></li>
                    <hr>
@@ -120,7 +120,7 @@ HTML;
                 </ul>
             </div>
             <!-- Contenedor donde montamos todas las paginas requeridas para este modulo -->
-             <div class="col-sm-10">
+             <div class="col-sm-9">
                 <div id="contenedor" class="content-panel">
                      <?php require_once($maindir . 'pages/SecretariaAcademica/Graficos/pantallaPrincipal.php');         ?>
                 </div>
