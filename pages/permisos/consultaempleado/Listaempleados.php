@@ -1,16 +1,25 @@
 <?php
 //Este codigo hace una validación de la sesión del usuario y del tiempo que esta lleva inactiva, para proceder a cerrarla
-$maindir = "../../";
+$maindir = "../../../";
+
+
 
 if (isset($_GET['contenido'])) {
     $contenido = $_GET['contenido'];
 } else {
-    $contenido = 'gestion_de_folios';
+    $contenido = 'permisos';
 }
 
 require_once($maindir . "funciones/check_session.php");
 
 require_once($maindir . "funciones/timeout.php");
+
+if(!isset( $_SESSION['user_id'] ))
+  {
+    header('Location: '.$maindir.'login/logout.php?code=100');
+    exit();
+  }
+
 ?>
 
 <?php
@@ -20,12 +29,22 @@ require_once($maindir . "funciones/timeout.php");
 
 <?php
 
+require($maindir."conexion/config.inc.php");
 
- $query4 = mysql_query(" SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
- persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
- inner join persona on empleado.N_identidad=persona.N_identidad 
- inner join departamento_laboral on departamento_laboral.Id_departamento_laboral =empleado.Id_departamento
-	");
+
+$sql="SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
+    persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
+    inner join persona on empleado.N_identidad=persona.N_identidad 
+    inner join departamento_laboral on departamento_laboral.Id_departamento_laboral=empleado.Id_departamento";
+$rec =$db->prepare($sql);
+$rec->execute();
+	
+
+  //$conexion = mysqli_connect($host, $username, $password, $dbname);
+	//$result = mysqli_query($conexion, "SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
+//		persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
+	//	inner join persona on empleado.N_identidad=persona.N_identidad 
+	//	inner join departamento_laboral on departamento_laboral.Id_departamento_laboral=empleado.Id_departamento");
 
 ?>
 
@@ -74,13 +93,13 @@ require_once($maindir . "funciones/timeout.php");
          
                 data = {no_empleado: pid};
 
-				alert ( nombre+" Ha sido selecionado");
+				
                 $.ajax({
                     async: true,
                     type: "POST",
                     //dataType: "html",
                     //contetType: "application/x-www-form-urlencoded",
-                    url:"pages/permisos/Solicitud_E.php",  
+                    url:"pages/permisos/consultaempleado/ReportexPersona.php",  
                     beforeSend: inicioEnvio,
                     success: EditarEmpleado,
                     timeout: 4000,
@@ -96,7 +115,7 @@ require_once($maindir . "funciones/timeout.php");
         
             function EditarEmpleado()
             {
-                $("#contenedor").load('pages/permisos/Solicitud_E.php', data);
+                $("#contenedor").load('pages/permisos/consultaempleado/ReportexPersona.php', data);
            
             }
 
@@ -107,7 +126,18 @@ require_once($maindir . "funciones/timeout.php");
 
         
         
-
+      <script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $('#tabla_empleados').dataTable(); // example es el id de la tabla
+    } );
+    </script>
+    
+ <script type="text/javascript">
+  // For demo to fit into DataTables site builder...
+  $('#tabla_empleados')
+    .removeClass( 'display' )
+    .addClass('table table-striped table-bordered');
+</script>
            
     </head>
 
@@ -116,7 +146,7 @@ require_once($maindir . "funciones/timeout.php");
              <div class="row">
                 <div class="col-lg-12">
 
-                    <h1 class="page-header">Selecione  a un empleado: </h1>
+                    <h1 class="page-header">Selecione el Empleado</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -145,14 +175,16 @@ require_once($maindir . "funciones/timeout.php");
                                         </thead>
                                         <tbody>
 HTML;
+	//$field_cnt = $result->field_count;
+	//if($field_cnt > 0){
 
-            while ($row2 = mysql_fetch_array($query4))  {
+            while ($row = $rec->fetch())  {
 
-            $Noempleado = $row2['No_Empleado'];
-            $Noidentidad = $row2['N_identidad'];
-            $nombre = $row2['Primer_nombre'];
-            $apellido=$row2['Primer_apellido'];
-            $departamento=$row2['nombre_departamento'];
+            $Noempleado = $row['No_Empleado'];
+            $Noidentidad = $row['N_identidad'];
+            $nombre = $row['Primer_nombre'];
+            $apellido=$row['Primer_apellido'];
+            $departamento=$row['nombre_departamento'];
             
                 echo "<tr data-id='".$Noempleado."'>";
                 echo <<<HTML
@@ -173,18 +205,9 @@ HTML;
                 echo <<<HTML
                 <td>$departamento</td>                        
 
-               
-            
-             
-                        
                  <td><center>
 					<button class="selecionar_empleado btn btn-primary glyphicon glyphicon-edit"  title="selecionar_empleado">
-                </center></td>       
-        
-                    
-             
-                        
-                        
+                </center></td>                          
 HTML;
                 echo "</tr>";
 
@@ -196,7 +219,7 @@ HTML;
                                         <tr>                                            
                                             <th>No empleado</th>
                                             <th>No identidad</th>
-                                            <th>nombre</th>
+                                            <th>Nombre</th>
                                             <th>Apellido</th>
                                             <th>Departamento</th>
                                             <th>Seleccionar</th>
@@ -205,6 +228,8 @@ HTML;
                                         </tfoot>
 									</table>
 HTML;
+
+		//}
              
                ?>
            </div><!-- /.box-body -->
