@@ -328,7 +328,7 @@ HTML;
       <div class="modal-footer">
        
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button id="button-Aprobacionm"  class="button-Aprobacion btn btn-danger ">Eliminar</button>
+        <button id="button-Aprobacionm"  class="button-Aprobacion btn btn-danger ">Aprobar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
