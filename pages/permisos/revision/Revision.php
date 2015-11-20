@@ -328,7 +328,7 @@ HTML;
       <div class="modal-footer">
        
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button id="button-Aprobacionm"  class="button-Aprobacion btn btn-danger ">Eliminar</button>
+        <button id="button-Aprobacionm"  class="button-Aprobacion btn btn-danger ">Aprobar</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -425,7 +425,7 @@ x.ready(inicio);
 		var pid=$('#Aprobar-modal #codigo').text();
 		var diasp=$('#Aprobar-modal #dias').text();			
 		data ={codigo:pid, cdias:diasp, usr:"<?php echo $idusuario ?>", rol:"<?php echo $rol ?>"}; 
-	    alert(pid);
+	    
 		$.ajax({
 			data:data,
 			type: "POST",
