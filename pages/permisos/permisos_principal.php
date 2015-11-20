@@ -27,6 +27,9 @@ if(!isset( $_SESSION['user_id'] ))
 
 <html lang ="en">
 <body>
+
+
+	
  
 
     
@@ -35,7 +38,7 @@ if(!isset( $_SESSION['user_id'] ))
 <?php 
 
 	$rol = $_SESSION['user_rol'];
-	require("../../conexion/config.inc.php");
+	require($maindir."conexion/config.inc.php");
 
 	
 	$encontro=1;
