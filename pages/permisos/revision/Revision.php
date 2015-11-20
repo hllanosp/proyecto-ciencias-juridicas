@@ -425,7 +425,7 @@ x.ready(inicio);
 		var pid=$('#Aprobar-modal #codigo').text();
 		var diasp=$('#Aprobar-modal #dias').text();			
 		data ={codigo:pid, cdias:diasp, usr:"<?php echo $idusuario ?>", rol:"<?php echo $rol ?>"}; 
-	    alert(pid);
+	    
 		$.ajax({
 			data:data,
 			type: "POST",
