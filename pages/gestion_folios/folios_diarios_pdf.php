@@ -31,35 +31,134 @@ $pdf->Ln(25);
 $pdf->SetFont('Arial', 'U', 14);
 $pdf->Cell(30, 8, ' ', 0,0,"C");
 $pdf->Cell(133, 8, utf8_decode("Reporte de Folios Diarios"), 0,0,"C");
-$pdf->Rect(6, 45, 200, 200 ,'D');
+
 $pdf->SetFont('Arial', '', 12);
 $pdf->Ln(10);
-$pdf->Cell(115, 15, 'Fecha: '.date('Y-m-d'), 0);
-$pdf->Ln(7);
-$pdf->Ln(5);
+$pdf->Cell(190, 8, 'Fecha: '.date('Y-m-d'), 1);
+$pdf->Ln(10);
 $pdf->SetFont('Arial', 'B', 8);
-$pdf->Cell(30, 8, utf8_decode("No. de Folio"), 0);
-$pdf->Cell(40, 8, utf8_decode("Persona Referente"), 0);
-$pdf->Cell(50, 8, utf8_decode("Unidad académica u Organización"), 0);
-$pdf->Cell(40, 8, utf8_decode("Fecha de Entrada"), 0);
-$pdf->Cell(40, 8, utf8_decode("Tipo de Folio"), 0);
+$pdf->Cell(20, 8, utf8_decode("No. de Folio"), 1,0,"C");
+$pdf->Cell(60, 8, utf8_decode("Persona Referente"), 1,0,"C");
+$pdf->Cell(50, 8, utf8_decode("Unidad académica u Organización"), 1,0,"C");
+$pdf->Cell(30, 8, utf8_decode("Fecha de Entrada"), 1,0,"C");
+$pdf->Cell(30, 8, utf8_decode("Tipo de Folio"), 1,0,"C");
 $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
+
 foreach( $rows as $row ){
 	if($row['TipoFolio'] == 0){
 	$tipo = "Folio de entrada";
     }elseif($row['TipoFolio'] == 1){
 		$tipo = "Folio de salida";
   	}
-		$pdf->Cell(30, 8, utf8_decode($row["NroFolio"]), 0);
-		$pdf->Cell(40, 8, utf8_decode($row["PersonaReferente"]), 0);
-		$pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]), 0);
-		$pdf->Cell(40, 8, utf8_decode($row["FechaEntrada"]), 0);
-		$pdf->Cell(40, 8, utf8_decode($tipo), 0);
 		
-		$pdf->Ln(5);
-	}
-;
+
+
+		$cadena=$row["PersonaReferente"];
+
+
+    if (strlen($cadena)<40) {
+    	      $pdf->Cell(20, 8, utf8_decode($row["NroFolio"]),1,0,"C");
+		      $pdf->Cell(60, 8, utf8_decode($cadena), 1,0,"C");
+		      $pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]),1,0,"C");
+		      $pdf->Cell(30, 8, utf8_decode($row["FechaEntrada"]), 1,0,"C");
+		      $pdf->Cell(30, 8, utf8_decode($tipo), 1,0,"C");
+		      $pdf->Ln();
+    	
+    } else {
+
+    	$prim="1";
+    	while ( strlen($cadena)>40 ) {
+    	$cadena2=substr($cadena,1,40);
+    	$ultima=substr($cadena2,-1);
+    	$cadena3=substr($cadena,40 , strlen($cadena));
+
+
+    	if ($ultima==" ") {
+
+
+    		if ($prim==1) {
+    		  $pdf->Cell(20, 8, utf8_decode($row["NroFolio"]), "L,R",0,"C");
+		      $pdf->Cell(60, 8, utf8_decode($cadena2), "L,R",0,"C");
+		      $pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]), "L,R",0,"C");
+		      $pdf->Cell(30, 8, utf8_decode($row["FechaEntrada"]), "L,R",0,"C");
+		      $pdf->Cell(30, 8, utf8_decode($tipo), "L,R",0,"C");
+		      $pdf->Ln();
+		      $prim=2;
+
+
+
+    		} else {
+    			
+    			$pdf->Cell(20, 8, utf8_decode(""), "L,R");
+		      $pdf->Cell(60, 8, utf8_decode($cadena2), "L,R",0,"C");
+		      $pdf->Cell(50, 8, utf8_decode(""), "L,R");
+		      $pdf->Cell(30, 8, utf8_decode(""), "L,R");
+		      $pdf->Cell(30, 8, utf8_decode(""), "L,R");
+		      $pdf->Ln();
+    		}
+    		
+    		  
+    		
+    	} else {
+    		$cadena2=$cadena2."-";
+
+
+    		if ($prim==1) {
+    			$pdf->Cell(20, 8, utf8_decode($row["NroFolio"]), "L,R",0,"C");
+		      $pdf->Cell(60, 8, utf8_decode($cadena2), "L,R",0,"C");
+		      $pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]), "L,R",0,"C");
+		      $pdf->Cell(30, 8, utf8_decode($row["FechaEntrada"]), "L,R",0,"C");
+		      $pdf->Cell(30, 8, utf8_decode($tipo), "L,R",0,"C");
+		      $pdf->Ln();
+		      $prim=2;
+
+
+    		} else {
+    			$pdf->Cell(20, 8, utf8_decode(""), "L,R");
+		      $pdf->Cell(60, 8, utf8_decode($cadena2), "L,R",0,"C");
+		      $pdf->Cell(50, 8, utf8_decode(""), "L,R");
+		      $pdf->Cell(30, 8, utf8_decode(""), "L,R");
+		      $pdf->Cell(30, 8, utf8_decode(""), "L,R");
+		      $pdf->Ln();
+    		}
+    		
+    		
+
+    		
+    		
+    	}
+    	$cadena=$cadena3;
+    	if (strlen($cadena)<40) {
+    		$pdf->Cell(20, 8, utf8_decode(""), "L,R,B");
+		      $pdf->Cell(60, 8, utf8_decode($cadena), "L,R,B",0,"C");
+		      $pdf->Cell(50, 8, utf8_decode(""), "L,R,B");
+		      $pdf->Cell(30, 8, utf8_decode(""), "L,R,B");
+		      $pdf->Cell(30, 8, utf8_decode(""), "L,R,B");
+		      $pdf->Ln();
+
+    		$cadena="";
+
+    		
+    	} 
+    	
+    	
+
+
+
+
+
+    	}
+    }
+	
+
+
+
+	};
+
+     
+    
+
 
 
 

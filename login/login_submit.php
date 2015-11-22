@@ -102,7 +102,7 @@ if($result)
          header('Location: login.php?error_code=3');
          //die("We are unable to process your request. Please try again later");
       }
-      header('Location: '.$maindir.'index.php?hola');
+      header('Location: '.$maindir.'index.php');
     }
  
 }else

@@ -3,6 +3,11 @@
 //conexion a la base de datos 
 $maindir = "../../../";
 require($maindir."conexion/config.inc.php");
+if(!isset( $_SESSION['user_id'] ))
+  {
+    header('Location: '.$maindir.'login/logout.php?code=100');
+    exit();
+  }
  
 											     
 

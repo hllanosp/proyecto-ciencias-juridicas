@@ -39,7 +39,8 @@ if(isset($_GET['contenido']))
 	
 <body>
 
-		      <!-- /.Filtracion Principal-->							
+		   <div id="proceso">
+             </div>								
                                         
     <div id="wrapper">
 		<h1 class="page-header">Reporte Permisos  Empleados</h1>
@@ -149,13 +150,7 @@ if(isset($_GET['contenido']))
 			
 	 
  <div id="contenedor2" class="panel-body">
-        <?php
         
-       
-
-         
-     
-        ?>
  </div>
   
 
@@ -184,9 +179,31 @@ $( document ).ready(function() {
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
                 url:"pages/permisos/reportecompleto/crearpdfreportedepto.php", 
-                success:reportePDF,
+                beforeSend: function()
+               {
+                $(".alert").remove();
+                var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>Enviando .......................</div>';
+                $("#proceso").append(me); 
+               	window.open('pages/permisos/reportecompleto/crearpdfreportedepto.php?area='+area+'&motivo='+motivo+'&fecha_i='+fecha_i+'&fecha_f='+fecha_f);  
+               },
+
+
+                success:function()
+                {  $mensaje="Transaccion Exitosamente..............................................";
+                    $(".alert").remove();
+                    $me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje + '</strong></div>';
+                    $("#proceso").append($me);
+
+
+
+                },
                 timeout:4000,
-                error:problemas
+                error:function(result){  
+                $(".alert").remove();
+                 var me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong> '+ result.status + ' ' + result.statusText+'</strong></div>';
+                $("#proceso").append(me);
+
+          }
             }); 
             
           
@@ -242,9 +259,33 @@ $( document ).ready(function() {
 				data:data,
                 contentType: "application/x-www-form-urlencoded",
                 url:"pages/permisos/reportecompleto/reporte_filtrado.php", 
-                success:llegadaGuardar,
+
+                 beforeSend:function()
+                {
+
+                 $(".alert").remove();
+                var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>"cargando .............."</div>';
+                $("#proceso").append(me); 
+
+                },
+                success:function()
+                {
+                	$mensaje="Transaccion Exitosamente..............................................";
+                    $(".alert").remove();
+                    $me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje + '</strong></div>';
+                    $("#proceso").append($me);
+                    $("#contenedor2").load('pages/permisos/reportecompleto/reporte_filtrado.php', data);
+
+
+
+                },
                 timeout:4000,
-                error:problemas
+                 error:function(result){  
+                $(".alert").remove();
+                 var me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong> '+ result.status + ' ' + result.statusText+'</strong></div>';
+                $("#proceso").append(me);
+
+          }
             }); 
             return false;
           
@@ -268,12 +309,7 @@ function reportePDF(data){
 		window.open('pages/permisos/reportecompleto/crearpdfreportedepto.php?area='+area+'&motivo='+motivo+'&fecha_i='+fecha_i+'&fecha_f='+fecha_f);  
 	}
 
-	   function llegadaGuardar(datos)
-    {
-        
-        $("#contenedor2").load('pages/permisos/reportecompleto/reporte_filtrado.php', data);
-    }
-
+	   
 
 </script>
 

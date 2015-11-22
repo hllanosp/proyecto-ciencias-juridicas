@@ -2,6 +2,11 @@
 <?php
 
   $maindir = "../../../";
+  if(!isset( $_SESSION['user_id'] ))
+  {
+    header('Location: '.$maindir.'login/logout.php?code=100');
+    exit();
+  }
 
 
 
@@ -172,9 +177,31 @@ $( document ).ready(function() {
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
                 url:"pages/permisos/consultaempleado/crearpdfsolicitudes.php", 
-                success:reportePDF2,
+                beforeSend: function()
+               {
+                $(".alert").remove();
+                var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>Enviando .......................</div>';
+                $("#proceso").append(me);
+                 window.open('pages/permisos/consultaempleado/crearpdfsolicitudes.php?area='+area+'&motivo='+motivo+'&fecha_i='+fecha_i+'&fecha_f='+fecha_f+'&idempleado='+idempleado); 
+                
+               }, 
+                success:function(){
+                	$mensaje="Transaccion Exitosamente..............................................";
+                  $(".alert").remove();
+                  $me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje + '</strong></div>';
+                  $("#proceso").append($me); 
+
+                  
+
+                },
                 timeout:4000,
-                error:problemas
+                error:function(result)
+                {
+                   $(".alert").remove();
+                  var me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+result.status + ' ' + result.statusText+'</strong></div>';
+                  $("#proceso").append(me);
+                    
+                }
             }); 
          
           
@@ -201,10 +228,33 @@ $( document ).ready(function() {
                 dataType: "html",
 				data:data,
                 contentType: "application/x-www-form-urlencoded",
-                url:"pages/permisos/consultaempleado/Revision_consulta.php", 
-                success:llegadaGuardar,
+                url:"pages/permisos/consultaempleado/Revision_consulta.php",
+                beforeSend: function()
+               {
+                $(".alert").remove();
+                var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>Enviando .......................</div>';
+                $("#proceso").append(me); 
+                 
+                
+               }, 
+                success:function()
+                {
+                 
+                 $mensaje="Transaccion Exitosamente..............................................";
+                  $(".alert").remove();
+                  $me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje + '</strong></div>';
+                  $("#proceso").append($me); 
+                 $("#contenedor2").load('pages/permisos/consultaempleado/Revision_consulta.php', data);
+
+                },
                 timeout:4000,
-                error:problemas
+                error:function(result)
+                {
+                   $(".alert").remove();
+                  var me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+result.status + ' ' + result.statusText+'</strong></div>';
+                  $("#proceso").append(me);
+                    
+                }
             }); 
          
           
@@ -214,16 +264,8 @@ $( document ).ready(function() {
 
 );
 
-function reportePDF2(data){
-		//window.open('pages/permisos/crearpdfreportedepto.php?id1='+id1);
-		window.open('pages/permisos/consultaempleado/crearpdfsolicitudes.php?area='+area+'&motivo='+motivo+'&fecha_i='+fecha_i+'&fecha_f='+fecha_f+'&idempleado='+idempleado);  
-	}
 
-	   function llegadaGuardar(datos)
-    {
-        
-        $("#contenedor2").load('pages/permisos/consultaempleado/Revision_consulta.php', data);
-    }
+	  
 
 
 </script>

@@ -4,6 +4,11 @@
 
     $maindir = "../../../";
 	require($maindir."conexion/config.inc.php");
+	if(!isset( $_SESSION['user_id'] ))
+  {
+    header('Location: '.$maindir.'login/logout.php?code=100');
+    exit();
+  }
 
 	$codpermiso =  $_POST['codigo'];
 	$usuario = $_POST['usr'];

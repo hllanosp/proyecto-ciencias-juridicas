@@ -1,4 +1,14 @@
+<?php 
+if(!isset( $_SESSION['user_id'] ))
+  {
+    header('Location: '.$maindir.'login/logout.php?code=100');
+    exit();
+  }
 
+
+
+
+ ?>
 
 <!DOCTYPE html>
 <html lang="utf-8">
@@ -37,36 +47,43 @@
                     type: "POST",
                     dataType: "html",
                     contentType: "application/x-www-form-urlencoded",
-                    beforeSend: inicioEnvio,
-                    success: llegadabuscar,
+                    beforeSend: function()
+               {
+                $(".alert").remove();
+                var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>Enviando .......................</div>';
+                $("#proceso").append(me); 
+                
+               },
+                    success:function()
+                    {
+
+                  $mensaje="Transaccion Exitosamente..............................................";
+                  $(".alert").remove();
+                  $me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje + '</strong></div>';
+                  $("#proceso").append($me);
+                  $("#contenedor2").load('Datos/BuscarPersona.php',data);
+                    },
                     timeout: 4000,
-                    error: problemas
+                    error:function(result)
+                {
+                   $(".alert").remove();
+                  var me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+result.status + ' ' + result.statusText+'</strong></div>';
+                  $("#proceso").append(me);
+                    
+                }
                 });
                 return false;
             }
 
-            function inicioEnvio()
-            {
-                var x = $("#contenedor2");
-                x.html('Cargando...');
-            }
-
-            function llegadabuscar()
-            {
-                $("#contenedor2").load('Datos/BuscarPersona.php',data);
-                //$("#contenedor").load('../cargarPOAs.php');
-            }
             
-            function problemas()
-            {
-                $("#contenedor2").text('Problemas en el servidor.');
-            }
 
         </script>
        
 </head>
 
 <body>
+
+    <div id="proceso"></div>
 
 <div id="contenedor3" class="panel-body">
         <?php
