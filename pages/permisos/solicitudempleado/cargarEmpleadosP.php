@@ -1,6 +1,7 @@
 <?php
 //Este codigo hace una validación de la sesión del usuario y del tiempo que esta lleva inactiva, para proceder a cerrarla
-$maindir = "../../";
+$maindir = "../../../";
+require($maindir . "conexion/config.inc.php");
 
 if (isset($_GET['contenido'])) {
     $contenido = $_GET['contenido'];
@@ -15,17 +16,39 @@ require_once($maindir . "funciones/timeout.php");
 
 <?php
 	//Esta seccion obtiene el nombre de usuario que ha iniciado sesión y lo guarda en una variable
-	$idusuario = $_SESSION['user_id'];
+	if(!isset( $_SESSION['user_id'] ))
+  {
+    header('Location: '.$maindir.'login/logout.php?code=100');
+    exit();
+  }else
+  {
+
+    $idusuario = $_SESSION['user_id'];
+  }
+
+
+
 ?>
 
 <?php
 
-
- $query4 = mysql_query(" SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
+ $ql1=" SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
  persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
  inner join persona on empleado.N_identidad=persona.N_identidad 
  inner join departamento_laboral on departamento_laboral.Id_departamento_laboral =empleado.Id_departamento
-	");
+  ";
+
+
+
+
+
+
+
+ //$query = mysql_query(" SELECT empleado.No_Empleado,empleado.N_identidad,persona.Primer_nombre,
+ //persona.Primer_apellido, departamento_laboral.nombre_departamento FROM empleado
+ //inner join persona on empleado.N_identidad=persona.N_identidad 
+ //inner join departamento_laboral on departamento_laboral.Id_departamento_laboral =empleado.Id_departamento
+//	");
 
 ?>
 
@@ -74,17 +97,35 @@ require_once($maindir . "funciones/timeout.php");
          
                 data = {no_empleado: pid};
 
-				alert ( nombre+" Ha sido selecionado");
+				
                 $.ajax({
                     async: true,
                     type: "POST",
                     //dataType: "html",
                     //contetType: "application/x-www-form-urlencoded",
-                    url:"pages/permisos/Solicitud_E.php",  
-                    beforeSend: inicioEnvio,
-                    success: EditarEmpleado,
+                    url:"pages/permisos/solicitudempleado/Solicitud_E.php",  
+                    beforeSend: function()
+                    {
+                      $(".alert").remove();
+                      var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>"cargando .............."</div>';
+                      $("#proceso").append(me);
+
+
+                    },
+                      success:function()
+                      {
+                      $("#contenedor").empty();
+                      $("#contenedor").load('pages/permisos/solicitudempleado/Solicitud_E.php', data);
+
+
+                      },
                     timeout: 4000,
-                    error: problemas
+                    error : function(result) {
+                   $(".alert").remove();
+                  var me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+result.status + ' ' + result.statusText+'</strong></div>';
+                  $("#proceso").append(me);
+        
+                 }
                 });
               }
 
@@ -94,11 +135,7 @@ require_once($maindir . "funciones/timeout.php");
 
 
         
-            function EditarEmpleado()
-            {
-                $("#contenedor").load('pages/permisos/Solicitud_E.php', data);
-           
-            }
+          
 
    
 
@@ -107,16 +144,28 @@ require_once($maindir . "funciones/timeout.php");
 
         
         
-
+      <script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    $('#tabla_empleados').dataTable(); // example es el id de la tabla
+    } );
+    </script>
+    
+ <script type="text/javascript">
+  // For demo to fit into DataTables site builder...
+  $('#tabla_empleados')
+    .removeClass( 'display' )
+    .addClass('table table-striped table-bordered');
+</script>
            
     </head>
 
     <body>
+      <div id="proceso"></div>
         
              <div class="row">
                 <div class="col-lg-12">
 
-                    <h1 class="page-header">Selecione  a un empleado: </h1>
+                    <h1 class="page-header">Lista de Empleados para Solicitud:</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
@@ -145,14 +194,17 @@ require_once($maindir . "funciones/timeout.php");
                                         </thead>
                                         <tbody>
 HTML;
+            
 
-            while ($row2 = mysql_fetch_array($query4))  {
+              $rec =$db->prepare($ql1);
+              $rec->execute();
+            while ($row = $rec->fetch()) {
 
-            $Noempleado = $row2['No_Empleado'];
-            $Noidentidad = $row2['N_identidad'];
-            $nombre = $row2['Primer_nombre'];
-            $apellido=$row2['Primer_apellido'];
-            $departamento=$row2['nombre_departamento'];
+            $Noempleado = $row['No_Empleado'];
+            $Noidentidad = $row['N_identidad'];
+            $nombre = $row['Primer_nombre'];
+            $apellido=$row['Primer_apellido'];
+            $departamento=$row['nombre_departamento'];
             
                 echo "<tr data-id='".$Noempleado."'>";
                 echo <<<HTML

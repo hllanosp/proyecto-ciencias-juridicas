@@ -55,7 +55,7 @@
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
-			url:"pages/permisos/estadistica.php",    
+			url:"pages/permisos/estadistica/estadistica.php",    
 			// url:"../estadistica.php",  
 			beforeSend:inicioEnvio,
 			success:llegadaEsta,
@@ -69,7 +69,7 @@
 	
 	function llegadaEsta()
 	{
-		$("#contenedor").load('pages/permisos/estadistica.php');
+		$("#contenedor").load('pages/permisos/estadistica/estadistica.php');
 		 //$("#contenedor").load('../permisos/estadistica.php');
 	}
 	function Solicitud()
@@ -79,7 +79,7 @@
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
-			url:"pages/permisos/Solicitud.php",    
+			url:"pages/permisos/solicitudpersonal/Solicitud.php",    
 			// url:"../solicitudes.php",  
 			beforeSend:inicioEnvio,
 			success:llegadaSolic,
@@ -98,7 +98,7 @@
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
-			url:"pages/permisos/Nuevo_usuario.php",      
+			url:"pages/permisos/solicitudempleado/Nuevo_usuario.php",      
 			beforeSend:inicioEnvio,
 			success:llegadaCreacion,
 			timeout:4000,
@@ -116,7 +116,7 @@
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
-			url:"pages/permisos/motivo.php",    
+			url:"pages/permisos/motivo/motivo.php",    
 			// url:"../Motivos.php",  
 			beforeSend:inicioEnvio,
 			success:llegadaMotivos,
@@ -135,7 +135,7 @@
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
-			url:"pages/permisos/Edificios.php",    
+			url:"pages/permisos/edificio/Edificios.php",    
 			// url:"../Edificios.php",  
 			beforeSend:inicioEnvio,
 			success:llegadaEdificios,
@@ -173,7 +173,7 @@
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
-			url:"pages/permisos/Revision.php",    
+			url:"pages/permisos/revision/Revision.php",    
 			// url:"../Revision.php",  
 			beforeSend:inicioEnvio,
 			success:llegadaRevision,
@@ -182,7 +182,7 @@
             alert('ERROR ' + result.status + ' ' + result.statusText);  
           }
 		}); 
-		return false;
+		return true;
 	}
 	
 	function ReporteT()
@@ -192,7 +192,7 @@
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
-			url:"pages/permisos/ReporteTotal.php",    
+			url:"pages/permisos/reportecompleto/ReporteTotal.php",    
 			// url:"../ReporteTotal.php",  
 			beforeSend:inicioEnvio,
 			success:llegadaReporteTotal,
@@ -210,7 +210,7 @@
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
-			url:"pages/permisos/reporteEmpleado.php",    
+			url:"pages/permisos/consultaempleado/reporteEmpleado.php",    
 			// url:"../reporteTrimestral.php",  
 			beforeSend:inicioEnvio,
 			success:llegadaReporteTrimestral,
@@ -228,7 +228,7 @@
 			type: "POST",
 			dataType: "html",
 			contentType: "application/x-www-form-urlencoded",
-			url:"pages/permisos/Nuevo_usuario.php",      
+			url:"pages/permisos/solicitudempleado/Nuevo_usuario.php",      
 			beforeSend:inicioEnvio,
 			success:llegadaCreacion,
 			timeout:4000,
@@ -273,17 +273,17 @@
 	}
 	function llegadaSolic()
 	{
-		$("#contenedor").load('pages/permisos/Solicitud.php');
+		$("#contenedor").load('pages/permisos/solicitudpersonal/Solicitud.php');
 		 //$("#contenedor").load('../permisos/solicitudes.php');
 	}
 	function llegadaMotivos()
 	{
-		$("#contenedor").load('pages/permisos/motivo.php');
+		$("#contenedor").load('pages/permisos/motivo/motivo.php');
 		 //$("#contenedor").load('../permisos/motivo.php');
 	}
 	function llegadaEdificios()
 	{
-		$("#contenedor").load('pages/permisos/Edificios.php');
+		$("#contenedor").load('pages/permisos/edificio/Edificios.php');
 		 //$("#contenedor").load('../permisos/Edificios.php');
 	}
 	function llegadaUnidad()
@@ -293,26 +293,26 @@
 	}
 	function llegadaRevision()
 	{
-		$("#contenedor").load('pages/permisos/Revision.php');
+		$("#contenedor").load('pages/permisos/revision/Revision.php');
 		 //$("#contenedor").load('../permisos/Revision.php');
 	}
 	function llegadaReporteTotal()
 	{
-		$("#contenedor").load('pages/permisos/ReporteTotal.php');
+		$("#contenedor").load('pages/permisos/reportecompleto/ReporteTotal.php');
 		 //$("#contenedor").load('../permisos/ReporteTotal.php');
 	}
 	function llegadaReporteTrimestral()
 	{
-		$("#contenedor").load('pages/permisos/reporteEmpleado.php');
+		$("#contenedor").load('pages/permisos/consultaempleado/reporteEmpleado.php');
 		 //$("#contenedor").load('../permisos/reporteTrimestral.php');
 	}
 	function llegadaCreacion(){
-		$("#contenedor").load('pages/permisos/Nuevo_usuario.php');
+		$("#contenedor").load('pages/permisos/solicitudempleado/Nuevo_usuario.php');
 	}
 	function problemas()
 	{
 		$("#contenedor").text();
 	}
 		function llegadaCreacion(){
-		$("#contenedor").load('pages/permisos/Nuevo_usuario.php');
+		$("#contenedor").load('pages/permisos/solicitudempleado/Nuevo_usuario.php');
 	}
