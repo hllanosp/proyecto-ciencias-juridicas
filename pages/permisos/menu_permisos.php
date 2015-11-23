@@ -24,14 +24,14 @@
 						</li>
 						
 						<?php
-							if($rol==29 ){
+							if($rol==29 or $rol == 100){
 								echo "<li><a id ='solicitude' href='#'> Solicitud Empleados</a>	</li>";
 							}						
 						?>	
 					
 						
 						<?php
-							if($rol==30 or $rol==50 ){
+							if($rol==30 or $rol==50 or $rol==100 ){
 								echo "<li><a id ='revision' href='#'>Revisión</a></li>";
 							}						
 						?>	
