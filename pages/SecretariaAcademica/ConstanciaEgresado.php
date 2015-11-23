@@ -23,8 +23,12 @@ $añosEstudio = "<<AÑOS DE ESTUDIO EN DERECHO>>";
 $fechaPalabras = "veintidós días del mes de julio de dos mil quince.";
 $nombreSecretario = "JORGE ALBERTO MATUTE OCHOA";
 
-if(isset($_POST["arregloEgresado"]) && isset($_POST["cadena"])){
+if(isset($_POST["arregloEgresado"]) && isset($_POST["cadena"]) && isset($_POST["arregloCodsEgresados"]) && isset($_POST["fechaExp"])){
     $listaDNI = $_POST["arregloEgresado"];
+    $listaCodsEgresados = $_POST["arregloCodsEgresados"];
+    $fechaExp = $_POST["fechaExp"];
+    $codsEgresados  = explode(',', $listaCodsEgresados);
+    
     $tok = explode(',', $listaDNI);
     $tam = count($tok);
     
@@ -54,6 +58,11 @@ if(isset($_POST["arregloEgresado"]) && isset($_POST["cadena"])){
         }
 
         $fechaPalabras = $_POST['cadena'];
+        $statement->nextRowSet();
+        $statement->closeCursor();
+        
+        $statement = $db->prepare('UPDATE sa_solicitudes SET fecha_exportacion = "'.$fechaExp.'" WHERE codigo = '.$codsEgresados[$i].'');
+        $statement->execute();
         $statement->nextRowSet();
         $statement->closeCursor();
         

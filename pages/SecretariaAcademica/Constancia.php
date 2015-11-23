@@ -24,8 +24,13 @@ $orientacion = "Derecho Penal";
 $fechaPalabras = 'veintiún días del mes de abril de dos mil quince.';
 $nombreSecretario = "JORGE ALBERTO MATUTE OCHOA";
 
-if(isset($_POST['arregloConstancia']) && isset($_POST['cadena'])){
+if(isset($_POST['arregloConstancia']) && isset($_POST['cadena']) && isset($_POST["arregloCodsConstancia"]) && isset($_POST["fechaExp"])){
     $listaDNIConstancia = $_POST['arregloConstancia'];
+    
+    $listaCodsConstancias = $_POST["arregloCodsConstancia"];
+    $fechaExp = $_POST["fechaExp"];
+    $codsConstancias = explode(',', $listaCodsConstancias);
+    
     $tok = explode(',', $listaDNIConstancia);
     $tam = count($tok);
     
@@ -57,6 +62,11 @@ if(isset($_POST['arregloConstancia']) && isset($_POST['cadena'])){
         $cadenaOrientacion = ", con orientación en ".$orientacion."";
         $cadenaPlanEstudio = "(".$planEstudio.")";
         $fechaPalabras = $_POST["cadena"];
+        $statement->nextRowSet();
+        $statement->closeCursor();
+        
+        $statement = $db->prepare('UPDATE sa_solicitudes SET fecha_exportacion = "'.$fechaExp.'" WHERE codigo = '.$codsConstancias[$i].'');
+        $statement->execute();
         $statement->nextRowSet();
         $statement->closeCursor();
         

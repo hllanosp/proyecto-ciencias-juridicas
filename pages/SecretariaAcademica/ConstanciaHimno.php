@@ -20,8 +20,13 @@ $calificacion = "100 POR CIENTO(%)";
 $nombreSecretario = "JORGE ALBERTO MATUTE OCHOA";
 $fechaPalabras = "veintidós días del mes de julio de dos mil quince.";
 
-if(isset($_POST["arregloHimno"]) && isset($_POST["cadena"])){
+if(isset($_POST["arregloHimno"]) && isset($_POST["cadena"]) && isset($_POST["arregloCodsHimno"]) && isset($_POST["fechaExp"])){
     $listaDNI = $_POST["arregloHimno"];
+    
+    $listaCodsHimno = $_POST["arregloCodsHimno"];
+    $fechaExp = $_POST["fechaExp"];
+    $codsHimno = explode(',', $listaCodsHimno);
+    
     $tok = explode(',', $listaDNI);
     $tam = count($tok);
     
@@ -48,6 +53,11 @@ if(isset($_POST["arregloHimno"]) && isset($_POST["cadena"])){
         }
 
         $fechaPalabras = $_POST['cadena'];
+        $statement->nextRowSet();
+        $statement->closeCursor();
+        
+        $statement = $db->prepare('UPDATE sa_solicitudes SET fecha_exportacion = "'.$fechaExp.'" WHERE codigo = '.$codsHimno[$i].'');
+        $statement->execute();
         $statement->nextRowSet();
         $statement->closeCursor();
         
