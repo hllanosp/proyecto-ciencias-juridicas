@@ -395,18 +395,37 @@ $( document ).ready(function() {
                 dataType: "html",
                 contentType: "application/x-www-form-urlencoded",
                 url:"pages/permisos/revision/crear_pdfpermiso.php", 
-                success:reportePDF,
+                beforeSend: function()
+               {
+                $(".alert").remove();
+                var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>Enviando .......................</div>';
+                $("#proceso").append(me); 
+                window.open('pages/permisos/revision/crear_pdfpermiso.php?id1='+id1);
+                 
+                
+               }, 
+                success:function()
+                {
+                  $mensaje="Transaccion Exitosamente..............................................";
+                  $(".alert").remove();
+                  $me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje + '</strong></div>';
+                  $("#proceso").append($me);
+
+                },
                 timeout:4000,
-                error:problemas
+                error:function(result)
+                {
+                   $(".alert").remove();
+                  var me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+result.status + ' ' + result.statusText+'</strong></div>';
+                  $("#proceso").append(me);
+                	
+                }
             }); 
             return false;
           }
         });
 });
 
-function reportePDF(data){
-	window.open('pages/permisos/revision/crear_pdfpermiso.php?id1='+id1);
-}
 
 </script>
 

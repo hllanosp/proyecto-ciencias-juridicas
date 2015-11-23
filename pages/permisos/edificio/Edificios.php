@@ -21,82 +21,7 @@ if(isset($_GET['contenido']))
     exit();
   }
 
- if(isset($_GET['errores']))
-   {
-       $accion = $_GET['errores'];
-        switch ($accion) 
-        {
-            case 0:
-                error_print(0);
-                break;
-            case 1:
-                error_print(1);
-                break;
-            case 2:
-                error_print(2);
-                break;
-            case 3:
-                error_print(3);
-                break;
-            case 4:
-                error_print(4);
-                break;
-            case 5:
-                error_print(5);
-                break;
-            default:
-                break;
-        }
-   }
-   
-   function error_print($error_code)
-   {
-       $mensaje = "";
-       switch ($error_code) {
-             
-            case 1:
-                $mensaje = "Exitosamente transaccion...........";
-                echo '<div class="alert alert-success alert-error">
-                <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <strong> Success! </strong>'.$mensaje.'</div>';
-
-
-                break;
-            case 2:
-                $mensaje = "No se puede Eliminar estad relacionado con un permiso ..................... ";
-                echo '<div class="alert alert-danger alert-error">
-                <a href="#" class="close" data-dismiss="alert">&times;</a>
-                <strong> Error! </strong>'.$mensaje.'</div>';
-                break;
-            case 3:
-                $mensaje = "Error al Eliminar........................";
-                echo '<div class="alert alert-danger alert-error">
-               <a href="#" class="close" data-dismiss="alert">&times;</a>
-               <strong> Error! </strong>'.$mensaje.'</div>';
-                break;
-            case 4:
-                $mensaje = " Se  necesita el id Motivo vacio";
-                echo '<div class="alert alert-danger alert-error">
-               <a href="#" class="close" data-dismiss="alert">&times;</a>
-               <strong> Error! </strong>'.$mensaje.'</div>';
-
-
-                break;
-                case 5:
-                $mensaje = " No se puede Editar error servidor";
-                echo '<div class="alert alert-danger alert-error">
-               <a href="#" class="close" data-dismiss="alert">&times;</a>
-               <strong> Error! </strong>'.$mensaje.'</div>';
-
-
-                break;
-            
-                
-            default:
-                break;
-        }
-        
-   }
+ 
 require($maindir."conexion/config.inc.php");
 $sql="SELECT * from edificios";
 $rec =$db->prepare($sql);
@@ -120,6 +45,10 @@ $rec->execute();
 
   <div id="proceso">
 </div>
+
+
+
+<div id="contenido_tabla">
 	<div id="wrapper">
 			<div class="row">
                 <div class="col-lg-12">
@@ -149,52 +78,7 @@ $rec->execute();
 										
 										<?php
               
-                   echo <<<HTML
-                                    <table id="tabla_Edificios" class="table table-bordered table-striped">
-                                        <thead>
-                                            <tr>
-                                            <th style='display:none'><strong>ID Edificio</strong></th>
-                                             <th><strong>Nombre Edificio</strong></th>
-                                             <th><strong>Editar</strong></th>
-                                             <th><strong>Eliminar</strong></th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-HTML;
-
-               while ($row = $rec->fetch())  {
-
-				$idE = $row['Edificio_ID'];
-				$dedificio = $row['descripcion'];
-            
-            
-                echo "<tr data-id='".$idE."'>";
-                echo <<<HTML
-                <td style='display:none'> $idE</td> 
-HTML;
-               
-
-               echo <<<HTML
-				
-                <td>$dedificio</td>
-				
-				<td><center>
-                    <a class="open-Modal btn btn-primary" data-toggle="modal" data-id=$idE data-target="#compose-modal"><i class="fa fa-edit"></i></a>
-                </center></td>
-                <td><center>
-                    <a class="open-Modal-Eliminar btn btn-danger"  data-toggle="modal" data-idEliminar=$idE data-target="#Eliminar-modal" ><i class=" fa fa-trash-o"></i></a>
-                </center></td>
-  
-HTML;
-                echo "</tr>";
-
-            }
-
-                   echo <<<HTML
-                                       
-									</table>
-HTML;
+                 require_once($maindir."pages/permisos/edificio/tabla_edificio.php");
                ?>
 
 									</form>
@@ -204,7 +88,8 @@ HTML;
 					</div>						
 				</div>							
 			</div>								
-	</div>									
+	</div>	
+  </div>								
 	
  <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
@@ -232,16 +117,13 @@ HTML;
                   </div>
                   
               </div>
-           <!--  <div class="modal-footer clearfix">
-            <button name="submit" id="submit" class="insertarbg btn btn-primary pull-left"><i class="glyphicon glyphicon-pencil"></i> Insertar</button>
-          </div>
-           -->
+           
                 
                     
           </form>
     
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+  </div>
+</div>
 </div> 
 
 <div class="modal fade" id="Eliminar-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -270,10 +152,14 @@ HTML;
 	
 
 <script>
+
+
 $(document).on("click", ".open-Modal", function () {
 	id = $(this).parents("tr").find("td").eq(0).html();
+  $datos = $(this).parents("tr").find("td").eq(1).html();
 	var myDNI = $(this).data('id');
 	$(".modal-body #idedificio").val(myDNI);
+  $(".modal-body #descripcione").val($datos);
 });
 
 $(document).on("click",".open-Modal-Eliminar",function(){
@@ -291,7 +177,7 @@ $('#Eliminar-modal #informacion').text(d);
  
     function inicio(){
         var x;
-        x=$("#guardarEdificio");
+        x=$(".guardarEdificio");
         x.click(consultaEdificio);
         
         var x;
@@ -316,23 +202,83 @@ $('#Eliminar-modal #informacion').text(d);
                 dataType:'html',
                 beforeSend: function () {
 
-                  $(".alert").remove();
+                $(".alert").remove();
                 var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>"cargando .............."</div>';
                 $("#proceso").append(me);
                     
                 },
                 success:  function (response) {
-                  $("#contenedor").empty();
-                 $dato=response.trim();
-                 $("#contenedor").load('pages/permisos/edificio/Edificios.php?errores='+$dato); 
-                        
+               
+                      $dato=response.trim();
+                       if ($dato==1) 
+                        {
+                            $mensaje="Transaccion Exitosamente..............................................";
+                            $(".alert").remove();
+                             $me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje + '</strong></div>';
+                             $("#proceso").append($me);
+
+                        } 
+                        else
+                          {
+                            if ($dato==2) 
+                              {
+                                  $mensaje="No se puede Eliminar esta relacionado con un permiso ..................... ";
+                                  $(".alert").remove();
+                                  $me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje+' </strong></div>';
+                                  $("#proceso").append($me);
+                                 
+
+                              } 
+                              else
+                                {
+                                  if
+                                   ($dato==3) 
+                                      {
+                                        $mensaje="Error al Eliminar........................ ";
+                                        $(".alert").remove();
+                                        $me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje+' </strong></div>';
+                                       $("#proceso").append($me);
+
+
+                                      }
+                                  else
+                                    {
+                                      if ($dato==4) 
+                                        {
+                                          $mensaje="Se  necesita el id Edificio vacio..................... ";
+                                          $(".alert").remove();
+                                          $me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje+' </strong></div>';
+                                          $("#proceso").append($me);
+
+                                        } else
+                                        {
+                                          $mensaje="Error critico .....#"+$dato;
+                                          $(".alert").remove();
+                                          $me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje+' </strong></div>';
+                                          $("#proceso").append($me);
+
+
+                                        };
+
+                                    };
+                                
+
+
+                                };
+
+
+                          };
+                     
+               
+               $("#tabla_Edificios").empty(); 
+               $("#tabla_Edificios").load('pages/permisos/edificio/tabla_edificio.php');
                         
                           
                 },
                 error : function(result) {
-                   $(".alert").remove();
-                  var me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+result.status + ' ' + result.statusText+'</strong></div>';
-                  $("#proceso").append(me);
+                $(".alert").remove();
+                var me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+result.status + ' ' + result.statusText+'</strong></div>';
+                $("#proceso").append(me);
         
                  }
  
@@ -366,7 +312,7 @@ $('#Eliminar-modal #informacion').text(d);
 	function consultaEdificio() {
             var dedificio=$("#nmedificio").val(); 
             data ={ dedificio:$("#nmedificio").val()};
-
+           $("#nmedificio").val("");
             $.ajax({
                 async:true,
                 type: "POST",
@@ -383,9 +329,46 @@ $('#Eliminar-modal #informacion').text(d);
                 },
                 success:function(response)
                 {
-                  $("#contenedor").empty();
-                  $dato=response.trim();
-                   $("#contenedor").load('pages/permisos/edificio/Edificios.php?errores='+$dato);
+            
+                    
+                      $dato=response.trim();
+                       if ($dato==1) 
+                        {
+                          $mensaje="Transaccion Exitosamente..............................................";
+                            $(".alert").remove();
+                             $me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje + '</strong></div>';
+                             $("#proceso").append($me);
+
+
+                        } 
+                        else
+                          {
+                            if ($dato==5) 
+                              {
+
+                                $mensaje="Error del servidor........................ ";
+                                $(".alert").remove();
+                                $me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje+' </strong></div>';
+                                $("#proceso").append($me);
+
+
+                              } 
+                              else
+                                {
+                                  $mensaje="Error critico .....#"+$dato;
+                                  $(".alert").remove();
+                                  $me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje+' </strong></div>';
+                                  $("#proceso").append($me);
+                                
+
+                                };
+
+
+                          };
+                     
+              
+               $("#tabla_Edificios").empty(); 
+               $("#tabla_Edificios").load('pages/permisos/edificio/tabla_edificio.php');
                    
                   
                 },
@@ -393,17 +376,19 @@ $('#Eliminar-modal #informacion').text(d);
                 timeout:4000,
                 error:function(result){  
                 $(".alert").remove();
-                 var me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong> '+ result.status + ' ' + result.statusText+'</strong></div>';
+                 var me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong> '+ result.status + ' ' + result.statusText+'</strong></div>';
                 $("#proceso").append(me);
+
           }
             }); 
-           
-          return false;
+     
+           return false;
+          
 			
     }
 	
 	function editarEdificio(){
-		//var id = $(this).parents("tr").find("td").eq(0).html();
+		
 		
      
 			data = {Edificio_ID:$('#idedificio').val(), dedificio:$('#descripcione').val()};
@@ -417,19 +402,51 @@ $('#Eliminar-modal #informacion').text(d);
 				url:"pages/permisos/edificio/editarEdificios.php",     
 				beforeSend:function()
         {
-           $(".alert").remove();
-                var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>"cargando .............."</div>';
-                $("#proceso").append(me); 
+        $(".alert").remove();
+        var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>"cargando .............."</div>';
+        $("#proceso").append(me); 
 
 
         },
 				success:function(response)
         {
-          $("#contenedor").empty();
-          $dato=response.trim();
-           
-          $("#contenedor").load('pages/permisos/edificio/Edificios.php?errores='+$dato);
-                   
+          
+                      $dato=response.trim();
+                       if ($dato==1) 
+                        {
+                          $mensaje="Transaccion Exitosamente..............................................";
+                            $(".alert").remove();
+                             $me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje + '</strong></div>';
+                             $("#proceso").append($me);
+                        } 
+                        else
+                          {
+                            if ($dato==5) 
+                              {
+
+                                $mensaje="Error del servidor........................ ";
+                                $(".alert").remove();
+                                $me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje+' </strong></div>';
+                                $("#proceso").append($me);
+
+
+                              } 
+                              else
+                                {
+                                $mensaje="Error critico .....#"+$dato;
+                                  $(".alert").remove();
+                                  $me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje+' </strong></div>';
+                                  $("#proceso").append($me);
+
+
+                                };
+
+
+                          };
+                     
+               
+               $("#tabla_Edificios").empty(); 
+               $("#tabla_Edificios").load('pages/permisos/edificio/tabla_edificio.php');
 
 
         },
@@ -437,8 +454,8 @@ $('#Eliminar-modal #informacion').text(d);
 				error:function(result)
         {
           $(".alert").remove();
-                 var me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong> '+ result.status + ' ' + result.statusText+'</strong></div>';
-                $("#proceso").append(me);
+          var me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong> '+ result.status + ' ' + result.statusText+'</strong></div>';
+          $("#proceso").append(me);
 
 
         }

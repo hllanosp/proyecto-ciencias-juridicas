@@ -100,10 +100,31 @@ $rec->execute();
                     //dataType: "html",
                     //contetType: "application/x-www-form-urlencoded",
                     url:"pages/permisos/consultaempleado/ReportexPersona.php",  
-                    beforeSend: inicioEnvio,
-                    success: EditarEmpleado,
+                    beforeSend: function()
+               {
+                $(".alert").remove();
+                var me='<div class="alert alert-info alert-error"><a href="#" class="close" data-dismiss="alert">&times;</a><strong> Informacion   </strong>Enviando .......................</div>';
+                $("#proceso").append(me); 
+                
+               },
+                    success: function()
+                    {
+                      $mensaje="Transaccion Exitosamente..............................................";
+                  $(".alert").remove();
+                  $me='<div class="alert alert-success" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+$mensaje + '</strong></div>';
+                  $("#proceso").append($me);
+                  $("#contenedor3").load('pages/permisos/consultaempleado/ReportexPersona.php', data);
+
+
+                    },
                     timeout: 4000,
-                    error: problemas
+                    error:function(result)
+                {
+                   $(".alert").remove();
+                  var me='<div class="alert alert-danger" role="alert"> <a href="#" class="close" data-dismiss="alert">&times;</a>  <strong>'+result.status + ' ' + result.statusText+'</strong></div>';
+                  $("#proceso").append(me);
+                    
+                }
                 });
               }
 
@@ -113,12 +134,7 @@ $rec->execute();
 
 
         
-            function EditarEmpleado()
-            {
-                $("#contenedor").load('pages/permisos/consultaempleado/ReportexPersona.php', data);
-           
-            }
-
+            
    
 
 
