@@ -21,6 +21,8 @@ if($contadorFilas >= 1){
 $statement->nextRowSet();
 $statement->closeCursor();
 
+$fechaExpedicion = "No definida.";
+
 ?>
 
 <div class="panel panel-primary">
@@ -64,8 +66,10 @@ $statement->closeCursor();
                             <th>Estudiante</th>
                             <th>DNI</th>
                             <th>Fecha</th>
+                            <th>Fecha Exp</th>
                             <th>Tipo Solicitud</th>
                             <th style="width: 40px">Exportar</th>
+                            <th style="width: 40px">Supr.</th>
                         </tr>
                     <!--<a class="fa fa-file-pdf-o"></a>-->
                     </thead>
@@ -73,12 +77,14 @@ $statement->closeCursor();
                         <?php
                         foreach ($tabla as $fila){
                             echo '<tr>'.
-                                    '<td>'.$fila['CODIGO'].'</td>'.
+                                    '<td id="'.$fila['CODIGO'].'">'.$fila['CODIGO'].'</td>'.
                                     '<td>'.$fila['NOMBRE'].'</td>'.
                                     '<td class="'.$fila['DNI'].'">'.$fila['DNI'].'</td>'.
                                     '<td>'.$fila['FECHA'].'</td>'.
+                                    '<td>'.$fila['FECHAEXP'].'</td>'.
                                     '<td>'.$fila['TIPOSOLICITUD'].'</td>'.
-                                    '<td class="'.$fila['TIPOSOLICITUD'].'"><center><a title="'.$fila['TIPOSOLICITUD'].'" class="'.$fila['TIPOSOLICITUD'].' btn btn-danger fa fa-file-pdf-o"></a></center></td>'.
+                                    '<td class="'.$fila['TIPOSOLICITUD'].'"><center><a title="'.$fila['TIPOSOLICITUD'].'" class="'.$fila['TIPOSOLICITUD'].' btn btn-success fa fa-file-pdf-o"></a></center></td>'.
+                                    '<td><center><button class="btn btn-danger btnSuprimir"><span class="glyphicon glyphicon-remove-circle"></span></button></center></td>'.
                                     '</tr>';
                         }
                         ?>
@@ -86,8 +92,6 @@ $statement->closeCursor();
                 </table>
             </div>
             <button style="width: 200px; margin-top: 10px;" class="btn btn-primary pull-right" id="btnExportarTodos">Exportar Todas</button>
-        </div>
-        <div> 
         </div>
     </div>
     
@@ -108,7 +112,7 @@ $statement->closeCursor();
                         <div class="row">
                             <label class="label label-default">Fecha en la que se emite la constancia:</label>
                         </div>
-                        <input placeholder="ejem: siete dias del mes de noviembre de dos mil quince." style="margin-bottom: 10px; margin-top: 10px; width: 450px" class="form-control" id="txtFechaPalabrasHimno" type="text">
+                        <input style="margin-bottom: 10px; margin-top: 10px; width: 200px" class="form-control" id="txtFechaPalabrasHimno" type="date">
 
 <!--                        <div class="row">
                             <label class="label label-default">Recibio sanci&oacute;n:</label>
@@ -154,7 +158,7 @@ $statement->closeCursor();
                         <div class="row">
                             <label class="label label-default">Fecha en la que se emite la constancia:</label>
                         </div>
-                        <input placeholder="ejem: siete dias del mes de noviembre de dos mil quince." style="margin-bottom: 10px; margin-top: 10px; width: 450px" class="form-control" id="txtFechaPalabrasConducta" type="text">
+                        <input style="margin-bottom: 10px; margin-top: 10px; width: 200px" class="form-control" id="txtFechaPalabrasConducta" type="date">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -181,7 +185,7 @@ $statement->closeCursor();
                         <div class="row">
                             <label class="label label-default">Fecha en la que se emite la certificaci&oacute;n:</label>
                         </div>
-                        <input placeholder="ejem: siete dias del mes de noviembre de dos mil quince." style="margin-bottom: 10px; margin-top: 10px; width: 450px" class="form-control" id="txtFechaPalabrasPPS" type="text">
+                        <input style="margin-bottom: 10px; margin-top: 10px; width: 200px" class="form-control" id="txtFechaPalabrasPPS" type="date">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -208,7 +212,7 @@ $statement->closeCursor();
                         <div class="row">
                             <label class="label label-default">Fecha en la que se emite la constancia:</label>
                         </div>
-                        <input placeholder="ejem: siete dias del mes de noviembre de dos mil quince." style="margin-bottom: 10px; margin-top: 10px; width: 450px" class="form-control" id="txtFechaPalabrasConstancia" type="text">
+                        <input style="margin-bottom: 10px; margin-top: 10px; width: 200px" class="form-control" id="txtFechaPalabrasConstancia" type="date">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -235,7 +239,7 @@ $statement->closeCursor();
                         <div class="row">
                             <label class="label label-default">Fecha en la que se emite la constancia:</label>
                         </div>
-                        <input placeholder="ejem: siete dias del mes de noviembre de dos mil quince." style="margin-bottom: 10px; margin-top: 10px; width: 450px" class="form-control" id="txtFechaPalabrasEgresado" type="text">
+                        <input style="margin-bottom: 10px; margin-top: 10px; width: 200px" class="form-control" id="txtFechaPalabrasEgresado" type="date">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -255,12 +259,38 @@ $statement->closeCursor();
         var matrizHimno = []; //al parecer solo se enviaran los dni
         var matrizEgresado = [];
         var matrizConstancia = [];
+        var row;
+        var codTipo = [];
+        var codsConducta = [];
+        var codsPPS = [];
+        var codsHimno = [];
+        var codsEgresado = [];
+        var codsConstancia = [];
+        
+        var dias = "un,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,diez,once,doce,trece,catorce,quince,dieciséis,diecisiete,dieciocho,diecinueve,veinte,veintiún,veintidós,veintitrés,veinticuatro,veinticinco,veintiséis,veintisiete,veintiocho,veintinueve,treinta,treinta y un";
+        var años = "uno,dos,tres,cuatro,cinco,seis,siete,ocho,nueve,diez,once,doce,trece,catorce,quince,dieciséis,diecisiete,dieciocho,diecinueve,veinte,veintiuno,veintidós,veintitrés,veinticuatro,veinticinco,veintiséis,veintisiete,veintiocho,veintinueve,treinta,treinta y uno,treinta y dos,treinta y tres,\n\
+                    treinta y cuatro,treinta y cinco,treinta y seis,treinta y siete,treinta y ocho,treinta y nueve,cuarenta,cuarenta y uno,cuarenta y dos,cuarenta y tres,cuarenta y cuatro,cuarenta y cinco,cuarenta y seis,cuarenta y siete,cuarenta y ocho,cuarenta y nueve,cincuenta,cincuenta y uno,cincuenta y dos,cincuenta y tres,cincuenta y cuatro,cincuenta y cinco,cincuenta y seis,cincuenta y siete,cincuenta y ocho,cincuenta y nueve,sesenta";
+        var dia = dias.split(",");
+        var año = años.split(",");
+        var mes = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
         
         $(".Constancia.de.Ultimo.Año").click(function(){
             DNI = $(this).parents("tr").find("td").eq(2).attr('class');
+            row = $(this).closest('tr').find('td').eq(4);
             matrizConstancia[0] = DNI;
+            codsConstancia[0] = $(this).parents("tr").find("td").eq(0).attr('id');
             $("#modalConstancia").modal("show");
+            row = $(this).closest('tr').find('td').eq(4);
             $("#txtFechaPalabrasConstancia").val(null);
+        });
+        
+        $(".btnSuprimir").click(function(){
+            var here = this;
+            $(this).closest('tr').find('td').fadeOut('200', 
+                function(here){
+                    table.row($(this).parents('tr')).remove().draw();
+                    //$(here).parents('tr:first').remove().draw();                    
+                });  
         });
         
         $("#btnAceptarConstancia").click(function(){
@@ -268,13 +298,36 @@ $statement->closeCursor();
                 alert("Introduzca la fecha en la que se emitie la constancia");
             }
             else{
-                var cadena = $.trim($("#txtFechaPalabrasConstancia").val());
+                var cadena = $("#txtFechaPalabrasConstancia").val();
+                var parts = cadena.match(/(\d+)/g);
+                var date = new Date(parts[0], parts[1]-1, parts[2]);
+                var aniospart = date.getFullYear().toString().split("");
+                var dosUltimos = aniospart[2]+""+aniospart[3];
+                
+                cadena = dia[date.getDate()-1]+" días del mes de "+mes[date.getMonth()]+" de Dos Mil "+año[dosUltimos - 1].toString().charAt(0).toUpperCase()+año[dosUltimos - 1].slice(1)+".";
+                
                 var arregloConstancia = matrizConstancia.toString();
+                var arregloCodsConstancia = codsConstancia.toString();
+                
+                if(row != null){
+                    row.html($("#txtFechaPalabrasConstancia").val());
+                }
+                
+                if(codTipo.length >= 1){
+                    for(var i = 0; i < codTipo.length; i++){
+                        if(codTipo[i][1] === "Constancia de Ultimo Año"){
+                            codTipo[i][2].find('td').eq(4).html($("#txtFechaPalabrasConstancia").val());
+                        }
+                    }
+                }
+                
                 submit_post_via_hidden_form(
                     'pages/SecretariaAcademica/Constancia.php',
                     {
                         arregloConstancia: arregloConstancia,
-                        cadena: cadena
+                        cadena: cadena,
+                        arregloCodsConstancia: arregloCodsConstancia,
+                        fechaExp: $("#txtFechaPalabrasConstancia").val()
                     }
                 );
                 $("#modalConstancia").modal("hide");
@@ -284,7 +337,9 @@ $statement->closeCursor();
         $(".Constancia.de.Egresado").click(function(){
             DNI = $(this).parents("tr").find("td").eq(2).attr('class');
             matrizEgresado[0] = DNI;
+            codsEgresado[0] = $(this).parents("tr").find("td").eq(0).attr('id');
             $("#modalEgresado").modal("show");
+            row = $(this).closest('tr').find('td').eq(4);
             $("#txtFechaPalabrasEgresado").val(null);
         });
         
@@ -293,13 +348,35 @@ $statement->closeCursor();
                 alert("Introduzca la fecha en la que se emitie la constancia")
             }
             else{
-                var cadena = $.trim($("#txtFechaPalabrasEgresado").val());
+                var cadena = $("#txtFechaPalabrasEgresado").val();
+                var parts = cadena.match(/(\d+)/g);
+                var date = new Date(parts[0], parts[1]-1, parts[2]);
+                var aniospart = date.getFullYear().toString().split("");
+                var dosUltimos = aniospart[2]+""+aniospart[3];
+                
+                cadena = dia[date.getDate()-1]+" días del mes de "+mes[date.getMonth()]+" de Dos Mil "+año[dosUltimos - 1].toString().charAt(0).toUpperCase()+año[dosUltimos - 1].slice(1)+".";
+              
+                if(row != null){
+                    row.html($("#txtFechaPalabrasEgresado").val());
+                }
+                
+                if(codTipo.length >= 1){
+                    for(var i = 0; i < codTipo.length; i++){
+                        if(codTipo[i][1] === "Constancia de Egresado"){
+                            codTipo[i][2].find('td').eq(4).html($("#txtFechaPalabrasEgresado").val());
+                        }
+                    }
+                }
+                
                 var arregloEgresado = matrizEgresado.toString();
+                var arregloCodsEgresados = codsEgresado.toString();
                 submit_post_via_hidden_form(
                     'pages/SecretariaAcademica/ConstanciaEgresado.php',
                     {
                         arregloEgresado: arregloEgresado,
-                        cadena: cadena
+                        cadena: cadena,
+                        arregloCodsEgresados: arregloCodsEgresados,
+                        fechaExp: $("#txtFechaPalabrasEgresado").val()
                     }
                 );
                 $("#modalEgresado").modal("hide");
@@ -309,7 +386,9 @@ $statement->closeCursor();
         $(".Certificación.para.PPS").click(function(){
             DNI = $(this).parents("tr").find("td").eq(2).attr('class');
             matrizPPS[0] = DNI;
+            codsPPS[0] = $(this).parents("tr").find("td").eq(0).attr('id');
             $("#modalPPS").modal("show");
+            row = $(this).closest('tr').find('td').eq(4);
             $("#txtFechaPalabrasPPS").val(null);
         });
         
@@ -318,12 +397,34 @@ $statement->closeCursor();
                 alert("Introduzca la fecha en la que se emitie la certificación");
             }
             else{
-                var cadena = $.trim($("#txtFechaPalabrasPPS").val());
+                var cadena = $("#txtFechaPalabrasPPS").val();
+                var parts = cadena.match(/(\d+)/g);
+                var date = new Date(parts[0], parts[1]-1, parts[2]);
+                var aniospart = date.getFullYear().toString().split("");
+                var dosUltimos = aniospart[2]+""+aniospart[3];
+                
+                cadena = dia[date.getDate()-1]+" días del mes de "+mes[date.getMonth()]+" de Dos Mil "+año[dosUltimos - 1].toString().charAt(0).toUpperCase()+año[dosUltimos - 1].slice(1);
+             
                 var arregloPPS = matrizPPS.toString();
+                var arregloCodsPPS = codsPPS.toString();
+                if(row != null){
+                    row.html($("#txtFechaPalabrasPPS").val());
+                }
+                
+                if(codTipo.length >= 1){
+                    for(var i = 0; i < codTipo.length; i++){
+                        if(codTipo[i][1] === "Certificación para PPS"){
+                            codTipo[i][2].find('td').eq(4).html($("#txtFechaPalabrasPPS").val());
+                        }
+                    }
+                }
+                
                 submit_post_via_hidden_form('pages/SecretariaAcademica/ConstanciaPPS.php',
                     {
                         arregloPPS: arregloPPS,
-                        cadena: cadena
+                        cadena: cadena,
+                        arregloCodsPPS: arregloCodsPPS,
+                        fechaExp: $("#txtFechaPalabrasPPS").val()
                     }
                 );
                 $("#modalPPS").modal("hide");
@@ -333,7 +434,9 @@ $statement->closeCursor();
         $(".Constancia.de.Conducta").click(function(){
             DNI = $(this).parents("tr").find("td").eq(2).attr('class');
             matrizConducta[0] = DNI;
+            codsConducta[0] = $(this).parents("tr").find("td").eq(0).attr('id');
             $("#modalConducta").modal("show");
+            row = $(this).closest('tr').find('td').eq(4);
             $("#txtFechaPalabrasConducta").val(null);
         });
         
@@ -342,13 +445,37 @@ $statement->closeCursor();
                 alert("Introduzca la fecha en la que se emitie la constancia");
             }
             else{
-                var cadena = $.trim($("#txtFechaPalabrasConducta").val());
+                
+                var cadena = $("#txtFechaPalabrasConducta").val();
+                var parts = cadena.match(/(\d+)/g);
+                var date = new Date(parts[0], parts[1]-1, parts[2]);
+                var aniospart = date.getFullYear().toString().split("");
+                var dosUltimos = aniospart[2]+""+aniospart[3];
+                
+                cadena = dia[date.getDate()-1]+" días del mes de "+mes[date.getMonth()]+" de Dos Mil "+año[dosUltimos - 1].toString().charAt(0).toUpperCase()+año[dosUltimos - 1].slice(1)+".";
+             
                 var arregloConducta = matrizConducta.toString();
+                var arregloCodsConducta = codsConducta.toString();
+                
+                if(row != null){
+                    row.html($("#txtFechaPalabrasConducta").val());
+                }
+                
+                if(codTipo.length >= 1){
+                    for(var i = 0; i < codTipo.length; i++){
+                        if(codTipo[i][1] === "Constancia de Conducta"){
+                            codTipo[i][2].find('td').eq(4).html($("#txtFechaPalabrasConducta").val());
+                        }
+                    }
+                }
+                
                 submit_post_via_hidden_form(
                     'pages/SecretariaAcademica/ConstanciaConducta.php',
                     {
                         arregloConducta: arregloConducta,
-                        cadena: cadena
+                        cadena: cadena,
+                        arregloCodsConducta: arregloCodsConducta,
+                        fechaExp: $("#txtFechaPalabrasConducta").val()
                     }
                 );                
                 $("#modalConducta").modal("hide");
@@ -358,7 +485,10 @@ $statement->closeCursor();
         $(".Constancia.de.Himno").click(function(){
             DNI = $(this).parents("tr").find("td").eq(2).attr('class');
             matrizHimno[0] = DNI;
+            codsHimno[0] = $(this).parents("tr").find("td").eq(0).attr('id');
+            row = $(this).closest('tr').find('td').eq(4);
             $("#modalHimno").modal("show");
+            row = $(this).closest('tr').find('td').eq(4);
             $("#txtFechaPalabrasHimno").val(null);
         });
         
@@ -367,13 +497,35 @@ $statement->closeCursor();
                 alert("Introduzca la fecha en la que se emitie la constancia");
             }
             else{
-                var cadena = $.trim($("#txtFechaPalabrasHimno").val());
+                var cadena = $("#txtFechaPalabrasHimno").val();
+                var parts = cadena.match(/(\d+)/g);
+                var date = new Date(parts[0], parts[1]-1, parts[2]);
+                var aniospart = date.getFullYear().toString().split("");
+                var dosUltimos = aniospart[2]+""+aniospart[3];
+                
+                cadena = dia[date.getDate()-1]+" días del mes de "+mes[date.getMonth()]+" de Dos Mil "+año[dosUltimos - 1].toString().charAt(0).toUpperCase()+año[dosUltimos - 1].slice(1)+".";
+             
                 var arregloHimno = matrizHimno.toString();
+                var arregloCodsHimno = codsHimno.toString();
+                if(row != null){
+                    row.html($("#txtFechaPalabrasHimno").val());
+                }
+                
+                if(codTipo.length >= 1){
+                    for(var i = 0; i < codTipo.length; i++){
+                        if(codTipo[i][1] === "Constancia de Himno"){
+                            codTipo[i][2].find('td').eq(4).html($("#txtFechaPalabrasHimno").val());
+                        }
+                    }
+                }
+                
                 submit_post_via_hidden_form(
                     'pages/SecretariaAcademica/ConstanciaHimno.php',
                     {
                         arregloHimno: arregloHimno,
-                        cadena: cadena
+                        cadena: cadena,
+                        arregloCodsHimno: arregloCodsHimno,
+                        fechaExp: $("#txtFechaPalabrasHimno").val()
                     }
                 );                
                 $("#modalHimno").modal("hide");
@@ -398,7 +550,9 @@ $statement->closeCursor();
             
             $("#lista_solicitudes tr").each(function(){
                 if(ini){
-                    matrizSolicitudes[i] = [$(this).find("td").eq(2).attr('class'), $(this).find("td").eq(5).attr('class')];
+                    matrizSolicitudes[i] = [$(this).find("td").eq(2).attr('class'), $(this).find("td").eq(6).attr('class'), $(this).find("td").eq(0).attr("id")];
+                    codTipo[i] = [$(this).find("td").eq(0).attr('id'), $(this).find("td").eq(6).attr('class'), $(this)];
+                    //alert(codTipo[i][2]);
                     i++;
                 }
                 else{
@@ -411,28 +565,32 @@ $statement->closeCursor();
                 
                 if(matrizSolicitudes[i][1] === "Constancia de Himno"){
                     matrizHimno[contHimno] = matrizSolicitudes[i][0];
-                    //alert(matrizHimno[0]);
+                    codsHimno[contHimno] = matrizSolicitudes[i][2];
+                    //alert(codsHimno[0]);
                     contHimno++;
                 }
                 
                 if(matrizSolicitudes[i][1] === "Certificación para PPS"){
-                    
+                    codsPPS[contPPS] = matrizSolicitudes[i][2];
                     matrizPPS[contPPS] = [matrizSolicitudes[i][0]];
                     contPPS++;
                 }
                 
                 if(matrizSolicitudes[i][1] === "Constancia de Conducta"){
                     matrizConducta[contConducta] = matrizSolicitudes[i][0];
+                    codsConducta[contConducta] = matrizSolicitudes[i][2];
                     contConducta++;
                 }
                 
                 if(matrizSolicitudes[i][1] === "Constancia de Egresado"){
                     matrizEgresado[contEgresado] = matrizSolicitudes[i][0];
+                    codsEgresado[contEgresado] = matrizSolicitudes[i][2];
                     contEgresado++;
                 }
                 
                 if(matrizSolicitudes[i][1] === "Constancia de Ultimo Año"){
                     matrizConstancia[contConstancia] = matrizSolicitudes[i][0];
+                    codsConstancia[contConstancia] = matrizSolicitudes[i][2];
                     contConstancia++;
                 }
             }
