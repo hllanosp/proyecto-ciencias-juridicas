@@ -78,7 +78,12 @@
       event.preventDefault();
       $("#contenedor").load("pages/CargaAcademica/facultad/ca_indexFacultad.php"
                             );
-      }); 
+      });
+      $("#Periodos").click(function(event) {
+      event.preventDefault();
+      $("#contenedor").load("pages/CargaAcademica/periodos/ca_indexPeriodo.php"
+                            );
+      });
     $("#AreasProyecto").click(function(event) {
       event.preventDefault();
       $("#contenedor").load("pages/CargaAcademica/Areas_de_Proyectos/ca_index_Areas_de_Proyecto.php"

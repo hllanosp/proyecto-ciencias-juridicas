@@ -258,14 +258,14 @@
 				            </select>
                         </div>
 			        </div>
-					<div class="form-group">
+					<!--<div class="form-group">
                         <div class="checkbox">
                             <label>
                             <input id="chkFinalizado" type="checkbox"/>
                             finalizar seguimiento del folio?
                             </label>
                         </div>
-                    </div>
+                    </div>-->
 			        <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"> Notas del seguimiento </span>
@@ -329,7 +329,7 @@ $( document ).ready(function() {
     $("#chkFinalizado").change(function () {
 		    if($("#chkFinalizado").prop('checked') == true){
 			    $('#Seguimiento_actualizar').prop('disabled', 'disabled');
-				$('#Seguimiento_actualizar').val(5);
+				$('#Seguimiento_actualizar').val(3);
 			}else{
 			    $('#Seguimiento_actualizar').prop('disabled', false);
 				$('#Seguimiento_actualizar').val(-1);
