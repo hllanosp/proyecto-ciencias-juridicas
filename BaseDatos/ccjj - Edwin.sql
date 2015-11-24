@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-11-2015 a las 04:56:26
+-- Tiempo de generación: 23-11-2015 a las 03:06:06
 -- Versión del servidor: 5.6.26-log
 -- Versión de PHP: 5.5.12
 
@@ -3310,7 +3310,8 @@ BEGIN
     	sa_solicitudes.dni_estudiante as DNI,
     	sa_solicitudes.fecha_solicitud as FECHA,
     	sa_tipos_solicitud.nombre as TIPOSOLICITUD,
-    	sa_tipos_solicitud.codigo as CODTIPOSOLICITUD 
+    	sa_tipos_solicitud.codigo as CODTIPOSOLICITUD,
+        sa_solicitudes.fecha_exportacion as FECHAEXP
 FROM sa_solicitudes
 	INNER JOIN persona on sa_solicitudes.dni_estudiante = 	persona.N_identidad
     INNER JOIN sa_tipos_solicitud on sa_solicitudes.cod_tipo_solicitud = sa_tipos_solicitud.codigo
@@ -5421,7 +5422,9 @@ INSERT INTO `folios` (`NroFolio`, `NroFolioRespuesta`, `FechaCreacion`, `FechaEn
 ('20', NULL, '2015-09-11', '2015-09-11 23:38:35', 'EMMA VIRGINIA ', NULL, 3, 2, 'ASUNTO', 1, 5, 5),
 ('Oficio 120', NULL, '2015-09-01', '2015-09-22 23:02:50', 'rutilia calderon', NULL, 5, 2, 'sddddddd', 0, 6, 5),
 ('015/2015', NULL, '2015-09-15', '2015-09-25 18:49:59', 'ESTER LÓPEZ', NULL, 4, 5, 'Se devuelve expediente de Carmen Mondragón', 1, 6, 5),
-('002', NULL, '2015-09-10', '2015-09-25 19:01:07', 'Ester Lopez', NULL, 3, 5, 'Se devuelve expediente para recosideración de dictamen', 0, 6, 6);
+('002', NULL, '2015-09-10', '2015-09-25 19:01:07', 'Ester Lopez', NULL, 3, 5, 'Se devuelve expediente para recosideración de dictamen', 0, 6, 6),
+('CC 001', NULL, '2015-11-19', '2015-11-20 03:00:56', 'Msc. Julieta Castellanos', NULL, 3, 6, 'folio de prueba', 0, 5, 6),
+('452', NULL, '2015-11-19', '2015-11-20 03:02:04', 'wergwger', 3, NULL, 6, 'wergwer', 0, 6, 6);
 
 -- --------------------------------------------------------
 
@@ -5883,7 +5886,7 @@ CREATE TABLE IF NOT EXISTS `prioridad_folio` (
   PRIMARY KEY (`Id_PrioridadFolio`),
   KEY `fk_prioridad_folio_folios_idx` (`IdFolio`),
   KEY `fk_prioridad_folio_prioridad_idx` (`Id_Prioridad`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `prioridad_folio`
@@ -5895,7 +5898,9 @@ INSERT INTO `prioridad_folio` (`Id_PrioridadFolio`, `IdFolio`, `Id_Prioridad`, `
 (4, 'folio de prueba', 5, '2015-09-10'),
 (5, '20', 5, '2015-09-11'),
 (6, 'Oficio 120', 5, '2015-09-22'),
-(7, '002', 6, '2015-09-25');
+(7, '002', 6, '2015-09-25'),
+(8, 'CC 001', 6, '2015-11-19'),
+(9, '452', 6, '2015-11-19');
 
 -- --------------------------------------------------------
 
@@ -6211,7 +6216,8 @@ INSERT INTO `sa_examenes_himno` (`cod_solicitud`, `fecha_solicitud`, `nota_himno
 (49, '2015-11-07', '20151107', '0000-00-00'),
 (50, '2015-11-07', '20151107', '0000-00-00'),
 (51, '2015-11-13', '20151113', '0000-00-00'),
-(52, '2015-11-17', '20151117', '0000-00-00');
+(52, '2015-11-17', '20151117', '0000-00-00'),
+(53, '2015-11-22', '20151122', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -6325,42 +6331,44 @@ CREATE TABLE IF NOT EXISTS `sa_solicitudes` (
   `cod_tipo_solicitud` int(11) NOT NULL,
   `cod_solicitud_padre` int(11) DEFAULT NULL,
   `fecha_solicitud_padre` date DEFAULT NULL,
+  `fecha_exportacion` date DEFAULT NULL,
   PRIMARY KEY (`codigo`,`fecha_solicitud`),
   KEY `solicitud_estudiante_FK_idx` (`dni_estudiante`),
   KEY `solicitud_periodo_FK_idx` (`cod_periodo`),
   KEY `solicitud_estados_solicitud_FK_idx` (`cod_estado`),
   KEY `solicitud_tipo_solicitud_FK_idx` (`cod_tipo_solicitud`),
   KEY `solicitud_solicitud_FK_idx` (`cod_solicitud_padre`,`fecha_solicitud_padre`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=53 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=54 ;
 
 --
 -- Volcado de datos para la tabla `sa_solicitudes`
 --
 
-INSERT INTO `sa_solicitudes` (`codigo`, `fecha_solicitud`, `observaciones`, `dni_estudiante`, `cod_periodo`, `cod_estado`, `cod_tipo_solicitud`, `cod_solicitud_padre`, `fecha_solicitud_padre`) VALUES
-(31, '2015-08-05', NULL, '0801-1991-21784', 1, 1, 1, NULL, NULL),
-(32, '2015-08-05', NULL, '0801-1990-12345', 1, 1, 1, NULL, NULL),
-(27, '2015-09-04', NULL, '0002-0002-00002', 2, 1, 1, NULL, NULL),
-(26, '2015-08-04', NULL, '0002-0002-00002', 2, 2, 1, NULL, NULL),
-(33, '2015-08-09', NULL, '0002-0002-00002', 2, 2, 1, 26, NULL),
-(34, '2015-08-12', NULL, '0002-0002-00002', 2, 1, 1, 26, NULL),
-(35, '2015-08-19', NULL, '0002-0002-00002', 2, 1, 1, 33, NULL),
-(36, '2015-08-19', NULL, '0002-0002-00002', 2, 1, 1, 26, NULL),
-(37, '2015-08-19', NULL, '0801-1977-13759', 4, 1, 123482, NULL, NULL),
-(38, '2015-09-16', NULL, '0801-1959-03859', 4, 1, 123481, NULL, NULL),
-(39, '2015-10-30', NULL, '0801-1987-09326', 3, 1, 123484, NULL, NULL),
-(40, '2015-10-30', NULL, '0801-1991-21784', 3, 1, 123483, NULL, NULL),
-(41, '2015-10-30', NULL, '0801-1991-21784', 6, 1, 123485, NULL, NULL),
-(42, '2015-10-30', NULL, '0801-1990-12345', 3, 1, 1, NULL, NULL),
-(43, '2015-10-30', NULL, '0301-1993-04251', 3, 1, 123488, NULL, NULL),
-(44, '2015-10-31', NULL, '0301-1990-00604', 3, 1, 123491, NULL, NULL),
-(45, '2015-11-06', NULL, '0801-1987-09326', 3, 1, 123491, NULL, NULL),
-(46, '2015-11-06', NULL, '0301-1990-00604', 3, 1, 123490, NULL, NULL),
-(47, '2015-11-06', NULL, '0801-1987-09326', 3, 1, 123489, NULL, NULL),
-(48, '2015-11-07', NULL, '0301-1993-04251', 6, 1, 123490, NULL, NULL),
-(49, '2015-11-07', NULL, '0301-1990-00604', 3, 1, 123488, NULL, NULL),
-(50, '2015-11-07', NULL, '0301-1993-04251', 3, 1, 123489, NULL, NULL),
-(52, '2015-11-17', NULL, '0801-1987-09326', 3, 1, 123492, NULL, NULL);
+INSERT INTO `sa_solicitudes` (`codigo`, `fecha_solicitud`, `observaciones`, `dni_estudiante`, `cod_periodo`, `cod_estado`, `cod_tipo_solicitud`, `cod_solicitud_padre`, `fecha_solicitud_padre`, `fecha_exportacion`) VALUES
+(31, '2015-08-05', NULL, '0801-1991-21784', 1, 1, 1, NULL, NULL, NULL),
+(32, '2015-08-05', NULL, '0801-1990-12345', 1, 1, 1, NULL, NULL, NULL),
+(27, '2015-09-04', NULL, '0002-0002-00002', 2, 1, 1, NULL, NULL, NULL),
+(26, '2015-08-04', NULL, '0002-0002-00002', 2, 2, 1, NULL, NULL, NULL),
+(33, '2015-08-09', NULL, '0002-0002-00002', 2, 2, 1, 26, NULL, NULL),
+(34, '2015-08-12', NULL, '0002-0002-00002', 2, 1, 1, 26, NULL, NULL),
+(35, '2015-08-19', NULL, '0002-0002-00002', 2, 1, 1, 33, NULL, NULL),
+(36, '2015-08-19', NULL, '0002-0002-00002', 2, 1, 1, 26, NULL, NULL),
+(37, '2015-08-19', NULL, '0801-1977-13759', 4, 1, 123482, NULL, NULL, NULL),
+(38, '2015-09-16', NULL, '0801-1959-03859', 4, 1, 123481, NULL, NULL, NULL),
+(39, '2015-10-30', NULL, '0801-1987-09326', 3, 1, 123484, NULL, NULL, NULL),
+(40, '2015-10-30', NULL, '0801-1991-21784', 3, 1, 123483, NULL, NULL, NULL),
+(41, '2015-10-30', NULL, '0801-1991-21784', 6, 1, 123485, NULL, NULL, NULL),
+(42, '2015-10-30', NULL, '0801-1990-12345', 3, 1, 1, NULL, NULL, NULL),
+(43, '2015-10-30', NULL, '0301-1993-04251', 3, 1, 123488, NULL, NULL, '2015-11-24'),
+(44, '2015-10-31', NULL, '0301-1990-00604', 3, 1, 123491, NULL, NULL, '2015-11-25'),
+(45, '2015-11-06', NULL, '0801-1987-09326', 3, 1, 123491, NULL, NULL, '2015-11-24'),
+(46, '2015-11-06', NULL, '0301-1990-00604', 3, 1, 123490, NULL, NULL, '2015-11-26'),
+(47, '2015-11-06', NULL, '0801-1987-09326', 3, 1, 123489, NULL, NULL, '2015-11-22'),
+(48, '2015-11-07', NULL, '0301-1993-04251', 6, 1, 123490, NULL, NULL, '2015-11-26'),
+(49, '2015-11-07', NULL, '0301-1990-00604', 3, 1, 123488, NULL, NULL, '2015-11-25'),
+(50, '2015-11-07', NULL, '0301-1993-04251', 3, 1, 123489, NULL, NULL, '2015-11-22'),
+(52, '2015-11-17', NULL, '0801-1987-09326', 3, 1, 123492, NULL, NULL, '2015-11-23'),
+(53, '2015-11-22', NULL, '0301-1993-04251', 6, 1, 123492, NULL, NULL, '2015-11-30');
 
 -- --------------------------------------------------------
 
@@ -6481,7 +6489,7 @@ CREATE TABLE IF NOT EXISTS `seguimiento` (
   PRIMARY KEY (`Id_Seguimiento`),
   KEY `fk_seguimiento_folios_idx` (`NroFolio`),
   KEY `fk_seguimiento_usuarioAsignado_idx` (`UsuarioAsignado`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `seguimiento`
@@ -6491,9 +6499,11 @@ INSERT INTO `seguimiento` (`Id_Seguimiento`, `NroFolio`, `UsuarioAsignado`, `Not
 (2, '123123', 4, 'd', 5, '2015-08-23 20:41:23', NULL, 8),
 (3, '123', 3, 'ninguna', 6, '2015-09-02 18:33:03', NULL, 11),
 (4, 'folio de prueba', NULL, 'prueba', 5, '2015-09-10 18:54:45', NULL, 9),
-(5, '20', 5, 'PRUEBA', 5, '2015-09-11 23:38:35', NULL, 11),
+(5, '20', 5, 'Aprobada ', 5, '2015-11-18 19:16:42', NULL, 9),
 (6, 'Oficio 120', 9, 'faltan documentos de soporte', 5, '2015-09-22 23:02:50', NULL, 11),
-(7, '002', 6, 'en proceso de aprobación', 6, '2015-09-25 19:01:07', NULL, 11);
+(7, '002', 6, 'en proceso de aprobación', 6, '2015-09-25 19:01:07', NULL, 11),
+(8, 'CC 001', 6, 'adfasdfasdfasdfa', 6, '2015-11-20 03:00:56', NULL, 10),
+(9, '452', 9, 'wergwerge', 6, '2015-11-20 03:02:04', NULL, 10);
 
 -- --------------------------------------------------------
 
@@ -6511,7 +6521,7 @@ CREATE TABLE IF NOT EXISTS `seguimiento_historico` (
   PRIMARY KEY (`Id_SeguimientoHistorico`),
   KEY `fk_seguimiento_historico_seguimiento` (`Id_Seguimiento`),
   KEY `fk_seguimiento_historico_tblEstdoSeguimiento_idx` (`Id_Estado_Seguimiento`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
 -- Volcado de datos para la tabla `seguimiento_historico`
@@ -6524,7 +6534,10 @@ INSERT INTO `seguimiento_historico` (`Id_SeguimientoHistorico`, `Id_Seguimiento`
 (5, 4, 9, 'prueba', 5, '2015-09-10 12:54:45'),
 (6, 5, 11, 'PRUEBA', 5, '2015-09-11 17:38:35'),
 (7, 6, 11, 'faltan documentos de soporte', 5, '2015-09-22 17:02:50'),
-(8, 7, 11, 'en proceso de aprobación', 6, '2015-09-25 13:01:07');
+(8, 7, 11, 'en proceso de aprobación', 6, '2015-09-25 13:01:07'),
+(9, 5, 9, 'Aprobada ', 5, '2015-11-18 13:16:42'),
+(10, 8, 10, 'adfasdfasdfasdfa', 6, '2015-11-19 14:00:56'),
+(11, 9, 10, 'wergwerge', 6, '2015-11-19 14:02:04');
 
 -- --------------------------------------------------------
 
@@ -6871,7 +6884,7 @@ CREATE TABLE IF NOT EXISTS `usuario_log` (
   `fecha_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ip_conn` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id_log`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=752 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=790 ;
 
 --
 -- Volcado de datos para la tabla `usuario_log`
@@ -7468,7 +7481,45 @@ INSERT INTO `usuario_log` (`Id_log`, `usuario`, `fecha_log`, `ip_conn`) VALUES
 (748, 1, '2015-11-14 05:48:06', '::1'),
 (749, 1, '2015-11-17 19:10:42', '::1'),
 (750, 1, '2015-11-18 03:13:44', '::1'),
-(751, 1, '2015-11-18 03:39:29', '::1');
+(751, 1, '2015-11-18 03:39:29', '::1'),
+(752, 1, '2015-11-18 04:39:45', '::1'),
+(753, 1, '2015-11-18 05:29:24', '::1'),
+(754, 1, '2015-11-18 18:40:05', '::1'),
+(755, 1, '2015-11-18 19:09:45', '::1'),
+(756, 1, '2015-11-19 17:41:30', '::1'),
+(757, 1, '2015-11-19 17:46:06', '::1'),
+(758, 1, '2015-11-19 19:58:03', '::1'),
+(759, 1, '2015-11-20 23:09:28', '::1'),
+(760, 1, '2015-11-20 23:51:16', '::1'),
+(761, 1, '2015-11-21 01:55:35', '::1'),
+(762, 1, '2015-11-21 02:38:56', '::1'),
+(763, 1, '2015-11-21 03:09:32', '::1'),
+(764, 1, '2015-11-21 04:57:27', '::1'),
+(765, 1, '2015-11-21 06:34:59', '::1'),
+(766, 1, '2015-11-21 06:50:09', '::1'),
+(767, 1, '2015-11-21 20:15:08', '::1'),
+(768, 1, '2015-11-21 20:49:29', '::1'),
+(769, 1, '2015-11-21 21:15:21', '::1'),
+(770, 1, '2015-11-21 22:19:29', '::1'),
+(771, 1, '2015-11-21 23:12:57', '::1'),
+(772, 1, '2015-11-21 23:33:55', '::1'),
+(773, 1, '2015-11-22 00:00:28', '::1'),
+(774, 1, '2015-11-22 00:39:19', '::1'),
+(775, 1, '2015-11-22 01:02:45', '::1'),
+(776, 1, '2015-11-22 01:26:52', '::1'),
+(777, 1, '2015-11-22 03:43:21', '::1'),
+(778, 1, '2015-11-22 18:01:02', '::1'),
+(779, 1, '2015-11-22 19:07:36', '::1'),
+(780, 1, '2015-11-22 20:03:42', '::1'),
+(781, 1, '2015-11-22 21:05:07', '::1'),
+(782, 1, '2015-11-22 21:08:49', '::1'),
+(783, 1, '2015-11-22 21:55:51', '::1'),
+(784, 1, '2015-11-22 22:25:24', '::1'),
+(785, 1, '2015-11-22 23:10:52', '::1'),
+(786, 1, '2015-11-22 23:36:39', '::1'),
+(787, 1, '2015-11-22 23:51:48', '::1'),
+(788, 1, '2015-11-23 00:17:34', '::1'),
+(789, 1, '2015-11-23 01:58:39', '::1');
 
 -- --------------------------------------------------------
 

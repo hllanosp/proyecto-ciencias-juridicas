@@ -23,10 +23,15 @@ $anioInicio = "2010";
 $fechaPalabras = 'veintiún días del mes de abril de dos mil quince.';
 $nombreSecretario = "JORGE ALBERTO MATUTE OCHOA(no definido)";
 
-if(isset($_POST["arregloConducta"]) && isset($_POST["cadena"])){
+if(isset($_POST["arregloConducta"]) && isset($_POST["cadena"]) && isset($_POST["arregloCodsConducta"]) && isset($_POST["fechaExp"])){
     
     $listaDNIConducta = $_POST["arregloConducta"];
+    $listaCodsConducta = $_POST["arregloCodsConducta"];
+    $fechaExp = $_POST["fechaExp"];
+    
     $tok = explode(',', $listaDNIConducta);
+    $codsConducta  = explode(',', $listaCodsConducta);
+    
     $tam = count($tok);
     
     $pdf = new PDF('P', 'mm', array(215.9, 355.6));
@@ -58,6 +63,13 @@ if(isset($_POST["arregloConducta"]) && isset($_POST["cadena"])){
         $fechaPalabras = $_POST["cadena"];
         $statement->nextRowSet();
         $statement->closeCursor();
+        
+        $statement = $db->prepare('UPDATE sa_solicitudes SET fecha_exportacion = "'.$fechaExp.'" WHERE codigo = '.$codsConducta[$i].'');
+        $statement->execute();
+        $statement->nextRowSet();
+        $statement->closeCursor();
+        
+        //$statement = mysql_query('UPDATE sa_solicitudes SET fecha_exportacion = '.$fechaExp.' WHERE codigo = '.$codsConducta[$i].'', $db);
         
         $pdf->AddPage();
         $pdf->Image($maindir.'assets/img/Encabezado de documentos.jpg', 4.00, 0.50, 209.6, 32.2, 'JPG');

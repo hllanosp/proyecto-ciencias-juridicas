@@ -6,7 +6,7 @@ require_once($maindir."fpdf/fpdf.php");
 require($maindir."conexion/config.inc.php");
 
 $sql = "SELECT * FROM ( SELECT folios.NroFolio, folios.PersonaReferente, unidad_academica.NombreUnidadAcademica AS ENTIDAD, 
-                         DATE(folios.FechaEntrada) as FechaEntrada, folios.FechaEntrada as Fecha, folios.TipoFolio FROM folios INNER JOIN unidad_academica ON folios.UnidadAcademica = unidad_academica.Id_UnidadAcademica 
+                         DATE(folios.FechaEntrada) as FechaEntrada, folios.FechaEntrada as Fecha, folios.TipoFolio FROM folios INNER JOIN unidad_academica ON folios.UnidadAcademica = unidad_academica.Id_UnidadAcademica where DATE(folios.FechaEntrada)=CURDATE()
                          UNION SELECT folios.NroFolio, folios.PersonaReferente, organizacion.NombreOrganizacion AS ENTIDAD, 
                          DATE(folios.FechaEntrada) as FechaEntrada, folios.FechaEntrada as Fecha ,folios.TipoFolio FROM folios INNER JOIN organizacion ON folios.Organizacion = organizacion.Id_Organizacion where DATE(folios.FechaEntrada)=CURDATE()) T1 
                         ORDER BY `T1`.`Fecha` DESC";

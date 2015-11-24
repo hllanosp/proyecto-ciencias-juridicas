@@ -24,8 +24,13 @@ $abogado = "ERLINDA ESPERANZA FLORES FLORES";
 $fechaPalabras = "<<Fecha en palabras>>";
 $nombreSecretario = "JORGE ALBERTO MATUTE OCHOA";
 
-if(isset($_POST["arregloPPS"]) && isset($_POST["cadena"])){
+if(isset($_POST["arregloPPS"]) && isset($_POST["cadena"]) && isset($_POST["arregloCodsPPS"]) && isset($_POST["fechaExp"])){
     $listaDNI = $_POST["arregloPPS"];
+    
+    $listaCodsPPS = $_POST["arregloCodsPPS"];
+    $fechaExp = $_POST["fechaExp"];
+    $codsPSS = explode(',', $listaCodsPPS);
+    
     $tok = explode(',', $listaDNI);
     $tam = count($tok);
     
@@ -52,6 +57,11 @@ if(isset($_POST["arregloPPS"]) && isset($_POST["cadena"])){
         }
 
         $fechaPalabras = $_POST["cadena"];
+        $statement->nextRowSet();
+        $statement->closeCursor();
+        
+        $statement = $db->prepare('UPDATE sa_solicitudes SET fecha_exportacion = "'.$fechaExp.'" WHERE codigo = '.$codsPSS[$i].'');
+        $statement->execute();
         $statement->nextRowSet();
         $statement->closeCursor();
         
