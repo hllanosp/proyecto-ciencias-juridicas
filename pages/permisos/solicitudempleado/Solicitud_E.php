@@ -5,6 +5,8 @@ require_once($maindir . "funciones/check_session.php");
 
 require_once($maindir . "funciones/timeout.php");
 require($maindir . "conexion/config.inc.php");
+
+
 ?>
 
 <?php

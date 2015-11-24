@@ -2,6 +2,7 @@
 	
 
 	$maindir = "../../../"; 
+	
     require($maindir ."conexion/config.inc.php");
 	$id = $_POST['Edificio_ID'];
 	$desc = $_POST['dedificio'];
