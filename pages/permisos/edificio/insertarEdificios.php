@@ -1,6 +1,7 @@
 <?php
    $maindir = "../../../"; 
    require($maindir ."conexion/config.inc.php");
+   
 	
 	$edificio = $_POST['dedificio'];
 	$query =  "INSERT INTO edificios(descripcion) VALUES('$edificio')";

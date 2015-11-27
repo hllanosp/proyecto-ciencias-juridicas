@@ -3,7 +3,7 @@
 
 <?php
 $maindir = "../../../";
-	
+
     require($maindir."conexion/config.inc.php");
  
 ?>

@@ -3,6 +3,7 @@
 //conexion a la base de datos 
  $maindir = "../../../";
  require($maindir."conexion/config.inc.php");
+ 
 											     
 //$link = mysqli_connect($host, $username, $password, $dbname);
 

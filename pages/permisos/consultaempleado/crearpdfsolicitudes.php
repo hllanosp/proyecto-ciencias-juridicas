@@ -150,9 +150,9 @@ class PDF extends PDF_PDO_Table
 	$pdf->Ln(25);
 
 	//$pdf->AddCol('N',25,'#Empleado','C');
-	$pdf->AddCol('Nombre',70,'Nombre Completo ','C');
-	$pdf->AddCol('nombre_departamento',30,'Departamento', 'C');
-	$pdf->AddCol('mtd',30,'Motivo', 'C');
+	$pdf->AddCol('Nombre',70,'Nombre Completo','C');
+	$pdf->AddCol('nombre_departamento',70,'Departamento', 'C');
+	$pdf->AddCol('mtd',50,'Motivo', 'C');
 	$pdf->AddCol('fecha',22,'Fecha', 'C');
 	$pdf->AddCol('hora_inicio',20,'inicio', 'C');
 	$pdf->AddCol('hora_finalizacion',20,'fin', 'C');

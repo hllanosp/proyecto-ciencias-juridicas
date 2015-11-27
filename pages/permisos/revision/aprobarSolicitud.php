@@ -4,7 +4,6 @@
 
     $maindir = "../../../";
 	require($maindir."conexion/config.inc.php");
-
 	$codpermiso =  $_POST['codigo'];
 	$usuario = $_POST['usr'];
 	$rol = $_POST['rol'];

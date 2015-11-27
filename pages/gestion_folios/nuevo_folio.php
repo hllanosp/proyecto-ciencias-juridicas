@@ -127,7 +127,7 @@ require_once("datos/datos_nuevo_folio.php");
                                             <div class="form-group">
                                                 <div class="input-group">
                                                     <span class="input-group-addon" style="width: 200px" ><strong>Persona referente</strong></span>
-                                                    <input type="text" maxlength="50" name="personaReferente" class="form-control" style="width: 550px" required="required" id="personaReferente" placeholder="Persona Referente">
+                                                    <input type="text" name="personaReferente" class="form-control" style="width: 550px" required="required" id="personaReferente" placeholder="Persona Referente">
                                                 </div>
                                             </div>
                                             <div class="form-group">

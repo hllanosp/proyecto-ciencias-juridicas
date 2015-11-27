@@ -71,7 +71,8 @@ if(!isset( $_SESSION['user_id'] ))
                 <li class="nav-header" id = "Mantenimiento"> <a href="#" data-toggle="collapse" data-target="#userMenu3">
                         <h5><i class="glyphicon glyphicon-folder-open"></i>Mantenimiento<i class="glyphicon glyphicon-chevron-down"></i></h5>
                     </a>     
-                    <ul class="list-unstyled collapse in" id="userMenuNa">     
+                    <ul class="list-unstyled collapse in" id="userMenuNa">
+                        <li><a id="Periodos" href="#"><i class="glyphicon glyphicon-ok"></i> Periodos</a></li>
                         <li><a id="Facultad" href="#"><i class="glyphicon glyphicon-ok"></i> Facultad</a></li>
                         <li><a id="AreasProyecto" href="#"><i class="glyphicon glyphicon-ok"></i> Areas de proyecto</a></li> 
                         <li><a id="AreasVinculacion" href="#"><i class="glyphicon glyphicon-ok"></i> Areas de vinculacion</a></li> 

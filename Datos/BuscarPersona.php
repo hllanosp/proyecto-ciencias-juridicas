@@ -18,7 +18,7 @@
             
      			  
 		if($row=mysql_fetch_array($pa)){
-			$existe=TRUE;
+			$existe=True;
 			
 			
 			$nombre=$row['Primer_nombre'] ;
@@ -28,7 +28,7 @@
 			
 		}
                 else{
-                    $existe=FALSE;
+                    $existe=False;
                     
                     
                echo mensajes('No se encontro ningun registro','azul');
