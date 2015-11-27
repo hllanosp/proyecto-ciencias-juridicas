@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-11-2015 a las 03:06:06
+-- Tiempo de generación: 27-11-2015 a las 06:24:16
 -- Versión del servidor: 5.6.26-log
 -- Versión de PHP: 5.5.12
 
@@ -5827,8 +5827,16 @@ INSERT INTO `persona` (`N_identidad`, `Primer_nombre`, `Segundo_nombre`, `Primer
 ('0801-1978-12387', 'MONICA ', 'ESMERALDA ', 'DORMES ', 'RAMIREZ', '1978-00-00', 'F', '', 'esmeraldadormes772@gmail.com', 'Soltero', 'hondureña', ''),
 ('0801-1988-16746', 'EVELIN ', 'ROCIO ', 'CANACA ', 'ARRIOLA', '1988-09-06', 'F', '', 'ecanaca@unah.edu.hn', 'Soltero', 'hondureña', ''),
 ('0801-1971-10136', 'JUAN', 'JUAN', 'SSS', 'SS', '0000-00-00', 'F', 'SS', 'SDJDJD@GMAIL.COM', 'Soltero', 'SS', ''),
-('0801-1987-09326', 'IRIS', 'ALEJANDRA', 'CHAVARRÍA', 'LAGOS', '1987-04-24', 'F', '', 'irishawi@hotmail.com', 'Soltero', 'hondureña', ''),
-('1414-1414-14141', 'Prueba de error', '', 'Prueba de error', 'Prueba de error', '2015-06-24', 'M', 'Direccion', 'q@gmail.com', 'Soltero', 'Hondurena', '');
+('0801-1987-09326', 'IRIS', 'ALEJANDRA', 'IRIS', 'LAGOS', '1987-04-24', 'F', '', 'irishawi@hotmail.com', 'Soltero', 'hondureña', ''),
+('1414-1414-14141', 'Prueba de error', '', 'Prueba de error', 'Prueba de error', '2015-06-24', 'M', 'Direccion', 'q@gmail.com', 'Soltero', 'Hondurena', ''),
+('0801-1977-13757', '', 'sadf', 'asdf', 'asdf', '2015-11-26', 'F', 'adfasdf', 'correo@unah.hn', 'Soltero', 'asdf', ''),
+('0801-1977-13751', 'N/D', 'asdfa', 'asdf', 'asdf', '2015-11-26', 'F', 'asdf', 'correo@unah.hn', 'Soltero', 'hondureña', ''),
+('0301-1993-04253', 'adf', '', 'asdf', '', '2015-11-27', 'F', '', '', 'Soltero', '', ''),
+('0301-1990-00605', 'asd', '', 'asd', '', '2015-11-26', 'F', 'asdas', '', 'Soltero', '', ''),
+('0801-1991-21783', 'asd', '', 'asd', '', '2015-11-26', 'F', 'asd', '', 'Soltero', '', ''),
+('0301-1993-04255', 'asd', '', 'asd', '', '2015-11-23', 'F', 'asd', '', 'Soltero', '', ''),
+('0801-1987-09327', 'asd', '', 'asdf', '', '2015-11-26', 'F', '', '', 'Soltero', '', ''),
+('0301-1993-04252', 'sad', '', 'asd', '', '2015-11-27', 'F', '', '', 'Soltero', '', '');
 
 -- --------------------------------------------------------
 
@@ -5962,7 +5970,7 @@ CREATE TABLE IF NOT EXISTS `sa_ciudades` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Volcado de datos para la tabla `sa_ciudades`
@@ -5979,7 +5987,8 @@ INSERT INTO `sa_ciudades` (`codigo`, `nombre`) VALUES
 (9, ''),
 (10, 'Valle'),
 (11, 'La Paz'),
-(24, 'PruebaAllan');
+(24, 'PruebaAllan'),
+(25, 'N/D');
 
 -- --------------------------------------------------------
 
@@ -6047,7 +6056,8 @@ INSERT INTO `sa_estudiantes` (`dni`, `no_cuenta`, `anios_inicio_estudio`, `indic
 ('0301-1993-04251', '20121001759', 2012, '87', '2015-08-12', 50, NULL, 15, 2, 3, 2, 2015),
 ('0301-1990-00604', '20091900402', 2009, '83', '2015-08-12', 67, NULL, 15, 2, 4, 2, 2014),
 ('0007-0007-00007', '20101002707', 1990, '98', '2015-08-17', 54, NULL, 1, 4, 8, 4, 2015),
-('0801-1977-13759', '20101003881', 1996, '89', '2015-08-19', 254, NULL, 16, 2, 8, 2, 2003);
+('0801-1977-13759', '20101003881', 1996, '89', '2015-08-19', 254, NULL, 16, 2, 8, 2, 2003),
+('0801-1977-13751', '20111003085', 1990, '0', '2015-11-26', 1, NULL, 1, 2, 2, 2, 2015);
 
 -- --------------------------------------------------------
 
@@ -6073,6 +6083,7 @@ INSERT INTO `sa_estudiantes_correos` (`dni_estudiante`, `correo`) VALUES
 ('0501-0501-05010', 'jose@gmail.com'),
 ('0801-1959-03859', 'prueba@yahoo.com'),
 ('0801-1971-10136', 'SDJDJD@GMAIL.COM'),
+('0801-1977-13751', 'correo@unah.hn'),
 ('0801-1977-13759', 'rafael@diazdelvalle.com'),
 ('0801-1987-09326', 'irishawi@hotmail.com'),
 ('0801-1990-12345', 'yenifer@gmail.com'),
@@ -6109,8 +6120,9 @@ INSERT INTO `sa_estudiantes_menciones_honorificas` (`dni_estudiante`, `cod_menci
 ('0501-0501-05010', 0),
 ('0801-1959-03859', 0),
 ('0801-1971-10136', 2),
+('0801-1977-13751', 2),
 ('0801-1977-13759', 7),
-('0801-1987-09326', 6),
+('0801-1987-09326', 0),
 ('0801-1990-12345', 2),
 ('0801-1990-77778', 3),
 ('0801-1991-21784', 2),
@@ -6164,7 +6176,8 @@ INSERT INTO `sa_estudiantes_tipos_estudiantes` (`codigo_tipo_estudiante`, `dni_e
 (4, '0007-0007-00007', '2015-08-17 13:57:25'),
 (2, '0801-1977-13759', '2015-08-19 09:54:47'),
 (6, '0801-1971-10136', '2015-09-11 18:00:51'),
-(9, '0801-1987-09326', '2015-09-19 13:13:45');
+(9, '0801-1987-09326', '2015-09-19 13:13:45'),
+(9, '0801-1977-13751', '2015-11-26 21:15:05');
 
 -- --------------------------------------------------------
 
@@ -6238,7 +6251,7 @@ CREATE TABLE IF NOT EXISTS `sa_menciones_honorificas` (
 INSERT INTO `sa_menciones_honorificas` (`codigo`, `descripcion`) VALUES
 (2, 'Cum Laude'),
 (13, 'Magna Cum Laude'),
-(11, 'N/A'),
+(11, 'N/D'),
 (12, 'Summa Cum Laude');
 
 -- --------------------------------------------------------
@@ -6263,7 +6276,7 @@ INSERT INTO `sa_orientaciones` (`codigo`, `descripcion`) VALUES
 (4, 'Derechos Humanos'),
 (5, 'Derecho Maritimo'),
 (8, 'Informática'),
-(16, 'N/A'),
+(16, 'N/D'),
 (11, 'mercantil'),
 (12, 'mercantil2');
 
@@ -6300,7 +6313,7 @@ CREATE TABLE IF NOT EXISTS `sa_planes_estudio` (
   `nombre` varchar(50) DEFAULT NULL,
   `uv` int(11) DEFAULT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Volcado de datos para la tabla `sa_planes_estudio`
@@ -6313,7 +6326,8 @@ INSERT INTO `sa_planes_estudio` (`codigo`, `nombre`, `uv`) VALUES
 (9, 'plan agosto', 50),
 (16, 'Nuevo Plan', 20),
 (22, 'Plan 2003', NULL),
-(23, 'Plan 1978', NULL);
+(23, 'Plan 1978', NULL),
+(25, 'N/D', NULL);
 
 -- --------------------------------------------------------
 
@@ -6361,14 +6375,14 @@ INSERT INTO `sa_solicitudes` (`codigo`, `fecha_solicitud`, `observaciones`, `dni
 (42, '2015-10-30', NULL, '0801-1990-12345', 3, 1, 1, NULL, NULL, NULL),
 (43, '2015-10-30', NULL, '0301-1993-04251', 3, 1, 123488, NULL, NULL, '2015-11-24'),
 (44, '2015-10-31', NULL, '0301-1990-00604', 3, 1, 123491, NULL, NULL, '2015-11-25'),
-(45, '2015-11-06', NULL, '0801-1987-09326', 3, 1, 123491, NULL, NULL, '2015-11-24'),
+(45, '2015-11-06', NULL, '0801-1987-09326', 3, 1, 123491, NULL, NULL, '2015-12-17'),
 (46, '2015-11-06', NULL, '0301-1990-00604', 3, 1, 123490, NULL, NULL, '2015-11-26'),
 (47, '2015-11-06', NULL, '0801-1987-09326', 3, 1, 123489, NULL, NULL, '2015-11-22'),
 (48, '2015-11-07', NULL, '0301-1993-04251', 6, 1, 123490, NULL, NULL, '2015-11-26'),
 (49, '2015-11-07', NULL, '0301-1990-00604', 3, 1, 123488, NULL, NULL, '2015-11-25'),
 (50, '2015-11-07', NULL, '0301-1993-04251', 3, 1, 123489, NULL, NULL, '2015-11-22'),
-(52, '2015-11-17', NULL, '0801-1987-09326', 3, 1, 123492, NULL, NULL, '2015-11-23'),
-(53, '2015-11-22', NULL, '0301-1993-04251', 6, 1, 123492, NULL, NULL, '2015-11-30');
+(52, '2015-11-17', NULL, '0801-1987-09326', 3, 1, 123492, NULL, NULL, '2015-12-24'),
+(53, '2015-11-22', NULL, '0301-1993-04251', 6, 1, 123492, NULL, NULL, '2015-12-24');
 
 -- --------------------------------------------------------
 
@@ -6380,7 +6394,7 @@ CREATE TABLE IF NOT EXISTS `sa_tipos_estudiante` (
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
   PRIMARY KEY (`codigo`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Volcado de datos para la tabla `sa_tipos_estudiante`
@@ -6393,7 +6407,8 @@ INSERT INTO `sa_tipos_estudiante` (`codigo`, `descripcion`) VALUES
 (6, 'PruebaAllan'),
 (7, 'PruebaAllan0'),
 (8, 'ghfghfgh'),
-(9, 'Pregrado');
+(9, 'Pregrado'),
+(10, 'N/D');
 
 -- --------------------------------------------------------
 
@@ -6596,7 +6611,7 @@ CREATE TABLE IF NOT EXISTS `telefono` (
   `N_identidad` varchar(20) NOT NULL,
   PRIMARY KEY (`ID_Telefono`),
   KEY `fk_Telefono_Persona1_idx` (`N_identidad`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
 
 --
 -- Volcado de datos para la tabla `telefono`
@@ -6624,7 +6639,8 @@ INSERT INTO `telefono` (`ID_Telefono`, `Tipo`, `Numero`, `N_identidad`) VALUES
 (23, NULL, '9999-9999', '0007-0007-00007'),
 (24, NULL, '9710-9201', '0801-1977-13759'),
 (25, NULL, '3280-1140', '0801-1971-10136'),
-(26, NULL, '9916-2002', '0801-1987-09326');
+(26, NULL, '', '0801-1987-09326'),
+(27, NULL, '9999-9999', '0801-1977-13751');
 
 -- --------------------------------------------------------
 
@@ -6884,7 +6900,7 @@ CREATE TABLE IF NOT EXISTS `usuario_log` (
   `fecha_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `ip_conn` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`Id_log`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=790 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=795 ;
 
 --
 -- Volcado de datos para la tabla `usuario_log`
@@ -7519,7 +7535,12 @@ INSERT INTO `usuario_log` (`Id_log`, `usuario`, `fecha_log`, `ip_conn`) VALUES
 (786, 1, '2015-11-22 23:36:39', '::1'),
 (787, 1, '2015-11-22 23:51:48', '::1'),
 (788, 1, '2015-11-23 00:17:34', '::1'),
-(789, 1, '2015-11-23 01:58:39', '::1');
+(789, 1, '2015-11-23 01:58:39', '::1'),
+(790, 1, '2015-11-23 02:20:48', '::1'),
+(791, 1, '2015-11-23 02:36:54', '::1'),
+(792, 1, '2015-11-23 03:50:40', '::1'),
+(793, 1, '2015-11-27 02:48:15', '::1'),
+(794, 1, '2015-11-27 04:31:44', '::1');
 
 -- --------------------------------------------------------
 
