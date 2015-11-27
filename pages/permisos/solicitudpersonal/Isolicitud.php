@@ -3,7 +3,6 @@
 //conexion a la base de datos 
  $maindir = "../../../";
  require($maindir."conexion/config.inc.php");
- 
 											     
 //$link = mysqli_connect($host, $username, $password, $dbname);
 
@@ -16,7 +15,11 @@ $edificio =  $_POST['edificio'];
 $fecha =  $_POST['fecha'];
 $horai =  $_POST['horai'];
 $horaf =  $_POST['horaf'];
+$jefe = $_POST['jefe'];
 $cantidad =  $_POST['cantidad'];
+if($cantidad > 1){
+    $jefe = '';
+}
 //$tildes = $link->query("SET NAMES 'utf8'"); //Para que se muestren las tildes
 $tildes=$db->exec("set names utf8");
 
@@ -90,7 +93,8 @@ $fecha_solic =$result5->fetch();
 	fecha,
 	estado,
 	fecha_solicitud,
-	id_usuario)
+	id_usuario,
+        revisarPor)
 	VALUES(
 	'".$extraido2['Id_departamento_laboral']."',
 	'".$row2['No_Empleado']."',
@@ -102,7 +106,8 @@ $fecha_solic =$result5->fetch();
 	'".$fecha."',
 	'Espera',
 	Date_format(now(),'%Y-%m-%d'),
-	'".$idusuario."'
+	'".$idusuario."',
+        '".$jefe."'
 	)";
 	//se ejecuta la consulta de insercion y se verifica si se ha realizado o si ha fallado
 	$sql8="SELECT DATE_FORMAT(fecha, '%Y-%m-%d') as fecha from permisos where fecha between DATE_SUB(DATE_FORMAT('".$fecha."', '%Y-%m-%d'), INTERVAL '".$cantidad."' DAY) 
