@@ -35,35 +35,36 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
 
   <script type="text/javascript">
     $(document).ready(function() {
-
+        
+        var nada = "N/D";
       $("form").submit( //Se realiza cuando se ejecuta un "submit" en el formulario, el "submit" se encuentra en el boton "Envíar Solicitud
         function(e) {
           e.preventDefault();
           var data1 = {
             "identidad": $('#identidad').val(),
             "primerNombre": $('#primerNombre').val(),
-            "segundoNombre": $('#segundoNombre').val(),
+            "segundoNombre": (!$.trim($('#segundoNombre').val())) ? nada : $('#segundoNombre').val(),
             "primerApellido": $('#primerApellido').val(),
-            "segundoApellido": $('#segundoApellido').val(),
+            "segundoApellido": (!$.trim($('#segundoApellido').val())) ? nada : $('#segundoApellido').val() ,
             "sexo": $('input[name="sexo"]:checked').val(),
             "fecha": $("#dp1").val(),
-            "telefono": $('#telefono').val(),
-            "correo": $('#correo').val(),
+            "telefono": (!$.trim($('#telefono').val())) ? nada : $('#telefono').val() ,
+            "correo": (!$.trim($('#correo').val())) ? nada : $('#correo').val(),
             "estCivil": $('#estCivil').val(),
-            "nacionalidad": $('#nacionalidad').val(),
-            "direccion": $('#direccion').val(),
+            "nacionalidad": (!$.trim($('#nacionalidad').val())) ? nada : $('#nacionalidad').val(),
+            "direccion": (!$.trim($('#direccion').val())) ? nada : $('#direccion').val(),
             "ciudadOrigen": $('#ciudadOrigenCombo').val(),
             "residenciaActual": $('#residenciaActual').val(),
             "numeroCuenta": $('#numeroCuenta').val(),
 
             "tipoEstudiante": $('#tipoEstudiante').val(),
             "planEstudio": $('#planEstudio').val(),
-            "unidadesValorativas": $('#unidadesValorativas').val(),
-            "aniosEstudioInicio": $('#aniosEstudioInicio').val(),
-            "aniosEstudioFinal": $('#aniosEstudioFinal').val(),
+            "unidadesValorativas": (!$.trim($('#unidadesValorativas').val())) ? "N/D" :  $('#unidadesValorativas').val(),
+            "aniosEstudioInicio": (!$.trim($('#aniosEstudioInicio').val())) ? 0000 : $('#aniosEstudioInicio').val(),
+            "aniosEstudioFinal": (!$.trim($('#aniosEstudioFinal').val())) ? 0000 : $('#aniosEstudioFinal').val(),
             "titulo": $('#titulo').val(),
             "orientacion": $('#orientacion').val(),
-            "indiceAcademico": $('#indiceAcademico').val(),
+            "indiceAcademico": (!$.trim($('#indiceAcademico').val())) ? 0.00 : $('#indiceAcademico').val() ,
             "mencionHonorifica": $('#mencionHonorificaCombo').val()
           };
 
@@ -143,7 +144,7 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                     <label class="col-sm-5 control-label">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Primer nombre</label>
                     <div class="col-sm-7">
-                      <input id="primerNombre" class="form-control" name="primerNombre" required>
+                        <input id="primerNombre" class="form-control" name="primerNombre" required>
                     </div>
                   </div>
                   <div class="form-group" id="Snombre">
@@ -168,16 +169,16 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                   </div>
                   <div class="form-group" id="tel">
                     <label class="col-sm-5 control-label">
-                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Teléfono</label>
+                      <span aria-hidden="true"></span> Teléfono</label>
                     <div class="col-sm-7">
-                      <input type="tel" id="telefono" class="form-control" name="telefono" placeholder="Ejemplo: 9999-9999" pattern="[0-9]{4}[\-][0-9]{4}" required>
+                      <input type="tel" id="telefono" class="form-control" name="telefono" placeholder="Ejemplo: 9999-9999" pattern="[0-9]{4}[\-][0-9]{4}">
                     </div>
                   </div>
                   <div class="form-group" id="correoE">
                     <label class="col-sm-5 control-label">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Correo Electrónico</label>
                     <div class="col-sm-7">
-                      <input type="email" id="correo" class="form-control" name="correo" pattern="[^ @]*@[^ @]*" placeholder="Ejemplo: correo@server.com" required>
+                      <input type="email" id="correo" class="form-control" name="correo" pattern="[^ @]*@[^ @]*" placeholder="Ejemplo: correo@server.com">
                     </div>
                   </div>
                   <!--</div>-->
@@ -215,7 +216,7 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                     <label class="col-sm-5 control-label">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Nacionalidad</label>
                     <div class="col-sm-7">
-                      <input id="nacionalidad" class="form-control" name="nacionalidad" required>
+                      <input id="nacionalidad" class="form-control" name="nacionalidad">
                     </div>
                   </div>
                   <div class="form-group" id="lugarOrigenOpcion">
@@ -298,21 +299,21 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Unidades Valorativas</label>
                       <div class="col-sm-6">
-                        <input type="number" min="1" max="600" value="1" id="unidadesValorativas" class="form-control" name="unidadesValorativas" required>
+                        <input type="number" min="1" max="600" value="1" id="unidadesValorativas" class="form-control" name="unidadesValorativas">
                       </div>
                     </div>
                     <div class="form-group" id="aniosInicio">
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Año Inicio Estudios</label>
                       <div class="col-sm-6">
-                        <input type="number" min="1847" max="<?php echo date('Y')?>" value="1990" id="aniosEstudioInicio" class="form-control" name="aniosEstudioInicio" onchange="validarAnioCambio()" required>
+                        <input type="number" min="1847" max="<?php echo date('Y')?>" value="1990" id="aniosEstudioInicio" class="form-control" name="aniosEstudioInicio" onchange="validarAnioCambio()">
                       </div>
                     </div>
                     <div class="form-group" id="aniosFinal">
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Año Finalizacion Estudios</label>
                       <div class="col-sm-6">
-                        <input type="number" min="1847" max="<?php echo date('Y')?>" value="<?php echo date('Y')?>" id="aniosEstudioFinal" class="form-control" name="aniosEstudioFinal" required>
+                        <input type="number" min="1847" max="<?php echo date('Y')?>" value="<?php echo date('Y')?>" id="aniosEstudioFinal" class="form-control" name="aniosEstudioFinal">
                       </div>
                     </div>
                     <div class="form-group" id="tituloOpcion">
@@ -347,7 +348,7 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Índice Académico</label>
                       <div class="col-sm-6">
-                        <input type="number" min="0" max="100" step="0.01" value="0.00" id="indiceAcademico" class="form-control" name="indiceAcademico" required>
+                        <input type="number" min="0" max="100" step="0.01" value="0.00" id="indiceAcademico" class="form-control" name="indiceAcademico">
                       </div>
                     </div>
                     <div class="form-group" id="mencionOpcion">
