@@ -33,13 +33,25 @@ if(!isset( $_SESSION['user_id'] ))
  
 
     
-  <?php $idusuario= $_SESSION['user_id']; ?> 
+  <?php $idusuario= $_SESSION['user_id'];?> 
 
 <?php 
 
 	$rol = $_SESSION['user_rol'];
 	require($maindir."conexion/config.inc.php");
-
+        
+        $q = 'SELECT No_Empleado FROM usuario WHERE Id_Usuario ='.$idusuario;
+        $r = $db->prepare($q);
+        $r->execute();
+        $datos = $r->fetch();
+        $nEE = $datos['No_Empleado'];
+        $_SESSION['nEE'] = $nEE;
+        
+        $q = 'SELECT recibirNotificacion FROM empleado_has_cargo WHERE No_Empleado ='.$nEE;
+        $r = $db->prepare($q);
+        $r->execute();
+        $datos = $r->fetch();
+        $nE = $datos['recibirNotificacion'];
 	
 	$encontro=1;
 		//$query1 = mysqli_query($conexion, "SELECT Id_departamento FROM empleado where ='".$unidad."'");

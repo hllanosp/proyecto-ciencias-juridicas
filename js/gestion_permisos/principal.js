@@ -46,6 +46,10 @@
 		var x8;
 		x8=$("#estadistica");
 		x8.click(Esta);
+                
+                var x9;
+		x9=$("#nE");
+		x9.click(nE);
 	}
 
 	function Esta()
@@ -184,6 +188,25 @@
 		}); 
 		return true;
 	}
+        
+        function nE()
+	{
+		$.ajax({
+			async:true,
+			type: "POST",
+			dataType: "html",
+			contentType: "application/x-www-form-urlencoded",
+			url:"pages/permisos/revision/nE.php",    
+			// url:"../Revision.php",  
+			beforeSend:inicioEnvio,
+			success:llegadanE,
+			timeout:4000,
+			error:function(result){  
+            alert('ERROR ' + result.status + ' ' + result.statusText);  
+          }
+		}); 
+		return true;
+	}
 	
 	function ReporteT()
 	{
@@ -294,6 +317,11 @@
 	function llegadaRevision()
 	{
 		$("#contenedor").load('pages/permisos/revision/Revision.php');
+		 //$("#contenedor").load('../permisos/Revision.php');
+	}
+        function llegadanE()
+	{
+		$("#contenedor").load('pages/permisos/revision/nE.php');
 		 //$("#contenedor").load('../permisos/Revision.php');
 	}
 	function llegadaReporteTotal()

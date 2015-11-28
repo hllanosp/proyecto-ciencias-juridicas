@@ -2,7 +2,6 @@
 <?php
 
  $maindir = "../../../";
-
  
 
 require_once($maindir."fpdf/fpdf.php");

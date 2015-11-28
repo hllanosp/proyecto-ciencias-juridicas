@@ -30,61 +30,16 @@ if(isset($_GET['contenido']))
 <?php 
 	
 	$rol = $_SESSION['user_rol'];
-	
-	if($rol == 30){
-		$sql1="SELECT  Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')";
-        $rec =$db->prepare($sql1);
-        $rec->execute();
-        $extraido=$rec->fetch();
-		//$query = mysqli_query($conexion, "SELECT  Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')");
-		//mysqli_data_seek ($query,0);
-		 // $extraido = mysqli_fetch_array($query);
-		  $query= "Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
-			DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado,
-			departamento_laboral.nombre_departamento from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
-			inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
-			inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento where permisos.id_departamento = '".$extraido['Id_departamento']."' and
-			permisos.estado = 'Espera' or permisos.estado = 'Aprobado' ORDER BY fecha asc";
-			$consulta =$db->prepare($query);
-            $consulta->execute();
-
-			//$consulta = mysqli_query($conexion, $query) or die("Error " . mysqli_error($link));
-	    // mysqli_close($conexion);
-
-
-		
-		
-		//$consulta  = mysqli_query($conexion, "Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
-		//	DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado,
-	//	departamento_laboral.nombre_departamento from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
-	//		inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
-	//		inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento where permisos.id_departamento = '".$extraido['Id_departamento']."' and
-	//		permisos.estado = 'Espera' or permisos.estado = 'Aprobado' ORDER BY fecha asc");
-
-	}else{
-		if($rol == 50){
-			$query ="Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
-			DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado,
-			departamento_laboral.nombre_departamento from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
-			inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
-			inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
-			where permisos.estado = 'Espera' or permisos.estado = 'Aprobado' ORDER BY fecha asc";
-			$consulta =$db->prepare($query);
-            $consulta->execute();
-
-
-			//$consulta = mysqli_query($conexion, $query) or die("Error " . mysqli_error($link));
-	        //mysqli_close($conexion);
-
-
-		//	$consulta = mysqli_query($conexion, "Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
-		//	DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado,
-		//	departamento_laboral.nombre_departamento from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
-		//	inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
-	//		inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
-	//		where permisos.estado = 'Visto' or permisos.estado = 'Aprobado' ORDER BY fecha asc");
-		}
-	}
+	$nEE = $_SESSION['nEE'];
+        
+        $query ="Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
+        DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado,
+        departamento_laboral.nombre_departamento from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
+        inner join empleado on empleado.No_Empleado=permisos.No_Empleado inner join persona on persona.N_identidad=empleado.N_identidad 
+        inner join departamento_laboral on departamento_laboral.id_departamento_laboral = permisos.id_departamento 
+        where permisos.revisarPor = $nEE AND permisos.estado = 'Espera' or permisos.estado = 'Aprobado' ORDER BY fecha asc";
+        $consulta =$db->prepare($query);
+        $consulta->execute();
 ?>
 
 <!DOCTYPE html>
