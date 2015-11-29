@@ -38,6 +38,12 @@ include($maindir."conexion/config.inc.php");
       $indiceAcademico = $_POST['indiceAcademico'];
       $mencionHonorifica = $_POST['mencionHonorifica'];
 
+      $grupoEtnico = $_POST['grupoEtnico'];
+      $carreraAnterior = $_POST['carreraAnterior'];
+
+
+
+
       $stmt = $db->prepare("CALL SP_REGISTRAR_ESTUDIANTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@mensajeError)");
           //Introduccion de parametros
           $stmt->bindParam(1, $identidad, PDO::PARAM_STR);
@@ -69,6 +75,9 @@ include($maindir."conexion/config.inc.php");
        $output = $db->query("select @mensajeError")->fetch(PDO::FETCH_ASSOC);
        $mensaje = $output['@mensajeError'];
        $codMensaje = 0;
+
+        $query1 = $db -> prepare('UPDATE `sa_estudiantes` SET `grupo_etnico`=? ,`carrera_anterior`=? WHERE `dni`=?');
+        $query1 -> execute(array($grupoEtnico,$carreraAnterior ,$identidad));
 
 
 
