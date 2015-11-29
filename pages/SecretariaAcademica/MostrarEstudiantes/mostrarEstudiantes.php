@@ -6,11 +6,12 @@ include ('../../../conexion/config.inc.php');
   <head>
     <script type="text/javascript" src="pages/SecretariaAcademica/MostrarEstudiantes/scripts.js"></script>
     
-    <!-- // <script type="text/javascript" src="js/jquery.js"></script> -->
+    
   </head>
   <body>
       <!-- .panel-heading -->
       <div class="panel-body">
+        <div id = "notificaciones"></div>
         <div class="panel-group" id="accordion">
           <h2>Mostrar Estudiantes</h2>
           <div name="alerta" id="alerta"></div>
@@ -51,3 +52,5 @@ include ('../../../conexion/config.inc.php');
       </div>
     </body>
   </html>
+
+  
