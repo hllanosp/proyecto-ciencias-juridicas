@@ -6,10 +6,12 @@ require_once($maindir."fpdf/fpdf.php");
 require($maindir."conexion/config.inc.php");
 
 $sql = "SELECT * FROM ( SELECT folios.NroFolio, folios.PersonaReferente, unidad_academica.NombreUnidadAcademica AS ENTIDAD, 
-                         DATE(folios.FechaEntrada) as FechaEntrada, folios.FechaEntrada as Fecha, folios.TipoFolio FROM folios INNER JOIN unidad_academica ON folios.UnidadAcademica = unidad_academica.Id_UnidadAcademica 
-                         UNION SELECT folios.NroFolio, folios.PersonaReferente, organizacion.NombreOrganizacion AS ENTIDAD, 
-                         DATE(folios.FechaEntrada) as FechaEntrada, folios.FechaEntrada as Fecha ,folios.TipoFolio FROM folios INNER JOIN organizacion ON folios.Organizacion = organizacion.Id_Organizacion where DATE(folios.FechaEntrada)=CURDATE()) T1 
-                        ORDER BY `T1`.`Fecha` DESC";
+                         categorias_folios.NombreCategoria, DATE(folios.FechaEntrada) as FechaEntrada, folios.FechaEntrada as Fecha, folios.TipoFolio FROM folios INNER JOIN unidad_academica ON 
+                         folios.UnidadAcademica = unidad_academica.Id_UnidadAcademica INNER JOIN categorias_folios ON 
+                         folios.categoria = categorias_folios.Id_Categoria UNION SELECT folios.NroFolio, folios.PersonaReferente, 
+                         organizacion.NombreOrganizacion AS ENTIDAD, categorias_folios.NombreCategoria, DATE(folios.FechaEntrada) as FechaEntrada, folios.FechaEntrada as Fecha ,folios.TipoFolio 
+                         FROM folios INNER JOIN organizacion ON folios.Organizacion = organizacion.Id_Organizacion INNER JOIN categorias_folios ON 
+                         folios.categoria = categorias_folios.Id_Categoria) T1 WHERE TipoFolio = 0 ORDER BY Fecha DESC";
 
     $query = $db->prepare($sql);
 	//$query ->bindParam(":Id_Seguimiento",$Id_Seguimiento);
@@ -30,7 +32,7 @@ $pdf->Cell(143, 10, utf8_decode("Universidad Nacional Autónoma de Honduras"), 0
 $pdf->Ln(25);
 $pdf->SetFont('Arial', 'U', 14);
 $pdf->Cell(30, 8, ' ', 0,0,"C");
-$pdf->Cell(133, 8, utf8_decode("Reporte de Folios Diarios"), 0,0,"C");
+$pdf->Cell(133, 8, utf8_decode("Reporte de Folios de Entrada"), 0,0,"C");
 
 $pdf->SetFont('Arial', '', 12);
 $pdf->Ln(10);
@@ -40,8 +42,8 @@ $pdf->SetFont('Arial', 'B', 8);
 $pdf->Cell(20, 8, utf8_decode("No. de Folio"), 1,0,"C");
 $pdf->Cell(60, 8, utf8_decode("Persona Referente"), 1,0,"C");
 $pdf->Cell(50, 8, utf8_decode("Unidad académica u Organización"), 1,0,"C");
+$pdf->Cell(30, 8, utf8_decode("NombreCategoria"), 1,0,"C");
 $pdf->Cell(30, 8, utf8_decode("Fecha de Entrada"), 1,0,"C");
-$pdf->Cell(30, 8, utf8_decode("Tipo de Folio"), 1,0,"C");
 $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 
@@ -58,11 +60,11 @@ foreach( $rows as $row ){
 
 
     if (strlen($cadena)<40) {
-    	      $pdf->Cell(20, 8, utf8_decode($row["NroFolio"]),1,0,"C");
+    	      $pdf->Cell(20, 8, utf8_decode($row['NroFolio']),1,0,"C");
 		      $pdf->Cell(60, 8, utf8_decode($cadena), 1,0,"C");
 		      $pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]),1,0,"C");
+              $pdf->Cell(30, 8, utf8_decode($row['NombreCategoria']), 1,0,"C");
 		      $pdf->Cell(30, 8, utf8_decode($row["FechaEntrada"]), 1,0,"C");
-		      $pdf->Cell(30, 8, utf8_decode($tipo), 1,0,"C");
 		      $pdf->Ln();
     	
     } else {
@@ -81,8 +83,8 @@ foreach( $rows as $row ){
     		  $pdf->Cell(20, 8, utf8_decode($row["NroFolio"]), "L,R",0,"C");
 		      $pdf->Cell(60, 8, utf8_decode($cadena2), "L,R",0,"C");
 		      $pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]), "L,R",0,"C");
-		      $pdf->Cell(30, 8, utf8_decode($row["FechaEntrada"]), "L,R",0,"C");
-		      $pdf->Cell(30, 8, utf8_decode($tipo), "L,R",0,"C");
+		      $pdf->Cell(30, 8, utf8_decode($row['NombreCategoria']), 1,0,"C");
+              $pdf->Cell(30, 8, utf8_decode($row["FechaEntrada"]), "L,R",0,"C");
 		      $pdf->Ln();
 		      $prim=2;
 
@@ -108,8 +110,8 @@ foreach( $rows as $row ){
     			$pdf->Cell(20, 8, utf8_decode($row["NroFolio"]), "L,R",0,"C");
 		      $pdf->Cell(60, 8, utf8_decode($cadena2), "L,R",0,"C");
 		      $pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]), "L,R",0,"C");
+              $pdf->Cell(30, 8, utf8_decode($row['NombreCategoria']), 1,0,"C");
 		      $pdf->Cell(30, 8, utf8_decode($row["FechaEntrada"]), "L,R",0,"C");
-		      $pdf->Cell(30, 8, utf8_decode($tipo), "L,R",0,"C");
 		      $pdf->Ln();
 		      $prim=2;
 
