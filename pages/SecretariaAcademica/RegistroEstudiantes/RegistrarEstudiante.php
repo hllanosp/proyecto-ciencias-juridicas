@@ -4,24 +4,15 @@
 
 $maindir = "../../../";
 include($maindir."conexion/config.inc.php");
-
-
-
-
-  require_once($maindir."funciones/check_session.php");
-
+ require_once($maindir."funciones/check_session.php");
   require_once($maindir."funciones/timeout.php");
-
    if(!isset( $_SESSION['user_id'] ))
   {
     header('Location: '.$maindir.'login/logout.php?code=100');
     exit();
   }
-
-
-	try{
-
-		  $identidad = $_POST['identidad'];
+  try{
+      $identidad = $_POST['identidad'];
       $primerNombre =  $_POST['primerNombre'];
       $segundoNombre = $_POST['segundoNombre'];
       $primerApellido = $_POST['primerApellido'];
@@ -48,7 +39,7 @@ include($maindir."conexion/config.inc.php");
       $mencionHonorifica = $_POST['mencionHonorifica'];
 
       $stmt = $db->prepare("CALL SP_REGISTRAR_ESTUDIANTE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,@mensajeError)");
-		      //Introduccion de parametros
+          //Introduccion de parametros
           $stmt->bindParam(1, $identidad, PDO::PARAM_STR);
           $stmt->bindParam(2, $primerNombre, PDO::PARAM_STR);
           $stmt->bindParam(3, $segundoNombre, PDO::PARAM_STR);
@@ -88,14 +79,24 @@ include($maindir."conexion/config.inc.php");
 
     if($mensaje == NULL)
     {
-      echo '<div class="alert alert-success alert-succes">
+      echo '<div id = "mensaje" class="alert alert-success alert-succes">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
-        <strong> Exito! </strong></div>';
+        <strong> Exito! El usuario se ha creado correctamente</strong></div>';
     }
     else
         {
-      echo '<div class="alert alert-danger alert-error">
+      echo '<div id = "mensaje" class="alert alert-danger alert-error">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong> Error! </strong>'.$mensaje.'</div>';
     }
+
+
  ?>
+ <script>
+  $(document).ready(function(){
+        setTimeout(function(){
+            $('#mensaje').fadeOut(3000);
+        },3000);
+
+      });
+</script>

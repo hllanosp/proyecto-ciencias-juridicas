@@ -33,7 +33,7 @@
 		          			 	"<td id='".$mencion."'>".$mencion."</td>".
 		          			 	"<td id='".$solicitudes."'>".$solicitudes."</td>".
 		          			 	// Botones
-		          				"<td><a class='edit_estudiante btn btn-info fa fa-pencil'></a>".
+		          				"<td><a data-no_cuenta = '".$row['no_cuenta']."' class='edit_estudiante btn btn-info fa fa-pencil'></a>".
 		              			"&nbsp;&nbsp;<a class='elimina btn btn-danger fa fa-trash-o'></a></td> ".
 					      	"</tr></tbody>";
 
