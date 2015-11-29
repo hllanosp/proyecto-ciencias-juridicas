@@ -103,8 +103,8 @@ if(!isset( $_SESSION['user_id'] ))
             <h5><i class="glyphicon glyphicon-cog"></i> Mantenimiento<i class="glyphicon glyphicon-chevron-down"></i></h5>
                           </a>
                             <ul class="list-unstyled collapse in" id="userMenu3">     
-                              <!-- Ingreso de sub meno de la seccion de Mantenimiento 
-                                <li><a id="ciudadOrigen" href="#"><i class="glyphicon glyphicon-globe"></i> Ciudades de origen</a></li>-->
+                              <!-- Ingreso de sub meno de la seccion de Mantenimiento -->
+                                <li><a id="ciudadOrigen" href="#"><i class="glyphicon glyphicon-globe"></i> Ciudades de origen</a></li>
                                 <li><a id="planesEstudio" href="#"><i class="glyphicon glyphicon-book"></i> Planes de estudio</a></li> 
                                 <li><a id="mencionHonorifica" href="#"><i class="glyphicon glyphicon-star"></i> Menciones Honorificas</a></li>
                                 <li><a id="Orientaciones" href="#"><i class="glyphicon glyphicon-education"></i> Orientaciones</a></li>  
@@ -122,6 +122,7 @@ HTML;
             <!-- Contenedor donde montamos todas las paginas requeridas para este modulo -->
              <div class="col-sm-9">
                 <div id="contenedor" class="content-panel">
+                  
                      <?php require_once($maindir . 'pages/SecretariaAcademica/Graficos/pantallaPrincipal.php');         ?>
                 </div>
             </div> 

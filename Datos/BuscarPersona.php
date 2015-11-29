@@ -18,7 +18,7 @@
             
      			  
 		if($row=mysql_fetch_array($pa)){
-			$existe=True;
+			$existe=TRUE;
 			
 			
 			$nombre=$row['Primer_nombre'] ;
@@ -28,7 +28,7 @@
 			
 		}
                 else{
-                    $existe=False;
+                    $existe=FALSE;
                     
                     
                echo mensajes('No se encontro ningun registro','azul');
@@ -61,6 +61,7 @@
                     obs:$('#obs').val(),
                     id_dep:$('#depar').val(),
                     cargo:$('#cargo').val(),
+                    notificacion:$('#recibirNotificacion').val(),
                     tipoProcedimiento:"insertar"
                 };
                 
@@ -270,6 +271,9 @@ echo<<<HTML
                                         </select>
                                      </div>
                                     
+                                     </div>
+                                     <div>
+                                        <label><input type="checkbox" id="recibirNotificacion"> Recibir notificaciones de permisos</label>
                                      </div>
 
                                     <div class="form-group">

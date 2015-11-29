@@ -1,6 +1,5 @@
 <?php
 	$maindir = "../../../";
-	
 
 	
 	
@@ -11,7 +10,7 @@
   
 	$idusuario= $_SESSION['user_id']; 
 	$rol = $_SESSION['user_rol'];
-	
+
 		$codpermiso =  $_POST['idpermiso'];
 		$obsr = $_POST['obs'];
 		$cont=0;
@@ -27,8 +26,10 @@
 			   $sql2="update permisos set estado = 'Denegado', observacion = '".$obsr."', revisado_por = '".$NoEmp['No_Empleado']."' 
 				where id_Permisos = '$codpermiso' and estado = 'Espera'";
 		        $rec2 =$db->prepare($sql2);
-                 $rec2->execute();
+               $rec2->execute();
                echo 1;
+
+               
 
 
 
@@ -40,7 +41,8 @@
 				where id_Permisos = '$codpermiso' and estado = 'Visto'";
 		     $rec2 =$db->prepare($sql2);
              $rec2->execute();
-             echo 1;
+              echo 1;
+             
 
 
 			//$resultado = mysqli_query($conexion, "update permisos set estado = 'Denegado', observacion = '".$obsr."', revisado_por = '".$NoEmp['No_Empleado']."' 

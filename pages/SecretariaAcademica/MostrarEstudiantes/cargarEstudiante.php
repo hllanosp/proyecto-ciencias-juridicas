@@ -25,6 +25,8 @@ include($maindir."conexion/config.inc.php");
     
     $dni = $row['dni'];
     $anios_estudio = $row['anios_inicio_estudio'];
+    $aniosEstudioDerecho = $row['anios_final_estudio'];
+
     $indice_academico = $row['indice_academico'];
     $fecha_registro = $row['fecha_registro'];
     $uv_acumulados = $row['uv_acumulados'];
@@ -32,28 +34,59 @@ include($maindir."conexion/config.inc.php");
     $cod_ciudad_origen = $row['cod_ciudad_origen'];
     $cod_orientacion = $row['cod_orientacion'];
     $cod_residencia_actual = $row['cod_residencia_actual'];
+    $grupoEtnico = $row['grupo_etnico'];
+    $carreraAnterior = $row['carrera_anterior'];
+
     $correo = obtenerCorreo($dni);
     $tipo = obtenerTipo($dni);
     $mencion = obtenerMencion($dni);
-    $personales = obtenerPersonales($dni);
     $telefono = obtenerTelefono($dni);
-
-    $mensaje = $dni.",".
-                $anios_estudio.",".
-                $indice_academico.",".
-                $fecha_registro.",".
-                $uv_acumulados.",".
-                $cod_plan_estudio.",".
-                $cod_ciudad_origen.",".
-                $cod_orientacion.",".
-                $cod_residencia_actual.",".
-                $tipo.",".
-                $correo.",".
-                $mencion.",".
-                $telefono.",".
-                $personales;
     
-    echo $mensaje;
+    $Primer_nombre = "";
+    $Segundo_nombre = "";
+    $Primer_apellido = "";
+    $Segundo_apellido = "";
+    $Sexo = "";
+    $Fecha_nacimiento = "";
+    $Estado_Civil = "";
+    $Nacionalidad = "";
+    $Direccion = "";
+    $personales = obtenerPersonales($dni);
+
+    $arreglo = array( 'no_cuenta' => $no_cuenta,
+                      'dni' => $dni,
+                      'anios_estudio' => $anios_estudio,
+                      'ịndice_academico' => $indice_academico,
+                      'fecha_registro' => $fecha_registro,
+                      'uv_acumulados' => $uv_acumulados,
+                      'cod_plan_estudio' => $cod_plan_estudio,
+                      'cod_ciudad_origen' => $cod_ciudad_origen,
+                      'cod_orientacion' => $cod_orientacion,
+                      'cod_residencia_actual' => $cod_residencia_actual,
+                      'tipo' => $tipo,
+                      'correo' => $correo,
+                      'mencion' => $mencion,
+                      'telefono' => $telefono,
+
+                      'Primer_nombre' => $personales[0],
+                      'Segundo_nombre' => $personales[1],
+                      'Primer_apellido' => $personales[2],
+                      'Segundo_apellido' => $personales[3],
+                      'Sexo' => $personales[4],
+                      'Fecha_nacimiento' => $personales[5],
+                      'Estado_Civil' => $personales[6],
+                      'Nacionalidad' => $personales[7],
+                      'Direccion' => $personales[8],
+                      'aniosEstudioDerecho' => $aniosEstudioDerecho,
+                      'grupoEtnico' => $grupoEtnico,
+                      'carreraAnterior' => $carreraAnterior
+                      );
+
+    // $arreglo = explode(',',$mensaje);
+    echo json_encode($arreglo);
+
+    
+    // echo $mensaje;
   }catch(PDOExecption $e){
     $mensaje = "<strong>¡Error! </strong> Error al actualizar la clase.";
     $codMensaje = 0;
@@ -89,9 +122,22 @@ include($maindir."conexion/config.inc.php");
             persona p INNER JOIN sa_estudiantes e ON p.N_Identidad = e.dni WHERE e.dni = '".$dni."'";
     $query = mysql_query($queryString);
     $row = mysql_fetch_assoc($query);
+    $Primer_nombre = $row['Primer_nombre'];
+    $Segundo_nombre = $row['Segundo_nombre'];
+    $Primer_apellido = $row['Primer_apellido'];
+    $Segundo_apellido = $row['Segundo_apellido'];
+    $Sexo = $row['Sexo'];
+    $Fecha_nacimiento = $row['Fecha_nacimiento'];
+    $Estado_Civil = $row['Estado_Civil'];
+    $Nacionalidad = $row['Nacionalidad'];
+    $Direccion = $row['Direccion'];
 
-    return $row['Primer_nombre'].",".$row["Segundo_nombre"].",".$row["Primer_apellido"].",".$row["Segundo_apellido"].",".
-            $row['Sexo'].",".$row['Fecha_nacimiento'].",".$row['Estado_Civil'].",".$row['Nacionalidad'].",".$row['Direccion'];
+    // return $row['Primer_nombre'].",".$row["Segundo_nombre"].",".$row["Primer_apellido"].",".$row["Segundo_apellido"].",".
+    //         $row['Sexo'].",".$row['Fecha_nacimiento'].",".$row['Estado_Civil'].",".$row['Nacionalidad'].",".$row['Direccion'];
+    
+    return array( $row['Primer_nombre'],$row["Segundo_nombre"],$row["Primer_apellido"],$row["Segundo_apellido"],
+            $row['Sexo'],$row['Fecha_nacimiento'],$row['Estado_Civil'],$row['Nacionalidad'],$row['Direccion']);
+
   }
   
   function obtenerTelefono($dni){

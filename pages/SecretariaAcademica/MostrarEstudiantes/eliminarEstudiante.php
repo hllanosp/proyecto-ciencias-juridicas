@@ -22,15 +22,34 @@ include($maindir."conexion/config.inc.php");
     $query = mysql_query($queryString);
 
     if($query){
-      $mensaje = "<strong>¡Éxito! </strong> Se ha eliminado al estudiante: ".$no_cuenta;
+      $mensaje = "<div id = 'mensaje' class='alert alert-success alert-success'>
+            <a href='#'' class='close' data-dismiss='alert'>&times;</a>
+            <strong> Exito! </strong> EL usuario  se ha eliminado correctamente</div>";
+
+
+     
     }else{
-      $mensaje = "<strong>¡Error! </strong> Error al eliminar al estudiante.";
-      http_response_code(400);
+      $mensaje = "<div id = 'mensaje' class='alert alert-danger alert-danger'>
+            <a href='#'' class='close' data-dismiss='alert'>&times;</a>
+            <strong> Error! </strong>Problemas al Borrar el Estudiante</div>";
+      // http_response_code(400);
     }
     
     echo $mensaje;
   }catch(PDOExecption $e){
-    echo "<strong>¡Error! </strong> Error al eliminar.";
-    http_response_code(500);
+    echo "<div id = 'mensaje' class='alert alert-danger alert-danger'>
+            <a href='#'' class='close' data-dismiss='alert'>&times;</a>
+            <strong> Error! </strong>Problemas al Borrar el Estudiante</div>";
+    // http_response_code(500);
   }
+
+  include 'mostrarEstudiantes.php';
 ?>
+<script>
+  $(document).ready(function(){
+        setTimeout(function(){
+            $('#mensaje').fadeOut(3000);
+        },3000);
+
+      });
+</script>
