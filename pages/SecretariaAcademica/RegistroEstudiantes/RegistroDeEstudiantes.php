@@ -144,6 +144,13 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                       <input id="nacionalidad" class="form-control" name="nacionalidad" required>
                     </div>
                   </div>
+                  <div class="form-group" id="GrupoEtnico">
+                    <label class="col-sm-5 control-label">
+                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Grupo Etnico</label>
+                    <div class="col-sm-7">
+                      <input id="grupoEtnico" value = " "class="form-control" name="grupoEtnico" >
+                    </div>
+                  </div>
                   <div class="form-group" id="lugarOrigenOpcion">
                     <label class="col-sm-5 control-label">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Lugar de Origen</label>
@@ -292,6 +299,15 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                         </select>
                       </div>
                     </div>
+
+                    <div class="form-group" id="carrera_anterior">
+                    <label class="col-sm-5 control-label">
+                      <span class="glyphicon " aria-hidden="true"></span>Es egresado de otra Carrera</label>
+                    <div class="col-sm-7">
+                      <input id="carreraAnterior" value = ""class="form-control" name="carreraAnterior" >
+                    </div>
+                  </div>
+
                   </div>
                 </div>
               </div>
@@ -340,7 +356,11 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
             "titulo": $('#titulo').val(),
             "orientacion": $('#orientacion').val(),
             "indiceAcademico": (!$.trim($('#indiceAcademico').val())) ? 0.00 : $('#indiceAcademico').val() ,
-            "mencionHonorifica": $('#mencionHonorificaCombo').val()
+            "mencionHonorifica": $('#mencionHonorificaCombo').val(),
+
+
+            "grupoEtnico":$('#grupoEtnico').val(),
+            "carreraAnterior": $('#carreraAnterior').val()
 
           };
            $.ajax({
