@@ -13,7 +13,7 @@ function request(id){
         data: $('#formActualizar').serialize(),
 
         success: function(datos) {
-          $("#notificaciones").html(datos);
+          $("#contenedor").html(datos);
         }
       });
     }

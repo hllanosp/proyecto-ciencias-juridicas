@@ -102,9 +102,7 @@ include($maindir."conexion/config.inc.php");
     return $query;
   }
 
-
-
-
+  include 'mostrarEstudiantes.php';
 ?>
 <script>
   $(document).ready(function(){
