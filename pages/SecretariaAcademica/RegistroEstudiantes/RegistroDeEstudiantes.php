@@ -369,7 +369,7 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
             url: "pages/SecretariaAcademica/RegistroEstudiantes/RegistrarEstudiante.php",
             data: data1,
             success: function(data) {
-              $('#notificaciones').html(data);
+              $('#contenedor').html(data);
             },
           });
     
