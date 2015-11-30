@@ -32,7 +32,7 @@ $pdf->Cell(143, 10, utf8_decode("Universidad Nacional Autónoma de Honduras"), 0
 $pdf->Ln(25);
 $pdf->SetFont('Arial', 'U', 14);
 $pdf->Cell(30, 8, ' ', 0,0,"C");
-$pdf->Cell(133, 8, utf8_decode("Reporte de Folios de Entrada"), 0,0,"C");
+$pdf->Cell(133, 8, utf8_decode("Reporte de Folios de Salida"), 0,0,"C");
 
 $pdf->SetFont('Arial', '', 12);
 $pdf->Ln(10);
