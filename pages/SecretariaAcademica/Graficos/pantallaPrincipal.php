@@ -40,40 +40,8 @@ function cargarSolicitudes(){
             url: "pages/SecretariaAcademica/Graficos/cargarSolicitudes.php",
             data: datos,
             dataType: "html",
-            success: function(data){
-                var response = JSON.parse(data);
-                var options = '';
-                var Estado = '';
-                /* Seccion para llenar la tabla */
-                for (var index = 0;index < response.length; index++){
-                if (response[index].Estado == "Desactiva") {
-                         
-                    Estado ='<td><center><label href="#" class = "label label-warning">Desactiva</label></td></center>';
-                }
-                else{
-                    Estado ='<td><Center><label href="#" class = "label label-primary">Activa</label></td></center>';
-                } 
-                
-                   options += '<tr>' +
-                                    '<td>' + response[index].Codigo + '</td>' +
-                                    '<td>' + response[index].Estudiantes + '</td>' +
-                                    '<td>' + response[index].Fecha + '</td>' +
-                                    '<td>' + response[index].Observaciones + '</td>' +
-                                     Estado +
-                                    '<td>' + response[index].Dni_estudiante + '</td>' +
-                                    '<td>' + response[index].Tipo_solicitud + '</td>' +
-                                    '<td>' + response[index].Himno + '</td>' +
-                                    '<td><center>'+
-                                        '<button data-himno = "'+ response[index].Himno +'" data-id = "'+ response[index].Codigo +'" href= "#" class = "editar btn_editar btn btn-info"  data-toggle="modal" data-target = ""><i class="glyphicon glyphicon-edit"></i></button>'+
-                                    '</td></center>' +
-                                    '<td><center>'+
-                                        '<button data-himno = "'+ response[index].Himno +'" data-id = "'+ response[index].Codigo+'" href= "#" class = "elimina btn_editar btn btn-danger" data-toggle="modal" data-target = ""><i class="glyphicon glyphicon-trash"></i></button>'+
-                                    '</td></center>' +             
-                              '</tr>';
-                }
-
-            
-                $("#cTablaSolicitudes").html(options);
+            success: function(data){            
+                $("#cTablaSolicitudes").html(data);
 
                 /* Script que permite a la tabla hacer busquedas dentro de ella
                     y ordenarla deacuerdo a lo que se presenta en ella.*/
@@ -264,11 +232,11 @@ function cargarSolicitudes(){
         </div>
         <div class="panel-body" id = "Solicitudes">
             <section class="content">
-                <div class="table-responsive">
-                    <table id= "tableSolicitudes" border="1" class='table table-bordered table-hover'>
+                <div class="box-body table-responsive">
+                    <table id= "tableSolicitudes" class="table table-bordered table-hover table-striped">
                         <thead>
-                            <tr>
-                                <th>Cod</th>
+                            <tr align="center">
+                                <th hidden>Cod</th>
                                 <th>Estudiante</th>  
                                 <th>Fecha</th>   
                                 <th>Observaciones</th>
