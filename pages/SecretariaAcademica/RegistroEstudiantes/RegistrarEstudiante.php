@@ -99,7 +99,7 @@ include($maindir."conexion/config.inc.php");
         <strong> Error! </strong>'.$mensaje.'</div>';
     }
 
-
+include '../MostrarEstudiantes/mostrarEstudiantes.php';
  ?>
  <script>
   $(document).ready(function(){
