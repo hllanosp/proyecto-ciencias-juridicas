@@ -7,10 +7,10 @@
             
             if(mysql_query("DELETE FROM idioma WHERE ID_Idioma='$id'")){
                 
-            echo mensajes('Idioma"' . $id . '" Eliminado con Exito', 'verde');
+            echo mensajes('Idioma :  Eliminado con Exito', 'verde');
             }else{
                 
-            echo mensajes('Idioma"' . $id . '" No se puede eliminar', 'rojo');
+            echo mensajes('Idioma : No se puede eliminar', 'rojo');
                 
             }
         }

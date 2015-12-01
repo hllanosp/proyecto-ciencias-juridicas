@@ -3,7 +3,8 @@ session_start();
 $maindir = "../";
 
 require_once($maindir."conexion/config.inc.php");
-require_once("../Datos/conexion.php");
+//require_once("../Datos/conexion.php");
+include '../conexion/config.inc.php';
 
 /* Codigo que valida para que no se pueda cargar de retroseso el login */
 if(isset($_SESSION['user_id']))
@@ -102,7 +103,7 @@ if($result)
          header('Location: login.php?error_code=3');
          //die("We are unable to process your request. Please try again later");
       }
-      header('Location: '.$maindir.'index.php?hola');
+      header('Location: '.$maindir.'index.php?');
     }
  
 }else

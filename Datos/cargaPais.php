@@ -178,7 +178,7 @@
         <table id="tabla_paises"  class="table table-bordered table-hover table-striped">
             <thead>
         <tr>
-            <th><strong>ID pais</strong></th>
+            <th style="display:none"><strong>ID pais</strong></th>
             <th><strong>Nombre del Pais</strong></th>
             <th><strong>Eliminar</strong></th>
             <th><strong>Modificar</strong></th>
@@ -193,7 +193,7 @@
          ?>
             
           <tr>
-                  <td id="id4"><?php echo $id ?></td>
+                  <td style="display:none" id="id4"><?php echo $id ?></td>
                   <td><div class="text" id="npais-<?php echo $id ?>"><?php echo $row['Nombre_pais'] ?></div></td>
 
 <?php

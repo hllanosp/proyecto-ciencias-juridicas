@@ -10,7 +10,7 @@ echo <<<HTML
 
     <!-- Dorian js begin -->
 
-    
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js" ></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>   
     <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
     <script src="bower_components/raphael/raphael-min.js"></script>
@@ -22,7 +22,8 @@ echo <<<HTML
 
     <!-- Dorian js end -->
 
-   
+    <script type="text/javascript" src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+	
 	<script type="text/javascript" src="bower_components/bootstrap-switch-master/dist/js/bootstrap-switch.js" ></script>
 
     <!-- <script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.10.2.min.js"></script> -->
@@ -35,7 +36,8 @@ echo <<<HTML
     <!-- <script src="js/jquery.js" type="text/javascript"></script> -->
 
     <!--<script src="js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script> -->
-    
+    <script src="js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+
         <!-- JavaScript jQuery code from Bootply.com editor  -->
         
         <script type='text/javascript'>

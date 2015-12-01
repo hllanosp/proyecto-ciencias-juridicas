@@ -1,7 +1,7 @@
 <?php
 
-include '../../Datos/conexion.php';
-
+//include '../../Datos/conexion.php';
+include '../../conexion/config.inc.php';
 
 
 if (isset($_POST['titulo'])) {
@@ -132,9 +132,9 @@ mysql_select_db("ccjj"); -->
 
                                 <div class="form-group">
 
-                                    <label>ID Titulo</label>
+                                    <label style="display:none">ID Titulo</label>
 
-                                    <input type="text" id="codigo2" class="form-control" autocomplete="off" value="<?php echo $id; ?>" disabled>
+                                    <input style="display:none" type="text" id="codigo2" class="form-control" autocomplete="off" value="<?php echo $id; ?>" disabled>
 
 
                                 </div>

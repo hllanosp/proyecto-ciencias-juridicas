@@ -34,7 +34,7 @@ function reset()
     $(document).ready(function(e) {
     document.location.href = "login/logout.php?code=5";
 });
-  },20000000);//fin timeout
+  },20000000);//fin timeout   20000000
   }
   
   window.onbeforeunload = function(event) {

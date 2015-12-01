@@ -190,7 +190,7 @@
                                     <table id="tabla_Universidad2" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                            <th><strong>Id_universidad</strong></th>
+                                            <th style="display:none"><strong>Id_universidad</strong></th>
                                              <th><strong>Nombre_universidad</strong></th>
                                              <th><strong>Pais</strong></th>
                                              <th><strong>Eliminar</strong></th>
@@ -206,9 +206,9 @@ HTML;
             $nombreU = $row['nombre_universidad'];
             $nombreP = $row['Nombre_pais'];
             
-                echo "<tr data-id='".$idU."'>";
+                echo "<tr  data-id='".$idU."'>";
                 echo <<<HTML
-                <td>$idU</td>
+                <td style="display:none">$idU</td>
 
 HTML;
                 //echo <<<HTML <td><a href='javascript:ajax_("'$url'");'>$NroFolio</a></td>HTML;
@@ -252,7 +252,7 @@ HTML;
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                     <th><strong>Id_universidad</strong></th>
+                                     <th style="display:none"><strong>Id_universidad</strong></th>
                                     <th><strong>Nombre_universidad</strong></th>
                                    <th><strong>Pais</strong></th>
                                     <th><strong>Eliminar</strong></th>

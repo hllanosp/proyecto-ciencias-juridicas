@@ -1,8 +1,8 @@
 <?php
 
-
-	$enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
-        mysql_select_db("ccjj", $enlace);
+include '../conexion/config.inc.php';
+//	$enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
+       // mysql_select_db("ccjj", $enlace);
 
   if(isset($_POST['nombreGrupo'])){
       $nGrupo=$_POST['nombreGrupo'];

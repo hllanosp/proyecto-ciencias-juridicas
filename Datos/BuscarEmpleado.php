@@ -1,7 +1,7 @@
 <?php
 
-   // include '../Datos/conexion.php';
-
+   //include '../Datos/conexion.php';
+   include '../conexion/config.inc.php';
      require_once('funciones.php');
 	
 	$nombre='';	
@@ -12,8 +12,8 @@
     
  
 	
-	$enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
-        mysql_select_db("ccjj", $enlace);
+//$enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
+   //mysql_select_db("ccjj", $enlace);
 	
 	  if (isset($_POST['idempleado'])) 
     {

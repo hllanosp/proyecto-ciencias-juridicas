@@ -6,10 +6,10 @@ if (isset($_POST['IdClase'])) {
     $id = $_POST['IdClase'];
 
     if (mysql_query("DELETE FROM clases WHERE ID_Clases='$id'")) {
-        echo mensajes('Clase "' . $id . '" Eliminado con Exito', 'verde');
+        echo mensajes('Clase : Eliminada con Exito', 'verde');
     } else {
 
-        echo mensajes('Clase "' . $id . '" No se puede eliminar', 'rojo');
+        echo mensajes('Clase : No se puede eliminar', 'rojo');
     }
 }
  

@@ -126,7 +126,7 @@ $('#tablaDepartamento').dataTable(); // example es el id de la tabla
         <table id="tablaDepartamento" class="table table-bordered table-hover table-striped">
             <thead>
         <tr>
-            <th><strong><center>ID Departamento</center></strong></th>
+            <th style="display:none"><strong><center>ID Departamento</center></strong></th>
             <th><strong><center>Nombre del Departamento</center></strong></th>
             <th><strong><center>Eliminar</center></strong></th>
             <th><strong><center>Modificar</center></strong></th>
@@ -141,7 +141,7 @@ $('#tablaDepartamento').dataTable(); // example es el id de la tabla
          ?>
             
           <tr>
-                  <td id="id"><?php echo $id ?></td>
+                  <td style="display:none" id="id"><?php echo $id ?></td>
                   <td><div class="text" id="nombre-<?php echo $id ?>"><?php echo $row['nombre_departamento'] ?>
                       </div></td>
 
