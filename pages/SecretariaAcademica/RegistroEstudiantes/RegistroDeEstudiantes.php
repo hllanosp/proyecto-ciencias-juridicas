@@ -62,7 +62,7 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                     <label class="col-sm-5 control-label">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Número de Cuenta</label>
                     <div class="col-sm-7">
-                      <input id="numeroCuenta" class="form-control" name="numeroCuenta" placeholder="Ejemplo: 20011001111" pattern="[0-9]" required>
+                      <input id="numeroCuenta" class="form-control" name="numeroCuenta" placeholder="Ejemplo: 20011001111" required>
                     </div>
                   </div>
                   <div class="form-group" id="primerN">
@@ -240,14 +240,14 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de Estudio segun Certificado</label>
                       <div class="col-sm-6">
-                        <input type="number" min="0" value="0" id="aniosEstudioInicio" class="form-control" name="aniosEstudioInicio" placeholder = "1999-1999" onchange="validarAnioCambio()" >
+                        <input type="text" min="" value="" id="aniosEstudioInicio" class="form-control" name="aniosEstudioInicio" placeholder = "1999-1999" onchange="validarAnioCambio()" >
                       </div>
                     </div>
                     <div class="form-group" id="aniosFinal">
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de estudio en Derecho</label>
                       <div class="col-sm-6">
-                        <input type="number" min="0" value="0" id="aniosEstudioFinal" class="form-control" name="aniosEstudioFinal" placeholder = "1999-1999">
+                        <input type="text" id="aniosEstudioFinal" class="form-control" name="aniosEstudioFinal" placeholder = "1999-1999">
                       </div>
                     </div>
                     <div class="form-group" id="tituloOpcion">
