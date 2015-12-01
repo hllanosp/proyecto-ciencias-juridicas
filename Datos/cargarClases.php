@@ -138,7 +138,7 @@ $pame = mysql_query("SELECT * FROM clases");
             <thead>
                 <tr>
 
-                    <td><strong><center>ID Clase</center></strong></td>
+                    <td style="display:none" ><strong><center>ID Clase</center></strong></td>
                     <td><strong><center>Nombre Clase</strong></td>
                     <td><strong><center>Eliminar</strong></center></td>
                     <td><strong><center>Actualizar</strong></center></td>
@@ -154,8 +154,8 @@ $pame = mysql_query("SELECT * FROM clases");
                     ?>
 
                     <tr>
-                        <td id="id"><?php echo $id ?></td>
-                        <td><div class="text" id="nombre-<?php echo $id ?>"><?php echo $row['Clase'] ?>
+                        <td style="display:none"  id="id"><?php echo $id ?></td>
+                        <td ><div class="text" id="nombre-<?php echo $id ?>"><?php echo $row['Clase'] ?>
                             </div></td>
 
 <?php

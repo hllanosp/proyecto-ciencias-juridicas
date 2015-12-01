@@ -1,5 +1,6 @@
 <?php
- include ('../../Datos/conexion.php');
+ //include ('../../Datos/conexion.php');
+include '../../conexion/config.inc.php';
 
 ?>
 

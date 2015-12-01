@@ -11,7 +11,7 @@
             
             }else{
                 
-            echo mensajes('Pais"' . $id . '" No se puede eliminar', 'rojo');
+            echo mensajes('Pais : No se puede eliminar', 'rojo');
                 
             }
         }

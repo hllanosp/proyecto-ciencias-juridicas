@@ -1,6 +1,6 @@
 <?php
 
-include '../../Datos/conexion.php';
+include '../../conexion/config.inc.php';
 
 
 
@@ -122,7 +122,7 @@ mysql_select_db("ccjj"); -->
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Llene los campos a continuaci�n solicitados
+                   Llene los campos a continuación solicitados
                 </div>
                 <div class="panel-body">
                     <div class="row">
@@ -132,9 +132,9 @@ mysql_select_db("ccjj"); -->
 
                                 <div class="form-group">
 
-                                    <label>ID Idioma</label>
+                                    <label style="display:none">ID Idioma</label>
 
-                                    <input type="text" id="codigo2" class="form-control" autocomplete="off" value="<?php echo $id; ?>" disabled>
+                                    <input style="display:none" type="text" id="codigo2" class="form-control" autocomplete="off" value="<?php echo $id; ?>" disabled>
 
 
                                 </div>

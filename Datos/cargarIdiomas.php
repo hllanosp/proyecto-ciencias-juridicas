@@ -163,7 +163,7 @@
         <table class="table table-bordered table-hover table-striped">
             <thead>
         <tr>
-            <th><strong>ID Idioma</strong></th>
+            <th style="display:none"><strong>ID Idioma</strong></th>
             <th><strong>Nombre del Idioma</strong></th>
             <th><strong>Eliminar</strong></th>
             <th><strong>Modificar</strong></th>
@@ -178,7 +178,7 @@
          ?>
             
           <tr>
-                  <td id="id4"><?php echo $id ?></td>
+                  <td style="display:none" id="id4"><?php echo $id ?></td>
                   <td><div class="text" id="npais-<?php echo $id ?>"><?php echo $row['Idioma'] ?></div></td>
 
                   <?php

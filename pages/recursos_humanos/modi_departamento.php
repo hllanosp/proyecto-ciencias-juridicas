@@ -1,6 +1,6 @@
 <?php
 
-include '../../Datos/conexion.php';
+include '../../conexion/config.inc.php';
 
 
 
@@ -123,9 +123,9 @@ if (isset($_POST['idDepartamento'])) {
 
                                 <div class="form-group">
 
-                                    <label>ID Departamento</label>
+                                    <label style="display:none">ID Departamento</label>
 
-                                    <input type="text" id="id" class="form-control" autocomplete="off" value="<?php echo $id; ?>" disabled>
+                                    <input style="display:none" type="text" id="id" class="form-control" autocomplete="off" value="<?php echo $id; ?>" disabled>
 
 
                                 </div>

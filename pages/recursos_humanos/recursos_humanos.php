@@ -1,5 +1,6 @@
 <?php
-   include '../../Datos/conexion.php';
+   //include '../../Datos/conexion.php';
+include '../../conexion/config.inc.php';
     $maindir = "../../";
  
   if(isset($_GET['contenido']))
@@ -38,15 +39,15 @@
              <div class="col-sm-3">
 
        <ul class="list-unstyled">
-       <li class="nav-header active"> <a id="Recursos_humanos" href="#"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>
-       <hr>
-        <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">
+       <!--<li class="nav-header active"> <a id="Recursos_humanos" href="#"><i class="glyphicon glyphicon-home"></i> Inicio</a></li>-->
+        
+       <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">
           <h5><i class="fa fa-male fa-fw"></i> Gestión de perfiles <i class="glyphicon glyphicon-chevron-down"></i></h5>
           </a>
             <ul class="list-unstyled collapse in" id="userMenu">
                 
                      <li>
-                                <a id="personas" href="#"><i class="fa fa-user"></i> Perfiles</a>
+                            <a id="personas" href="#"><i class="fa fa-user"></i> Perfiles</a>
                             </li>
                             <li>
                                 <a id="Busqueda"  href="#"><i class="glyphicon glyphicon-search"></i> Búsqueda</a>

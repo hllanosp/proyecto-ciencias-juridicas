@@ -1,8 +1,8 @@
 <?php
 
 
-include '../../Datos/conexion.php';
-
+//include '../../Datos/conexion.php';
+include '../../conexion/config.inc.php';
         if (isset($_POST['codigo'])) 
     {
 	$codigo=$_POST['codigo'];
@@ -175,9 +175,9 @@ mysql_select_db("ccjj"); -->
 
                                     <div class="form-group">
 
-                                        <label>ID Universidad</label>
+                                        <label style="display:none">ID Universidad</label>
 
-                                        <input type="text" id="codigo" class="form-control" autocomplete="off" required value="<?php echo $codigo; ?>"  disabled>
+                                        <input style="display:none" type="text" id="codigo" class="form-control" autocomplete="off" required value="<?php echo $codigo; ?>"  disabled>
 
 
                                     </div>

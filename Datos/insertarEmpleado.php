@@ -17,12 +17,6 @@ require_once('funciones.php');
 		 $obs=$_POST['obs'];
 		 $identi=$_POST['identi'];
                  $cargo=$_POST['cargo'];
-                 $notificacion = $_POST['notificacion'];
-                 if($notificacion == 'on'){
-                     $notificacion = 1;
-                 }else{
-                     $notificacion = 0;
-                 }
                //  $fechaingreso=$_POST['fecha2'];
 
            
@@ -51,11 +45,11 @@ require_once('funciones.php');
 	if($query){
             
             
-          $query= mysql_query("INSERT INTO `empleado_has_cargo`(`No_Empleado`, `ID_cargo`, `Fecha_ingreso_cargo`, `recibirNotificacion`) VALUES ('$no_empleado','$cargo','$fecha','$notificacion')");
+          $query= mysql_query("INSERT INTO `empleado_has_cargo`(`No_Empleado`, `ID_cargo`, `Fecha_ingreso_cargo`) VALUES ('$no_empleado','$cargo','$fecha')");
             
             if($query){
                 
-                   $mensaje = 'Empleado agregado con Exito'.$notificacion;
+                   $mensaje = 'Empleado agregado con Exito';
             $codMensaje = 1;
              
             

@@ -1,6 +1,5 @@
 <?php
-
-include '../../Datos/conexion.php';
+include '../../conexion/config.inc.php';
 
 
 
@@ -132,9 +131,9 @@ mysql_select_db("ccjj"); -->
 
                                 <div class="form-group">
 
-                                    <label>ID Grupo o Comite</label>
+                                    <label style="display:none">ID Grupo o Comite</label>
 
-                                    <input type="text" id="codigo2" class="form-control" autocomplete="off" value="<?php echo $id; ?>" disabled>
+                                    <input style="display:none" type="text" id="codigo2" class="form-control" autocomplete="off" value="<?php echo $id; ?>" disabled>
 
 
                                 </div>
