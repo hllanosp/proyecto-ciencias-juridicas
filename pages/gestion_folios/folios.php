@@ -91,9 +91,9 @@
                                             <!-- <a class="btn btn-block btn-primary" id="nuevo_folio" href="javascript:ajax_('pages/gestion_folios/nuevo_folio.php');"><i class="fa fa-pencil"></i> Nuevo Folio</a> -->
                                             <!-- Navigation - folders-->
                                             <a class="btn btn-block btn-primary" id="nuevo_folio"><i class="fa fa-pencil"></i> Nuevo Folio</a>
-											<a class="btn btn-block btn btn-info" id="folios_pdf"><i class="fa fa-print"></i> Reporte Folios Diarios</a>
-                      <a class="btn btn-block btn btn-info" id="folios_Entrada_pdf"><i class="fa fa-print"></i> Reporte Folios Entrada</a>
-                      <a class="btn btn-block btn btn-info" id="folios_Salida_pdf"><i class="fa fa-print"></i> Reporte Folios Salida</a>
+											<a class="btn btn-block btn btn-default" id="folios_pdf"><i class="fa fa-print"></i> Reporte Folios Diarios</a>
+                      <a class="btn btn-block btn btn-default" id="folios_Entrada_pdf"><i class="fa fa-print"></i> Reporte Folios Entrada</a>
+                      <a class="btn btn-block btn btn-default" id="folios_Salida_pdf"><i class="fa fa-print"></i> Reporte Folios Salida</a>
                                             <div style="margin-top: 15px;">
                                                 <ul class="nav nav-pills nav-stacked">
                                                     <li class="header">Tipos de folios</li>

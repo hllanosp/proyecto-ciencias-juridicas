@@ -140,16 +140,7 @@ foreach( $rows as $row ){
               $pdf->Ln();
 
             $cadena="";
-
-            
         } 
-        
-        
-
-
-
-
-
         }
     }
     

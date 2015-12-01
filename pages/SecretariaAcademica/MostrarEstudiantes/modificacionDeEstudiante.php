@@ -78,7 +78,7 @@ include ('../../../conexion/config.inc.php');
                     <label class="col-sm-5 control-label">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Número de Cuenta</label>
                     <div class="col-sm-7">
-                      <input id="noCuenta" value = "<?php echo $cuenta; ?>"class="form-control" name="noCuenta" placeholder="Ejemplo: 20011001111" pattern="[0-9]{11}" required>
+                      <input id="noCuenta" value = "<?php echo $cuenta; ?>"class="form-control" name="noCuenta" placeholder="Ejemplo: 20011001111" pattern="[0-9]" required>
                     </div>
                   </div>
                   <div class="form-group" id="primerN">
@@ -174,7 +174,7 @@ include ('../../../conexion/config.inc.php');
                     <label class="col-sm-5 control-label">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Grupo Etnico</label>
                     <div class="col-sm-7">
-                      <input id="grupoEtnico" value = "<?php echo $grupoEtnico; ?>"class="form-control" name="grupoEtnico" required>
+                      <input id="grupoEtnico" value = "<?php echo $grupoEtnico; ?>"class="form-control" name="grupoEtnico" >
                     </div>
                   </div>
                   <div class="form-group" id="lugarOrigenOpcion">
@@ -284,14 +284,14 @@ include ('../../../conexion/config.inc.php');
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de Estudio Segun Certificado</label>
                       <div class="col-sm-6">
-                        <input type="number" min="1" max="30" value="<?php echo $aniosEstudio; ?>" id="aniosEstudio" class="form-control" name="aniosEstudio" required>
+                        <input type="text" min="1" max="30" value="<?php echo $aniosEstudio; ?>" id="aniosEstudio" class="form-control" name="aniosEstudio" placeholder = "9999-9999" >
                       </div>
                     </div>
                     <div class="form-group" id="aniosDerecho">
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de Estudio En Derecho</label>
                       <div class="col-sm-6">
-                        <input type="number" min="1" max="30" value="<?php echo $aniosEstudioDerecho; ?>" id="aniosEstudioDerecho" class="form-control" name="aniosEstudioDerecho" required>
+                        <input type="text" min="1" max="30" value="<?php echo $aniosEstudioDerecho; ?>" id="aniosEstudioDerecho" class="form-control" name="aniosEstudioDerecho" placeholder = "9999">
                       </div>
                     </div>
 
