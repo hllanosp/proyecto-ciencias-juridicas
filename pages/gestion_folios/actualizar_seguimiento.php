@@ -32,7 +32,8 @@
 		}
 		
 		try{
-		$stmt = $db->prepare("CALL sp_actualizar_seguimiento(?,?,?,?,?,@mensaje,@codMensaje)");
+			$id=$_SESSION["user_id"];
+		$stmt = $db->prepare("CALL sp_actualizar_seguimiento(?,?,?,?,?,@mensaje,@codMensaje,".$id.")");
         $stmt->bindParam(1, $num_folio, PDO::PARAM_STR);
 		$stmt->bindParam(2, $fecha, PDO::PARAM_STR); 
 		$stmt->bindParam(3, $prioridad, PDO::PARAM_STR); 
