@@ -44,130 +44,551 @@ HTML;
 HTML;
               }
 
-             // pagina del POA
-	    if($rol == 100 || $rol == 50 || $rol == 30 || $rol == 20)
-		  {
-            if($contenido == 'poa') 
-              {
-			  
-              			switch($rol)
-              			{   
-              			    case 100: 
-              				    $url = 'pages/principal.php?contenido=poa';// 100    
-              				    break;
-              				case 50:
-              				    $url = 'pages/principalDecana.php?contenido=poa'; // 50
-              				    break;
-              				case 30:
-              				    $url = 'pages/principalJefe.php?contenido=poa'; // 30
-              					break;
-              				case 20:
-              				    $url = 'pages/principalDocente.php?contenido=poa'; // 20
-              			     	break;
-              			}
-				
-                    echo <<<HTML
-                    <li class="active"><a href="javascript:ajax_('$url');">POA</a></li>
+            
 
-HTML;
-              }
-              else
+        if($rol == 10){
+             // pagina del modulo de gestion de folios
+            
+        if($contenido == 'home') 
               {
-                $url = 'pages/principal.php?contenido=poa';
+                $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+}else{
+    $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li class="active"><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+
+}
+        }
+
+//Docente y jefe  solo puede tener acceso poa, permisos,folios 
+   if($rol == 20  || $rol == 30 ){  
+        if($contenido == 'home') {
+           $url = 'pages/principal.php?contenido=poa';
                 echo <<<HTML
                 <li><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+            
+ $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
 
 HTML;
+
+      $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+      echo <<<HTML
+      <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+}
+if($contenido == 'gestion_de_folios'){
+  $url = 'pages/principal.php?contenido=poa';
+                echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+$url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+HTML;
+                $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li class="active"><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+  if($rol == 30 ){ 
+        
+                  $url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
+HTML;
+}
               }
-		  }
-             
-             // pagina de permisos
-            if($contenido == 'permisos') 
-              {
+
+
+if($contenido == 'poa'){
+
+  $url = 'pages/principal.php?contenido=poa';
+                echo <<<HTML
+                <li class="active"><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+ $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+
+HTML;
+
+                $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li ><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+  if($rol == 30 ){ 
+        
+                  $url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
+HTML;
+}
+
+
+              }
+
+if($contenido == 'permisos') {
+ $url = 'pages/principal.php?contenido=poa';
+                echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+
+
                 $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
                 echo <<<HTML
                 <li class="active"><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
 
 HTML;
-              }
-            else
-              {
-                $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+$url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
                 echo <<<HTML
-                <li><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+                <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+
 
 HTML;
-                
-              }
-              if($rol >= 40){
-             // pagina del recursos humanos
-            if($contenido == 'recursos_humanos') 
-              {
-			    $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
-			    echo <<<HTML
-                <li class="active"><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
-
+  if($rol == 30 ){ 
+        
+                  $url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
 HTML;
-              }
-            else
-              {
-			    $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
-			    echo <<<HTML
-                <li><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+}
 
+
+ 
+              }
+
+
+  if($rol == 30 ){ 
+        if($contenido == 'home') {
+                  $url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
 HTML;
-              }
-              }	  
-        if($rol >= 0){
-             // pagina del modulo de gestion de folios
-            if($contenido == 'gestion_de_folios') 
+
+}
+     if($contenido == 'carga_academica') 
               {
 
-                $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+$url = 'pages/principal.php?contenido=poa';
                 echo <<<HTML
-                <li class="active"><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+                <li><a role="button" href="javascript:ajax_('$url');">POA</a></li>
 HTML;
-
-              }
-            else
-              {
-
-                $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+            
+ $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
                 echo <<<HTML
-                <li><a role='button' id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+
 HTML;
-              }
-            if($contenido == 'carga_academica') 
-              {
+
+      $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+      echo <<<HTML
+      <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+
+
                   $url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
                   echo <<<HTML
                 <li class="active"><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
 HTML;
               }
-            else
-              {
-                $url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+
+
+
+   }
+
+        }
+
+
+
+//Docente solo puede tener acceso poa, permisos,folios 
+   if($rol == 29){  
+        if($contenido == 'home') {
+  
+            
+ $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
                 echo <<<HTML
-                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+
+HTML;
+
+      $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+      echo <<<HTML
+      <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+}
+if($contenido == 'gestion_de_folios'){
+
+$url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+HTML;
+                $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li class="active"><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
 HTML;
               }
+if($contenido == 'permisos') {
+                $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class="active"><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
 
-              if($contenido == 'secretaria_academica') 
+HTML;
+$url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+ 
+              }
+        }
+
+
+
+
+//modulo solo de recursos humanos  y folios 
+   if($rol == 40 ||  $rol == 45){  
+        if($contenido == 'home') {
+    $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+
+      $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+      echo <<<HTML
+      <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+}
+
+if($contenido == 'gestion_de_folios'){
+
+        $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+                $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li class="active"><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+if($rol==45){
+        $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+                  echo <<<HTML
+                <li class><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
+HTML;
+   }
+              }
+
+if($contenido == 'recursos_humanos'){
+
+        $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li class="active"><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+                $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+if($rol==45){
+        $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+                  echo <<<HTML
+                <li class><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
+HTML;
+   }
+
+              }
+
+if($rol==45){
+   if($contenido == 'home') {
+        $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+                  echo <<<HTML
+                <li class><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
+HTML;
+   }
+    if($contenido == 'secretaria_academica') 
               {
+                 $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+
+      $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+      echo <<<HTML
+      <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
                   $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
                   echo <<<HTML
                 <li class="active"><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
 HTML;
               }
-            else
-              {
-                $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+
+}
+
+
+        }
+
+
+
+
+//modulo solo de recursos humanos  y folios 
+   if($rol == 50 ||  $rol == 100){  
+        if($contenido == 'home') {
+          $url = 'pages/principal.php?contenido=poa';
                 echo <<<HTML
-                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
+                <li><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+
+           $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+
+HTML;
+    $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+
+      $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+      echo <<<HTML
+      <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+$url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
+HTML;
+if($rol==100){
+       
+                  $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+                  echo <<<HTML
+                <li class=""><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
+HTML;
+              
+
+}
+}
+if($contenido == 'poa'){
+
+      $url = 'pages/principal.php?contenido=poa';
+                echo <<<HTML
+                <li class='active'><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+
+           $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+
+HTML;
+    $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+
+      $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+      echo <<<HTML
+      <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+$url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
+HTML;
+ if($rol==100){
+       
+                  $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+                  echo <<<HTML
+                <li class=""><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
+HTML;
+              
+
+}
+
+
+              }
+if($contenido == 'carga_academica') 
+              {
+                  $url = 'pages/principal.php?contenido=poa';
+                echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+
+$url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+
+HTML;
+    $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+
+      $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+      echo <<<HTML
+      <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+
+
+                  $url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li class="active"><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
+HTML;
+if($rol==100){
+       
+                  $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+                  echo <<<HTML
+                <li class=""><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
+HTML;
+              
+
+}
+              }
+if($contenido == 'gestion_de_folios'){
+    $url = 'pages/principal.php?contenido=poa';
+                echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+ $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+
+HTML;
+        $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+                $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li class="active"><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+         $url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
+HTML;
+if($rol==100){
+       
+                  $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+                  echo <<<HTML
+                <li class=""><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
+HTML;
+              
+
+}
+              }
+if($contenido == 'permisos') {
+    $url = 'pages/principal.php?contenido=poa';
+                echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+                $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class="active"><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+
+HTML;
+  $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+$url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+ $url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
+HTML;
+if($rol==100){
+       
+                  $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+                  echo <<<HTML
+                <li class=""><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
+HTML;
+              
+
+}
+ 
+              }
+if($contenido == 'recursos_humanos'){
+    $url = 'pages/principal.php?contenido=poa';
+                echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+   $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+
+HTML;
+        $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li class="active"><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+                $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+                echo <<<HTML
+                <li><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+ $url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
+HTML;
+if($rol==100){
+       
+                  $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+                  echo <<<HTML
+                <li class=""><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
+HTML;
+              
+
+}
+              }
+if($rol==100){
+      if($contenido == 'secretaria_academica') 
+              {$url = 'pages/principal.php?contenido=poa';
+                echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">POA</a></li>
+HTML;
+
+           $url = 'pages/permisos/permisos_principal.php?contenido=permisos';
+                echo <<<HTML
+                <li class=""><a role="button" href="javascript:ajax_('$url');">Permisos</a></li>
+
+HTML;
+    $url = 'pages/recursos_humanos/recursos_humanos.php?contenido=recursos_humanos';
+          echo <<<HTML
+                <li><a role="button" href="javascript:ajax_('$url');">Recursos humanos</a></li>
+
+HTML;
+
+      $url = 'pages/gestion_folios/gestion_de_folios.php?contenido=gestion_de_folios';
+      echo <<<HTML
+      <li class=""><a role="button" id="gestion_de_folios" href="javascript:ajax_('$url')" >Gestion de folios</a></li>
+HTML;
+$url = 'pages/CargaAcademica/CargaAcademica.php?contenido=carga_academica';
+                  echo <<<HTML
+                <li><a role='button' id="home" href="javascript:ajax_('$url')" >Carga Académica</a></li>
+HTML;
+
+                  $url = 'pages/SecretariaAcademica/SecretariaAcademica.php?contenido=secretaria_academica';
+                  echo <<<HTML
+                <li class="active"><a role='button' id="home" href="javascript:ajax_('$url')" >Secretaría Académica</a></li>
 HTML;
               }
+  
+}
 
-        }     
+        }
+
+
+            
 ?>
 
            </ul>
