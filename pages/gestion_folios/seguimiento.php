@@ -47,9 +47,11 @@
 				        echo '<li>';
 						$randNum = rand(2,4);
 						$randColor = getColor($randNum);
+
 					    echo '<i class="fa fa-user '.$randColor.'"></i>';
 					    echo '<div class="timeline-item">';
-					    echo '<span class="time"> '.date_format($date, "g:ia").' <i class="fa fa-clock-o"></i></span>';
+                        echo '<span class="time"> '.date_format($date, "g:ia").' <i class="fa fa-clock-o"></i></span>';
+					    echo '<h2 class="timeline-header no-border"><a href="#"> '.$row["nombre"].' </a>  </h>';
 					    echo '<h3 class="timeline-header no-border"><a href="#"> Estado del seguimiento: </a> '.$row["DescripcionEstadoSeguimiento"].' </h3>';
 						echo '<div class="timeline-body">'.$row["Notas"].'</div>';
 					    echo '<div class="timeline-footer">';

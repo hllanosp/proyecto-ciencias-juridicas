@@ -12,22 +12,34 @@ include($mkdir."Datos/conexion.php");
 
 
         while ($fila = mysql_fetch_array($result)) { 
-            $json[$contadorIteracion] = array
-                (
-                "Codigo" => $fila["CODIGO"],
-                "Estudiantes" => $fila["NOMBRE"],
-                "Fecha" => $fila["FECHA_SOLICITUD"],
-                "Observaciones" => $fila["OBSERVACIONES"],
-                "Estado" => $fila["ESTADO"],
-                "Dni_estudiante" => $fila["DNI_ESTUDIANTE"],
-                "Tipo_solicitud" => $fila["TIPO_SOLICITUD"],
-                "Himno" => $fila["APLICA_PARA_HIMNO"]
-                );
-
-            $contadorIteracion++;
+            echo '<tr>'.
+            '<td hidden>'.$fila["CODIGO"].'</td>'.
+            '<td>'.$fila["NOMBRE"].'</td>'.
+            '<td>'.$fila["FECHA_SOLICITUD"].'</td>'.
+            '<td>'.$fila["OBSERVACIONES"].'</td>'.
+            '<td>'.$fila["ESTADO"].'</td>'.
+            '<td>'.$fila["DNI_ESTUDIANTE"].'</td>'.
+            '<td>'.$fila["TIPO_SOLICITUD"].'</td>'.
+            '<td>'.$fila["APLICA_PARA_HIMNO"].'</td>'.
+            '<td><center>'
+                    . '<button data-himno = "'.$fila["APLICA_PARA_HIMNO"].'" '
+                    . 'data-id = "'.$fila["CODIGO"].'" '
+                    . 'href= "#" class = "editar btn_editar btn btn-info"  '
+                    . 'data-toggle="modal" data-target = "">'
+                    . '<i class="glyphicon glyphicon-edit">'
+                    . '</i>'
+                    . '</button>'.
+            '</center></td>'.
+            '<td><center>'.
+            '<button data-himno = "'.$fila["APLICA_PARA_HIMNO"].'" '
+                    . 'data-id = "'.$fila["CODIGO"].'" href= "#" '
+                    . 'class = "elimina btn_editar btn btn-danger" '
+                    . 'data-toggle="modal" data-target = "">'
+                    . '<i class="glyphicon glyphicon-trash">'
+                    . '</i>'
+                    . '</button>'.
+            '</center></td>'.
+      '</tr>';
         }
-
-        //Retornamos el jason con todos los elmentos tomados de la base de datos.
-        echo json_encode($json);
 ?>
 

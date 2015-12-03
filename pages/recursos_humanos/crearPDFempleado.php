@@ -1,7 +1,7 @@
 <?php
 
  $maindir = "../../";
-require_once('../../Datos/conexion.php');
+include '../../conexion/config.inc.php';
 require_once($maindir."fpdf/fpdf.php");
 require($maindir."conexion/config.inc.php");
 

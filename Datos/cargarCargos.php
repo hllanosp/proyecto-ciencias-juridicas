@@ -37,7 +37,7 @@ $pame = mysql_query("SELECT * FROM cargo");
             <table id="tabla_cargo" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
-                        <th><strong><center>ID Cargo</center></strong></th>
+                        <th style="display:none"><strong><center>ID Cargo</center></strong></th>
                         <th><strong><center>Nombre del Cargo</center></strong></th>
                         <th><strong><center>Eliminar</center></strong></th>
                         <th><strong><center>Modificar</center></strong></th>
@@ -52,7 +52,7 @@ $pame = mysql_query("SELECT * FROM cargo");
                         ?>
 
                         <tr>
-                            <td id="idcargo"><?php echo $idCargo ?></td>
+                            <td style="display:none" id="idcargo"><?php echo $idCargo ?></td>
                             <td><div class="text" id="nombre-<?php echo $idCargo ?>"><?php echo $row['Cargo'] ?></div></td>
 
 <?php

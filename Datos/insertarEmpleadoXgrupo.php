@@ -2,12 +2,12 @@
 
 //include "../Datos/conexion.php";
 require_once('funciones.php');
-
+include '../../conexion/config.inc.php';
 //include "$root\curriculo\Datos\funciones.php";
         
 
-	$enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
- mysql_select_db("ccjj", $enlace);
+	//$enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
+// mysql_select_db("ccjj", $enlace);
         
           
 	If(isset($_POST['cod_empleado'])){

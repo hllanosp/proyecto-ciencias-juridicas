@@ -377,14 +377,14 @@ include($maindir . "conexion/config.inc.php");
                         </div>
                     </div>
                    
-                    <div class="row">
+                    <!--<div class="row">
                         <label class="control-label col-sm-2"></label>
                         <div class="checkbox col-sm-4">
                             <label>
                                 <input type="checkbox" id="himno" name="himno" value="0"><strong>Solicitud aplica para himno</strong>
                             </label>                                
                         </div>                            
-                    </div>
+                    </div>-->
                     <br>
                     
                     <div class="row">                            

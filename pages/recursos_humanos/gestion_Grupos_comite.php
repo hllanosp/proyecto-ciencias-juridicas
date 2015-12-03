@@ -34,8 +34,7 @@ if(isset($_POST["tipoProcedimiento"])){
 
 
 
-include ('../../Datos/conexion.php');
-
+include '../../conexion/config.inc.php';
 $consulta = "SELECT Nombre_Grupo_o_comite, COUNT(No_Empleado) AS Cantidad FROM grupo_o_comite_has_empleado right join grupo_o_comite on grupo_o_comite.ID_Grupo_o_comite=grupo_o_comite_has_empleado.ID_Grupo_o_comite GROUP BY Nombre_Grupo_o_comite";
 $rec = mysql_query($consulta);
 

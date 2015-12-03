@@ -1,6 +1,6 @@
 <?php
 
-include '../../Datos/conexion.php';
+include '../../conexion/config.inc.php';
 
 
 
@@ -126,9 +126,9 @@ if (isset($_POST['idCargo'])) {
 
                                 <div class="form-group">
 
-                                    <label>Id Cargo</label>
+                                    <label style="display:none">Id Cargo</label>
 
-                                    <input type="text" id="id" class="form-control" autocomplete="off" value="<?php echo $id; ?>" disabled>
+                                    <input style="display:none" type="text" id="id" class="form-control" autocomplete="off" value="<?php echo $id; ?>" disabled>
 
 
                                 </div>

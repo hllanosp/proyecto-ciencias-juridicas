@@ -29,9 +29,11 @@
 	if($seguimiento == 1){
 	$Id_Seguimiento = $result11['Id_Seguimiento'];
 	$sql = "SELECT seguimiento_historico.Id_SeguimientoHistorico, seguimiento_historico.Id_Seguimiento, estado_seguimiento.DescripcionEstadoSeguimiento, 
-	        seguimiento_historico.FechaCambio, seguimiento_historico.Notas, prioridad.DescripcionPrioridad FROM seguimiento_historico 
+	        seguimiento_historico.FechaCambio, seguimiento_historico.Notas, prioridad.DescripcionPrioridad , usuario.nombre FROM seguimiento_historico 
 			INNER JOIN estado_seguimiento ON seguimiento_historico.Id_Estado_Seguimiento = estado_seguimiento.Id_Estado_Seguimiento 
-			INNER JOIN prioridad ON seguimiento_historico.Prioridad = prioridad.Id_Prioridad WHERE Id_Seguimiento = :Id_Seguimiento 
+			INNER JOIN prioridad ON seguimiento_historico.Prioridad = prioridad.Id_Prioridad
+     INNER JOIN  usuario ON seguimiento_historico.idusuario=usuario.id_Usuario
+     WHERE Id_Seguimiento = :Id_Seguimiento 
 			ORDER BY FechaCambio DESC";
 
     $query = $db->prepare($sql);

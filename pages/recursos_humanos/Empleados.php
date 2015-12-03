@@ -2,7 +2,7 @@
 
 
 
- require_once('../../Datos/conexion.php');
+include '../../conexion/config.inc.php';
  
 
 

@@ -62,7 +62,7 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                     <label class="col-sm-5 control-label">
                       <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Número de Cuenta</label>
                     <div class="col-sm-7">
-                      <input id="numeroCuenta" class="form-control" name="numeroCuenta" placeholder="Ejemplo: 20011001111" pattern="[0-9]{11}" required>
+                      <input id="numeroCuenta" class="form-control" name="numeroCuenta" placeholder="Ejemplo: 20011001111" required>
                     </div>
                   </div>
                   <div class="form-group" id="primerN">
@@ -144,9 +144,16 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                       <input id="nacionalidad" class="form-control" name="nacionalidad" required>
                     </div>
                   </div>
+                  <div class="form-group" id="GrupoEtnico">
+                    <label class="col-sm-5 control-label">
+                      <span class="" aria-hidden="true"></span> Grupo Etnico</label>
+                    <div class="col-sm-7">
+                      <input id="grupoEtnico" value = " "class="form-control" name="grupoEtnico" >
+                    </div>
+                  </div>
                   <div class="form-group" id="lugarOrigenOpcion">
                     <label class="col-sm-5 control-label">
-                      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Lugar de Origen</label>
+                      <span class="glyphicon " aria-hidden="true"></span> Lugar de Origen</label>
                     <div class="col-sm-7">
                       <select class="form-control" id="ciudadOrigenCombo" name="ciudadOrigenCombo">
                         <?php
@@ -233,14 +240,14 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de Estudio segun Certificado</label>
                       <div class="col-sm-6">
-                        <input type="number" min="0" value="0" id="aniosEstudioInicio" class="form-control" name="aniosEstudioInicio" onchange="validarAnioCambio()" required>
+                        <input type="text" min="" value="" id="aniosEstudioInicio" class="form-control" name="aniosEstudioInicio" placeholder = "1999-1999" onchange="validarAnioCambio()" >
                       </div>
                     </div>
                     <div class="form-group" id="aniosFinal">
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de estudio en Derecho</label>
                       <div class="col-sm-6">
-                        <input type="number" min="0" value="0" id="aniosEstudioFinal" class="form-control" name="aniosEstudioFinal" required>
+                        <input type="text" id="aniosEstudioFinal" class="form-control" name="aniosEstudioFinal" placeholder = "1999-1999">
                       </div>
                     </div>
                     <div class="form-group" id="tituloOpcion">
@@ -292,6 +299,15 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                         </select>
                       </div>
                     </div>
+
+                    <div class="form-group" id="carrera_anterior">
+                    <label class="col-sm-5 control-label">
+                      <span class="glyphicon " aria-hidden="true"></span>Es egresado de otra Carrera</label>
+                    <div class="col-sm-7">
+                      <input id="carreraAnterior" value = ""class="form-control" name="carreraAnterior" >
+                    </div>
+                  </div>
+
                   </div>
                 </div>
               </div>
@@ -340,7 +356,11 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
             "titulo": $('#titulo').val(),
             "orientacion": $('#orientacion').val(),
             "indiceAcademico": (!$.trim($('#indiceAcademico').val())) ? 0.00 : $('#indiceAcademico').val() ,
-            "mencionHonorifica": $('#mencionHonorificaCombo').val()
+            "mencionHonorifica": $('#mencionHonorificaCombo').val(),
+
+
+            "grupoEtnico":$('#grupoEtnico').val(),
+            "carreraAnterior": $('#carreraAnterior').val()
 
           };
            $.ajax({
@@ -349,7 +369,7 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
             url: "pages/SecretariaAcademica/RegistroEstudiantes/RegistrarEstudiante.php",
             data: data1,
             success: function(data) {
-              $('#notificaciones').html(data);
+              $('#contenedor').html(data);
             },
           });
     

@@ -7,10 +7,10 @@
             $id = $_POST['ID_cargo'];
             
             if(mysql_query("DELETE FROM cargo WHERE ID_cargo='$id'")){
-            echo mensajes('Cargo"' . $id . '" Eliminado con Exito', 'verde');
+            echo mensajes('Cargo : Eliminado con Exito', 'verde');
             }else{
                 
-            echo mensajes('Cargo"' . $id . '" No se puede eliminar', 'rojo');
+            echo mensajes('Cargo : No se puede eliminar', 'rojo');
                 
             }
         }
