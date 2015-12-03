@@ -237,19 +237,28 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
                       </div>
                     </div>
                     <div class="form-group" id="aniosInicio">
-                      <label class="col-sm-6 control-label">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de Estudio segun Certificado</label>
-                      <div class="col-sm-6">
-                        <input type="text" min="" value="" id="aniosEstudioInicio" class="form-control" name="aniosEstudioInicio" placeholder = "1999-1999" onchange="validarAnioCambio()" >
+                      <label class="col-sm-5 control-label">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de estudio en Derecho</label>
+                      <div class="col-sm-3">
+                        <input type="text" min="" value="" id="aniosEstudioInicio1" class="form-control" name="aniosEstudioInicio1" placeholder = "1999" onchange="validarAnioCambio()" >
+                      </div>
+                      <label for="" class="col-sm-1 control-label">to</label>
+                      <div class="col-sm-3">
+                        <input type="text" min="" value="" id="aniosEstudioInicio2" class="form-control" name="aniosEstudioInicio2" placeholder = "1999" onchange="validarAnioCambio()" >
                       </div>
                     </div>
                     <div class="form-group" id="aniosFinal">
-                      <label class="col-sm-6 control-label">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de estudio en Derecho</label>
-                      <div class="col-sm-6">
-                        <input type="text" id="aniosEstudioFinal" class="form-control" name="aniosEstudioFinal" placeholder = "1999-1999">
+                      <label class="col-sm-5 control-label">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de Estudio segun Certificado </label>
+                      <div class="col-sm-3">
+                        <input type="text" id="aniosEstudioFinal1" class="form-control" name="aniosEstudioFinal1" placeholder = "1999">
+                      </div>
+                      <label for="" class="col-sm-1 control-label">to</label>
+                      <div class="col-sm-3">
+                        <input type="text" id="aniosEstudioFinal2" class="form-control" name="aniosEstudioFinal2" placeholder = "1999">
                       </div>
                     </div>
+                    
                     <div class="form-group" id="tituloOpcion">
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Título</label>
@@ -351,8 +360,13 @@ $queryE = mysql_query('SELECT dni, no_cuenta FROM sa_estudiantes', $enlace);
             "tipoEstudiante": $('#tipoEstudiante').val(),
             "planEstudio": $('#planEstudio').val(),
             "unidadesValorativas": (!$.trim($('#unidadesValorativas').val())) ? "N/D" :  $('#unidadesValorativas').val(),
-            "aniosEstudioInicio": (!$.trim($('#aniosEstudioInicio').val())) ? 0000 : $('#aniosEstudioInicio').val(),
-            "aniosEstudioFinal": (!$.trim($('#aniosEstudioFinal').val())) ? 0000 : $('#aniosEstudioFinal').val(),
+
+            "aniosEstudioInicio1": (!$.trim($('#aniosEstudioInicio1').val())) ? 0000 : $('#aniosEstudioInicio1').val(),
+            "aniosEstudioInicio2": (!$.trim($('#aniosEstudioInicio2').val())) ? 0000 : $('#aniosEstudioInicio2').val(),
+            
+            "aniosEstudioFinal1": (!$.trim($('#aniosEstudioFinal1').val())) ? 0000 : $('#aniosEstudioFinal1').val(),
+            "aniosEstudioFinal2": (!$.trim($('#aniosEstudioFinal2').val())) ? 0000 : $('#aniosEstudioFinal2').val(),
+           
             "titulo": $('#titulo').val(),
             "orientacion": $('#orientacion').val(),
             "indiceAcademico": (!$.trim($('#indiceAcademico').val())) ? 0.00 : $('#indiceAcademico').val() ,
