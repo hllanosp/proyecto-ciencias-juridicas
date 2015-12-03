@@ -31,7 +31,7 @@ if(isset($_GET['contenido']))
 	
 	$rol = $_SESSION['user_rol'];
 	
-	if($rol == 30){
+	if($rol == 30 or $rol == 100){
 		$sql1="SELECT  Id_departamento FROM empleado where No_Empleado in (Select No_Empleado from usuario where id_Usuario='".$idusuario."')";
         $rec =$db->prepare($sql1);
         $rec->execute();
@@ -62,7 +62,7 @@ if(isset($_GET['contenido']))
 	//		permisos.estado = 'Espera' or permisos.estado = 'Aprobado' ORDER BY fecha asc");
 
 	}else{
-		if($rol == 50){
+		if($rol == 50 or $rol == 100){
 			$query ="Select permisos.id_Permisos, Primer_nombre, Segundo_nombre, Primer_apellido, Segundo_Apellido, dias_permiso, 
 			DATE_FORMAT(fecha,'%d-%m-%Y') as fecha, hora_inicio, hora_finalizacion, motivos.descripcion as mtd, permisos.estado,
 			departamento_laboral.nombre_departamento from permisos inner join motivos on permisos.id_motivo=motivos.Motivo_ID 
