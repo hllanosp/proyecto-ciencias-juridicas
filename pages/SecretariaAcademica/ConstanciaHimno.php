@@ -61,6 +61,17 @@ if(isset($_POST["arregloHimno"]) && isset($_POST["cadena"]) && isset($_POST["arr
         $statement->nextRowSet();
         $statement->closeCursor();
         
+        $statement = $db->prepare('SELECT sa_examenes_himno.nota_himno as NOTA FROM sa_examenes_himno WHERE sa_examenes_himno.cod_solicitud = '.$codsHimno[$i]);
+        $statement->execute();
+        $tablaNota = $statement->fetchALL(PDO::FETCH_ASSOC);
+        
+        foreach($tablaNota as $filaNota){
+            $calificacion = $filaNota['NOTA'];
+        }
+        
+        $statement->nextRowSet();
+        $statement->closeCursor();
+        
         $pdf->AddPage();
         $pdf->Image($maindir.'assets/img/Encabezado de documentos.jpg', 0.40, 0.05, 20.96, 3.22, 'JPG');
         $pdf->Image($maindir."assets/img/Pie de documentos.jpg", 0.40, 19.1, 20.88, 13.7, 'JPG');
@@ -109,7 +120,7 @@ if(isset($_POST["arregloHimno"]) && isset($_POST["cadena"]) && isset($_POST["arr
         $pdf->WriteFlowingBlock(utf8_decode(', ha realizado Examen del Himno Nacional de la República de Honduras, habiendo obtenido una '
                 . 'calificación de  '));
         $pdf->setFont('Cambria', 'BI', 16);
-        $pdf->WriteFlowingBlock(utf8_decode($calificacion).'.');
+        $pdf->WriteFlowingBlock(utf8_decode($calificacion).' POR CIENTO(%).');
         $pdf->finishFlowingBlock();
 
         $pdf->Ln(1.9);
