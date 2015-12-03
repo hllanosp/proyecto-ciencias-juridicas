@@ -24,8 +24,10 @@ include($maindir."conexion/config.inc.php");
     $row = mysql_fetch_assoc($query);
     
     $dni = $row['dni'];
-    $anios_estudio = $row['anios_inicio_estudio'];
-    $aniosEstudioDerecho = $row['anios_final_estudio'];
+    $aniosEstudioDerecho1 = $row['anios_inicio_estudio'];
+    $aniosEstudioDerecho2 = $row['anios_final_estudio'];
+    $aniosEstudiosFinal1 = $row['aniosDerecho1'];
+    $aniosEstudiosFinal2 = $row['aniosDerecho2'];
 
     $indice_academico = $row['indice_academico'];
     $fecha_registro = $row['fecha_registro'];
@@ -55,7 +57,7 @@ include($maindir."conexion/config.inc.php");
 
     $arreglo = array( 'no_cuenta' => $no_cuenta,
                       'dni' => $dni,
-                      'anios_estudio' => $anios_estudio,
+                      'aniosEstudioDerecho1' => $aniosEstudioDerecho1,
                       'ịndice_academico' => $indice_academico,
                       'fecha_registro' => $fecha_registro,
                       'uv_acumulados' => $uv_acumulados,
@@ -77,9 +79,12 @@ include($maindir."conexion/config.inc.php");
                       'Estado_Civil' => $personales[6],
                       'Nacionalidad' => $personales[7],
                       'Direccion' => $personales[8],
-                      'aniosEstudioDerecho' => $aniosEstudioDerecho,
+                      'aniosEstudioDerecho2' => $aniosEstudioDerecho2,
                       'grupoEtnico' => $grupoEtnico,
-                      'carreraAnterior' => $carreraAnterior
+                      'carreraAnterior' => $carreraAnterior,
+                       'aniosEstudiosFinal1' => $aniosEstudiosFinal1,
+                       'aniosEstudiosFinal2' => $aniosEstudiosFinal2
+
                       );
 
     // $arreglo = explode(',',$mensaje);

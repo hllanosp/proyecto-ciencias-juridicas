@@ -17,7 +17,14 @@ include($maindir."conexion/config.inc.php");
   try{
     $noCuenta = $_POST["noCuenta"];
     $dni = $_POST["dni"];
-    $aniosEstudio = $_POST["aniosEstudio"];
+    $aniosEstudioInicio1 = $_POST["aniosEstudioInicio1"];
+    $aniosEstudioInicio2 = $_POST["aniosEstudioInicio2"];
+    $aniosEstudioFinal1 = $_POST["aniosEstudioFinal1"];
+    $aniosEstudioFinal2 = $_POST["aniosEstudioFinal2"];
+
+
+
+
     $indiceAcademico = $_POST["indiceAcademico"];
     $uvAcumulados = $_POST["uvAcumulados"];
     $planEstudio = $_POST["planEstudio"];
@@ -39,7 +46,7 @@ include($maindir."conexion/config.inc.php");
     $sexo = $_POST["sexo"];
 
 
-    $aniosEstudioDerecho = $_POST['aniosEstudioDerecho'];
+   
     $grupoEtnico = $_POST['grupoEtnico'];
     $carreraAnterior = $_POST['carreraAnterior'];
 
@@ -48,8 +55,8 @@ include($maindir."conexion/config.inc.php");
     // $query1 = mysql_query($queryString1);
 
 
-    $query1 = $db -> prepare('UPDATE `sa_estudiantes` SET `no_cuenta`=?,`anios_inicio_estudio`=?,`indice_academico`=?,`uv_acumulados`=?,`cod_plan_estudio`=?,`cod_ciudad_origen`=?,`cod_orientacion`=?,`cod_residencia_actual`=?, `anios_final_estudio`=? ,`grupo_etnico`=? ,`carrera_anterior`=? WHERE `dni`=?');
-    $query1 -> execute(array($noCuenta, $aniosEstudio, $indiceAcademico, $uvAcumulados, $planEstudio, $ciudadOrigen, $orientacion, $residenciaActual,  $aniosEstudioDerecho, $grupoEtnico,$carreraAnterior ,$dni));
+    $query1 = $db -> prepare('UPDATE `sa_estudiantes` SET `no_cuenta`=?,`anios_inicio_estudio`=?,`indice_academico`=?,`uv_acumulados`=?,`cod_plan_estudio`=?,`cod_ciudad_origen`=?,`cod_orientacion`=?,`cod_residencia_actual`=?, `anios_final_estudio`=? ,`grupo_etnico`=? ,`carrera_anterior`=? ,`aniosDerecho1`=?, `aniosDerecho2`=? WHERE `dni`=?');
+    $query1 -> execute(array($noCuenta, $aniosEstudioInicio1, $indiceAcademico, $uvAcumulados, $planEstudio, $ciudadOrigen, $orientacion, $residenciaActual,  $aniosEstudioInicio2, $grupoEtnico,$carreraAnterior,$aniosEstudioFinal1, $aniosEstudioFinal2 ,$dni));
 
     $query2 = $db ->prepare('UPDATE sa_estudiantes_tipos_estudiantes  SET codigo_tipo_estudiante  = ? where dni_estudiante = ?');
     $query2 -> execute(array($tipoEstudiante, $dni));

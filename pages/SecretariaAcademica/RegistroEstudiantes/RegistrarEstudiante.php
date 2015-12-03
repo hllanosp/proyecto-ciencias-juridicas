@@ -1,7 +1,6 @@
 
 <?php
 
-
 $maindir = "../../../";
 include($maindir."conexion/config.inc.php");
  require_once($maindir."funciones/check_session.php");
@@ -31,8 +30,8 @@ include($maindir."conexion/config.inc.php");
       $tipoEstudiante = $_POST['tipoEstudiante'];
       $planEstudio = $_POST['planEstudio'];
       $unidadesValorativas = $_POST['unidadesValorativas'];
-      $aniosEstudioInicio = $_POST['aniosEstudioInicio'];
-      $aniosEstudioFinal = $_POST['aniosEstudioFinal'];
+      $aniosEstudioInicio = $_POST['aniosEstudioInicio1'];
+      $aniosEstudioFinal = $_POST['aniosEstudioInicio2'];
       $titulo = $_POST['titulo'];
       $orientacion = $_POST['orientacion'];
       $indiceAcademico = $_POST['indiceAcademico'];
@@ -40,6 +39,9 @@ include($maindir."conexion/config.inc.php");
 
       $grupoEtnico = $_POST['grupoEtnico'];
       $carreraAnterior = $_POST['carreraAnterior'];
+
+      $aniosEstudioFinal1 = $_POST['aniosEstudioFinal1'];
+      $aniosEstudioFinal2 = $_POST['aniosEstudioFinal2'];
 
 
 
@@ -76,8 +78,8 @@ include($maindir."conexion/config.inc.php");
        $mensaje = $output['@mensajeError'];
        $codMensaje = 0;
 
-        $query1 = $db -> prepare('UPDATE `sa_estudiantes` SET `grupo_etnico`=? ,`carrera_anterior`=? WHERE `dni`=?');
-        $query1 -> execute(array($grupoEtnico,$carreraAnterior ,$identidad));
+        $query1 = $db -> prepare('UPDATE `sa_estudiantes` SET `grupo_etnico`=? ,`carrera_anterior`=?, `aniosDerecho1`=?, `aniosDerecho2`=? WHERE `dni`=?');
+        $query1 -> execute(array($grupoEtnico,$carreraAnterior , $aniosEstudioFinal1, $aniosEstudioFinal2, $identidad));
 
 
 
@@ -93,11 +95,11 @@ include($maindir."conexion/config.inc.php");
         <strong> Exito! El usuario se ha creado correctamente</strong></div>';
     }
     else
-        {
+      {
       echo '<div id = "mensaje" class="alert alert-danger alert-error">
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong> Error! </strong>'.$mensaje.'</div>';
-    }
+      }
 
 include '../MostrarEstudiantes/mostrarEstudiantes.php';
  ?>
