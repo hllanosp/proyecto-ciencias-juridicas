@@ -3,8 +3,15 @@ include ('../../../conexion/config.inc.php');
 
     $cuenta = $_POST["no_cuenta"];
     $dni = $_POST["dni"];
-    $aniosEstudio = $_POST["anios_estudio"];
-    $aniosEstudioDerecho = $_POST['aniosEstudioDerecho'];
+    
+    $aniosEstudioDerecho1 = $_POST['aniosEstudioDerecho1'];
+    $aniosEstudioDerecho2 = $_POST['aniosEstudioDerecho2'];
+
+    $aniosEstudioFinal1 = $_POST['aniosEstudiosFinal1'];
+    $aniosEstudioFinal2 = $_POST['aniosEstudiosFinal2'];
+
+
+
     $indiceAcademico = $_POST["ịndice_academico"];
     $uvAcumulados = $_POST["uv_acumulados"];
     $planEstudio = $_POST["cod_plan_estudio"];
@@ -280,20 +287,45 @@ include ('../../../conexion/config.inc.php');
                         <input type="number" value = "<?php echo $uvAcumulados; ?>" min="1" max="600" value="1" id="uvAcumulados" class="form-control" name="uvAcumulados" required>
                       </div>
                     </div>
-                    <div class="form-group" id="anios">
-                      <label class="col-sm-6 control-label">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de Estudio Segun Certificado</label>
-                      <div class="col-sm-6">
-                        <input type="text"  value="<?php echo $aniosEstudio; ?>" id="aniosEstudio" class="form-control" name="aniosEstudio" placeholder = "9999-9999" >
+
+                    <div class="form-group" id="aniosInicio">
+                      <label class="col-sm-5 control-label">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de estudio en Derecho</label>
+                      <div class="col-sm-3">
+                        <input type="text" min="" value="<?php echo $aniosEstudioDerecho1; ?>" id="aniosEstudioInicio1" class="form-control" name="aniosEstudioInicio1" placeholder = "1999" onchange="validarAnioCambio()" >
+                      </div>
+                      <label for="" class="col-sm-1 control-label">to</label>
+                      <div class="col-sm-3">
+                        <input type="text" min="" value="<?php echo $aniosEstudioDerecho2; ?>" id="aniosEstudioInicio2" class="form-control" name="aniosEstudioInicio2" placeholder = "1999" onchange="validarAnioCambio()" >
                       </div>
                     </div>
-                    <div class="form-group" id="aniosDerecho">
+                    <div class="form-group" id="aniosFinal">
+                      <label class="col-sm-5 control-label">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de Estudio segun Certificado </label>
+                      <div class="col-sm-3">
+                        <input type="text" id="aniosEstudioFinal1" value = "<?php echo $aniosEstudioFinal1 ?>" class="form-control" name="aniosEstudioFinal1" placeholder = "1999">
+                      </div>
+                      <label for="" class="col-sm-1 control-label">to</label>
+                      <div class="col-sm-3">
+                        <input type="text" id="aniosEstudioFinal2" value = "<?php echo $aniosEstudioFinal2 ?>" class="form-control" name="aniosEstudioFinal2" placeholder = "1999">
+                      </div>
+                    </div>
+
+                    <!-- <div class="form-group" id="aniosDerecho">
                       <label class="col-sm-6 control-label">
                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de Estudio En Derecho</label>
                       <div class="col-sm-6">
                         <input type="text"  value="<?php echo $aniosEstudioDerecho; ?>" id="aniosEstudioDerecho" class="form-control" name="aniosEstudioDerecho" placeholder = "9999-9999">
                       </div>
                     </div>
+                    
+                    <div class="form-group" id="anios">
+                      <label class="col-sm-6 control-label">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Años de Estudio Segun Certificado</label>
+                      <div class="col-sm-6">
+                        <input type="text"  value="<?php echo $aniosEstudio; ?>" id="aniosEstudio" class="form-control" name="aniosEstudio" placeholder = "9999-9999" >
+                      </div>
+                    </div> -->
 
                     <div class="form-group" id="orientacionOpcion">
                       <label class="col-sm-6 control-label">
