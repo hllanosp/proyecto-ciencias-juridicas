@@ -20,8 +20,9 @@ $nombreTemporal = "KEVIN ALEXANDER VALLADARES ARGUELLO";
 $numCuentaTemporal = "20070000804";
 $numIdentidadTemporal = "1701-1989-00998";
 $anioInicio = "2010";
+$anioFinal = "2010";
 $fechaPalabras = 'veintiún días del mes de abril de dos mil quince.';
-$nombreSecretario = "JORGE ALBERTO MATUTE OCHOA(no definido)";
+$nombreSecretario = "JORGE ALBERTO MATUTE OCHOA";
 
 if(isset($_POST["arregloConducta"]) && isset($_POST["cadena"]) && isset($_POST["arregloCodsConducta"]) && isset($_POST["fechaExp"])){
     
@@ -58,6 +59,7 @@ if(isset($_POST["arregloConducta"]) && isset($_POST["cadena"]) && isset($_POST["
             $numIdentidadTemporal = $fila['DNI'];
             $numCuentaTemporal = $fila['CUENTA'];
             $anioInicio = $fila['ANIO'];
+            $anioFinal = $fila['ANIOFINAL'];
         }
 
         $fechaPalabras = $_POST["cadena"];
@@ -120,7 +122,7 @@ if(isset($_POST["arregloConducta"]) && isset($_POST["cadena"]) && isset($_POST["
         $pdf->SetFont( 'Cambria', 'I', 16 );
         $pdf->WriteFlowingBlock(utf8_decode('durante sus años de estudio como Alumno (a) de esta Facultad, '));
         $pdf->SetFont( 'Cambria', 'BI', 16 );
-        $pdf->WriteFlowingBlock(utf8_decode('los que inició a partir del año '.$anioInicio.', '));
+        $pdf->WriteFlowingBlock(utf8_decode('la que cursó durante los años '.$anioInicio.' al '.$anioFinal.', '));
         $pdf->SetFont( 'Cambria', 'BI', 16 );
         $pdf->WriteFlowingBlock(utf8_decode('NO RECIBIÓ SANCIÓN DISCIPLINARIA ALGUNA.'));
         $pdf->finishFlowingBlock();
