@@ -7,7 +7,7 @@
 
 
   echo "<div class='table-responsive'>
-          <table id= 'tableSolicitudes' class='table table-striped table-bordered'cellspacing='0' width='100%'>
+          <table id= 'tabla_Solicitudes' class='table table-striped table-bordered'cellspacing='0' width='100%'>
             <thead class = '' >
                <tr>
                     <th>Estudiante</th>  
