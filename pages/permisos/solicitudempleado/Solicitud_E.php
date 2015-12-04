@@ -313,7 +313,6 @@ require($maindir . "conexion/config.inc.php");
 											/* Este codigo jala los datos que hay en la tabla de motivos y los muestra en el 
 											  combobox */
 											  
-												
 												 $ql2="SELECT descripcion from motivos";
 											     $rec2 =$db->prepare($ql2);
                                                  $rec2->execute();
@@ -323,9 +322,32 @@ require($maindir . "conexion/config.inc.php");
 													echo "</option>";
 												}
 											?>
+                     
 											</select>                                       
                                         </div>
-										
+										 <div class="form-group">
+                                            <label>Tipo De Permiso :</label>
+                                            <select class="form-control" Id="tipoDePermiso" name="tipoDePermiso">
+
+
+                      <?php
+                      /* Este codigo jala los datos que hay en la tabla de motivos y los muestra en el 
+                        combobox */
+                           $ql2="SELECT tipo_permiso from tipodepermiso";
+                           $rec2 =$db->prepare($ql2);
+                                                 $rec2->execute();
+                                                 
+                        while ($row = $rec2->fetch()) {
+                          echo "<option>";
+                          echo $row['tipo_permiso'];
+                          echo "</option>";
+                        }
+                      ?>
+                      </select>                                       
+                                        </div>
+
+
+                    
                                         <div class="form-group">
                                             <label>Edificio donde tiene registrada su asistencia :</label>
                                             <select class="form-control" Id="edificio" name="edificio">

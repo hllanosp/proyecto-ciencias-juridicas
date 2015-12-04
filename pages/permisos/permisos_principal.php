@@ -208,10 +208,17 @@ HTML;
 	
 </body>
 </html>
-	
-	
-<script>
+ <script type="text/javascript">
 
-</script>
+  $( document ).ready(function() {
+      $( "#TipoDePermisos" ).click(function() {
+          
+            $("#contenedor").load('pages/permisos/TipoDePermisos/TiposDePermisos.php');
+
+         });
+});
+    
+
+ </script>
 	
 	
