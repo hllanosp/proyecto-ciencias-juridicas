@@ -43,10 +43,23 @@
     
     <head>
         <script>
-
-            
             $( document ).ready(function() {
-
+                $("[name='my-checkbox']").bootstrapSwitch();
+                $('[name="my-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+                  if (state == true) {
+                    estado = 1;
+                    //marcarCheckbox();
+                  }else {
+                    estado = 0;
+                    //marcarCheckbox();
+                  }
+                  return estado;
+                });
+                function marcarCheckbox(){
+        for (i=0;i<document.form.elements.length;i++) 
+          if(document.form.elements[i].type == "checkbox")    
+                document.form.elements[i].checked=1
+    }
            $("form").submit(function(e) {
 	    e.preventDefault();
           
@@ -61,6 +74,7 @@
                     obs:$('#obs').val(),
                     id_dep:$('#depar').val(),
                     cargo:$('#cargo').val(),
+                    jefe:$('input[name="my-checkbox"]').bootstrapSwitch('state'),
                     tipoProcedimiento:"insertar"
                 };
                 
@@ -199,7 +213,7 @@
                         <div class="row">
                             <div class="col-lg-12"> 
 
-                                <form role="form" id="form" action="#" method="Post">
+                                <form role="form" id="form" action="#" method="Post" name="form">
 
                                     <div id="Cempleado" class="form-group">
      
@@ -289,22 +303,15 @@ echo<<<HTML
                                     <div class="col-lg-6">
                                         <textarea name="comentarios" rows="3" cols="31"  id="obs" ></textarea>
                                     </div>
+                                    <div class="panel-body">
+                                        <div class="panel-body">
+                                            <input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '0' data-on-color = 'primary' data-off-color  = 'success' data-off-text = 'NO' data-on-text = 'SI' type='checkbox' name='my-checkbox'>  
+                                        </div>
+                                    </div>
                                    </div>
-
-
-
-
-
                                     <button id="Empleado" class="btn btn-primary">Agregar empleado</button>
                                     <button type="reset" class="btn btn-default">Cancelar</button>
-
-
-
                                 </form>
-
-
-
-
                             </div>
                         </div>
                     </div>

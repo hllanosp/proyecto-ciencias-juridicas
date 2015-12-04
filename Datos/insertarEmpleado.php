@@ -12,14 +12,19 @@ require_once('funciones.php');
           
             
 		$no_empleado=$_POST['cod_empleado'];
-		 $id_dep=$_POST['id_dep'];
-		 $fecha=$_POST['fecha'];
-		 $obs=$_POST['obs'];
-		 $identi=$_POST['identi'];
-                 $cargo=$_POST['cargo'];
+                $id_dep=$_POST['id_dep'];
+                $fecha=$_POST['fecha'];
+                $obs=$_POST['obs'];
+                $identi=$_POST['identi'];
+                $cargo=$_POST['cargo'];
+                $jefe = $_POST['jefe'];
                //  $fechaingreso=$_POST['fecha2'];
 
-           
+           if($jefe){
+               $jefe = 1;
+           }else{
+               $jefe = 0;
+           }
               
               $rec2=mysql_query("SELECT N_identidad FROM empleado WHERE N_identidad='".$identi."'");
               $rec3=mysql_fetch_array($rec2);
@@ -45,7 +50,7 @@ require_once('funciones.php');
 	if($query){
             
             
-          $query= mysql_query("INSERT INTO `empleado_has_cargo`(`No_Empleado`, `ID_cargo`, `Fecha_ingreso_cargo`) VALUES ('$no_empleado','$cargo','$fecha')");
+          $query= mysql_query("INSERT INTO `empleado_has_cargo`(`No_Empleado`, `ID_cargo`, `Fecha_ingreso_cargo`, `recibirNotificacion`) VALUES ('$no_empleado','$cargo','$fecha','$jefe')");
             
             if($query){
                 
