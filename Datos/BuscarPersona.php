@@ -305,6 +305,7 @@ echo<<<HTML
                                     </div>
                                     <div class="panel-body">
                                         <div class="panel-body">
+                                            <label>JEFE INMEDIATO </label>
                                             <input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '0' data-on-color = 'primary' data-off-color  = 'success' data-off-text = 'NO' data-on-text = 'SI' type='checkbox' name='my-checkbox'>  
                                         </div>
                                     </div>
