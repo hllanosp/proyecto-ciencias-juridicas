@@ -6,14 +6,12 @@
 	
 
 	If(isset($_POST['nidentidadE'])){
-		
 		$n_identidad=$_POST['nidentidadE'];
                  $codigo=$_POST['codigo'];
 		 $id_departamento=$_POST['departE'];
                  $fechaIngreso=$_POST['fechaE'];
                  $obs=$_POST['obsE'];
-                 
-               
+                 $jefe = $_POST['jefe'];           
 		
         $rec2=mysql_query("SELECT No_Empleado FROM empleado WHERE No_Empleado='".$codigo."'");
         $temp=mysql_fetch_row($rec2);
@@ -21,8 +19,8 @@
         
         $t=$temp[0];      
               
-     $enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
-     mysql_select_db("ccjj", $enlace);
+//     $enlace = mysql_connect('mysqlv115', 'ddvderecho', 'DDVD3recho');
+//     mysql_select_db("ccjj", $enlace);
 		 
 	$queryAE = mysql_query("UPDATE `empleado` SET `No_Empleado`='$codigo',`Id_departamento`='$id_departamento',`Fecha_ingreso`='$fechaIngreso',`Observacion`='$obs'  WHERE N_identidad ='".$n_identidad."'");
         
@@ -36,8 +34,8 @@
             $mensaje = 'Empleado actualizado con Exito';
             $codMensaje = 1;
 	    $existe=FALSE;
-	
-	
+           $query = "UPDATE `empleado_has_cargo` SET `recibirNotificacion`=".$jefe." WHERE No_Empleado = '".$codigo."'";
+            $queryAE = mysql_query($query);
 	}else{
             
              $mensaje = 'error al actualizar el empleado' . mysql_errno();
@@ -45,9 +43,6 @@
              $existe=TRUE;
             
         }
-        
-	
-        mysql_close($enlace);
 	
         
 

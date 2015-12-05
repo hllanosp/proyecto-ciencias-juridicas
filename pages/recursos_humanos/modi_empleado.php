@@ -211,7 +211,6 @@ if(isset($_POST['codigo']) and $existe==FALSE ){
                  var id = "<?php echo $noE; ?>" ;
        
                  var codT = "<?php echo $codigoE; ?>" ;
-         
                 data={
                     codigo:$('#cod').val(),
                     codigo2:codT,
@@ -219,6 +218,7 @@ if(isset($_POST['codigo']) and $existe==FALSE ){
                     departE:$('#dep').val(),
                     fechaE:$('#fecha').val(),
                     obsE:$('#obs').val(),
+                    jefe:$('input[name="my-checkbox"]').bootstrapSwitch('state'),
                     tipoProcedimiento:"Actualizar"
                 };
                 
@@ -312,6 +312,22 @@ if(isset($_POST['codigo']) and $existe==FALSE ){
             {
                 $("#contenedor").text('Problemas en el servidor.');
             }
+            $("[name='my-checkbox']").bootstrapSwitch();
+                $('[name="my-checkbox"]').on('switchChange.bootstrapSwitch', function(event, state) {
+                  if (state == true) {
+                    estado = 1;
+                    //marcarCheckbox();
+                  }else {
+                    estado = 0;
+                    //marcarCheckbox();
+                  }
+                  return estado;
+                });
+                function marcarCheckbox(){
+        for (i=0;i<document.form.elements.length;i++) 
+          if(document.form.elements[i].type == "checkbox")    
+                document.form.elements[i].checked=1
+    }
 
 
 
@@ -548,7 +564,14 @@ HTML;
                                                           <div class="form-group">
                                   
                                         <textarea class="form-control" name="comentarios" rows="3"  id="obs" ><?php echo $obsE;  ?></textarea>
+                                        
                              </div>
+                             <div class="panel-body">
+                                        <div class="panel-body">
+                                            <label>JEFE INMEDIATO </label>
+                                            <input class = 'bootstrapSwitch bootstrap-switch-wrapper bootstrap-switch-id-switch-state bootstrap-switch-animate bootstrap-switch-on' data-id = '0' data-on-color = 'primary' data-off-color  = 'success' data-off-text = 'NO' data-on-text = 'SI' type='checkbox' name='my-checkbox'>  
+                                        </div>
+                                    </div>
                                 </div>
                                 
 

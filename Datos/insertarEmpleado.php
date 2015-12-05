@@ -19,7 +19,7 @@ require_once('funciones.php');
                 $cargo=$_POST['cargo'];
                 $jefe = $_POST['jefe'];
                //  $fechaingreso=$_POST['fecha2'];
-
+        
            if($jefe){
                $jefe = 1;
            }else{
