@@ -92,12 +92,13 @@ require_once($maindir . "funciones/timeout.php");
 									area: "<?php echo $row['nombre_departamento']?>",
 									motivo: $('select[name=motivo]').val(),
 									edificio: $('select[name=edificio]').val(),
-                                                                        jefe: $('select[name=jefe]').val(),
+                  jefe: $('select[name=jefe]').val(),
 									horaf: $("#horaf").val(),
 									horai: $("#horai").val(),
 									fecha: $("#fecha").val(),
 									cantidad: $("#cantidad").val(),
-									fecha_solic: $fecha_a
+									fecha_solic: $fecha_a,
+                  tipoPermiso: $('select[name=tipoDePermiso]').val()
 								};  //la seccion de codigo anterior almacena en un conjunto data las variables que 
 								//la funcion enviara para que se ejecute la consulta en el archivo php
 							$.ajax({
@@ -320,6 +321,26 @@ require_once($maindir . "funciones/timeout.php");
 												}
 											?>
 											</select>                                       
+                                        </div>
+                        <div class="form-group">
+                                            <label>Tipo De Permiso :</label>
+                                            <select class="form-control" Id="tipoDePermiso" name="tipoDePermiso">
+
+
+                      <?php
+                      /* Este codigo jala los datos que hay en la tabla de motivos y los muestra en el 
+                        combobox */
+                           $ql2="SELECT tipo_permiso from tipodepermiso";
+                           $rec2 =$db->prepare($ql2);
+                                                 $rec2->execute();
+                                                 
+                        while ($row = $rec2->fetch()) {
+                          echo "<option>";
+                          echo $row['tipo_permiso'];
+                          echo "</option>";
+                        }
+                      ?>
+                      </select>                                       
                                         </div>
 										
                                         <div class="form-group">

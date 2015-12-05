@@ -17,6 +17,7 @@ $horai =  $_POST['horai'];
 $horaf =  $_POST['horaf'];
 $jefe = $_POST['jefe'];
 $cantidad =  $_POST['cantidad'];
+$tipodepermiso= $_POST['tipoDePermiso'];
 if($cantidad > 1){
     $jefe = '';
 }
@@ -41,8 +42,10 @@ $result5  =$db->prepare($sql5);
 $result5->execute();
 
 
-
-
+$sql123="SELECT `id_tipo_permiso` FROM `tipodepermiso` WHERE `tipo_permiso` =".$tipodepermiso."'";
+$result123  =$db->prepare($sql123);
+$result123->execute();
+$row123->$consult123->fetch();
 //$result = mysqli_query($link, "SELECT Edificio_ID FROM edificios  where descripcion='".$edificio."'");
 //$result2 = mysqli_query($link, "SELECT Id_departamento_laboral FROM departamento_laboral  where nombre_departamento='".$depto."'");
 //$result3 = mysqli_query($link, "SELECT Motivo_ID FROM motivos  where descripcion='".$motivo."'");
@@ -94,7 +97,9 @@ $fecha_solic =$result5->fetch();
 	estado,
 	fecha_solicitud,
 	id_usuario,
-        revisarPor)
+	revisarPor,
+	 id_tipo_permiso
+        )
 	VALUES(
 	'".$extraido2['Id_departamento_laboral']."',
 	'".$row2['No_Empleado']."',
@@ -107,7 +112,8 @@ $fecha_solic =$result5->fetch();
 	'Espera',
 	Date_format(now(),'%Y-%m-%d'),
 	'".$idusuario."',
-        '".$jefe."'
+        '".$jefe."',
+        '".$row123['id_tipo_permiso']."'
 	)";
 	//se ejecuta la consulta de insercion y se verifica si se ha realizado o si ha fallado
 	$sql8="SELECT DATE_FORMAT(fecha, '%Y-%m-%d') as fecha from permisos where fecha between DATE_SUB(DATE_FORMAT('".$fecha."', '%Y-%m-%d'), INTERVAL '".$cantidad."' DAY) 
