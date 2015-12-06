@@ -47,120 +47,187 @@ $pdf->Cell(30, 8, utf8_decode("Fecha de Entrada"), 1,0,"C");
 $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 
-foreach( $rows as $row ){
-	if($row['TipoFolio'] == 0){
-	$tipo = "Folio de entrada";
-    }elseif($row['TipoFolio'] == 1){
-		$tipo = "Folio de salida";
-  	}
-		
+$NroFolio=array();
+$PersonaReferente=array();
+$Unidadacadémica =array();
+$FechadeEntrada=array();
+$NombreCategoria=array();
+$numeroMayor=array();
 
+function array_ref(&$arreglo,$cadena,$limite) {
+    $limite=$limite-10;
+    $contador=0;
+  if (strlen($cadena)<$limite)
+   {
+      $arreglo[$contador]=$cadena;
+   }
+  else {
 
-		$cadena=$row["PersonaReferente"];
-
-
-    if (strlen($cadena)<40) {
-    	      $pdf->Cell(20, 8, utf8_decode($row['NroFolio']),1,0,"C");
-		      $pdf->Cell(60, 8, utf8_decode($cadena), 1,0,"C");
-		      $pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]),1,0,"C");
-              $pdf->Cell(30, 8, utf8_decode($row['NombreCategoria']), 1,0,"C");
-		      $pdf->Cell(30, 8, utf8_decode($row["FechaEntrada"]), 1,0,"C");
-		      $pdf->Ln();
-    	
-    } else {
-
-    	$prim="1";
-    	while ( strlen($cadena)>40 ) {
-    	$cadena2=substr($cadena,1,40);
-    	$ultima=substr($cadena2,-1);
-    	$cadena3=substr($cadena,40 , strlen($cadena));
-
-
-    	if ($ultima==" ") {
-
-
-    		if ($prim==1) {
-    		  $pdf->Cell(20, 8, utf8_decode($row["NroFolio"]), "L,R",0,"C");
-		      $pdf->Cell(60, 8, utf8_decode($cadena2), "L,R",0,"C");
-		      $pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]), "L,R",0,"C");
-		      $pdf->Cell(30, 8, utf8_decode($row['NombreCategoria']), 1,0,"C");
-              $pdf->Cell(30, 8, utf8_decode($row["FechaEntrada"]), "L,R",0,"C");
-		      $pdf->Ln();
-		      $prim=2;
-
-
-
-    		} else {
-    			
-    			$pdf->Cell(20, 8, utf8_decode(""), "L,R");
-		      $pdf->Cell(60, 8, utf8_decode($cadena2), "L,R",0,"C");
-		      $pdf->Cell(50, 8, utf8_decode(""), "L,R");
-		      $pdf->Cell(30, 8, utf8_decode(""), "L,R");
-		      $pdf->Cell(30, 8, utf8_decode(""), "L,R");
-		      $pdf->Ln();
-    		}
-    		
-    		  
-    		
-    	} else {
-    		$cadena2=$cadena2."-";
-
-
-    		if ($prim==1) {
-    			$pdf->Cell(20, 8, utf8_decode($row["NroFolio"]), "L,R",0,"C");
-		      $pdf->Cell(60, 8, utf8_decode($cadena2), "L,R",0,"C");
-		      $pdf->Cell(50, 8, utf8_decode($row["ENTIDAD"]), "L,R",0,"C");
-              $pdf->Cell(30, 8, utf8_decode($row['NombreCategoria']), 1,0,"C");
-		      $pdf->Cell(30, 8, utf8_decode($row["FechaEntrada"]), "L,R",0,"C");
-		      $pdf->Ln();
-		      $prim=2;
-
-
-    		} else {
-    			$pdf->Cell(20, 8, utf8_decode(""), "L,R");
-		      $pdf->Cell(60, 8, utf8_decode($cadena2), "L,R",0,"C");
-		      $pdf->Cell(50, 8, utf8_decode(""), "L,R");
-		      $pdf->Cell(30, 8, utf8_decode(""), "L,R");
-		      $pdf->Cell(30, 8, utf8_decode(""), "L,R");
-		      $pdf->Ln();
-    		}
-    		
-    		
-
-    		
-    		
-    	}
-    	$cadena=$cadena3;
-    	if (strlen($cadena)<40) {
-    		$pdf->Cell(20, 8, utf8_decode(""), "L,R,B");
-		      $pdf->Cell(60, 8, utf8_decode($cadena), "L,R,B",0,"C");
-		      $pdf->Cell(50, 8, utf8_decode(""), "L,R,B");
-		      $pdf->Cell(30, 8, utf8_decode(""), "L,R,B");
-		      $pdf->Cell(30, 8, utf8_decode(""), "L,R,B");
-		      $pdf->Ln();
-
-    		$cadena="";
-
-    		
-    	} 
-    	
-    	
-
-
-
-
-
-    	}
+    while ( strlen($cadena)>$limite) {
+        $cadena2=substr($cadena,0,$limite);
+        $arreglo[$contador]=$cadena2;
+        $contador=$contador+1;
+        $cadena3=substr($cadena,$limite-1,strlen($cadena));
+        $cadena=$cadena3;
+        if (strlen($cadena)< $limite) {
+            
+            $arreglo[$contador]=$cadena;
+            $cadena="";
+        }
     }
-	
+      
+  }
+}
+
+
+foreach( $rows as $row ){
+  
 
 
 
-	};
+array_ref($NroFolio,$row["NroFolio"],20);
+array_ref($PersonaReferente,$row["PersonaReferente"],60);
+array_ref($Unidadacadémica,$row["ENTIDAD"],50);
+array_ref($FechadeEntrada,$row["FechaEntrada"],30);
+array_ref($NombreCategoria,$row['NombreCategoria'],30);
+$numeroMayor[1]=count($NroFolio);
+$numeroMayor[2]=count($PersonaReferente);
+$numeroMayor[3]=count($Unidadacadémica);
+$numeroMayor[4]=count($NombreCategoria);
+$n= max($numeroMayor);
 
-     
+$contador=0;
+while ( $contador<$n) {
+
+  if ($contador==$n-1)
+   {
+
+     if($contador<count($NroFolio))
+        {
+            $pdf->Cell(20, 8, utf8_decode($NroFolio[$contador]), "L,R,B",0,"C");
+        }
+     else
+        {
+            $pdf->Cell(20, 8, utf8_decode(" "), "L,R,B",0,"C");
+        }
+  if($contador<count($PersonaReferente))
+        {
+            $pdf->Cell(60, 8, utf8_decode($PersonaReferente[$contador]), "L,R,B",0,"C");
+        }
+  else
+       {
+            $pdf->Cell(60, 8, utf8_decode(""), "L,R,B",0,"C");
+    
+       }
+  if($contador<count($Unidadacadémica))
+       {
+        $pdf->Cell(50, 8, utf8_decode($Unidadacadémica[$contador]), "L,R,B",0,"C");
+       }
+ else
+ {
+   $pdf->Cell(50, 8, utf8_decode(""), "L,R,B",0,"C");
+ }
+ if($contador<count($NombreCategoria))
+ {
+   $pdf->Cell(30, 8, utf8_decode($NombreCategoria[$contador]), "L,R,B",0,"C");
+ }
+ else
+ {
+   $pdf->Cell(30, 8, utf8_decode(""), "L,R,B",0,"C");
     
 
+ }
+ if($contador<count($FechadeEntrada))
+ {
+   $pdf->Cell(30, 8, utf8_decode($FechadeEntrada[$contador]), "L,R,B",0,"C");
+   
+
+ }
+ else
+ {
+   $pdf->Cell(30, 8, utf8_decode(""), "L,R,B",0,"C");
+    
+
+ }
+    
+  } else {
+
+  if($contador<count($NroFolio))
+ {
+   $pdf->Cell(20, 8, utf8_decode($FechadeEntrada[$contador]), "L,R",0,"C");
+ }
+ else
+ {
+   $pdf->Cell(20, 8, utf8_decode(" "), "L,R",0,"C");
+  }
+  if($contador<count($PersonaReferente))
+ {
+   $pdf->Cell(60, 8, utf8_decode($PersonaReferente[$contador]), "L,R",0,"C");
+   
+
+ }
+ else
+ {
+   $pdf->Cell(60, 8, utf8_decode(""), "L,R",0,"C");
+    
+
+ }
+  if($contador<count($Unidadacadémica))
+ {
+   $pdf->Cell(50, 8, utf8_decode($Unidadacadémica[$contador]), "L,R",0,"C");
+   
+
+ }
+ else
+ {
+   $pdf->Cell(50, 8, utf8_decode(""), "L,R",0,"C");
+    
+
+ }
+ if($contador<count($NombreCategoria))
+ {
+   $pdf->Cell(30, 8, utf8_decode($NombreCategoria[$contador]), "L,R",0,"C");
+   
+
+ }
+ else
+ {
+   $pdf->Cell(30, 8, utf8_decode(""), "L,R",0,"C");
+    
+
+ }
+ if($contador<count($FechadeEntrada))
+ {
+   $pdf->Cell(30, 8, utf8_decode($FechadeEntrada[$contador]), "L,R",0,"C");
+   
+
+ }
+ else
+ {
+   $pdf->Cell(30, 8, utf8_decode(""), "L,R",0,"C");
+    
+
+ }
+
+ }
+  
+  
+
+ 
+
+$pdf->Ln();
+$contador=$contador+1;
+
+}
+
+
+
+
+  }
+
+
+
+ 
 
 
 

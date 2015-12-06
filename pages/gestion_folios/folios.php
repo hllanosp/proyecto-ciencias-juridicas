@@ -28,7 +28,7 @@
 	  require_once("actualizar_datos_folio_codigo.php");
 	}
   }
-
+  
   if(isset($_POST['tipoFolio'])){
     $tipo = $_POST['tipoFolio'];
     if($tipo == 'foliosEntrada'){
@@ -38,9 +38,16 @@
 	}else{
 	  require_once('datos/datos_folios.php');
 	}
-  }else{
-	require_once('datos/datos_folios.php');
   }
+
+
+
+  if (isset($_POST['tiposeguimiento'])) {
+    $idseguimiento=$_POST['tiposeguimiento'];
+    require_once('datos/datos_folios_seguimiento.php');
+
+  } 
+  
 
 ?>
 
@@ -122,24 +129,45 @@
 														echo '<li><a id="foliosSalida" href="#"><i class="glyphicon glyphicon-download-alt"></i> Folios de Entrada </a></li>';
 														echo '<li><a id="foliosEntrada" href="#"><i class="glyphicon glyphicon-send"></i> Folios de Salida</a></li>';
 													}
+
+
 												?>													                                          
                                                 </ul>
+                                                <ul  class=" nav nav-pills nav-stacked">
+                                                    <li class=" header">Tipos folios por seguimiento</li>
+                                                <?php
+                                                $query = $db->prepare("select * from estado_seguimiento");
+                                                $query->execute();
+                                                while($result = $query->fetch())
+                                                {
+                                                  echo '<li id="seguimiento" id-data='.$result["Id_Estado_Seguimiento"].' ><a href="#" id="se"><i class=" glyphicon glyphicon-retweet" ></i> folio por  seguimiento '.$result['DescripcionEstadoSeguimiento'].'</a></li>';
+
+                                                }
+                                                 ?>                                                                    
+                                                </ul>
+
+                                                </ul>
+                                                <ul  class=" nav nav-pills nav-stacked">
+                                                    <li class="header">Reporte de folios por seguimiento</li>
+                                                <?php
+                                                $query = $db->prepare("select * from estado_seguimiento");
+                                                $query->execute();
+                                                while($result = $query->fetch())
+                                                {
+                                                  echo '<li id="reporte" id-data='.$result["Id_Estado_Seguimiento"].' ><a href="#" id="se"><i class=" glyphicon glyphicon-print" ></i> Reportes por  seguimiento '.$result['DescripcionEstadoSeguimiento'].'</a></li>';
+
+                                                }
+                                                 ?>                                                                    
+                                                </ul>
+
+
                                             </div>
                                         </div><!-- /.col (LEFT) -->
                                         <div class="col-md-9 col-sm-8">
                             <div class="box">
                                 <div class="box-header">
 								<?php
-						            if(isset($_POST['tipoFolio'])){
-									    $tipoFolio = $_POST['tipoFolio'];
-									    if($tipoFolio == 'todos'){
-											echo '<h3 class="box-title">Folios</h3>';    
-										}elseif($tipoFolio == 'foliosSalida'){
-									        echo '<h3 class="box-title">Folios de salida</h3>';
-										}elseif($tipoFolio == 'foliosEntrada'){
-										    echo '<h3 class="box-title">Folios de entrada</h3>';
-										}
-									}
+						            echo '<h3 class="box-title">'.$nombre.'</h3>';
 							    ?>	
                                     
                                 </div><!-- /.box-header -->
@@ -254,7 +282,44 @@ HTML;
         });
       }
 	}); // example es el id de la tabla
-	
+
+    $("li#seguimiento").click(function() {
+        
+        var id=""+$(this).attr("id-data");
+        
+        data={
+      tiposeguimiento:id
+    };
+      $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"pages/gestion_folios/folios.php", 
+                success:function()
+                {
+
+                  $("#div_contenido").load('pages/gestion_folios/folios.php',data);
+                },
+                timeout:4000,
+                error:function()
+                {
+                  $("#div_contenido").text('Problemas en el servidor.');
+                }
+        }); 
+        return false;
+
+
+
+
+
+    });
+	$("li#reporte").click(function() {
+        var id=""+$(this).attr("id-data");
+        window.open('pages/gestion_folios/folios_por_seguimiento_pdf.php?id='+id);
+    });
+
+  
 	$('#tabla_folios')
     .removeClass( 'display' )
     .addClass('table table-striped table-bordered');

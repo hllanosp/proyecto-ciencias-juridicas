@@ -1,4 +1,5 @@
 <?php
+  $nombre="Folio ";
     $query = $db->prepare("SELECT * FROM ( SELECT folios.NroFolio, folios.PersonaReferente, unidad_academica.NombreUnidadAcademica AS ENTIDAD, 
 	                       categorias_folios.NombreCategoria, DATE(folios.FechaEntrada) as FechaEntrada, folios.FechaEntrada as Fecha, 
 						   folios.TipoFolio FROM folios INNER JOIN unidad_academica ON 
