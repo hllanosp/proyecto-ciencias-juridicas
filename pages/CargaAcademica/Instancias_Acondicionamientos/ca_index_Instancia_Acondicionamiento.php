@@ -1,9 +1,16 @@
 <?php
-  include '../../../Datos/conexion.php';
+  include '../../../conexion/config.inc.php';
 ?>
 
 <?php          
-$codIA = $_POST['codIA']; 
+$codIA = $_POST['codIA'];
+
+if(!isset($_SESSION)){
+    session_start();
+}
+
+$_SESSION['aula'] = $codIA;
+//echo $_SESSION['aula'];
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +27,7 @@ $codIA = $_POST['codIA'];
           function(e) {
             e.preventDefault();    
             var data1 = {
-              "nombreInstanciaA":$('#codIA').val(),
+              "nombreInstanciaA":$('select[name=acon]').val()
             };
 
             $.ajax({
@@ -42,7 +49,7 @@ $codIA = $_POST['codIA'];
 
                 $('#exampleModal').modal('hide');
 
-                ('#tbody').load("pages/CargaAcademica/Instancias_Acondicionamientos/ca_cargarTablaInstanciaAcondicionamiento.php", data1);
+                $('#tbody').load("pages/CargaAcademica/Instancias_Acondicionamientos/ca_cargarTablaInstanciaAcondicionamiento.php");
 
                 $('#nombreInstanciaA').val('');
               },
@@ -172,26 +179,37 @@ $codIA = $_POST['codIA'];
     </div>
     
     <div class="col-lg-12">
-      <h1 class="page-header">Instancias-Acondicionamiento</h1>
+      <h1 class="page-header">Acondicionamiento del aula</h1>
     </div>  
     <div class="panel panel-default">
       <div class="panel-body"> 
         <div class="conteiner">
           <div class="col-md-12" class="vertical-line">
             <form >
-              <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar Nueva Instancia-Acondicionamiento</button>   
+              <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Agregar nuevo acondicionamiento al aula</button>   
               <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="facultadR">Agregar Nueva Instancia-Acondicionamiento</h4>
+                      <h4 class="modal-title" id="facultadR">Agregar nuevo acondicionamiento al aula</h4>
                     </div>
                     <div class="modal-body">
                       <form id = "form" name="form" method="POST">
                         <div class="form-group">
-                          <label for="message-text" class="control-label">Código-Acondicionamiento:</label>
-                          <input type="text" class="form-control" id="nombreInstanciaA" value="<?php echo trim($codIA);?>"  placeholder="Nombre" disabled>
+                          <label for="message-text" class="control-label">Acondicionamiento:</label>
+                          <select class="form-control" id="acon" name="acon">
+                                                <?php
+                                                    $sql4 = "SELECT `codigo`, `nombre` FROM `ca_acondicionamientos`";
+                                                    $rec3 =$db->prepare($sql4);
+                                                    $rec3->execute();
+                                                    while ($row = $rec3->fetch()) {
+                                                            echo "<option value=$row[codigo]>";
+                                                            echo $row['nombre'];
+                                                            echo "</option>";
+                                                    }
+                                                ?>
+                                            </select>    
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -207,7 +225,7 @@ $codIA = $_POST['codIA'];
           <div class="col-md-12">
           <hr>
           <div class="panel panel-default">
-            <div class="panel-heading"><h4 > <b>Mis Instancias-Acondicionamientos </b></h4></div>
+            <div class="panel-heading"><h4 > <b>Acondicionamientos del aula </b></h4></div>
               <form >
                 <div  class="content" id= "notificaciones" style="display:none;"></div>
                 <div class="panel-body">
@@ -217,8 +235,9 @@ $codIA = $_POST['codIA'];
                         <table class="table table-bordered table-hover table-striped" id="tblInstanciaA" >
                           <thead>
                               <tr align="center" height="50px">
-                                  <th>Codigo</th>
-                                  <th>Codigo-Acondicionamiento</th>
+                                  <th hidden>Item</th>
+                                  <th>Aula</th>
+                                  <th>Acondicionamiento</th>
                                   <!--<th>Instancia</th> -->
                                   <th>Eliminar</th>                           
                               </tr>

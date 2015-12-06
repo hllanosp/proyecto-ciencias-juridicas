@@ -14,16 +14,19 @@ if(!isset( $_SESSION['user_id'] ))
 }
   try
   {
+      if(!isset($_SESSION)){
+    session_start();
+}
+ $aula = $_SESSION['aula'];
 	  $nombre = $_POST['nombreInstanciaA'];
     
-     $stmt = $db->prepare("CALL SP_REGISTRAR_INSTANCIA_ACONDICIONAMIENTO(?,@mensajeError)");
+     $stmt = $db->prepare("INSERT INTO `ca_aulas_instancias_acondicionamientos`(`cod_aula`, `cod_instancia_acondicionamiento`) VALUES (?,?)");
 	     //Introducciworworon de parametros
-     $stmt->bindParam(1, $nombre, PDO::PARAM_STR); 
+     $stmt->execute(array($aula, $nombre)); 
        
-     $stmt->execute();
-     $output = $db->query("select @mensajeError")->fetch(PDO::FETCH_ASSOC);
+
      //var_dump($output);
-     $mensaje = $output['@mensajeError'];
+     $mensaje = "Se agrego un acondicionamiento";
      $codMensaje = 1;
       
     }catch(PDOExecption $e){
