@@ -86,8 +86,36 @@ while ($row = mysql_fetch_array($query)) {
     $("#contenedor").load('pages/CargaAcademica/ca_crearEdificios.php');
      //$("#contenedor").load('../cargarPOAs.php');
 }
- 
- 
+ $(document).on("click",".verAula",function () {
+                 
+                    id = $(this).parents("tr").find("td").eq(0).html();
+                    
+                    
+                    //alert(id);      
+                    data1 = {codIA: id};
+                    $.ajax({
+                        async: true,
+                        type: "POST",
+                        dataType: "html",
+                        contentType: "application/x-www-form-urlencoded",
+                        url: "pages/CargaAcademica/Instancias_Acondicionamientos/ca_index_Instancia_Acondicionamiento.php",
+                        beforeSend: inicioVerr,
+                        success: llegadaVerr,
+                        timeout: 4000,
+                        error: problemas
+                    });
+                    return false;
+
+             });
+             function inicioVerr()
+            {
+                var x = $("#contenedor");
+                x.html('Cargando...');
+            }
+ function llegadaVerr()
+            {
+                $("#contenedor").load('pages/CargaAcademica/Instancias_Acondicionamientos/ca_index_Instancia_Acondicionamiento.php', data1);
+            }
  $(document).on("click",".verObjetivo",function() {
     
    
