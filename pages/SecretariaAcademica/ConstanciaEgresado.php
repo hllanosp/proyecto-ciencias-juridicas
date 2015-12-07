@@ -23,11 +23,12 @@ $añosEstudio = "<<AÑOS DE ESTUDIO EN DERECHO>>";
 $fechaPalabras = "veintidós días del mes de julio de dos mil quince.";
 $nombreSecretario = "JORGE ALBERTO MATUTE OCHOA";
 
-if(isset($_POST["arregloEgresado"]) && isset($_POST["cadena"]) && isset($_POST["arregloCodsEgresados"]) && isset($_POST["fechaExp"])){
+if(isset($_POST["arregloEgresado"]) && isset($_POST["cadena"]) && isset($_POST["arregloCodsEgresados"]) && isset($_POST["fechaExp"]) && isset($_POST["fechaEgresadoConstancia"])){
     $listaDNI = $_POST["arregloEgresado"];
     $listaCodsEgresados = $_POST["arregloCodsEgresados"];
     $fechaExp = $_POST["fechaExp"];
     $codsEgresados  = explode(',', $listaCodsEgresados);
+    $anioFinal = $_POST["fechaEgresadoConstancia"];
     
     $tok = explode(',', $listaDNI);
     $tam = count($tok);
@@ -123,7 +124,7 @@ if(isset($_POST["arregloEgresado"]) && isset($_POST["cadena"]) && isset($_POST["
         $pdf->SetFont('Cambria', 'I', 14);
         $pdf->WriteFlowingBlock(utf8_decode('  durante los años '));
         $pdf->SetFont('Cambria', 'BI', 14);
-        $pdf->WriteFlowingBlock(utf8_decode($añosEstudio));
+        $pdf->WriteFlowingBlock(utf8_decode($añosEstudio.' al '.$anioFinal));
         $pdf->SetFont('Cambria', 'I', 14);
         $pdf->WriteFlowingBlock(utf8_decode(', según consta en la Certificación de Estudios expedida por la Dirección de Ingreso, '
                 . 'Permanencia y Promoción de esta Universidad.'));
