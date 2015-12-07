@@ -2,8 +2,18 @@
 
  $maindir = "../../";
 
+ if (isset($_GET['id']))
+  {
+  $id=$_GET['id'];
+ } 
+
 require_once($maindir."fpdf/fpdf.php");
 require($maindir."conexion/config.inc.php");
+
+$re="select DescripcionEstadoSeguimiento from estado_seguimiento WHERE Id_Estado_Seguimiento=".$id;
+$q = $db->prepare($re);
+$q->execute();
+$result = $q->fetch();
 
 $sql = "SELECT * FROM (SELECT folios.NroFolio, folios.PersonaReferente, unidad_academica.NombreUnidadAcademica AS ENTIDAD, 
                           categorias_folios.NombreCategoria, DATE(folios.FechaEntrada) as FechaEntrada,folios.FechaEntrada as Fecha, folios.TipoFolio FROM folios INNER JOIN unidad_academica ON 
@@ -11,10 +21,12 @@ $sql = "SELECT * FROM (SELECT folios.NroFolio, folios.PersonaReferente, unidad_a
                           folios.categoria = categorias_folios.Id_Categoria UNION SELECT folios.NroFolio, folios.PersonaReferente, 
                           organizacion.NombreOrganizacion AS ENTIDAD, categorias_folios.NombreCategoria, DATE(folios.FechaEntrada) as FechaEntrada, folios.FechaEntrada as Fecha ,folios.TipoFolio 
                           FROM folios INNER JOIN organizacion ON folios.Organizacion = organizacion.Id_Organizacion INNER JOIN categorias_folios ON 
-                          folios.categoria = categorias_folios.Id_Categoria) T1 WHERE TipoFolio = 1 ORDER BY Fecha DESC";
+                          folios.categoria = categorias_folios.Id_Categoria) T1 
+                          INNER JOIN seguimiento ON seguimiento.NroFolio = T1.NroFolio
+                          WHERE EstadoSeguimiento = ".$id." ORDER BY Fecha DESC";
 
- $query = $db->prepare($sql);
-    //$query ->bindParam(":Id_Seguimiento",$Id_Seguimiento);
+    $query = $db->prepare($sql);
+	//$query ->bindParam(":Id_Seguimiento",$Id_Seguimiento);
     $query->execute();
     $rows = $query->fetchAll();
 
@@ -32,7 +44,7 @@ $pdf->Cell(143, 10, utf8_decode("Universidad Nacional Autónoma de Honduras"), 0
 $pdf->Ln(25);
 $pdf->SetFont('Arial', 'U', 14);
 $pdf->Cell(30, 8, ' ', 0,0,"C");
-$pdf->Cell(133, 8, utf8_decode("Reporte de Folios de Salida"), 0,0,"C");
+$pdf->Cell(133, 8, utf8_decode("Reporte de Folios por Seguimiento ".$result['DescripcionEstadoSeguimiento']), 0,0,"C");
 
 $pdf->SetFont('Arial', '', 12);
 $pdf->Ln(10);
@@ -42,19 +54,16 @@ $pdf->SetFont('Arial', 'B', 8);
 $pdf->Cell(20, 8, utf8_decode("No. de Folio"), 1,0,"C");
 $pdf->Cell(60, 8, utf8_decode("Persona Referente"), 1,0,"C");
 $pdf->Cell(50, 8, utf8_decode("Unidad académica u Organización"), 1,0,"C");
-$pdf->Cell(30, 8, utf8_decode("NombreCategoria"), 1,0,"C");
 $pdf->Cell(30, 8, utf8_decode("Fecha de Entrada"), 1,0,"C");
+$pdf->Cell(30, 8, utf8_decode("Tipo de Folio"), 1,0,"C");
 $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
-
-
-
 
 $NroFolio=array();
 $PersonaReferente=array();
 $Unidadacadémica =array();
 $FechadeEntrada=array();
-$NombreCategoria=array();
+$TipodeFolio=array();
 $numeroMayor=array();
 
 function array_ref(&$arreglo,$cadena,$limite) {
@@ -70,7 +79,7 @@ function array_ref(&$arreglo,$cadena,$limite) {
         $cadena2=substr($cadena,0,$limite);
         $arreglo[$contador]=$cadena2;
         $contador=$contador+1;
-        $cadena3=substr($cadena,$limite-1,strlen($cadena));
+        $cadena3=substr($cadena,$limite,strlen($cadena));
         $cadena=$cadena3;
         if (strlen($cadena)< $limite) {
             
@@ -84,7 +93,12 @@ function array_ref(&$arreglo,$cadena,$limite) {
 
 
 foreach( $rows as $row ){
-  
+  if($row['TipoFolio'] == 0){
+  $tipo = "Folio de entrada";
+    }elseif($row['TipoFolio'] == 1){
+    $tipo = "Folio de salida";
+    }
+     
 
 
 
@@ -92,11 +106,11 @@ array_ref($NroFolio,$row["NroFolio"],20);
 array_ref($PersonaReferente,$row["PersonaReferente"],60);
 array_ref($Unidadacadémica,$row["ENTIDAD"],50);
 array_ref($FechadeEntrada,$row["FechaEntrada"],30);
-array_ref($NombreCategoria,$row['NombreCategoria'],30);
+array_ref($TipodeFolio,$tipo,30);
 $numeroMayor[1]=count($NroFolio);
 $numeroMayor[2]=count($PersonaReferente);
 $numeroMayor[3]=count($Unidadacadémica);
-$numeroMayor[4]=count($NombreCategoria);
+$numeroMayor[4]=count($TipodeFolio);
 $n= max($numeroMayor);
 
 $contador=0;
@@ -130,9 +144,9 @@ while ( $contador<$n) {
  {
    $pdf->Cell(50, 8, utf8_decode(""), "L,R,B",0,"C");
  }
- if($contador<count($NombreCategoria))
+ if($contador<count($FechadeEntrada))
  {
-   $pdf->Cell(30, 8, utf8_decode($NombreCategoria[$contador]), "L,R,B",0,"C");
+   $pdf->Cell(30, 8, utf8_decode($FechadeEntrada[$contador]), "L,R,B",0,"C");
  }
  else
  {
@@ -140,9 +154,9 @@ while ( $contador<$n) {
     
 
  }
- if($contador<count($FechadeEntrada))
+ if($contador<count($TipodeFolio))
  {
-   $pdf->Cell(30, 8, utf8_decode($FechadeEntrada[$contador]), "L,R,B",0,"C");
+   $pdf->Cell(30, 8, utf8_decode($TipodeFolio[$contador]), "L,R,B",0,"C");
    
 
  }
@@ -157,7 +171,7 @@ while ( $contador<$n) {
 
   if($contador<count($NroFolio))
  {
-   $pdf->Cell(20, 8, utf8_decode($FechadeEntrada[$contador]), "L,R",0,"C");
+   $pdf->Cell(20, 8, utf8_decode($NroFolio[$contador]), "L,R",0,"C");
  }
  else
  {
@@ -187,9 +201,9 @@ while ( $contador<$n) {
     
 
  }
- if($contador<count($NombreCategoria))
+ if($contador<count($FechadeEntrada))
  {
-   $pdf->Cell(30, 8, utf8_decode($NombreCategoria[$contador]), "L,R",0,"C");
+   $pdf->Cell(30, 8, utf8_decode($FechadeEntrada[$contador]), "L,R",0,"C");
    
 
  }
@@ -199,9 +213,9 @@ while ( $contador<$n) {
     
 
  }
- if($contador<count($FechadeEntrada))
+ if($contador<count($TipodeFolio))
  {
-   $pdf->Cell(30, 8, utf8_decode($FechadeEntrada[$contador]), "L,R",0,"C");
+   $pdf->Cell(30, 8, utf8_decode($TipodeFolio[$contador]), "L,R",0,"C");
    
 
  }
@@ -238,6 +252,5 @@ $pdf->SetFont('Arial', '', 10);
 
 
 $pdf->Output('reporte.pdf','I');
-
 
 ?>
