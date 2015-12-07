@@ -17,7 +17,7 @@ $horai =  $_POST['horai'];
 $horaf =  $_POST['horaf'];
 $jefe = $_POST['jefe'];
 $cantidad =  $_POST['cantidad'];
-$tipodepermiso= $_POST['tipoDePermiso'];
+$tipodepermiso= $_POST['tipoPermiso'];
 if($cantidad > 1){
     $jefe = '';
 }
@@ -42,10 +42,10 @@ $result5  =$db->prepare($sql5);
 $result5->execute();
 
 
-$sql123="SELECT `id_tipo_permiso` FROM `tipodepermiso` WHERE `tipo_permiso` =".$tipodepermiso."'";
+$sql123="SELECT `id_tipo_permiso` FROM `tipodepermiso` WHERE `tipo_permiso` ='".$tipodepermiso."'";
 $result123  =$db->prepare($sql123);
 $result123->execute();
-$row123->$consult123->fetch();
+$row123 = $result123->fetch();
 //$result = mysqli_query($link, "SELECT Edificio_ID FROM edificios  where descripcion='".$edificio."'");
 //$result2 = mysqli_query($link, "SELECT Id_departamento_laboral FROM departamento_laboral  where nombre_departamento='".$depto."'");
 //$result3 = mysqli_query($link, "SELECT Motivo_ID FROM motivos  where descripcion='".$motivo."'");
