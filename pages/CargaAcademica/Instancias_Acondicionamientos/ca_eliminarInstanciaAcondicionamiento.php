@@ -16,20 +16,15 @@ if(!isset( $_SESSION['user_id'] ))
   try
   {
     $codigo = $_POST['codInstanciaA'];
-    $stmt = $db->prepare("CALL SP_ELIMINAR_INSTANCIA_ACONDICIONAMIENTO(?,@mensajeError)");
+    $stmt = $db->prepare("DELETE FROM `ca_aulas_instancias_acondicionamientos` WHERE `item` =?");
 	     //Introduccion de parametros
-    $stmt->bindParam(1, $codigo, PDO::PARAM_STR);
-
-    //echo $codigo . $nombre;
-       
-     $stmt->execute();
-     $output = $db->query("select @mensajeError")->fetch(PDO::FETCH_ASSOC);
+    $stmt->execute(array($codigo));
      //var_dump($output);
-     $mensaje = $output['@mensajeError'];
+     $mensaje = "Se eliminó el acondicionamiento";
      $codMensaje = 1;
       
     }catch(PDOExecption $e){
-      $mensaje = 'Error al ingresar el registro o registro actualmente existente';
+      $mensaje = 'Se encuentra asociado';
       $codMensaje = 0;
     }
     

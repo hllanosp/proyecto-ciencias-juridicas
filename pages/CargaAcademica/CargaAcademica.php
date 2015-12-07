@@ -46,9 +46,7 @@ if(!isset( $_SESSION['user_id'] ))
                     </a>
                     <ul class="list-unstyled collapse in" id="userMenu">
                        <li  class="nav-header active"> <a id="CargaAcademica" href="#"><i class="glyphicon glyphicon-home"></i>Cargas académicas</a></li>                        
-                      <li>
-                        <a id="Acondicionamientos"  href="#"><i class="glyphicon glyphicon-equalizer"></i> Acondicionamientos</a>
-                      </li>
+                      
                       <li>
                           <a id="seccionesMenu" href="#"><i class="glyphicon glyphicon-ok"></i> Secciones</a>
                       </li>                      
@@ -72,6 +70,9 @@ if(!isset( $_SESSION['user_id'] ))
                         <h5><i class="glyphicon glyphicon-folder-open"></i>Mantenimiento<i class="glyphicon glyphicon-chevron-down"></i></h5>
                     </a>     
                     <ul class="list-unstyled collapse in" id="userMenuNa">
+                        <li>
+                        <a id="Acondicionamientos"  href="#"><i class="glyphicon glyphicon-equalizer"></i> Acondicionamientos</a>
+                      </li>
                         <li><a id="Periodos" href="#"><i class="glyphicon glyphicon-ok"></i> Periodos</a></li>
                         <li><a id="Facultad" href="#"><i class="glyphicon glyphicon-ok"></i> Facultad</a></li>
                         <li><a id="AreasProyecto" href="#"><i class="glyphicon glyphicon-ok"></i> Areas de proyecto</a></li> 
