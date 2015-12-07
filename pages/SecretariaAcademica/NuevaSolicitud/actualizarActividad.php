@@ -47,12 +47,38 @@ $query = mysql_query("SELECT * FROM actividades where id_indicador='" . $idInd .
 
         $(document).ready(function () {
             $('#tabla_prioridad').dataTable({
-                "order": [[0, "asc"]],
-                "fnDrawCallback": function (oSettings) {
+            dom: 'Blfrtip',
+        buttons: [
 
-
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
                 }
-            }); // example es el id de la tabla
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+         }); // example es el id de la tabla
         });
 
     </script>

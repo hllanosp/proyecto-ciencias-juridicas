@@ -215,7 +215,7 @@
 
     function aplicarEstudiantes(){
         var table = $('#tabla_Estudiantes').DataTable({
-            dom: 'Bfrtip',
+            dom: 'Blfrtip',
         buttons: [
 
             {
@@ -261,7 +261,7 @@
 
     function aplicarSolicitudes(){
         var table = $('#tabla_Solicitudes').DataTable({
-                dom: 'Bfrtip',
+                dom: 'Blfrtip',
         buttons: [
             {
                 extend: 'copyHtml5',

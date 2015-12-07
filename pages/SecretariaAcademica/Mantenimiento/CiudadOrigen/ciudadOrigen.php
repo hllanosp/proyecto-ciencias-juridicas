@@ -137,7 +137,39 @@ $(document).ready(function() {
 
                 /* Script que permite a la tabla hacer busquedas dentro de ella
                     y ordenarla deacuerdo a lo que se presenta en ella.*/
-                $('#tableCiudad').dataTable(); 
+                $('#tableCiudad').dataTable({
+            dom: 'Blfrtip',
+        buttons: [
+
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+         }); 
             },
             timeout: 4000
         }); 

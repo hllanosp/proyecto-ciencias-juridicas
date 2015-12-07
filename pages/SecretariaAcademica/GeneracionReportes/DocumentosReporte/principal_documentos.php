@@ -252,7 +252,39 @@ $fechaExpedicion = "No definida.";
 
 <script>
     $(document).ready(function(){
-        var table = $("#lista_solicitudes").DataTable();
+        var table = $("#lista_solicitudes").DataTable({
+            dom: 'Blfrtip',
+        buttons: [
+
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+         });
         var DNI;
         var matrizConducta = [];
         var matrizPPS = [];

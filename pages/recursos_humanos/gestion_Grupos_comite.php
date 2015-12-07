@@ -319,17 +319,38 @@ mysql_select_db("ccjj"); -->
  $(document).ready(function() {
   
     $('#tabla_Grupos').dataTable({
-	  "order": [[ 1, "desc" ]],
-	  "fnDrawCallback": function(oSettings ) {
-              
-                
-                
-                
-		
-		
+            dom: 'Blfrtip',
+        buttons: [
 
-      }
-	}); // example es el id de la tabla
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+         }); // example es el id de la tabla
   });
 
     </script>

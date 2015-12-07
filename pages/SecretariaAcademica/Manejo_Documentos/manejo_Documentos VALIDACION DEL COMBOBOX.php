@@ -161,7 +161,7 @@ do {
           <div class="panel panel-primary">
             <div class="panel-heading"> <b>Resultado de la búsqueda</b></div>
 
-              <table class = "table table-striped" >
+            <table class = "table table-striped" id="tabla_prioridad">
                 
                  
 
@@ -267,3 +267,38 @@ do {
 
 </html>
 
+<script>
+    $('#tabla_prioridad').dataTable({
+            dom: 'Blfrtip',
+        buttons: [
+
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+         });
+</script>
