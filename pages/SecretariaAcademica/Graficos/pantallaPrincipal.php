@@ -245,7 +245,7 @@ function cargarSolicitudes(){
                                 <th>Tipo Solicitud</th>
                                 <th>Himno</th>
                                 <th>Reprogramar</th>
-                                <th>Dar de alta</th>
+                                <th>Registrar Nota</th>
 
                             </tr>
                         </thead>

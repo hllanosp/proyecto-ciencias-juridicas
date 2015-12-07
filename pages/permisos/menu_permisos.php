@@ -7,9 +7,15 @@
 			
 			<?php 
 				if($rol == 100){
-					echo "<li><h5><i class='glyphicon glyphicon-pencil'></i> Mantenimiento <i class='glyphicon glyphicon-chevron-down'></i></h5>";
-					echo "<ul class='list-unstyled collapse in' id='userMenu'> <li><a id='motivos' href='#'>Motivos</a></li> 
-					 <li><a id='edificios' href='#'>Edificios</a></li>  </ul> </li> ";
+					echo "<li><h5><i class='glyphicon glyphicon-pencil'></i> Mantenimiento 
+					          <i class='glyphicon glyphicon-chevron-down'></i></h5>";
+					
+
+					echo "<ul class='list-unstyled collapse in' id='userMenu'>
+					        <li><a id='motivos' href='#'>Motivos</a></li> 
+					        <li><a id='edificios' href='#'>Edificios</a></li>
+					        <li><a id='TipoDePermisos' href='#'>Tipo De Permisos</a></li>  
+					         </ul> </li> ";
 					
 				}
 			?>
@@ -67,4 +73,3 @@
  </div> 
 			
  <script type="text/javascript" src="js/gestion_permisos/principal.js" ></script> 
-   

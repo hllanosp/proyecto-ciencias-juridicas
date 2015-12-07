@@ -33,9 +33,9 @@ include($mkdir."Datos/conexion.php");
             '<td><center>'.
             '<button data-himno = "'.$fila["APLICA_PARA_HIMNO"].'" '
                     . 'data-id = "'.$fila["CODIGO"].'" href= "#" '
-                    . 'class = "elimina btn_editar btn btn-danger" '
+                    . 'class = "elimina btn_editar btn btn-success" '
                     . 'data-toggle="modal" data-target = "">'
-                    . '<i class="glyphicon glyphicon-trash">'
+                    . '<i class="glyphicon glyphicon-edit">'
                     . '</i>'
                     . '</button>'.
             '</center></td>'.

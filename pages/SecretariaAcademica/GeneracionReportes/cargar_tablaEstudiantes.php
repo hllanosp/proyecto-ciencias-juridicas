@@ -6,7 +6,7 @@
   $query = mysql_query($queryString);
 
   echo "<div class='table-responsive'>
-          <table id= 'tableEstudiantes' class='table table-striped table-bordered'cellspacing='0' width='100%'>
+          <table id= 'tabla_Estudiantes' class='table table-striped table-bordered'cellspacing='0' width='100%'>
             <thead class = '' style = 'background-color:#428bca; color: white;'>
                <tr>
                   <th>Cuenta</td>
