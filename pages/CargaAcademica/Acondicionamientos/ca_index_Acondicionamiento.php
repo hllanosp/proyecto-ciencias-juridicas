@@ -49,7 +49,39 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function() {
-        $('#tblAcondicionamiento').dataTable(); // example es el id de la tabla
+        $('#tblAcondicionamiento').dataTable({
+            dom: 'Blfrtip',
+        buttons: [
+
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+         }); // example es el id de la tabla
       });
     </script>
 

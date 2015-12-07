@@ -407,7 +407,7 @@ if(isset($_POST['codigo']) and $existe==FALSE ){
     
 
         <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped">
+            <table class="table table-bordered table-hover table-striped" id="tabla_prioridad">
             <thead>
         <tr>
              <th><strong>ID cargo</strong></th>
@@ -681,3 +681,38 @@ HTML;
 
 
 
+<script>
+    $('#tabla_prioridad').dataTable({
+            dom: 'Blfrtip',
+        buttons: [
+
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+         });
+</script>

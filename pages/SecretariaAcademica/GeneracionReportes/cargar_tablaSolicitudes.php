@@ -36,3 +36,38 @@
           </table> 
             </div> ";
  ?>
+<script>
+    $('#tabla_Solicitudes').dataTable({
+            dom: 'Blfrtip',
+        buttons: [
+
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+         });
+</script>

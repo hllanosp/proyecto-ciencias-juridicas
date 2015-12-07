@@ -21,29 +21,38 @@ while ($row = mysql_fetch_array($query)) {
 
         $(document).ready(function () {
             $('#tabla_prioridad').dataTable({
-                "order": [[0, "asc"]],
-                "destroy": true,
-                "fnDrawCallback": function (oSettings) {
+            dom: 'Blfrtip',
+        buttons: [
 
-
-
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
                 }
-                ,
-                "language":
-                {
-                    "lengthMenu": "Mostrar _MENU_ registros por página",
-                    "zeroRecords": "No se han encontrado registros",
-                    "info": "Mostrando página _PAGE_ de _PAGES_",
-                    "infoEmpty": "No hay registros disponibles",
-                    "infoFiltered": "(Filtrado de _MAX_ registros)"   ,
-                    "search": "Buscar",
-                    "paginate":
-                            {
-                                "previous": "Anterior",
-                                "next" : "Siguiente"
-                            }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
                 }
-            }); // example es el id de la tabla
+            },
+            'colvis'
+        ]
+         }); // example es el id de la tabla
         });
 
     </script>

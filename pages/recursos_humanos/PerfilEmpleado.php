@@ -98,7 +98,7 @@ $codigoE = $_POST['codigo'];
                             
                             
         <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped">
+            <table class="table table-bordered table-hover table-striped" id="tabla_prioridad">
             <thead>
         <tr>
             <th><strong>Cargo</strong></th>
@@ -242,3 +242,38 @@ $codigoE = $_POST['codigo'];
     
     
     </script>
+    <script>
+    $('#tabla_prioridad').dataTable({
+            dom: 'Blfrtip',
+        buttons: [
+
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+         });
+</script>
