@@ -24,12 +24,12 @@ $anioFinal = "2010";
 $fechaPalabras = 'veintiún días del mes de abril de dos mil quince.';
 $nombreSecretario = "JORGE ALBERTO MATUTE OCHOA";
 
-if(isset($_POST["arregloConducta"]) && isset($_POST["cadena"]) && isset($_POST["arregloCodsConducta"]) && isset($_POST["fechaExp"])){
+if(isset($_POST["arregloConducta"]) && isset($_POST["cadena"]) && isset($_POST["arregloCodsConducta"]) && isset($_POST["fechaExp"]) && isset($_POST["fechaEgresado"])){
     
     $listaDNIConducta = $_POST["arregloConducta"];
     $listaCodsConducta = $_POST["arregloCodsConducta"];
     $fechaExp = $_POST["fechaExp"];
-    
+    $anioFinal = $_POST["fechaEgresado"];
     $tok = explode(',', $listaDNIConducta);
     $codsConducta  = explode(',', $listaCodsConducta);
     
@@ -59,7 +59,7 @@ if(isset($_POST["arregloConducta"]) && isset($_POST["cadena"]) && isset($_POST["
             $numIdentidadTemporal = $fila['DNI'];
             $numCuentaTemporal = $fila['CUENTA'];
             $anioInicio = $fila['ANIO'];
-            $anioFinal = $fila['ANIOFINAL'];
+            //$anioFinal = $fila['ANIOFINAL'];
         }
 
         $fechaPalabras = $_POST["cadena"];

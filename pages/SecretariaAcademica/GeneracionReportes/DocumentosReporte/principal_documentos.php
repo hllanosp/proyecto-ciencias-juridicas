@@ -159,6 +159,10 @@ $fechaExpedicion = "No definida.";
                             <label class="label label-default">Fecha en la que se emite la constancia:</label>
                         </div>
                         <input style="margin-bottom: 10px; margin-top: 10px; width: 200px" class="form-control" id="txtFechaPalabrasConducta" type="date">
+                        <div class="row">
+                            <label class="label label-default">Fecha de culminacion de estudios en derecho:</label>
+                        </div>
+                        <input style="margin-bottom: 10px; margin-top: 10px; width: 200px" class="form-control" id="txtFechaEgresadoConduta" type="date">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -240,6 +244,10 @@ $fechaExpedicion = "No definida.";
                             <label class="label label-default">Fecha en la que se emite la constancia:</label>
                         </div>
                         <input style="margin-bottom: 10px; margin-top: 10px; width: 200px" class="form-control" id="txtFechaPalabrasEgresado" type="date">
+                        <div class="row">
+                            <label class="label label-default">Fecha de culminacion de estudios en derecho:</label>
+                        </div>
+                        <input style="margin-bottom: 10px; margin-top: 10px; width: 200px" class="form-control" id="txtFechaEgresado" type="date">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -344,12 +352,14 @@ $fechaExpedicion = "No definida.";
         });
         
         $("#btnAceptarEgresado").click(function(){
-            if(!$.trim($("#txtFechaPalabrasEgresado").val())){
-                alert("Introduzca la fecha en la que se emitie la constancia")
+            if(!$.trim($("#txtFechaPalabrasEgresado").val()) && !$.trim($("#txtFechaEgresado").val())){
+                alert("Introduzca la fecha en la que se emitie la constancia y la fecha de egreso.")
             }
             else{
                 var cadena = $("#txtFechaPalabrasEgresado").val();
                 var parts = cadena.match(/(\d+)/g);
+                var fechaEgresadoConstancia = $("#txtFechaEgresado").val();
+                var fechapartsEgresado = fechaEgresadoConstancia.match(/(\d+)/g);
                 var date = new Date(parts[0], parts[1]-1, parts[2]);
                 var aniospart = date.getFullYear().toString().split("");
                 var dosUltimos = aniospart[2]+""+aniospart[3];
@@ -376,7 +386,8 @@ $fechaExpedicion = "No definida.";
                         arregloEgresado: arregloEgresado,
                         cadena: cadena,
                         arregloCodsEgresados: arregloCodsEgresados,
-                        fechaExp: $("#txtFechaPalabrasEgresado").val()
+                        fechaExp: $("#txtFechaPalabrasEgresado").val(),
+                        fechaEgresadoConstancia: fechapartsEgresado[0]
                     }
                 );
                 $("#modalEgresado").modal("hide");
@@ -441,12 +452,14 @@ $fechaExpedicion = "No definida.";
         });
         
         $("#btnAceptarConducta").click(function(){
-            if(!$.trim($("#txtFechaPalabrasConducta").val())){
-                alert("Introduzca la fecha en la que se emitie la constancia");
+            if(!$.trim($("#txtFechaPalabrasConducta").val()) && !$.trim($("#txtFechaEgresadoConduta").val())){
+                alert("Introduzca la fecha en la que se emitie la constancia y la de fecha de egreso.");
             }
             else{
                 
                 var cadena = $("#txtFechaPalabrasConducta").val();
+                var fechaEgresado = $("#txtFechaEgresadoConduta").val();
+                var fechaparts = fechaEgresado.match(/(\d+)/g);
                 var parts = cadena.match(/(\d+)/g);
                 var date = new Date(parts[0], parts[1]-1, parts[2]);
                 var aniospart = date.getFullYear().toString().split("");
@@ -475,7 +488,8 @@ $fechaExpedicion = "No definida.";
                         arregloConducta: arregloConducta,
                         cadena: cadena,
                         arregloCodsConducta: arregloCodsConducta,
-                        fechaExp: $("#txtFechaPalabrasConducta").val()
+                        fechaExp: $("#txtFechaPalabrasConducta").val(),
+                        fechaEgresado: fechaparts[0] 
                     }
                 );                
                 $("#modalConducta").modal("hide");
