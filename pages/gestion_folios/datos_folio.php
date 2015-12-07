@@ -1,12 +1,18 @@
 <?php
+if(!isset($_SESSION)) 
+{ 
+  session_start(); 
+} 
 
   $maindir = "../../";
 
   require_once($maindir."funciones/check_session.php");
 
   require_once($maindir."funciones/timeout.php");
+
   
   $userId = $_SESSION['user_id'];
+  $usuario2 = $userId;
 
   if(isset($_GET['contenido']))
   {
@@ -36,6 +42,13 @@
   require_once("datos/datos_seguimiento_folio.php");
 
 ?>
+
+
+<!-- agregando php necesario para generar la nueva solicitud hllanos 12/12 -->
+<?php 
+
+?>
+
 
 <!-- Main -->
 <div class="container-fluid">
@@ -67,17 +80,18 @@
 	
                     <!-- Right side column. Contains the navbar and content of the page -->
             <aside class="right-side">
-			
-			<div class="content-wrapper">
+            
+            <div class="content-wrapper">
         <!-- Content Header (Page header) -->
                 <!-- Main content -->
-				
-				<article id="id_folio" data-folio="<?php echo $result['NroFolio']; ?>" data-prioridad=<?php echo $result['Prioridad']; ?> ></article>
+                
+                <article id="id_folio" data-folio="<?php echo $result['NroFolio']; ?>" data-prioridad=<?php echo $result['Prioridad']; ?> ></article>
                 <section class="invoice">
                     <!-- title row -->
                     <div class="row">
                         <div class="col-xs-12">
                             <h2 class="page-header">
+                <div id="folios_noti"></div>
                                 <i class="fa fa-newspaper-o"></i> Folio <?php echo $result['NroFolio']; ?>
                                 <i class="fa fa-globe"></i> <?php echo $result['DescripcionPrioridad']; ?>
                                 <small class="pull-right">Fecha de Entrada: <?php echo $result['FechaEntrada']; ?></small>
@@ -110,6 +124,11 @@
                                 ?><br>
                                 <strong>Persona referente al folio: </strong><?php echo $result['PersonaReferente']; ?><br>
                             </address>
+
+                            <div class="">
+                                <a class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modals"><i class="fa fa-pencil"></i> Nueva Notificación</a>
+                            </div>
+
                         </div><!-- /.col -->
                         <div class="col-sm-4 invoice-col">
                             <b>Fecha de creacion del folio: </b> <?php echo $result['FechaCreacion']; ?><br/><br/><br/>
@@ -310,8 +329,187 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+
+<!-- agregando php necesario para generar la nueva solicitud hllanos 12/12 -->
+<?php 
+  // $user = $_SESSION['nombreUsuario'];
+
+//  if(isset($_POST['tipoProcedimiento'])){
+//    $tipoProcedimiento =  $_POST['tipoProcedimiento'];
+//    if($tipoProcedimiento == 'insertar'){
+//      require_once("gestion_de_folios/Enviar_notificacion.php");
+//    }
+//  }
+
+
+$query2 = $db->prepare( "SELECT NroFolio  FROM folios");
+$query2->execute();
+$filas = $query2->fetchAll();
+        if($filas){
+            //$number_of_rows = $rows->rowCount();
+            $folio = 1;
+        }else{
+            $numero_filas = 0;
+            $notificacion = 0;
+        }
+    $query2 = null;
+    
+
+//Consulta para cargar los usuarios al combobox
+$query3 = $db->prepare("SELECT * FROM usuario");
+$query3->execute();
+$filas2 = $query3->fetchAll();
+        if($filas2){
+            //$number_of_rows = $rows->rowCount();
+            $usuario= 1;
+        }else{
+            $numero_filas = 0;
+            $notificacion = 0;
+        }
+    $query3 = null;
+
+ //Consulta para ver el idUsuario   
+// $query5 = $db->prepare( "SELECT *  FROM usuario WHERE nombre ='".$user."'");
+// $query5->execute();
+// $filas3 = $query5->fetchAll();
+// foreach( $filas3 as $row ){ 
+     
+//             $usuario2 = $row['id_Usuario'];
+//             }
+
+
+//Consulta para ver las notificaciones Enviadas
+//  $query = $db->prepare("SELECT NroFolio,Titulo,FechaCreacion FROM notificaciones_folios WHERE IdEmisor=(SELECT id_Usuario FROM usuario WHERE nombre='".$user."')");
+//    $query->execute();
+//    $rows = $query->fetchAll();
+//        if($rows){
+//            //$number_of_rows = $rows->rowCount();
+//            $notificacion = 1;
+//        }else{
+//            $number_of_rows = 0;
+//            $notificacion = 0;
+//        }
+//    $query = null;
+//    
+//
+////Consulta para ver las notificaciones Recibidas
+// $query4 = $db->prepare("SELECT NroFolio,Titulo,FechaCreacion FROM notificaciones_folios WHERE Id_Notificacion=(SELECT Id_Notificacion from usuario_notificado WHERE Id_Usuario=(SELECT id_Usuario from usuario where nombre ='".$user."'))");
+//    $query4->execute();
+//    $rows2 = $query4->fetchAll();
+//        if($rows2){
+//            //$number_of_rows = $rows->rowCount();
+//            $notificacion = 1;
+//        }else{
+//            $number_of_rows = 0;
+//            $notificacion = 0;
+//        }
+//    $query4 = null;
+
+?>
+
+
+
+<!-- nueva modal para eviar una notificacion hllanos 4/12 -->
+<div class="modal fade" id="compose-modals" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><i class="glyphicon glyphicon-floppy-disk"></i> Enviar Notificacion</h4>
+      </div>
+      <!-- form start -->
+      <div role="form" id="form" name="form" action="#">
+          <div class="modal-body">  
+              <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Componer nueva notificacion</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="form-group">
+                    <input type="hidden" name="Usuario" id="Insertar_Emisors" class="form-control"  readonly="readonly"  value="<?php echo $usuario2;?>"/>
+                    <input type="hidden" name="FechaCreacion" id="FechaCreacions" class="form-control"  readonly="readonly" value="<?php echo date('Y-m-d');?>" />
+                    <?php echo $user;?>
+                    <div class="pull-right">
+                      Fecha: <?php echo date('Y-m-d');?>
+                    </div>                    
+                  </div>   
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon">Numero Folio :</span>
+                      <select id="NroFolios" class="form-control"name="NroFolio" >
+                                            
+                                          
+                                            <option value="<?php echo $result['NroFolio']; ?>"selected><?php echo $result['NroFolio']; ?></option> 
+                                            </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <span class="input-group-addon">Para :</span>
+                      <select required= "required" multiple id="Destinatarioss" class="form-control" name="Destinatarios[]" >                  
+                                            <?php foreach( $filas2 as $row ) {if($row["nombre"]!=$usuario ){ ?>
+                                            <option value="<?php echo $row["id_Usuario"];?>"><?php echo $row["nombre"];?></option><?php }} ?>
+                                        </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <input class="form-control" name="Titulo" id="Insertar_Titulos" placeholder="Titulo:" required>
+                  </div>
+                  <div class="form-group">
+                    <textarea name="Mensaje" id="Insertar_Mensajes" class="form-control" style="height: 150px" placeholder="Mensaje..." required></textarea>
+                  </div>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                  <div class="pull-right">
+                    <button type="" name="submit" id="nueva_notificacion" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Enviar</button>
+                  </div>
+                  <button class="btn btn-default" data-dismiss="modal" aria-hidden="true"><i class="fa fa-times"></i> Descartar</button>
+                </div><!-- /.box-footer -->
+              </div><!-- /. box -->
+      </div><!-- /.modal-content -->
+    </div><!-- /.form -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</div>
+
 <script>
 $( document ).ready(function() {
+    // script para enviar la nueva notificacion hllanos
+    $('#nueva_notificacion').click(function(){
+        data={
+                NroFolio:$("#NroFolios").val(),
+                idEmisor:$("#Insertar_Emisors").val(),
+                Titulo:$("#Insertar_Titulos").val(),
+                Cuerpo:$("#Insertar_Mensajes").val(),
+                FechaCreacion:$("#FechaCreacions").val(),
+                UsuariosNotificados:$("#Destinatarioss").val(),
+                tipoProcedimiento:"insertar",
+                tipoNotificacion:"NotificacionEnviada"
+            };
+
+            $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"pages/gestion_folios/Notificacion.php", 
+                success:EnviarNotificacion,
+                timeout:4000,
+                error:problemas  
+            }); 
+            return false;
+    });
+    
+    function EnviarNotificacion(){
+         $('body').removeClass('modal-open');
+
+            $("#div_contenido").load('pages/gestion_folios/Notificacion.php',data);
+        }
+ function problemas(){
+
+            $("#div_contenido").text('Problemas con el servidor.');
+        }
+
     $( "#Seguimiento_actualizar" ).change(function () {
 		    var sel = $( "#Seguimiento_actualizar option:selected" ).text();
 			if( sel.indexOf("finalizado") >= 0 || sel.indexOf("terminado") >= 0){
