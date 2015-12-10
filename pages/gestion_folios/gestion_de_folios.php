@@ -138,7 +138,7 @@
                                     <h3 class="box-title">Folios</h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body table-responsive no-padding">
-                                    <table class="table table-hover">
+                                    <table id = "tabla_foliosMain"class="table table-hover">
                                         <?php
                                         if($folios == 1){
 										
@@ -160,7 +160,7 @@
                                                 $FechaEntrada = $row['FechaEntrada'];
                                                 $TipoFolio = $row['TipoFolio'];
 
-                                                echo "<tr data-id='".$NroFolio."'>";
+                                                echo "<tr class = 'folio' data-id='".$NroFolio."'>";
                                                 echo "<td>".$NroFolio."</td>";
                                                 if($TipoFolio == 1){
                                                     echo "<td> Entrada </td>";
@@ -199,10 +199,31 @@
 
 <script>
 $(document).ready(function() {
-  $('#tabla_folios').dataTable({
+  // $('#tabla_folios').dataTable({
     
-  });
+  // });
+  
+        $(".folio").on('click', function () {
+          id = $(this).data('id');
+         
+          data ={ idFolio:id};     
+            $.ajax({
+                async:true,
+                type: "POST",
+                dataType: "html",
+                contentType: "application/x-www-form-urlencoded",
+                url:"pages/gestion_folios/datos_folio.php", 
+                success:llegadaVer,
+                timeout:4000,
+                error:problemas
+            }); 
+            return false;
+        });
+      
+  
+
 }); 
 </script>
 
 <script type="text/javascript" src="js/gestion_folios/navbar_lateral.js" ></script>
+<script type="text/javascript" src="js/gestion_folios/folios.js" ></script>
