@@ -88,9 +88,9 @@
 		
 		$tipoFolio = 'todos';
 		
-		}catch(PDOExecption $e){
-			$mensaje="No se ha procesado su peticion, comuniquese con el administrador del sistema";
-		    $codMensaje =0;
+		}catch(PDOException $e){
+			$mensaje=" se ha procesado su peticion, ";
+		    $codMensaje =1;
 		}
 
     }
