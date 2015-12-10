@@ -62,7 +62,39 @@ $_SESSION['aula'] = $codIA;
     </script>
     <script type="text/javascript">
       $(document).ready(function() {
-        $('#tblInstanciaA').dataTable(); // example es el id de la tabla
+        $('#tblInstanciaA').dataTable({
+            dom: 'Blfrtip',
+        buttons: [
+
+            {
+                extend: 'copyHtml5',
+                exportOptions: {
+                    columns: [ 0, ':visible' ]
+                }
+            },
+            {
+                extend: 'excelHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'pdfHtml5',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                download: 'open'
+            },
+            {
+                extend: 'print',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'colvis'
+        ]
+         }); // example es el id de la tabla
       });
     </script>
 
