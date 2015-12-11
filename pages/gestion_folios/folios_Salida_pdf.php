@@ -50,12 +50,7 @@ $pdf->SetFont('Arial', '', 8);
 
 
 
-$NroFolio=array();
-$PersonaReferente=array();
-$Unidadacadémica =array();
-$FechadeEntrada=array();
-$NombreCategoria=array();
-$numeroMayor=array();
+
 
 function array_ref(&$arreglo,$cadena,$limite) {
     $limite=$limite-10;
@@ -85,11 +80,16 @@ function array_ref(&$arreglo,$cadena,$limite) {
 
 foreach( $rows as $row ){
   
-
+$NroFolio=array();
+$PersonaReferente=array();
+$Unidadacadémica =array();
+$FechadeEntrada=array();
+$NombreCategoria=array();
+$numeroMayor=array();
 
 
 array_ref($NroFolio,$row["NroFolio"],20);
-array_ref($PersonaReferente,$row["PersonaReferente"],60);
+array_ref($PersonaReferente,$row["PersonaReferente"],50);
 array_ref($Unidadacadémica,$row["ENTIDAD"],50);
 array_ref($FechadeEntrada,$row["FechaEntrada"],30);
 array_ref($NombreCategoria,$row['NombreCategoria'],30);

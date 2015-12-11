@@ -59,12 +59,7 @@ $pdf->Cell(30, 8, utf8_decode("Tipo de Folio"), 1,0,"C");
 $pdf->Ln(8);
 $pdf->SetFont('Arial', '', 8);
 
-$NroFolio=array();
-$PersonaReferente=array();
-$Unidadacadémica =array();
-$FechadeEntrada=array();
-$TipodeFolio=array();
-$numeroMayor=array();
+
 
 function array_ref(&$arreglo,$cadena,$limite) {
     $limite=$limite-10;
@@ -99,11 +94,16 @@ foreach( $rows as $row ){
     $tipo = "Folio de salida";
     }
      
-
+$NroFolio=array();
+$PersonaReferente=array();
+$Unidadacadémica =array();
+$FechadeEntrada=array();
+$TipodeFolio=array();
+$numeroMayor=array();
 
 
 array_ref($NroFolio,$row["NroFolio"],20);
-array_ref($PersonaReferente,$row["PersonaReferente"],60);
+array_ref($PersonaReferente,$row["PersonaReferente"],50);
 array_ref($Unidadacadémica,$row["ENTIDAD"],50);
 array_ref($FechadeEntrada,$row["FechaEntrada"],30);
 array_ref($TipodeFolio,$tipo,30);
